@@ -3,216 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IQ4U8 PRO | EVIDZONE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <title>IQ4U8 NEXUS — BY EVID</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #050505;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.12);
-            --accent: #007AFF;
-            --neon-blue: #5AC8FA;
-            --neon-pink: #FF2D55;
+            --bg: #000205;
+            --glass-white: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-blue: #007AFF;
+            --accent-glow: rgba(0, 122, 255, 0.5);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; cursor: none; }
 
         body {
             height: 100vh;
-            background: var(--bg-color);
+            background: var(--bg);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            perspective: 1000px;
+            perspective: 1200px;
         }
 
-        /* --- DYNAMIC AURORA BACKGROUND --- */
-        .aurora-bg {
+        /* --- INTERACTIVE MESH BACKGROUND --- */
+        .mesh-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 20% 30%, rgba(0, 122, 255, 0.15), transparent),
-                        radial-gradient(circle at 80% 70%, rgba(255, 45, 85, 0.1), transparent);
-            filter: blur(100px);
-            animation: moveAurora 15s infinite alternate;
+            background: 
+                radial-gradient(at 0% 0%, #001d3d 0px, transparent 50%),
+                radial-gradient(at 100% 100%, #003566 0px, transparent 50%),
+                radial-gradient(at 50% 50%, #000814 0px, transparent 100%);
         }
 
-        @keyframes moveAurora {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.2) translate(50px, 50px); }
-        }
-
-        /* --- MAIN CONTAINER --- */
-        .main-container {
-            position: relative;
-            width: 100%;
-            max-width: 480px;
-            transform-style: preserve-3d;
+        .cursor-follower {
+            position: fixed;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
             transition: transform 0.1s ease-out;
+            opacity: 0.4;
         }
 
-        /* --- iOS STATUS BAR --- */
-        .ios-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 30px;
-            font-size: 12px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.6);
-            position: absolute;
-            top: -45px;
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 8px; height: 8px; background: white;
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999;
+        }
+        .cursor-ring {
+            width: 40px; height: 40px; border: 1px solid var(--accent-blue);
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998;
+            transition: transform 0.15s ease-out;
+        }
+
+        /* --- MAIN DASHBOARD CARD --- */
+        .nexus-card {
             width: 100%;
+            max-width: 550px;
+            padding: 60px 40px;
+            background: var(--glass-white);
+            backdrop-filter: blur(50px) saturate(200%);
+            -webkit-backdrop-filter: blur(50px) saturate(200%);
+            border-radius: 48px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
+            transform-style: preserve-3d;
+            position: relative;
         }
 
-        /* --- GLASS CARD --- */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            padding: 50px 30px;
-            text-align: center;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+        /* --- TYPOGRAPHY UPGRADE --- */
+        .brand-header {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- IOS STYLE DOCK --- */
+        .dock {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 24px;
+            display: flex;
+            gap: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .dock-item {
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; transition: 0.3s;
+        }
+        .dock-item:hover { transform: translateY(-10px); background: var(--accent-blue); }
+
+        /* --- PRO BUTTON --- */
+        .btn-authorize {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 24px;
+            background: #fff;
+            color: #000;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: none;
+            transition: 0.4s;
             position: relative;
             overflow: hidden;
         }
 
-        .card::before {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, var(--accent), transparent 30%);
-            animation: rotateGlow 6s linear infinite;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        @keyframes rotateGlow { to { transform: rotate(360deg); } }
-
-        /* --- TEXT STYLES --- */
-        .logo { font-size: 10px; letter-spacing: 8px; color: var(--accent); margin-bottom: 20px; font-weight: 800; }
-        h1 { font-size: 38px; line-height: 1.1; margin-bottom: 15px; font-weight: 800; color: #fff; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        #greeting { font-size: 16px; font-weight: 500; color: var(--neon-blue); margin-bottom: 30px; }
-
-        /* --- STATS GRID --- */
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 35px;
-        }
-
-        .stat-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 20px;
-        }
-
-        .stat-box small { font-size: 10px; opacity: 0.5; text-transform: uppercase; }
-        .stat-box div { font-size: 18px; font-weight: 700; color: #fff; }
-
-        /* --- BUTTON --- */
-        .btn {
-            width: 100%;
-            padding: 18px;
-            border-radius: 20px;
-            border: none;
-            background: linear-gradient(135deg, var(--accent), #5856D6);
+        .btn-authorize:hover {
+            background: var(--accent-blue);
             color: #fff;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4);
-            transition: 0.3s;
+            box-shadow: 0 0 40px var(--accent-glow);
         }
 
-        .btn:hover { transform: scale(1.02); filter: brightness(1.2); }
+        /* --- SCANNING LINE --- */
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent-blue);
+            box-shadow: 0 0 15px var(--accent-blue);
+            display: none;
+            z-index: 10;
+        }
 
-        /* --- FOOTER --- */
-        .footer { margin-top: 30px; font-size: 11px; opacity: 0.4; letter-spacing: 1px; }
-        .footer span { color: var(--accent); font-weight: 700; }
+        @keyframes scanning {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
 
     </style>
 </head>
 <body>
 
-    <div class="aurora-bg"></div>
+    <div class="mesh-bg"></div>
+    <div class="cursor-follower" id="follower"></div>
+    <div class="cursor-dot" id="dot"></div>
+    <div class="cursor-ring" id="ring"></div>
 
-    <div class="main-container" id="container">
-        <div class="ios-bar">
-            <div>IQ4U8 Network</div>
-            <div id="top-clock">00:00</div>
-            <div>LTE 🔋 99%</div>
+    <div class="nexus-card" id="card">
+        <div class="brand-header">EVID • NEXUS</div>
+        
+        <h1 id="dyn-greet">Initializing...</h1>
+        <h1>IQ4U8 SHOP</h1>
+        
+        <div class="subtitle">Next-Gen Digital Assets Hub & Procurement Terminal.</div>
+
+        <button class="btn-authorize" onclick="authorize()">
+            <div class="scan-line" id="scanner"></div>
+            IDENTIFY & ENTER
+        </button>
+
+        <div class="dock">
+            <div class="dock-item">🏠</div>
+            <div class="dock-item">🛒</div>
+            <div class="dock-item">💬</div>
+            <div class="dock-item">⚙️</div>
         </div>
 
-        <div class="card">
-            <div class="logo">EVIDZONE ENTERPRISE</div>
-            
-            <div id="greeting">Initializing System...</div>
-            
-            <h1>IQ4U8<br>SHOP PRO</h1>
-            
-            <div class="stats">
-                <div class="stat-box">
-                    <small>Server Status</small>
-                    <div style="color: #4cd964;">ONLINE</div>
-                </div>
-                <div class="stat-box">
-                    <small>Active Users</small>
-                    <div>5,842+</div>
-                </div>
-            </div>
-
-            <button class="btn" onclick="startApp()">Access Terminal</button>
-
-            <div class="footer">
-                KERNEL BUILD BY <span>@EVID</span>
-            </div>
+        <div style="margin-top: 50px; font-size: 10px; opacity: 0.3; letter-spacing: 2px;">
+            SECURE ACCESS BY <span>EVID</span>
         </div>
     </div>
 
     <script>
-        // 1. DYNAMIC GREETING & CLOCK
-        function updateUI() {
-            const now = new Date();
-            const hour = now.getHours();
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            
-            document.getElementById('top-clock').innerText = timeStr;
-            
-            let greet = "🌙 System Ready";
-            if(hour < 12) greet = "🌅 Morning Protocol";
-            else if(hour < 17) greet = "☀️ Afternoon Access";
-            
-            document.getElementById('greeting').innerText = greet + " | " + timeStr;
-        }
-        setInterval(updateUI, 1000);
-        updateUI();
+        const card = document.getElementById('card');
+        const follower = document.getElementById('follower');
+        const dot = document.getElementById('dot');
+        const ring = document.getElementById('ring');
 
-        // 2. 3D TILT EFFECT
-        const container = document.getElementById('container');
+        // 1. DYNAMIC CURSOR & MESH
         document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 25;
-            const y = (window.innerHeight / 2 - e.pageY) / 25;
-            container.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+            // Cursor
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            ring.style.left = (e.clientX - 20) + 'px';
+            ring.style.top = (e.clientY - 20) + 'px';
+            
+            // Follower Mesh
+            follower.style.transform = `translate(${e.clientX - 200}px, ${e.clientY - 200}px)`;
+
+            // 3D Card Tilt
+            const x = (window.innerWidth / 2 - e.pageX) / 30;
+            const y = (window.innerHeight / 2 - e.pageY) / 30;
+            card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
         });
 
-        // 3. START APP ANIMATION
-        function startApp() {
-            const btn = document.querySelector('.btn');
-            btn.innerText = "🚀 AUTHORIZING...";
-            btn.style.background = "#4cd964";
+        // 2. GREETING ENGINE
+        function updateGreeting() {
+            const h = new Date().getHours();
+            const text = h < 12 ? "GOOD MORNING" : h < 17 ? "GOOD AFTERNOON" : "GOOD EVENING";
+            document.getElementById('dyn-greet').innerText = text;
+        }
+        updateGreeting();
+
+        // 3. SCAN ANIMATION
+        function authorize() {
+            const scanner = document.getElementById('scanner');
+            const btn = document.querySelector('.btn-authorize');
             
+            scanner.style.display = 'block';
+            scanner.style.animation = 'scanning 1.5s infinite';
+            btn.innerText = "AUTHENTICATING...";
+
             setTimeout(() => {
-                alert("Welcome to the IQ4U8 Universe, Admin EVID.");
-                btn.innerText = "Access Terminal";
-                btn.style.background = "linear-gradient(135deg, var(--accent), #5856D6)";
-            }, 1500);
+                scanner.style.display = 'none';
+                alert("ACCESS GRANTED. Welcome to EVID's IQ4U8 Nexus.");
+                btn.innerText = "IDENTIFY & ENTER";
+            }, 3000);
         }
     </script>
 </body>
