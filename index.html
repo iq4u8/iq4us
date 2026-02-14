@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IQ4U8 NEXUS | COSMIC EDITION</title>
+    <title>IQ4U8 NEXUS | EVIDZONE</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg: #000;
-            /* Glass transparency adjusted for space bg */
-            --glass: rgba(255, 255, 255, 0.06);
-            --border: rgba(255, 255, 255, 0.2);
+            --glass: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.15);
             --accent: #007AFF;
             --neon: #5AC8FA;
             --success: #34C759;
@@ -28,7 +27,7 @@
         body {
             min-height: 100dvh;
             background: var(--bg);
-            /* Mobile positioning fix */
+            /* Shifting content higher for better Mobile Reach */
             display: flex;
             justify-content: center;
             align-items: flex-start; 
@@ -37,22 +36,13 @@
             color: #fff;
         }
 
-        /* --- NEW COSMIC BACKGROUND ENGINE --- */
+        /* --- INTERACTIVE NEBULA BG --- */
         .nebula {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            /* Using a high-quality space image with a dark overlay 
-               to ensure text remains readable.
-            */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)),
-                        url('https://images.unsplash.com/photo-1462331940025-496dfa712568?q=80&w=1455&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            /* Slight blur adds depth and makes the foreground card pop */
-            filter: blur(3px) scale(1.05);
-            transform: translateZ(0); /* Performance fix */
+            background: radial-gradient(circle at 50% 10%, #001d3d 0%, #000 80%);
+            opacity: 0.9;
         }
 
         /* --- MOBILE CONTAINER --- */
@@ -60,37 +50,37 @@
             width: 92%;
             max-width: 420px;
             position: relative;
+            /* Negative margin to push it even higher */
             margin-top: -20px; 
-            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            animation: slideUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(50px) scale(0.95); } 
+            from { opacity: 0; transform: translateY(40px) scale(0.98); } 
             to { opacity: 1; transform: translateY(0) scale(1); } 
         }
 
         /* --- ELITE GLASS CARD --- */
         .card {
             background: var(--glass);
-            /* Increased blur for better contrast against space */
-            backdrop-filter: blur(50px) saturate(180%);
-            -webkit-backdrop-filter: blur(50px) saturate(180%);
+            backdrop-filter: blur(40px) saturate(210%);
+            -webkit-backdrop-filter: blur(40px) saturate(210%);
             border-radius: 42px;
             border: 1.5px solid var(--border);
             padding: 45px 28px 35px;
             text-align: center;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             position: relative;
         }
 
-        /* --- WIDGET BAR --- */
+        /* --- INTERNAL WIDGET BAR --- */
         .card-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 25px;
             font-size: 10px;
             font-weight: 700;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
             letter-spacing: 1px;
         }
 
@@ -104,12 +94,11 @@
             font-size: 40px; font-weight: 800; line-height: 1;
             background: linear-gradient(180deg, #fff 50%, rgba(255,255,255,0.2));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
 
         #greet-txt { font-size: 13px; color: var(--neon); margin: 12px 0 30px; font-weight: 600; letter-spacing: 1.5px; }
 
-        /* --- FUNCTIONAL BUTTONS (Mobile Fixed) --- */
+        /* --- FUNCTIONAL BUTTONS --- */
         .btn-elite {
             width: 100%;
             padding: 20px;
@@ -118,15 +107,16 @@
             background: #fff;
             color: #000;
             font-size: 16px; font-weight: 800;
-            transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.2);
+            box-shadow: 0 12px 30px rgba(255,255,255,0.1);
         }
 
+        /* Fixed Click Effect for Mobile */
         .btn-elite:active {
-            transform: scale(0.94);
+            transform: scale(0.92);
             background: var(--accent);
             color: #fff;
         }
@@ -140,7 +130,7 @@
         }
         @keyframes scanLoop { 0% { top: 0; } 100% { top: 100%; } }
 
-        /* --- NAVIGATION DOCK --- */
+        /* --- MOBILE NAVIGATION DOCK --- */
         .dock-ui {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -166,21 +156,21 @@
             border-color: var(--neon);
         }
 
-        /* --- iOS BOTTOM POPUP --- */
+        /* --- iOS BOTTOM NOTIFICATION --- */
         .pill-popup {
             position: fixed;
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1.5px solid rgba(255,255,255,0.25);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255,255,255,0.2);
             padding: 14px 28px;
             border-radius: 60px;
             z-index: 10000;
             transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             display: flex; align-items: center; gap: 12px;
             font-size: 14px; font-weight: 700;
         }
@@ -193,60 +183,61 @@
     <div class="nebula"></div>
 
     <div class="pill-popup" id="pill">
-        <span id="pillIcon">🪐</span>
-        <span id="pillMsg">Cosmic Link Established</span>
+        <span id="pillIcon">✨</span>
+        <span id="pillMsg">System Online</span>
     </div>
 
     <div class="wrapper">
         <div class="card">
             <div class="card-header">
-                <div>🛰️ STARLINK-V3</div>
-                <div>SECURE SSL</div>
-                <div>⚡ 10ms</div>
+                <div>📶 EVID-NET</div>
+                <div>SECURE SSL v3</div>
+                <div>⚡ 14ms</div>
             </div>
 
-            <div class="logo-text">IQ4U8 COSMIC TERMINAL</div>
+            <div class="logo-text">IQ4U8 ELITE TERMINAL</div>
             
             <h1 class="main-title">NEXUS</h1>
             <h1 class="main-title" style="color: var(--accent); -webkit-text-fill-color: var(--accent);">DASHBOARD</h1>
 
-            <div id="greet-txt">CONNECTING TO UNIVERSE...</div>
+            <div id="greet-txt">IDENTIFYING USER...</div>
 
             <button class="btn-elite" id="authBtn" onclick="triggerScan()">
                 <div class="scan-anim" id="scanner"></div>
-                INITIALIZE LAUNCH
+                AUTHORIZE SESSION
             </button>
 
             <div class="dock-ui">
-                <div class="dock-btn" onclick="pop('Home Base', '🏠')">🏠</div>
-                <div class="dock-btn" onclick="pop('Galactic Store', '🛍️')">🛍️</div>
-                <div class="dock-btn" onclick="pop('Comms Link', '📡')">📡</div>
-                <div class="dock-btn" onclick="pop('Core Config', '⚙️')">⚙️</div>
+                <div class="dock-btn" onclick="pop('Home Terminal', '🏠')">🏠</div>
+                <div class="dock-btn" onclick="pop('Shop Catalog', '🛍️')">🛍️</div>
+                <div class="dock-btn" onclick="pop('Support @EVID', '💬')">💬</div>
+                <div class="dock-btn" onclick="pop('Settings Build', '⚙️')">⚙️</div>
             </div>
 
-            <div style="margin-top: 30px; font-size: 9px; opacity: 0.4; letter-spacing: 3px;">
-                EVIDZONE SPACE SYSTEMS
+            <div style="margin-top: 30px; font-size: 9px; opacity: 0.3; letter-spacing: 3px;">
+                KERNEL: <span>0x4U8-PRO-EVID</span>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Popup Logic
+        // 1. Fixed Centered Pill Popup
         function pop(msg, icon) {
             const pill = document.getElementById('pill');
             document.getElementById('pillMsg').innerText = msg;
             document.getElementById('pillIcon').innerText = icon;
+            
             pill.classList.add('active');
             setTimeout(() => pill.classList.remove('active'), 2000);
         }
 
-        // 2. Greeting Logic
+        // 2. Greeting Logic based on Time
         function updateStatus() {
             const h = new Date().getHours();
             const greet = document.getElementById('greet-txt');
-            if(h < 12) greet.innerText = "🌅 MORNING ORBIT ACHIEVED";
-            else if(h < 17) greet.innerText = "☀️ SOLAR PEAK ACTIVE";
-            else greet.innerText = "🌙 DEEP SPACE MODE";
+            if(h < 12) greet.innerText = "🌅 MORNING PROTOCOL ACTIVE";
+            else if(h < 17) greet.innerText = "☀️ SESSION LIVE";
+            else greet.innerText = "🌙 NIGHT TERMINAL READY";
         }
 
         // 3. Scan & Auth Function
@@ -255,27 +246,27 @@
             const scanner = document.getElementById('scanner');
             
             scanner.style.display = 'block';
-            btn.innerText = "CALIBRATING JUMP...";
-            pop('Engaging Hyperdrive', '🛸');
+            btn.innerText = "ANALYZING...";
+            pop('Scanning Identity', '🔍');
 
             setTimeout(() => {
                 scanner.style.display = 'none';
-                btn.innerText = "LAUNCH SUCCESSFUL";
+                btn.innerText = "ACCESS GRANTED";
                 btn.style.background = "#34C759";
                 btn.style.color = "#fff";
-                pop('Welcome to EVIDZONE Space', '🌌');
+                pop('Welcome back, EVID', '✅');
 
                 setTimeout(() => {
-                    btn.innerText = "INITIALIZE LAUNCH";
+                    btn.innerText = "AUTHORIZE SESSION";
                     btn.style.background = "#fff";
                     btn.style.color = "#000";
                 }, 3000);
-            }, 2500);
+            }, 2000);
         }
 
         window.onload = () => {
             updateStatus();
-            setTimeout(() => pop('Cosmic Systems Online', '🪐'), 1000);
+            setTimeout(() => pop('Nexus System Loaded', '🚀'), 800);
         };
     </script>
 </body>
