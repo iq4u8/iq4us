@@ -391,7 +391,9 @@
             border-right: 1px solid var(--bdr);
             display: flex;
             flex-direction: column;
-            flex-shrink: 0
+            flex-shrink: 0;
+            overflow-y: auto;
+            overflow-x: hidden
         }
 
         .sbr {
@@ -1199,10 +1201,138 @@
             background: rgba(248, 81, 73, .15)
         }
 
+        /* CONTACT US */
+        .contact-sec {
+            padding: 16px;
+            border-top: 1px solid var(--bdr)
+        }
+
+        .contact-sec h3 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px
+        }
+
+        .contact-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 9px;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            color: var(--tx);
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit
+        }
+
+        .contact-btn:hover {
+            border-color: var(--ac);
+            transform: translateY(-1px)
+        }
+
+        .contact-btn .cb-icon {
+            font-size: 18px
+        }
+
+        .contact-btn.wa {
+            border-color: rgba(37, 211, 102, .2)
+        }
+
+        .contact-btn.wa:hover {
+            border-color: #25d366;
+            background: rgba(37, 211, 102, .08)
+        }
+
+        .contact-btn.tg {
+            border-color: rgba(0, 136, 204, .2)
+        }
+
+        .contact-btn.tg:hover {
+            border-color: #0088cc;
+            background: rgba(0, 136, 204, .08)
+        }
+
+        .sup-cfg {
+            padding: 16px;
+            border-top: 1px solid var(--bdr)
+        }
+
+        .sup-cfg h3 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px
+        }
+
+        .sup-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px
+        }
+
+        .sup-row label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--txd);
+            width: 80px;
+            flex-shrink: 0
+        }
+
+        .sup-row input {
+            flex: 1;
+            padding: 7px 10px;
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 6px;
+            color: var(--tx);
+            font-family: inherit;
+            font-size: 11px;
+            outline: 0
+        }
+
+        .sup-row input:focus {
+            border-color: var(--ac)
+        }
+
+        .sup-save {
+            padding: 6px 14px;
+            background: var(--ac);
+            color: #fff;
+            border: 0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 4px
+        }
+
         /* MOBILE */
         @media(max-width:700px) {
             .sb {
-                width: 130px
+                width: 130px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch
+            }
+
+            .contact-btns {
+                flex-direction: column
+            }
+
+            .contact-btn {
+                padding: 8px 12px;
+                font-size: 10px
             }
 
             .sbr h2 {
@@ -1540,9 +1670,23 @@
             </div>
             <div class="pn" id="p-plans">
                 <div class="plans-grid" id="plansGrid"></div>
+                <div class="contact-sec">
+                    <h3>📞 Contact Us</h3>
+                    <div class="contact-btns" id="contactBtns">
+                        <div style="color:var(--txd);font-size:11px">Loading...</div>
+                    </div>
+                </div>
             </div>
             <div class="pn" id="p-settings">
                 <div class="sg" id="sG"></div>
+                <div class="sup-cfg" id="supCfg" style="display:none">
+                    <h3>📞 Support Contact Settings</h3>
+                    <div class="sup-row"><label>WHATSAPP</label><input type="text" id="supWa"
+                            placeholder="Phone number (e.g. 919876543210)"></div>
+                    <div class="sup-row"><label>TELEGRAM</label><input type="text" id="supTg"
+                            placeholder="Username (without @)"></div>
+                    <button class="sup-save" onclick="saveSup()">💾 Save Support Info</button>
+                </div>
             </div>
             <div class="pn" id="p-users">
                 <div class="ul" id="uL">
@@ -1634,8 +1778,8 @@
         function openApp() {
             document.getElementById('lp').style.display = 'none'; document.getElementById('app').classList.add('sh');
             document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
-            if (user.role === 'owner') document.getElementById('usersNav').style.display = ''; else document.getElementById('usersNav').style.display = 'none';
-            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); lAlert(); lPlans() }, 300)
+            if (user.role === 'owner') { document.getElementById('usersNav').style.display = ''; document.getElementById('supCfg').style.display = '' } else { document.getElementById('usersNav').style.display = 'none'; document.getElementById('supCfg').style.display = 'none' }
+            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); lAlert(); lPlans(); lSupport() }, 300)
         }
 
         function sp(id, btn) {
@@ -1643,7 +1787,7 @@
             document.getElementById('p-' + id).classList.add('a'); if (btn) btn.classList.add('a');
             const t = { terminal: ['💻', 'Terminal', 'ACTIVE', 'bdg'], files: ['📂', 'Files', 'FILES', 'bdb'], plans: ['💎', 'Plans', 'PRICING', 'bdp'], settings: ['⚙️', 'Settings', 'INFO', 'bdb'], users: ['👥', 'Users', 'MANAGE', 'bdr2'] }; const v = t[id];
             document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1]; document.getElementById('pB').textContent = v[2]; document.getElementById('pB').className = 'bd ' + v[3];
-            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') lStats(); if (id === 'users') lUsers(); if (id === 'plans') lPlans()
+            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') { lStats(); if (user && user.role === 'owner') lSupInit() } if (id === 'users') lUsers(); if (id === 'plans') { lPlans(); lSupport() }
         }
 
         function initTerm() {
@@ -1709,6 +1853,35 @@
         </ul>
       </div>`).join('')
             } catch (e) { }
+        }
+
+        // SUPPORT CONTACT
+        async function lSupport() {
+            try {
+                const r = await api('/api/support'); const d = await r.json();
+                const el = document.getElementById('contactBtns');
+                let html = '';
+                if (d.whatsapp) html += `<a class="contact-btn wa" href="https://wa.me/${d.whatsapp}" target="_blank"><span class="cb-icon">💬</span>WhatsApp</a>`;
+                if (d.telegram) html += `<a class="contact-btn tg" href="https://t.me/${d.telegram}" target="_blank"><span class="cb-icon">✈️</span>Telegram</a>`;
+                if (!html) html = '<div style="color:var(--txd);font-size:11px">No contact info set yet</div>';
+                el.innerHTML = html;
+            } catch (e) { document.getElementById('contactBtns').innerHTML = '<div style="color:var(--txd);font-size:11px">Contact info unavailable</div>' }
+        }
+        async function lSupInit() {
+            try {
+                const r = await api('/api/support'); const d = await r.json();
+                document.getElementById('supWa').value = d.whatsapp || '';
+                document.getElementById('supTg').value = d.telegram || '';
+            } catch (e) { }
+        }
+        async function saveSup() {
+            const wa = document.getElementById('supWa').value.trim();
+            const tg = document.getElementById('supTg').value.trim();
+            try {
+                const r = await api('/api/support', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ whatsapp: wa, telegram: tg }) });
+                const d = await r.json();
+                if (d.success) { alert('✅ Support info saved!'); lSupport() } else alert('❌ ' + (d.error || 'Failed'))
+            } catch (e) { alert('❌ Error saving support info') }
         }
 
         // FILES
