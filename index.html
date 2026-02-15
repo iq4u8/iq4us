@@ -3,270 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Iq4u8 | Evidzone</title>
+    <title>IQ4U8 SERVER | VPS TERMINAL</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #000;
-            --glass: rgba(255, 255, 255, 0.04);
-            --border: rgba(255, 255, 255, 0.15);
-            --accent: #007AFF;
+            --bg: #020202;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --accent: #007AFF; /* iOS Blue */
             --neon: #5AC8FA;
-            --success: #34C759;
+            --success: #32D74B;
         }
 
-        * { 
-            margin: 0; padding: 0; box-sizing: border-box; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
 
         body {
             min-height: 100dvh;
             background: var(--bg);
-            /* Shifting content higher for better Mobile Reach */
             display: flex;
             justify-content: center;
-            align-items: flex-start; 
-            padding-top: 8vh; 
+            align-items: center; /* Desktop centering */
             overflow: hidden;
             color: #fff;
+            padding: 20px;
         }
 
-        /* --- INTERACTIVE NEBULA BG --- */
-        .nebula {
+        /* --- SPACE ENGINE BACKGROUND --- */
+        .cosmic-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 50% 10%, #001d3d 0%, #000 80%);
-            opacity: 0.9;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)),
+                        url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px);
+            transform: scale(1.1);
         }
 
-        /* --- MOBILE CONTAINER --- */
+        /* --- WRAPPER (Mobile Responsive Centering) --- */
         .wrapper {
-            width: 92%;
-            max-width: 420px;
-            position: relative;
-            /* Negative margin to push it even higher */
-            margin-top: -20px; 
-            animation: slideUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+            max-width: 440px;
+            /* Pushes UI slightly up for Mobile Reach */
+            margin-top: -5dvh; 
+            animation: appAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(40px) scale(0.98); } 
-            to { opacity: 1; transform: translateY(0) scale(1); } 
-        }
+        @keyframes appAppear { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-        /* --- ELITE GLASS CARD --- */
-        .card {
+        /* --- ELITE GLASS PANEL --- */
+        .glass-panel {
             background: var(--glass);
             backdrop-filter: blur(40px) saturate(210%);
             -webkit-backdrop-filter: blur(40px) saturate(210%);
-            border-radius: 42px;
-            border: 1.5px solid var(--border);
-            padding: 45px 28px 35px;
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            padding: 50px 30px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
             position: relative;
-        }
-
-        /* --- INTERNAL WIDGET BAR --- */
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-            font-size: 10px;
-            font-weight: 700;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 1px;
         }
 
         /* --- BRANDING --- */
-        .logo-text {
-            font-size: 10px; font-weight: 800; letter-spacing: 5px; 
-            color: var(--accent); margin-bottom: 15px; text-transform: uppercase;
+        .brand-pill {
+            font-size: 10px; font-weight: 800; letter-spacing: 4px; 
+            color: var(--accent); margin-bottom: 20px; text-transform: uppercase;
+            background: rgba(0, 122, 255, 0.1);
+            display: inline-block; padding: 6px 15px; border-radius: 50px;
         }
 
-        h1.main-title {
-            font-size: 40px; font-weight: 800; line-height: 1;
-            background: linear-gradient(180deg, #fff 50%, rgba(255,255,255,0.2));
+        h1.server-title {
+            font-size: clamp(34px, 10vw, 46px); font-weight: 800; line-height: 1;
+            background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.2));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        #greet-txt { font-size: 13px; color: var(--neon); margin: 12px 0 30px; font-weight: 600; letter-spacing: 1.5px; }
+        #status-txt { font-size: 13px; color: var(--neon); margin: 15px 0 35px; font-weight: 500; letter-spacing: 1.5px; }
 
-        /* --- FUNCTIONAL BUTTONS --- */
-        .btn-elite {
+        /* --- SERVER STATS WIDGET --- */
+        .server-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .stat-box:active { transform: scale(0.95); background: rgba(255,255,255,0.08); }
+        .stat-box small { display: block; font-size: 9px; opacity: 0.5; margin-bottom: 5px; text-transform: uppercase; }
+        .stat-box b { font-size: 16px; color: var(--success); }
+
+        /* --- JOIN US BUTTON (Ultra Premium) --- */
+        .join-btn {
+            display: inline-block;
             width: 100%;
             padding: 20px;
-            border-radius: 24px;
+            border-radius: 25px;
             border: none;
             background: #fff;
             color: #000;
-            font-size: 16px; font-weight: 800;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 18px; font-weight: 800;
+            text-decoration: none;
             position: relative;
             overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 12px 30px rgba(255,255,255,0.1);
+            transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.15);
         }
 
-        /* Fixed Click Effect for Mobile */
-        .btn-elite:active {
-            transform: scale(0.92);
+        .join-btn:hover {
+            transform: translateY(-5px);
             background: var(--accent);
             color: #fff;
+            box-shadow: 0 20px 50px rgba(0, 122, 255, 0.5);
         }
 
-        .scan-anim {
+        .join-btn:active { transform: scale(0.94); }
+
+        /* Shiny animation on button */
+        .join-btn::before {
+            content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: var(--accent);
-            display: none;
-            animation: scanLoop 1.5s infinite;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
         }
-        @keyframes scanLoop { 0% { top: 0; } 100% { top: 100%; } }
+        .join-btn:hover::before { left: 150%; transition: 0.7s; }
 
-        /* --- MOBILE NAVIGATION DOCK --- */
-        .dock-ui {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            background: rgba(255,255,255,0.04);
-            padding: 12px;
-            border-radius: 28px;
-            border: 1px solid var(--border);
-        }
-
-        .dock-btn {
-            aspect-ratio: 1/1;
-            background: rgba(255,255,255,0.06);
-            border-radius: 18px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; transition: 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .dock-btn:active {
-            background: var(--accent);
-            transform: scale(0.85);
-            border-color: var(--neon);
-        }
-
-        /* --- iOS BOTTOM NOTIFICATION --- */
-        .pill-popup {
+        /* --- iOS BOTTOM NOTIFICATION PILL --- */
+        .pill-notif {
             position: fixed;
             bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1.5px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.25);
             padding: 14px 28px;
-            border-radius: 60px;
+            border-radius: 50px;
             z-index: 10000;
-            transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            display: flex; align-items: center; gap: 12px;
-            font-size: 14px; font-weight: 700;
+            transition: 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            white-space: nowrap;
         }
-        .pill-popup.active { bottom: 40px; }
+        .pill-notif.active { bottom: 40px; }
+        .pill-flex { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; }
+
+        .footer { margin-top: 40px; font-size: 10px; opacity: 0.4; letter-spacing: 2px; }
+        .footer b { color: var(--accent); }
 
     </style>
 </head>
 <body>
 
-    <div class="nebula"></div>
+    <div class="cosmic-bg"></div>
 
-    <div class="pill-popup" id="pill">
-        <span id="pillIcon">✨</span>
-        <span id="pillMsg">System Online</span>
+    <div class="pill-notif" id="notif">
+        <div class="pill-flex">
+            <span id="notif-icon">🛰️</span>
+            <span id="notif-msg">Establishing Connection...</span>
+        </div>
     </div>
 
     <div class="wrapper">
-        <div class="card">
-            <div class="card-header">
-                <div>📶 EVID-NET</div>
-                <div>SECURE SSL v3</div>
-                <div>⚡ 14ms</div>
-            </div>
-
-            <div class="logo-text">IQ4U8 ELITE TERMINAL</div>
+        <div class="glass-panel">
+            <div class="brand-pill">IQ4U8 SERVER</div>
             
-            <h1 class="main-title">NEXUS</h1>
-            <h1 class="main-title" style="color: var(--accent); -webkit-text-fill-color: var(--accent);">DASHBOARD</h1>
+            <h1 class="server-title">ULTIMATE</h1>
+            <h1 class="server-title" style="color: var(--accent); -webkit-text-fill-color: var(--accent);">VPS HUB</h1>
 
-            <div id="greet-txt">IDENTIFYING USER...</div>
+            <div id="status-txt">QUANTUM ENCRYPTION ACTIVE</div>
 
-            <button class="btn-elite" id="authBtn" onclick="triggerScan()">
-                <div class="scan-anim" id="scanner"></div>
-                AUTHORIZE SESSION
-            </button>
-
-            <div class="dock-ui">
-                <div class="dock-btn" onclick="pop('Home Terminal', '🏠')">🏠</div>
-                <div class="dock-btn" onclick="pop('Shop Catalog', '🛍️')">🛍️</div>
-                <div class="dock-btn" onclick="pop('Support @EVID', '💬')">💬</div>
-                <div class="dock-btn" onclick="pop('Settings Build', '⚙️')">⚙️</div>
+            <div class="server-stats">
+                <div class="stat-box" onclick="show('99.9% Uptime Verified', '🛡️')">
+                    <small>System Health</small>
+                    <b>STABLE</b>
+                </div>
+                <div class="stat-box" onclick="show('Speed: 10Gbps Link', '⚡')">
+                    <small>Network Port</small>
+                    <b style="color: var(--neon);">10 Gbps</b>
+                </div>
             </div>
 
-            <div style="margin-top: 30px; font-size: 9px; opacity: 0.3; letter-spacing: 3px;">
-                KERNEL: <span>0x4U8-PRO-EVID</span>
+            <a href="YOUR_LINK_HERE" class="join-btn" onclick="joinAction()">
+                JOIN US NOW
+            </a>
+
+            <div class="footer">
+                V3 KERNEL BY <b>@EVID</b>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Fixed Centered Pill Popup
-        function pop(msg, icon) {
-            const pill = document.getElementById('pill');
-            document.getElementById('pillMsg').innerText = msg;
-            document.getElementById('pillIcon').innerText = icon;
-            
+        // 1. Notification Engine
+        function show(msg, icon) {
+            const pill = document.getElementById('notif');
+            document.getElementById('notif-msg').innerText = msg;
+            document.getElementById('notif-icon').innerText = icon;
             pill.classList.add('active');
-            setTimeout(() => pill.classList.remove('active'), 2000);
+            setTimeout(() => pill.classList.remove('active'), 2500);
         }
 
-        // 2. Greeting Logic based on Time
-        function updateStatus() {
-            const h = new Date().getHours();
-            const greet = document.getElementById('greet-txt');
-            if(h < 12) greet.innerText = "🌅 MORNING PROTOCOL ACTIVE";
-            else if(h < 17) greet.innerText = "☀️ SESSION LIVE";
-            else greet.innerText = "🌙 NIGHT TERMINAL READY";
+        // 2. Button Action Feedback
+        function joinAction() {
+            show('Redirecting to IQ4U8 Server...', '🚀');
         }
 
-        // 3. Scan & Auth Function
-        function triggerScan() {
-            const btn = document.getElementById('authBtn');
-            const scanner = document.getElementById('scanner');
-            
-            scanner.style.display = 'block';
-            btn.innerText = "ANALYZING...";
-            pop('Scanning Identity', '🔍');
-
-            setTimeout(() => {
-                scanner.style.display = 'none';
-                btn.innerText = "ACCESS GRANTED";
-                btn.style.background = "#34C759";
-                btn.style.color = "#fff";
-                pop('Welcome back, EVID', '✅');
-
-                setTimeout(() => {
-                    btn.innerText = "AUTHORIZE SESSION";
-                    btn.style.background = "#fff";
-                    btn.style.color = "#000";
-                }, 3000);
-            }, 2000);
-        }
-
+        // 3. Welcome Message on Load
         window.onload = () => {
-            updateStatus();
-            setTimeout(() => pop('Nexus System Loaded', '🚀'), 800);
+            setTimeout(() => show('VPS Terminal Initialized', '📡'), 1000);
         };
     </script>
 </body>
