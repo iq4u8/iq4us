@@ -593,7 +593,8 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden
+            overflow: hidden;
+            min-height: 0
         }
 
         .mh {
@@ -645,11 +646,17 @@
 
         .pn {
             flex: 1;
-            overflow: auto;
-            display: none
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            min-height: 0
         }
 
         .pn.a {
+            display: block
+        }
+
+        #p-terminal.a {
             display: flex;
             flex-direction: column
         }
