@@ -985,85 +985,121 @@
         }
 
         /* PLANS PAGE */
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            padding: 16px
+        .plans-wrap {
+            padding: 10px
         }
 
-        .plan-card {
+        .plans-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px
+        }
+
+        .plans-tab {
+            flex: 1;
+            padding: 8px 4px;
             background: var(--inp);
             border: 1px solid var(--bdr);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
             text-align: center;
             transition: .3s;
-            position: relative;
-            overflow: hidden
+            font-family: inherit;
+            color: var(--txd);
+            font-size: 11px;
+            font-weight: 600
         }
 
-        .plan-card:hover {
+        .plans-tab:hover {
+            border-color: var(--ac)
+        }
+
+        .plans-tab.a {
             border-color: var(--ac);
-            transform: translateY(-2px)
+            background: var(--acs);
+            color: var(--ac)
         }
 
-        .plan-card.pop {
-            border-color: var(--ac);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, .2)
-        }
-
-        .plan-card.pop::before {
-            content: 'POPULAR';
-            position: absolute;
-            top: 8px;
-            right: -28px;
-            background: var(--ac);
-            color: #fff;
-            font-size: 8px;
-            font-weight: 700;
-            padding: 2px 30px;
-            transform: rotate(45deg)
-        }
-
-        .plan-name {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 4px
-        }
-
-        .plan-price {
-            font-size: 28px;
+        .plans-tab .pt-price {
+            font-size: 16px;
             font-weight: 800;
             color: var(--ac);
-            margin-bottom: 2px
+            display: block;
+            margin-top: 2px
         }
 
-        .plan-price small {
-            font-size: 12px;
+        .plans-tab .pt-name {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .plans-detail {
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 10px;
+            padding: 12px
+        }
+
+        .pd-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px
+        }
+
+        .pd-name {
+            font-size: 16px;
+            font-weight: 800
+        }
+
+        .pd-price {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--ac)
+        }
+
+        .pd-price small {
+            font-size: 10px;
             color: var(--txd);
             font-weight: 600
         }
 
-        .plan-features {
-            list-style: none;
-            text-align: left;
-            margin: 12px 0;
-            font-size: 11px;
-            color: var(--txd)
+        .pd-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px
         }
 
-        .plan-features li {
-            padding: 4px 0;
-            display: flex;
-            align-items: center;
-            gap: 6px
+        .pd-spec {
+            background: var(--bg2);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center
         }
 
-        .plan-features li::before {
-            content: '✓';
-            color: var(--gn);
-            font-weight: 700
+        .pd-spec .ps-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--tx)
+        }
+
+        .pd-spec .ps-lbl {
+            font-size: 8px;
+            color: var(--txd);
+            text-transform: uppercase;
+            margin-top: 2px
+        }
+
+        .pd-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 8px;
+            font-weight: 700;
+            background: rgba(63, 185, 80, .12);
+            color: #3fb950
         }
 
         /* USER TABLE */
@@ -1552,22 +1588,25 @@
                 font-size: 8px
             }
 
-            .plans-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-                padding: 8px
+            .plans-tab .pt-price {
+                font-size: 13px
             }
 
-            .plan-card {
-                padding: 12px
+            .pd-specs {
+                grid-template-columns: 1fr 1fr;
+                gap: 4px
             }
 
-            .plan-name {
-                font-size: 14px
+            .pd-spec {
+                padding: 6px
             }
 
-            .plan-price {
-                font-size: 22px
+            .pd-spec .ps-val {
+                font-size: 11px
+            }
+
+            .plans-wrap {
+                padding: 6px
             }
 
             .alert-bar {
@@ -1685,11 +1724,14 @@
                 <div class="fl" id="fL"></div>
             </div>
             <div class="pn" id="p-plans">
-                <div class="plans-grid" id="plansGrid"></div>
-                <div class="contact-sec">
-                    <h3>📞 Contact Us</h3>
-                    <div class="contact-btns" id="contactBtns">
-                        <div style="color:var(--txd);font-size:11px">Loading...</div>
+                <div class="plans-wrap">
+                    <div class="plans-tabs" id="plansTabs"></div>
+                    <div class="plans-detail" id="plansDetail"></div>
+                    <div class="contact-sec">
+                        <h3>📞 Contact Us</h3>
+                        <div class="contact-btns" id="contactBtns">
+                            <div style="color:var(--txd);font-size:11px">Loading...</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1852,23 +1894,34 @@
         setInterval(() => { if (user) lRes() }, 15000);
 
         // PLANS
+        let plansData = [];
         async function lPlans() {
             try {
                 const r = await api('/api/plans'); const d = await r.json();
-                const pop = 'pro';
-                document.getElementById('plansGrid').innerHTML = d.plans.map(p => `
-      <div class="plan-card${p.id === pop ? ' pop' : ''}">
-        <div class="plan-name">${p.name}</div>
-        <div class="plan-price">₹${p.price}<small>/mo</small></div>
-        <ul class="plan-features">
-          <li>${p.storage} Storage</li>
-          <li>${p.ram} RAM</li>
-          <li>${p.cpu}</li>
-          <li>${p.id === 'free' ? 'Basic Support' : p.id === 'pro' ? 'Priority Support' : 'Premium Support'}</li>
-          <li>${p.id === 'ultra' ? 'All Features' : 'Standard Features'}</li>
-        </ul>
-      </div>`).join('')
+                plansData = d.plans;
+                const tabs = document.getElementById('plansTabs');
+                tabs.innerHTML = d.plans.map((p, i) => `<button class="plans-tab${i === 1 ? ' a' : ''}" onclick="selPlan(${i})">
+                    <span class="pt-name">${p.name}</span>
+                    <span class="pt-price">₹${p.price}</span>
+                </button>`).join('');
+                selPlan(1);
             } catch (e) { }
+        }
+        function selPlan(i) {
+            const p = plansData[i]; if (!p) return;
+            document.querySelectorAll('.plans-tab').forEach((t, j) => t.classList.toggle('a', j === i));
+            const support = p.id === 'free' ? 'Basic' : p.id === 'pro' ? 'Priority' : 'Premium';
+            document.getElementById('plansDetail').innerHTML = `
+                <div class="pd-header">
+                    <div><span class="pd-name">${p.name}</span> ${p.id === 'pro' ? '<span class="pd-badge">POPULAR</span>' : ''}</div>
+                    <div class="pd-price">₹${p.price}<small>/mo</small></div>
+                </div>
+                <div class="pd-specs">
+                    <div class="pd-spec"><div class="ps-val">${p.storage}</div><div class="ps-lbl">Storage</div></div>
+                    <div class="pd-spec"><div class="ps-val">${p.ram}</div><div class="ps-lbl">RAM</div></div>
+                    <div class="pd-spec"><div class="ps-val">${p.cpu}</div><div class="ps-lbl">CPU</div></div>
+                    <div class="pd-spec"><div class="ps-val">${support}</div><div class="ps-lbl">Support</div></div>
+                </div>`;
         }
 
         // SUPPORT CONTACT
