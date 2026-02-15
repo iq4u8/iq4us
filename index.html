@@ -435,6 +435,11 @@
             color: #58a6ff
         }
 
+        .bdr2 {
+            background: rgba(248, 81, 73, .12);
+            color: #f85149
+        }
+
         .pn {
             flex: 1;
             overflow: auto;
@@ -763,6 +768,117 @@
             display: none
         }
 
+        /* USER MANAGEMENT TABLE */
+        .ul {
+            padding: 16px;
+            overflow: auto;
+            flex: 1
+        }
+
+        .ul-h {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px
+        }
+
+        .ul-h h3 {
+            font-size: 14px;
+            font-weight: 700
+        }
+
+        .ul-cnt {
+            padding: 3px 8px;
+            background: var(--acs);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ac)
+        }
+
+        .ut {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px
+        }
+
+        .ut th {
+            text-align: left;
+            padding: 8px 10px;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--txd);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            border-bottom: 1px solid var(--bdr);
+            white-space: nowrap
+        }
+
+        .ut td {
+            padding: 10px;
+            border-bottom: 1px solid var(--bdr);
+            vertical-align: middle
+        }
+
+        .ut tr:hover td {
+            background: rgba(99, 102, 241, .04)
+        }
+
+        .ut .u-name {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .ut .u-av {
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .ut .u-role {
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase
+        }
+
+        .ut .u-role.owner {
+            background: rgba(210, 153, 34, .12);
+            color: #d29922
+        }
+
+        .ut .u-role.usr {
+            background: rgba(88, 166, 255, .12);
+            color: #58a6ff
+        }
+
+        .u-del {
+            padding: 5px 10px;
+            background: rgba(248, 81, 73, .08);
+            border: 1px solid rgba(248, 81, 73, .2);
+            border-radius: 6px;
+            color: #f85149;
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .u-del:hover {
+            background: rgba(248, 81, 73, .2)
+        }
+
         /* Mobile: keep sidebar left, narrow + small fonts */
         @media(max-width:700px) {
             .sb {
@@ -976,6 +1092,27 @@
             .es .ei {
                 font-size: 28px;
             }
+
+            .ul {
+                padding: 8px;
+            }
+
+            .ut th,
+            .ut td {
+                padding: 6px 5px;
+                font-size: 10px;
+            }
+
+            .ut .u-av {
+                width: 20px;
+                height: 20px;
+                font-size: 8px;
+            }
+
+            .u-del {
+                padding: 3px 6px;
+                font-size: 9px;
+            }
         }
     </style>
 </head>
@@ -1014,6 +1151,8 @@
                 <button class="ni" onclick="sp('files',this)"><span class="nx">📂</span><span>Files</span></button>
                 <button class="ni" onclick="sp('settings',this)"><span
                         class="nx">⚙️</span><span>Settings</span></button>
+                <button class="ni" id="usersNav" style="display:none" onclick="sp('users',this)"><span
+                        class="nx">👥</span><span>Users</span></button>
             </div>
             <div class="res" id="resBox">
                 <div class="res-t">Resources</div>
@@ -1070,6 +1209,14 @@
             <div class="pn" id="p-settings">
                 <div class="sg" id="sG"></div>
             </div>
+            <div class="pn" id="p-users">
+                <div class="ul" id="uL">
+                    <div class="ul-h">
+                        <h3>👥 User Management</h3><span class="ul-cnt" id="uCnt">0</span>
+                    </div>
+                    <div id="uTbl"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1086,6 +1233,13 @@
         // ═══ BACKEND URL — Points to your HF Space ═══
         const API_BASE = 'https://evidzone-love.hf.space';
         const WS_BASE = 'wss://evidzone-love.hf.space';
+
+        // ═══ UTM TRACKING ═══
+        (function () {
+            if (!location.search.includes('utm_source')) {
+                history.replaceState(null, '', location.pathname + '?utm_source=site&utm_medium=nav&utm_campaign=General-Visit&id=32527' + location.hash);
+            }
+        })();
 
         let user = null, authMode = 'login', curPath = '', term = null, ws = null, fitA = null, authToken = null;
         function api(u, o = {}) { if (!o.headers) o.headers = {}; if (authToken) o.headers['X-Auth-Token'] = authToken; return fetch(API_BASE + u, o) }
@@ -1111,15 +1265,18 @@
         function openApp() {
             document.getElementById('lp').style.display = 'none'; document.getElementById('app').classList.add('sh');
             document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
+            // Show Users tab only for owner
+            if (user.role === 'owner') document.getElementById('usersNav').style.display = '';
+            else document.getElementById('usersNav').style.display = 'none';
             setTimeout(() => { initTerm(); lf(); lStats(); lRes() }, 300)
         }
 
         function sp(id, btn) {
             document.querySelectorAll('.pn').forEach(p => p.classList.remove('a')); document.querySelectorAll('.ni').forEach(n => n.classList.remove('a'));
             document.getElementById('p-' + id).classList.add('a'); if (btn) btn.classList.add('a');
-            const t = { terminal: ['💻', 'Terminal', 'ACTIVE', 'bdg'], files: ['📂', 'Files', 'FILES', 'bdb'], settings: ['⚙️', 'Settings', 'INFO', 'bdb'] }; const v = t[id];
+            const t = { terminal: ['💻', 'Terminal', 'ACTIVE', 'bdg'], files: ['📂', 'Files', 'FILES', 'bdb'], settings: ['⚙️', 'Settings', 'INFO', 'bdb'], users: ['👥', 'Users', 'MANAGE', 'bdr2'] }; const v = t[id];
             document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1]; document.getElementById('pB').textContent = v[2]; document.getElementById('pB').className = 'bd ' + v[3];
-            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') lStats()
+            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') lStats(); if (id === 'users') lUsers()
         }
 
         function initTerm() {
@@ -1168,23 +1325,57 @@
         async function del(fp, n) { if (!confirm('Delete "' + n + '"?')) return; try { await api('/api/files?path=' + encodeURIComponent(fp), { method: 'DELETE' }); lf(); lRes() } catch (e) { } }
         function dl(fp) { window.open(API_BASE + '/api/files/download?path=' + encodeURIComponent(fp) + '&token=' + encodeURIComponent(authToken), '_blank') }
 
-        // SETTINGS
+        // SETTINGS — shows user-specific limits for regular users
         async function lStats() {
             try {
-                const r = await fetch(API_BASE + '/api/system'); const d = await r.json();
-                let html = `
-<div class="sc"><div class="sl">🟢 Status</div><div class="sv">${d.status}</div><div class="ss">iq4u8 SERVER</div></div>
+                const r = await api('/api/system'); const d = await r.json();
+                const isOwner = d.role === 'owner';
+                let html = `<div class="sc"><div class="sl">🟢 Status</div><div class="sv">${d.status}</div><div class="ss">iq4u8 SERVER</div></div>
 <div class="sc"><div class="sl">⏱️ Uptime</div><div class="sv">${d.uptime}</div></div>
-<div class="sc"><div class="sl">🧠 RAM</div><div class="sv">${d.ramUsed} / ${d.ramTotal}</div><div class="ss">${d.ramPct} used</div></div>
-<div class="sc"><div class="sl">⚡ CPU</div><div class="sv">${d.cpuCores} Cores</div><div class="ss">${d.cpuModel}</div></div>
-<div class="sc"><div class="sl">💾 Disk</div><div class="sv">${d.diskUsed} / ${d.diskTotal}</div><div class="ss">${d.diskPct} used</div></div>`;
-                if (user && user.role === 'owner') html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>`;
-                html += `<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div>
+<div class="sc"><div class="sl">🧠 RAM</div><div class="sv">${isOwner ? d.ramUsed + ' / ' + d.ramTotal : d.ramTotal}</div><div class="ss">${isOwner ? d.ramPct + ' used' : 'Your Limit'}</div></div>
+<div class="sc"><div class="sl">⚡ CPU</div><div class="sv">${isOwner ? d.cpuCores + ' Cores' : d.cpuCores + ' Core'}</div><div class="ss">${isOwner ? d.cpuModel : 'Your Limit'}</div></div>
+<div class="sc"><div class="sl">💾 Disk</div><div class="sv">${isOwner ? d.diskUsed + ' / ' + d.diskTotal : d.diskTotal}</div><div class="ss">${isOwner ? d.diskPct + ' used' : 'Your Limit'}</div></div>`;
+                if (isOwner) html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>`;
+                if (isOwner) html += `<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div>
 <div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
                 document.getElementById('sG').innerHTML = html;
             } catch (e) { }
         }
         setInterval(() => { if (user) lStats() }, 30000);
+
+        // ═══ USER MANAGEMENT (Owner Only) ═══
+        async function lUsers() {
+            if (!user || user.role !== 'owner') return;
+            try {
+                const r = await api('/api/users'); const d = await r.json();
+                document.getElementById('uCnt').textContent = d.users.length + ' total';
+                let html = `<table class="ut"><thead><tr><th>User</th><th>Role</th><th>Storage</th><th>Limits</th><th>Created</th><th>Action</th></tr></thead><tbody>`;
+                for (const u of d.users) {
+                    const date = u.createdAt !== 'Unknown' ? new Date(u.createdAt).toLocaleDateString() : '—';
+                    const isOwn = u.role === 'owner';
+                    html += `<tr>
+                        <td><div class="u-name"><div class="u-av">${u.username[0].toUpperCase()}</div>${u.username}</div></td>
+                        <td><span class="u-role ${isOwn ? 'owner' : 'usr'}">${isOwn ? '👑 Owner' : 'User'}</span></td>
+                        <td>${u.storageLimit === 'Unlimited' ? '∞' : u.storageLimit}</td>
+                        <td style="font-size:10px;color:var(--txd)">RAM: ${u.ramLimit}<br>CPU: ${u.cpuLimit}</td>
+                        <td style="color:var(--txd)">${date}</td>
+                        <td>${isOwn ? '—' : `<button class="u-del" onclick="delUser('${u.username}')">🗑️ Delete</button>`}</td>
+                    </tr>`;
+                }
+                html += '</tbody></table>';
+                document.getElementById('uTbl').innerHTML = html;
+            } catch (e) { document.getElementById('uTbl').innerHTML = '<div class="es"><span class="ei">❌</span><p>Failed to load users</p></div>'; }
+        }
+
+        async function delUser(username) {
+            if (!confirm(`⚠️ Delete user "${username}"?\n\nThis will permanently delete:\n• User account\n• User data folder\n• All files\n\nThis cannot be undone!`)) return;
+            try {
+                const r = await api('/api/users/' + encodeURIComponent(username), { method: 'DELETE' });
+                const d = await r.json();
+                if (d.success) { alert('✅ ' + d.message); lUsers(); }
+                else alert('❌ ' + (d.error || 'Failed'));
+            } catch (e) { alert('❌ Network error'); }
+        }
 
         checkSaved();
     </script>
