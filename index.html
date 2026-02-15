@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IQ4U8 SERVER | VPS TERMINAL</title>
+    <title>IQ4U8 SERVER | COSMIC VPS</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #020202;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --accent: #007AFF; /* iOS Blue */
+            --bg: #030305;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent: #007AFF;
             --neon: #5AC8FA;
-            --success: #32D74B;
+            --glow: rgba(0, 122, 255, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -24,205 +24,194 @@
             background: var(--bg);
             display: flex;
             justify-content: center;
-            align-items: center; /* Desktop centering */
+            align-items: center;
             overflow: hidden;
             color: #fff;
             padding: 20px;
         }
 
-        /* --- SPACE ENGINE BACKGROUND --- */
-        .cosmic-bg {
+        /* --- LIVE COSMIC ENGINE (ANIMATED BACKGROUND) --- */
+        .space-engine {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)),
-                        url('https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            filter: blur(2px);
-            transform: scale(1.1);
+            background: radial-gradient(circle at 50% 50%, #0a0a0f 0%, #000 100%);
         }
 
-        /* --- WRAPPER (Mobile Responsive Centering) --- */
+        /* Live Star Particles */
+        .stars {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-1000px); }
+        }
+
+        /* Deep Nebula Glow */
+        .nebula-glow {
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: drift 20s infinite alternate;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(-20%, -20%); }
+            100% { transform: translate(20%, 20%); }
+        }
+
+        /* --- WRAPPER (Centered & High-Mobile Reach) --- */
         .wrapper {
             width: 100%;
-            max-width: 440px;
-            /* Pushes UI slightly up for Mobile Reach */
-            margin-top: -5dvh; 
-            animation: appAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 420px;
+            margin-top: -6dvh; /* Centering fix for mobile */
+            animation: zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes appAppear { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9) translateY(40px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* --- ELITE GLASS PANEL --- */
-        .glass-panel {
+        /* --- DARK GLASS CARD --- */
+        .card {
             background: var(--glass);
-            backdrop-filter: blur(40px) saturate(210%);
-            -webkit-backdrop-filter: blur(40px) saturate(210%);
-            border-radius: 40px;
-            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(45px) saturate(220%);
+            -webkit-backdrop-filter: blur(45px) saturate(220%);
+            border-radius: 45px;
+            border: 1px solid var(--border);
             padding: 50px 30px;
             text-align: center;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
             position: relative;
         }
 
         /* --- BRANDING --- */
-        .brand-pill {
-            font-size: 10px; font-weight: 800; letter-spacing: 4px; 
-            color: var(--accent); margin-bottom: 20px; text-transform: uppercase;
-            background: rgba(0, 122, 255, 0.1);
-            display: inline-block; padding: 6px 15px; border-radius: 50px;
+        .brand-logo {
+            font-size: 10px; font-weight: 800; letter-spacing: 5px; 
+            color: var(--accent); margin-bottom: 15px; text-transform: uppercase;
         }
 
-        h1.server-title {
-            font-size: clamp(34px, 10vw, 46px); font-weight: 800; line-height: 1;
-            background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.2));
+        h1.title {
+            font-size: clamp(36px, 11vw, 48px); font-weight: 800; line-height: 1.1;
+            background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.1));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        #status-txt { font-size: 13px; color: var(--neon); margin: 15px 0 35px; font-weight: 500; letter-spacing: 1.5px; }
+        .subtitle { font-size: 13px; color: var(--neon); margin: 15px 0 40px; font-weight: 500; letter-spacing: 1px; }
 
-        /* --- SERVER STATS WIDGET --- */
-        .server-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 35px;
-        }
-        .stat-box {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--glass-border);
-            padding: 15px;
-            border-radius: 20px;
-            transition: 0.3s;
-        }
-        .stat-box:active { transform: scale(0.95); background: rgba(255,255,255,0.08); }
-        .stat-box small { display: block; font-size: 9px; opacity: 0.5; margin-bottom: 5px; text-transform: uppercase; }
-        .stat-box b { font-size: 16px; color: var(--success); }
-
-        /* --- JOIN US BUTTON (Ultra Premium) --- */
+        /* --- JOIN BUTTON (Live Pulse Effect) --- */
         .join-btn {
             display: inline-block;
             width: 100%;
-            padding: 20px;
-            border-radius: 25px;
+            padding: 22px;
+            border-radius: 28px;
             border: none;
             background: #fff;
             color: #000;
             font-size: 18px; font-weight: 800;
             text-decoration: none;
             position: relative;
-            overflow: hidden;
-            transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            box-shadow: 0 15px 40px rgba(255,255,255,0.15);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Breathing Glow Animation */
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 25px 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
 
         .join-btn:hover {
-            transform: translateY(-5px);
+            transform: scale(1.03) translateY(-5px);
             background: var(--accent);
             color: #fff;
-            box-shadow: 0 20px 50px rgba(0, 122, 255, 0.5);
         }
 
-        .join-btn:active { transform: scale(0.94); }
+        .join-btn:active { transform: scale(0.95); }
 
-        /* Shiny animation on button */
-        .join-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
-            transform: skewX(-25deg);
-            transition: 0.5s;
-        }
-        .join-btn:hover::before { left: 150%; transition: 0.7s; }
-
-        /* --- iOS BOTTOM NOTIFICATION PILL --- */
-        .pill-notif {
+        /* --- MOBILE PILL NOTIFICATION --- */
+        .pill {
             position: fixed;
-            bottom: -100px;
+            bottom: -80px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border);
+            padding: 12px 28px;
             border-radius: 50px;
             z-index: 10000;
-            transition: 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            white-space: nowrap;
+            transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .pill-notif.active { bottom: 40px; }
-        .pill-flex { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; }
+        .pill.active { bottom: 35px; }
+        .pill-flex { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: #fff; }
 
-        .footer { margin-top: 40px; font-size: 10px; opacity: 0.4; letter-spacing: 2px; }
-        .footer b { color: var(--accent); }
-
+        .footer { margin-top: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="cosmic-bg"></div>
+    <div class="space-engine">
+        <div class="nebula-glow"></div>
+        <div class="stars"></div>
+    </div>
 
-    <div class="pill-notif" id="notif">
+    <div class="pill" id="pill">
         <div class="pill-flex">
-            <span id="notif-icon">🛰️</span>
-            <span id="notif-msg">Establishing Connection...</span>
+            <span id="p-icon">🪐</span>
+            <span id="p-msg">Establishing Deep Link...</span>
         </div>
     </div>
 
     <div class="wrapper">
-        <div class="glass-panel">
-            <div class="brand-pill">IQ4U8 SERVER</div>
+        <div class="card">
+            <div class="brand-logo">IQ4U8 SERVER CORE</div>
             
-            <h1 class="server-title">ULTIMATE</h1>
-            <h1 class="server-title" style="color: var(--accent); -webkit-text-fill-color: var(--accent);">VPS HUB</h1>
+            <h1 class="title">DARK</h1>
+            <h1 class="title" style="color: var(--accent); -webkit-text-fill-color: var(--accent);">TERMINAL</h1>
 
-            <div id="status-txt">QUANTUM ENCRYPTION ACTIVE</div>
+            <div class="subtitle">ENCRYPTED VPS ACCESS PROTOCOL</div>
 
-            <div class="server-stats">
-                <div class="stat-box" onclick="show('99.9% Uptime Verified', '🛡️')">
-                    <small>System Health</small>
-                    <b>STABLE</b>
-                </div>
-                <div class="stat-box" onclick="show('Speed: 10Gbps Link', '⚡')">
-                    <small>Network Port</small>
-                    <b style="color: var(--neon);">10 Gbps</b>
-                </div>
-            </div>
-
-            <a href="https://evidzone-love.hf.space/?utm_source=site&utm_medium=nav&utm_campaign=General-Visit&id=94197" class="join-btn" onclick="joinAction()">
+            <a href="https://evidzone-love.hf.space/?utm_source=site&utm_medium=nav&utm_campaign=General-Visit&id=94197" class="join-btn" onclick="pop('Redirecting to IQ4U8 Server...', '🚀')">
                 JOIN US NOW
             </a>
 
             <div class="footer">
-                V3 KERNEL BY <b>@EVID</b>
+                V3 KERNEL // DESIGN BY <b>EVID</b>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Notification Engine
-        function show(msg, icon) {
-            const pill = document.getElementById('notif');
-            document.getElementById('notif-msg').innerText = msg;
-            document.getElementById('notif-icon').innerText = icon;
+        // Notification Function
+        function pop(msg, icon) {
+            const pill = document.getElementById('pill');
+            document.getElementById('p-msg').innerText = msg;
+            document.getElementById('p-icon').innerText = icon;
             pill.classList.add('active');
             setTimeout(() => pill.classList.remove('active'), 2500);
         }
 
-        // 2. Button Action Feedback
-        function joinAction() {
-            show('Redirecting to IQ4U8 Server...', '🚀');
-        }
+        // Mouse Drift Background Effect (Desktop Only)
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            const glow = document.querySelector('.nebula-glow');
+            glow.style.left = (x * 50) + '%';
+            glow.style.top = (y * 50) + '%';
+        });
 
-        // 3. Welcome Message on Load
         window.onload = () => {
-            setTimeout(() => show('VPS Terminal Initialized', '📡'), 1000);
+            setTimeout(() => pop('Cosmic Terminal Online', '📡'), 1000);
         };
     </script>
 </body>
