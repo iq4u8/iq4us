@@ -22,7 +22,7 @@
             --acs: rgba(99, 102, 241, .12);
             --gn: #3fb950;
             --rd: #f85149;
-            --sw: 220px;
+            --sw: 220px
         }
 
         * {
@@ -39,6 +39,7 @@
             overflow: hidden
         }
 
+        /* ═══ ANIMATED BACKGROUND ═══ */
         .bgx {
             position: fixed;
             top: 0;
@@ -46,20 +47,140 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            pointer-events: none
+            pointer-events: none;
+            overflow: hidden
         }
 
         .bgx::before {
             content: '';
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, .07), transparent 70%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, .08), transparent 70%);
             top: -200px;
-            left: -200px
+            left: -200px;
+            animation: float1 12s ease-in-out infinite
         }
 
-        /* LOGIN */
+        .bgx::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, .06), transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            animation: float2 15s ease-in-out infinite
+        }
+
+        @keyframes float1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            50% {
+                transform: translate(100px, 80px)
+            }
+        }
+
+        @keyframes float2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0)
+            }
+
+            50% {
+                transform: translate(-80px, -60px)
+            }
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(99, 102, 241, .3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0
+        }
+
+        @keyframes rise {
+            0% {
+                opacity: 0;
+                transform: translateY(0)
+            }
+
+            10% {
+                opacity: 1
+            }
+
+            90% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh)
+            }
+        }
+
+        /* ═══ ALERT BANNER ═══ */
+        .alert-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 8px 16px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            animation: slideDown .3s ease
+        }
+
+        .alert-bar.sh {
+            display: flex
+        }
+
+        .alert-bar.warning {
+            background: linear-gradient(135deg, rgba(210, 153, 34, .9), rgba(234, 179, 8, .9));
+            color: #000
+        }
+
+        .alert-bar .alert-x {
+            background: 0;
+            border: 0;
+            color: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            position: absolute;
+            right: 12px
+        }
+
+        .alert-bar .alert-x:hover {
+            background: rgba(0, 0, 0, .15)
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%)
+            }
+
+            to {
+                transform: translateY(0)
+            }
+        }
+
+        /* ═══ LOGIN ═══ */
         .lw {
             display: flex;
             align-items: center;
@@ -70,11 +191,12 @@
         }
 
         .lc {
-            background: var(--card);
+            background: rgba(22, 27, 34, .85);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--bdr);
             border-radius: 18px;
             padding: 36px 32px;
-            width: 380px;
+            width: 400px;
             max-width: 92vw
         }
 
@@ -84,27 +206,43 @@
         }
 
         .ll .ic {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             border-radius: 14px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 10px;
-            box-shadow: 0 6px 20px rgba(99, 102, 241, .25)
+            box-shadow: 0 6px 30px rgba(99, 102, 241, .35);
+            animation: pulse 3s ease-in-out infinite
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 6px 30px rgba(99, 102, 241, .35)
+            }
+
+            50% {
+                box-shadow: 0 6px 40px rgba(99, 102, 241, .55)
+            }
         }
 
         .ll h1 {
-            font-size: 20px;
-            font-weight: 800
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e6edf3, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
         }
 
         .ll p {
             color: var(--txd);
             font-size: 12px;
-            margin-top: 3px
+            margin-top: 4px
         }
 
         .ts {
@@ -162,7 +300,41 @@
         }
 
         .fg input:focus {
-            border-color: var(--ac)
+            border-color: var(--ac);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, .15)
+        }
+
+        /* Terms checkbox */
+        .tc {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 14px;
+            font-size: 11px;
+            color: var(--txd);
+            display: none
+        }
+
+        .tc.sh {
+            display: flex
+        }
+
+        .tc input[type=checkbox] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--ac);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .tc a {
+            color: var(--ac);
+            text-decoration: none
+        }
+
+        .tc a:hover {
+            text-decoration: underline
         }
 
         .bgo {
@@ -181,7 +353,7 @@
 
         .bgo:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, .3)
+            box-shadow: 0 4px 20px rgba(99, 102, 241, .4)
         }
 
         .bgo:disabled {
@@ -201,7 +373,7 @@
             display: none
         }
 
-        /* APP */
+        /* ═══ APP ═══ */
         .app {
             display: none;
             height: 100vh;
@@ -223,7 +395,7 @@
         }
 
         .sbr {
-            padding: 16px 14px;
+            padding: 14px 12px;
             border-bottom: 1px solid var(--bdr);
             display: flex;
             align-items: center;
@@ -231,40 +403,40 @@
         }
 
         .sbr .ic {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-radius: 9px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             flex-shrink: 0
         }
 
         .sbr h2 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             white-space: nowrap
         }
 
         .sbn {
             flex: 1;
-            padding: 10px 8px;
+            padding: 8px 6px;
             display: flex;
             flex-direction: column;
-            gap: 3px
+            gap: 2px
         }
 
         .ni {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 9px 12px;
-            border-radius: 9px;
+            gap: 7px;
+            padding: 8px 10px;
+            border-radius: 8px;
             cursor: pointer;
             transition: .2s;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--txd);
             border: 0;
@@ -285,36 +457,35 @@
         }
 
         .ni .nx {
-            font-size: 16px;
-            width: 22px;
+            font-size: 14px;
+            width: 20px;
             text-align: center
         }
 
-        /* Resource bars in sidebar */
         .res {
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-top: 1px solid var(--bdr)
         }
 
         .res-t {
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             color: var(--txd);
             text-transform: uppercase;
             letter-spacing: .5px;
-            margin-bottom: 6px
+            margin-bottom: 4px
         }
 
         .rb {
-            margin-bottom: 8px
+            margin-bottom: 6px
         }
 
         .rb-h {
             display: flex;
             justify-content: space-between;
-            font-size: 10px;
+            font-size: 9px;
             color: var(--txd);
-            margin-bottom: 3px
+            margin-bottom: 2px
         }
 
         .rb-bar {
@@ -335,53 +506,78 @@
             background: var(--rd)
         }
 
+        .plan-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 3px
+        }
+
+        .plan-free {
+            background: rgba(125, 133, 144, .15);
+            color: #7d8590
+        }
+
+        .plan-pro {
+            background: rgba(88, 166, 255, .15);
+            color: #58a6ff
+        }
+
+        .plan-ultra {
+            background: rgba(210, 153, 34, .15);
+            color: #d29922
+        }
+
         .sbf {
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-top: 1px solid var(--bdr)
         }
 
         .ub {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
+            gap: 7px;
+            padding: 7px 8px;
             background: var(--inp);
-            border-radius: 8px;
-            margin-bottom: 6px
+            border-radius: 7px;
+            margin-bottom: 5px
         }
 
         .ua {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-radius: 7px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             flex-shrink: 0
         }
 
         .un {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700
         }
 
         .ur {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--txd)
         }
 
         .bo {
             width: 100%;
-            padding: 7px;
+            padding: 6px;
             background: rgba(248, 81, 73, .08);
             border: 1px solid rgba(248, 81, 73, .2);
-            border-radius: 7px;
+            border-radius: 6px;
             color: #f85149;
             font-family: inherit;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: .2s
@@ -399,7 +595,7 @@
         }
 
         .mh {
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-bottom: 1px solid var(--bdr);
             display: flex;
             align-items: center;
@@ -409,17 +605,17 @@
         }
 
         .mh h2 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 7px
+            gap: 6px
         }
 
         .mh .bd {
-            padding: 2px 8px;
+            padding: 2px 7px;
             border-radius: 5px;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: .5px
@@ -438,6 +634,11 @@
         .bdr2 {
             background: rgba(248, 81, 73, .12);
             color: #f85149
+        }
+
+        .bdp {
+            background: rgba(210, 153, 34, .12);
+            color: #d29922
         }
 
         .pn {
@@ -460,8 +661,8 @@
         .fb {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 10px 16px;
+            gap: 5px;
+            padding: 8px 14px;
             background: var(--card);
             border-bottom: 1px solid var(--bdr);
             flex-wrap: wrap;
@@ -473,15 +674,15 @@
             align-items: center;
             gap: 3px;
             flex: 1;
-            min-width: 120px;
+            min-width: 100px;
             flex-wrap: wrap
         }
 
         .fc {
-            padding: 3px 8px;
+            padding: 3px 7px;
             background: var(--inp);
             border-radius: 5px;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
             border: 0;
             color: var(--tx);
@@ -496,23 +697,23 @@
 
         .fbs {
             display: flex;
-            gap: 4px
+            gap: 3px
         }
 
         .fb2 {
-            padding: 5px 10px;
+            padding: 4px 8px;
             background: var(--inp);
             border: 1px solid var(--bdr);
-            border-radius: 7px;
+            border-radius: 6px;
             color: var(--tx);
             font-family: inherit;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: .2s;
             display: flex;
             align-items: center;
-            gap: 4px
+            gap: 3px
         }
 
         .fb2:hover {
@@ -520,13 +721,13 @@
         }
 
         .dz {
-            padding: 20px;
+            padding: 16px;
             text-align: center;
             border: 2px dashed var(--bdr);
-            margin: 10px 14px;
-            border-radius: 12px;
+            margin: 8px 12px;
+            border-radius: 10px;
             color: var(--txd);
-            font-size: 12px;
+            font-size: 11px;
             transition: .3s;
             cursor: pointer;
             flex-shrink: 0
@@ -539,25 +740,25 @@
         }
 
         .dz .di {
-            font-size: 26px;
+            font-size: 22px;
             display: block;
-            margin-bottom: 5px
+            margin-bottom: 4px
         }
 
         .fl {
             flex: 1;
             overflow: auto;
-            padding: 4px 12px
+            padding: 3px 10px
         }
 
         .fi {
             display: flex;
             align-items: center;
-            padding: 8px 12px;
-            border-radius: 7px;
+            padding: 7px 10px;
+            border-radius: 6px;
             cursor: pointer;
             transition: .15s;
-            gap: 10px
+            gap: 8px
         }
 
         .fi:hover {
@@ -565,13 +766,13 @@
         }
 
         .fii {
-            width: 32px;
-            height: 32px;
-            border-radius: 7px;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             flex-shrink: 0
         }
 
@@ -590,14 +791,14 @@
 
         .fn {
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis
         }
 
         .fm {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--txd);
             margin-top: 1px
         }
@@ -614,14 +815,14 @@
         }
 
         .fab {
-            width: 24px;
-            height: 24px;
-            border-radius: 5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
             border: 1px solid var(--bdr);
             background: var(--inp);
             color: var(--tx);
             cursor: pointer;
-            font-size: 10px;
+            font-size: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -638,29 +839,29 @@
         }
 
         .es {
-            padding: 40px 16px;
+            padding: 30px 14px;
             text-align: center;
             color: var(--txd)
         }
 
         .es .ei {
-            font-size: 34px;
+            font-size: 30px;
             display: block;
-            margin-bottom: 10px
+            margin-bottom: 8px
         }
 
         .sg {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 10px;
-            padding: 16px
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            padding: 14px
         }
 
         .sc {
             background: var(--inp);
             border: 1px solid var(--bdr);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 9px;
+            padding: 10px;
             transition: .3s
         }
 
@@ -670,21 +871,21 @@
         }
 
         .sl {
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             color: var(--txd);
             text-transform: uppercase;
             letter-spacing: .5px;
-            margin-bottom: 4px
+            margin-bottom: 3px
         }
 
         .sv {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800
         }
 
         .ss {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--txd);
             margin-top: 2px
         }
@@ -709,47 +910,49 @@
         .mb {
             background: var(--card);
             border: 1px solid var(--bdr);
-            border-radius: 14px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 20px;
             width: 320px;
             max-width: 90vw
         }
 
         .mb h3 {
-            font-size: 14px;
-            margin-bottom: 12px
+            font-size: 13px;
+            margin-bottom: 10px
         }
 
-        .mb input {
+        .mb input,
+        .mb select {
             width: 100%;
-            padding: 9px 12px;
+            padding: 8px 10px;
             background: var(--inp);
             border: 1px solid var(--bdr);
-            border-radius: 7px;
+            border-radius: 6px;
             color: var(--tx);
             font-family: inherit;
-            font-size: 12px;
+            font-size: 11px;
             outline: 0;
-            margin-bottom: 12px
+            margin-bottom: 10px
         }
 
-        .mb input:focus {
+        .mb input:focus,
+        .mb select:focus {
             border-color: var(--ac)
         }
 
         .ma {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             justify-content: flex-end
         }
 
         .ma button {
-            padding: 7px 14px;
-            border-radius: 7px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-family: inherit;
             font-weight: 600;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             border: 1px solid var(--bdr)
         }
 
@@ -768,9 +971,91 @@
             display: none
         }
 
-        /* USER MANAGEMENT TABLE */
-        .ul {
+        /* PLANS PAGE */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            padding: 16px
+        }
+
+        .plan-card {
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 12px;
             padding: 16px;
+            text-align: center;
+            transition: .3s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .plan-card:hover {
+            border-color: var(--ac);
+            transform: translateY(-2px)
+        }
+
+        .plan-card.pop {
+            border-color: var(--ac);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, .2)
+        }
+
+        .plan-card.pop::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 8px;
+            right: -28px;
+            background: var(--ac);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 2px 30px;
+            transform: rotate(45deg)
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 4px
+        }
+
+        .plan-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--ac);
+            margin-bottom: 2px
+        }
+
+        .plan-price small {
+            font-size: 12px;
+            color: var(--txd);
+            font-weight: 600
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin: 12px 0;
+            font-size: 11px;
+            color: var(--txd)
+        }
+
+        .plan-features li {
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--gn);
+            font-weight: 700
+        }
+
+        /* USER TABLE */
+        .ul {
+            padding: 14px;
             overflow: auto;
             flex: 1
         }
@@ -779,33 +1064,57 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 12px
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 6px
         }
 
         .ul-h h3 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700
         }
 
         .ul-cnt {
-            padding: 3px 8px;
+            padding: 2px 7px;
             background: var(--acs);
-            border-radius: 6px;
-            font-size: 11px;
+            border-radius: 5px;
+            font-size: 10px;
             font-weight: 700;
             color: var(--ac)
+        }
+
+        .ul-acts {
+            display: flex;
+            gap: 4px
+        }
+
+        .ul-btn {
+            padding: 4px 10px;
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 6px;
+            color: var(--tx);
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .ul-btn:hover {
+            border-color: var(--ac)
         }
 
         .ut {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px
+            font-size: 11px
         }
 
         .ut th {
             text-align: left;
-            padding: 8px 10px;
-            font-size: 9px;
+            padding: 6px 8px;
+            font-size: 8px;
             font-weight: 700;
             color: var(--txd);
             text-transform: uppercase;
@@ -815,7 +1124,7 @@
         }
 
         .ut td {
-            padding: 10px;
+            padding: 8px;
             border-bottom: 1px solid var(--bdr);
             vertical-align: middle
         }
@@ -828,26 +1137,26 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px
+            gap: 6px
         }
 
         .ut .u-av {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border-radius: 6px;
+            border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             flex-shrink: 0
         }
 
         .ut .u-role {
-            padding: 2px 7px;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             text-transform: uppercase
         }
@@ -862,256 +1171,262 @@
             color: #58a6ff
         }
 
-        .u-del {
-            padding: 5px 10px;
-            background: rgba(248, 81, 73, .08);
-            border: 1px solid rgba(248, 81, 73, .2);
-            border-radius: 6px;
-            color: #f85149;
+        .u-act {
+            padding: 3px 7px;
+            border-radius: 5px;
             font-family: inherit;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             cursor: pointer;
-            transition: .2s
+            transition: .2s;
+            border: 1px solid var(--bdr);
+            background: var(--inp);
+            color: var(--tx);
+            margin: 1px
         }
 
-        .u-del:hover {
-            background: rgba(248, 81, 73, .2)
+        .u-act:hover {
+            border-color: var(--ac)
         }
 
-        /* Mobile: keep sidebar left, narrow + small fonts */
+        .u-act.del {
+            color: #f85149;
+            border-color: rgba(248, 81, 73, .2);
+            background: rgba(248, 81, 73, .06)
+        }
+
+        .u-act.del:hover {
+            background: rgba(248, 81, 73, .15)
+        }
+
+        /* MOBILE */
         @media(max-width:700px) {
             .sb {
-                width: 52px;
+                width: 130px
             }
 
-            .sbr h2,
-            .ni span:not(.nx),
-            .un,
-            .ur {
-                display: none;
+            .sbr h2 {
+                font-size: 11px
+            }
+
+            .ni span:not(.nx) {
+                font-size: 10px
             }
 
             .sbr {
-                justify-content: center;
-                padding: 10px 6px;
+                padding: 10px 8px
             }
 
             .sbr .ic {
-                width: 28px;
-                height: 28px;
-                font-size: 12px;
-                border-radius: 7px;
-            }
-
-            .ni {
-                padding: 8px 0;
-                justify-content: center;
-            }
-
-            .ni .nx {
-                font-size: 16px;
-            }
-
-            .res {
-                padding: 6px 4px;
-            }
-
-            .res-t {
-                display: none;
-            }
-
-            .rb {
-                margin-bottom: 5px;
-            }
-
-            .rb-h {
-                display: none;
-            }
-
-            .rb-bar {
-                height: 3px;
-            }
-
-            .ub {
-                justify-content: center;
-                padding: 5px;
-            }
-
-            .ua {
                 width: 24px;
                 height: 24px;
                 font-size: 10px;
-                border-radius: 6px;
+                border-radius: 6px
+            }
+
+            .ni {
+                padding: 6px 8px;
+                gap: 5px
+            }
+
+            .ni .nx {
+                font-size: 13px
+            }
+
+            .res {
+                padding: 6px 8px
+            }
+
+            .res-t {
+                font-size: 7px
+            }
+
+            .rb-h {
+                font-size: 8px
+            }
+
+            .rb-bar {
+                height: 3px
+            }
+
+            .ub {
+                padding: 5px
+            }
+
+            .ua {
+                width: 20px;
+                height: 20px;
+                font-size: 8px
+            }
+
+            .un {
+                font-size: 10px
+            }
+
+            .ur {
+                font-size: 8px
             }
 
             .bo {
-                font-size: 9px;
-                padding: 5px;
+                font-size: 8px;
+                padding: 4px
             }
 
             .sbf {
-                padding: 8px 4px;
+                padding: 6px 6px
             }
 
             .mh {
-                padding: 8px 12px;
+                padding: 6px 10px
             }
 
             .mh h2 {
-                font-size: 13px;
+                font-size: 12px
             }
 
             .mh .bd {
-                font-size: 8px;
-                padding: 2px 6px;
+                font-size: 7px;
+                padding: 2px 5px
             }
 
             .lc {
                 width: 92vw;
-                padding: 24px 18px;
+                padding: 24px 18px
             }
 
             .ll .ic {
                 width: 40px;
                 height: 40px;
-                font-size: 18px;
+                font-size: 18px
             }
 
             .ll h1 {
-                font-size: 17px;
+                font-size: 17px
             }
 
             .ll p {
-                font-size: 11px;
-            }
-
-            .ts button {
-                font-size: 11px;
-                padding: 7px;
-            }
-
-            .fg label {
-                font-size: 9px;
-            }
-
-            .fg input {
-                padding: 9px 10px;
-                font-size: 12px;
-            }
-
-            .bgo {
-                padding: 10px;
-                font-size: 13px;
+                font-size: 11px
             }
 
             .fb {
-                padding: 6px 8px;
-                gap: 4px;
+                padding: 5px 6px
             }
 
             .fb2 {
-                padding: 4px 7px;
-                font-size: 10px;
-                gap: 3px;
+                padding: 3px 6px;
+                font-size: 9px
             }
 
             .fc {
-                padding: 3px 6px;
-                font-size: 10px;
+                padding: 2px 5px;
+                font-size: 9px
             }
 
             .dz {
-                padding: 12px;
-                margin: 6px 8px;
-                font-size: 10px;
+                padding: 10px;
+                margin: 5px 6px;
+                font-size: 9px
             }
 
             .dz .di {
-                font-size: 18px;
-                margin-bottom: 3px;
+                font-size: 16px;
+                margin-bottom: 2px
             }
 
             .fl {
-                padding: 3px 6px;
+                padding: 2px 5px
             }
 
             .fi {
-                padding: 6px 8px;
-                gap: 6px;
+                padding: 5px 6px;
+                gap: 5px
             }
 
             .fii {
-                width: 26px;
-                height: 26px;
-                font-size: 12px;
-                border-radius: 5px;
+                width: 24px;
+                height: 24px;
+                font-size: 11px
             }
 
             .fn {
-                font-size: 11px;
+                font-size: 10px
             }
 
             .fm {
-                font-size: 9px;
+                font-size: 8px
             }
 
             .fab {
-                width: 22px;
-                height: 22px;
-                font-size: 9px;
+                width: 20px;
+                height: 20px;
+                font-size: 8px
             }
 
             .sg {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-                padding: 8px;
+                gap: 5px;
+                padding: 6px
             }
 
             .sc {
-                padding: 8px;
-                border-radius: 8px;
+                padding: 7px;
+                border-radius: 7px
             }
 
             .sl {
-                font-size: 8px;
+                font-size: 7px
             }
 
             .sv {
-                font-size: 12px;
+                font-size: 11px
             }
 
             .ss {
-                font-size: 8px;
-            }
-
-            .es {
-                padding: 30px 10px;
-            }
-
-            .es .ei {
-                font-size: 28px;
+                font-size: 7px
             }
 
             .ul {
-                padding: 8px;
+                padding: 6px
             }
 
             .ut th,
             .ut td {
-                padding: 6px 5px;
-                font-size: 10px;
+                padding: 5px 4px;
+                font-size: 9px
             }
 
             .ut .u-av {
-                width: 20px;
-                height: 20px;
-                font-size: 8px;
+                width: 18px;
+                height: 18px;
+                font-size: 7px
             }
 
-            .u-del {
-                padding: 3px 6px;
-                font-size: 9px;
+            .u-act {
+                padding: 2px 5px;
+                font-size: 8px
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                padding: 8px
+            }
+
+            .plan-card {
+                padding: 12px
+            }
+
+            .plan-name {
+                font-size: 14px
+            }
+
+            .plan-price {
+                font-size: 22px
+            }
+
+            .alert-bar {
+                font-size: 10px;
+                padding: 6px 30px 6px 10px
             }
         }
     </style>
@@ -1119,6 +1434,12 @@
 
 <body>
     <div class="bgx"></div>
+
+    <!-- ALERT BANNER -->
+    <div class="alert-bar warning" id="alertBar">
+        <span id="alertMsg">⚠️ Alert</span>
+        <button class="alert-x" onclick="closeAlert()">✕</button>
+    </div>
 
     <div class="lw" id="lp">
         <div class="lc">
@@ -1131,8 +1452,17 @@
                     onclick="stab('signup')">Sign Up</button></div>
             <div class="em" id="aErr"></div>
             <form onsubmit="doAuth(event)">
-                <div class="fg"><label>Username</label><input type="text" id="aU" placeholder="Username" required></div>
-                <div class="fg"><label>Password</label><input type="password" id="aP" placeholder="Password" required>
+                <div class="fg"><label>Username</label><input type="text" id="aU" placeholder="Enter username" required>
+                </div>
+                <div class="fg"><label>Password</label><input type="password" id="aP" placeholder="Enter password"
+                        required></div>
+                <div class="tc" id="tcBox">
+                    <input type="checkbox" id="agreeTC">
+                    <span>I agree to the <a href="#"
+                            onclick="alert('Terms: Use responsibly. No illegal activity. Data may be deleted for violations. Storage limits apply per plan.');return false">Terms
+                            & Conditions</a> and <a href="#"
+                            onclick="alert('Privacy: We store your username, hashed password, and files. No data shared with third parties.');return false">Privacy
+                            Policy</a></span>
                 </div>
                 <button type="submit" class="bgo" id="aB">Login</button>
             </form>
@@ -1149,6 +1479,7 @@
                 <button class="ni a" onclick="sp('terminal',this)"><span
                         class="nx">💻</span><span>Terminal</span></button>
                 <button class="ni" onclick="sp('files',this)"><span class="nx">📂</span><span>Files</span></button>
+                <button class="ni" onclick="sp('plans',this)"><span class="nx">💎</span><span>Plans</span></button>
                 <button class="ni" onclick="sp('settings',this)"><span
                         class="nx">⚙️</span><span>Settings</span></button>
                 <button class="ni" id="usersNav" style="display:none" onclick="sp('users',this)"><span
@@ -1156,24 +1487,25 @@
             </div>
             <div class="res" id="resBox">
                 <div class="res-t">Resources</div>
-                <div class="rb" id="rbStorage">
+                <div class="rb">
                     <div class="rb-h"><span>Storage</span><span id="rbSt">—</span></div>
                     <div class="rb-bar">
                         <div class="rb-fill" id="rbSf" style="width:0"></div>
                     </div>
                 </div>
-                <div class="rb" id="rbRam">
+                <div class="rb">
                     <div class="rb-h"><span>RAM</span><span id="rbRt">—</span></div>
                     <div class="rb-bar">
                         <div class="rb-fill" id="rbRf" style="width:0"></div>
                     </div>
                 </div>
-                <div class="rb" id="rbCpu">
+                <div class="rb">
                     <div class="rb-h"><span>CPU</span><span id="rbCt">—</span></div>
                     <div class="rb-bar">
                         <div class="rb-fill" id="rbCf" style="width:0"></div>
                     </div>
                 </div>
+                <div id="planBadge"></div>
             </div>
             <div class="sbf">
                 <div class="ub">
@@ -1203,8 +1535,11 @@
                 <input type="file" id="finp" multiple onchange="upl(this.files)">
                 <div class="dz" id="dZ" ondragover="event.preventDefault();this.classList.add('ov')"
                     ondragleave="this.classList.remove('ov')" ondrop="hDr(event)"><span class="di">📥</span><strong>Drop
-                        files here</strong><br><small>ZIP auto-extract</small></div>
+                        files</strong><br><small>ZIP auto-extract</small></div>
                 <div class="fl" id="fL"></div>
+            </div>
+            <div class="pn" id="p-plans">
+                <div class="plans-grid" id="plansGrid"></div>
             </div>
             <div class="pn" id="p-settings">
                 <div class="sg" id="sG"></div>
@@ -1212,7 +1547,10 @@
             <div class="pn" id="p-users">
                 <div class="ul" id="uL">
                     <div class="ul-h">
-                        <h3>👥 User Management</h3><span class="ul-cnt" id="uCnt">0</span>
+                        <h3>👥 User Management</h3>
+                        <div style="display:flex;gap:6px;align-items:center"><span class="ul-cnt"
+                                id="uCnt">0</span><button class="ul-btn" onclick="showAlertModal()">📢 Alert</button>
+                        </div>
                     </div>
                     <div id="uTbl"></div>
                 </div>
@@ -1220,6 +1558,7 @@
         </div>
     </div>
 
+    <!-- Modals -->
     <div class="mo" id="mkM">
         <div class="mb">
             <h3>📁 New Folder</h3><input type="text" id="mkN" placeholder="Name"
@@ -1228,104 +1567,112 @@
                     onclick="mkGo()">Create</button></div>
         </div>
     </div>
+    <div class="mo" id="pwM">
+        <div class="mb">
+            <h3>🔑 Reset Password</h3>
+            <p style="font-size:10px;color:var(--txd);margin-bottom:8px" id="pwUser"></p><input type="password" id="pwN"
+                placeholder="New password (6+ chars)">
+            <div class="ma"><button class="c"
+                    onclick="document.getElementById('pwM').classList.remove('sh')">Cancel</button><button class="k"
+                    onclick="pwGo()">Update</button></div>
+        </div>
+    </div>
+    <div class="mo" id="plM">
+        <div class="mb">
+            <h3>💎 Set Plan</h3>
+            <p style="font-size:10px;color:var(--txd);margin-bottom:8px" id="plUser"></p><select id="plSel">
+                <option value="free">Free — ₹40</option>
+                <option value="pro">Pro — ₹70</option>
+                <option value="ultra">Ultra — ₹150</option>
+            </select>
+            <div class="ma"><button class="c"
+                    onclick="document.getElementById('plM').classList.remove('sh')">Cancel</button><button class="k"
+                    onclick="plGo()">Set Plan</button></div>
+        </div>
+    </div>
+    <div class="mo" id="alM">
+        <div class="mb">
+            <h3>📢 Send Alert</h3><input type="text" id="alMsg" placeholder="Alert message (empty to clear)">
+            <div class="ma"><button class="c"
+                    onclick="document.getElementById('alM').classList.remove('sh')">Cancel</button><button class="k"
+                    onclick="alGo()">Send</button></div>
+        </div>
+    </div>
 
     <script>
-        // ═══ BACKEND URL — Points to your HF Space ═══
         const API_BASE = 'https://evidzone-love.hf.space';
         const WS_BASE = 'wss://evidzone-love.hf.space';
 
-        // ═══ UTM TRACKING ═══
-        (function () {
-            if (!location.search.includes('utm_source')) {
-                history.replaceState(null, '', location.pathname + '?utm_source=site&utm_medium=nav&utm_campaign=General-Visit&id=32527' + location.hash);
-            }
-        })();
+        // UTM
+        (function () { if (!location.search.includes('utm_source')) history.replaceState(null, '', location.pathname + '?utm_source=site&utm_medium=nav&utm_campaign=General-Visit&id=32527' + location.hash) })();
+
+        // Particles
+        (function () { for (let i = 0; i < 20; i++) { const p = document.createElement('div'); p.className = 'particle'; p.style.left = Math.random() * 100 + '%'; p.style.top = Math.random() * 100 + '%'; p.style.width = p.style.height = Math.random() * 3 + 1 + 'px'; p.style.animation = `rise ${Math.random() * 8 + 6}s linear ${Math.random() * 5}s infinite`; document.body.appendChild(p) } })();
 
         let user = null, authMode = 'login', curPath = '', term = null, ws = null, fitA = null, authToken = null;
         function api(u, o = {}) { if (!o.headers) o.headers = {}; if (authToken) o.headers['X-Auth-Token'] = authToken; return fetch(API_BASE + u, o) }
         function fSz(b) { if (!b || b === Infinity) return '∞'; const k = 1024, s = ['B', 'KB', 'MB', 'GB'], i = Math.min(Math.floor(Math.log(b) / Math.log(k)), 3); return (b / Math.pow(k, i)).toFixed(1) + s[i] }
 
-        function stab(m) { authMode = m; document.querySelectorAll('.ts button').forEach((b, i) => b.classList.toggle('a', m === 'login' ? i === 0 : i === 1)); document.getElementById('aB').textContent = m === 'login' ? 'Login' : 'Sign Up'; document.getElementById('aErr').style.display = 'none' }
+        function stab(m) { authMode = m; document.querySelectorAll('.ts button').forEach((b, i) => b.classList.toggle('a', m === 'login' ? i === 0 : i === 1)); document.getElementById('aB').textContent = m === 'login' ? 'Login' : 'Sign Up'; document.getElementById('aErr').style.display = 'none'; document.getElementById('tcBox').classList.toggle('sh', m === 'signup') }
 
         async function doAuth(e) {
             e.preventDefault(); const u = document.getElementById('aU').value.trim(), p = document.getElementById('aP').value, btn = document.getElementById('aB');
+            if (authMode === 'signup' && !document.getElementById('agreeTC').checked) { const el = document.getElementById('aErr'); el.textContent = 'Please agree to Terms & Conditions'; el.style.display = 'block'; return }
             btn.disabled = true; btn.textContent = 'Wait...';
             try {
                 const r = await fetch(API_BASE + (authMode === 'login' ? '/api/login' : '/api/signup'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: u, password: p }) }); const d = await r.json();
                 if (d.success) { user = d.user; authToken = d.token; localStorage.setItem('token', d.token); localStorage.setItem('user', JSON.stringify(d.user)); openApp() }
                 else { const el = document.getElementById('aErr'); el.textContent = d.error; el.style.display = 'block' }
-            } catch (err) { document.getElementById('aErr').textContent = 'Network error'; document.getElementById('aErr').style.display = 'block' }
+            }
+            catch (err) { document.getElementById('aErr').textContent = 'Network error'; document.getElementById('aErr').style.display = 'block' }
             btn.disabled = false; btn.textContent = authMode === 'login' ? 'Login' : 'Sign Up'
         }
 
         async function checkSaved() { const t = localStorage.getItem('token'); if (!t) return; try { const r = await fetch(API_BASE + '/api/me?token=' + t); const d = await r.json(); if (d.loggedIn) { user = d.user; authToken = t; openApp() } else localStorage.clear() } catch (e) { localStorage.clear() } }
-
         function doLogout() { user = null; authToken = null; localStorage.clear(); document.getElementById('lp').style.display = 'flex'; document.getElementById('app').classList.remove('sh'); if (ws) { ws.close(); ws = null } if (term) { term.dispose(); term = null } }
 
         function openApp() {
             document.getElementById('lp').style.display = 'none'; document.getElementById('app').classList.add('sh');
             document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
-            // Show Users tab only for owner
-            if (user.role === 'owner') document.getElementById('usersNav').style.display = '';
-            else document.getElementById('usersNav').style.display = 'none';
-            setTimeout(() => { initTerm(); lf(); lStats(); lRes() }, 300)
+            if (user.role === 'owner') document.getElementById('usersNav').style.display = ''; else document.getElementById('usersNav').style.display = 'none';
+            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); lAlert(); lPlans() }, 300)
         }
 
         function sp(id, btn) {
             document.querySelectorAll('.pn').forEach(p => p.classList.remove('a')); document.querySelectorAll('.ni').forEach(n => n.classList.remove('a'));
             document.getElementById('p-' + id).classList.add('a'); if (btn) btn.classList.add('a');
-            const t = { terminal: ['💻', 'Terminal', 'ACTIVE', 'bdg'], files: ['📂', 'Files', 'FILES', 'bdb'], settings: ['⚙️', 'Settings', 'INFO', 'bdb'], users: ['👥', 'Users', 'MANAGE', 'bdr2'] }; const v = t[id];
+            const t = { terminal: ['💻', 'Terminal', 'ACTIVE', 'bdg'], files: ['📂', 'Files', 'FILES', 'bdb'], plans: ['💎', 'Plans', 'PRICING', 'bdp'], settings: ['⚙️', 'Settings', 'INFO', 'bdb'], users: ['👥', 'Users', 'MANAGE', 'bdr2'] }; const v = t[id];
             document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1]; document.getElementById('pB').textContent = v[2]; document.getElementById('pB').className = 'bd ' + v[3];
-            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') lStats(); if (id === 'users') lUsers()
+            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') lStats(); if (id === 'users') lUsers(); if (id === 'plans') lPlans()
         }
 
         function initTerm() {
             if (term) return;
             term = new Terminal({ cursorBlink: true, fontSize: 13, fontFamily: '"Fira Code",monospace', rightClickSelectsWord: true, theme: { background: '#06080f', foreground: '#e6edf3', cursor: '#6366f1', selectionBackground: 'rgba(99,102,241,.3)', black: '#1e293b', red: '#f85149', green: '#3fb950', yellow: '#d29922', blue: '#58a6ff', magenta: '#8b5cf6', cyan: '#06b6d4', white: '#e6edf3' } });
             fitA = new FitAddon.FitAddon(); term.loadAddon(fitA); term.open(document.getElementById('tbox')); setTimeout(() => fitA.fit(), 100);
-
-            // ═══ CLIPBOARD SUPPORT ═══
-            term.attachCustomKeyEventHandler((ev) => {
-                // Ctrl+V → Paste from clipboard
-                if (ev.ctrlKey && ev.key === 'v' && ev.type === 'keydown') {
-                    navigator.clipboard.readText().then(text => {
-                        if (text && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: text }));
-                    }).catch(() => { });
-                    return false;
-                }
-                // Ctrl+C → Copy selected text (if any), else send interrupt
-                if (ev.ctrlKey && ev.key === 'c' && ev.type === 'keydown') {
-                    if (term.hasSelection()) {
-                        navigator.clipboard.writeText(term.getSelection());
-                        term.clearSelection();
-                        return false;
-                    }
-                    return true; // let Ctrl+C go through as interrupt
-                }
-                // Ctrl+Shift+V → Also paste
-                if (ev.ctrlKey && ev.shiftKey && ev.key === 'V' && ev.type === 'keydown') {
-                    navigator.clipboard.readText().then(text => {
-                        if (text && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: text }));
-                    }).catch(() => { });
-                    return false;
-                }
-                return true;
+            // Clipboard
+            term.attachCustomKeyEventHandler(ev => {
+                if (ev.ctrlKey && ev.key === 'v' && ev.type === 'keydown') { navigator.clipboard.readText().then(t => { if (t && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: t })) }).catch(() => { }); return false }
+                if (ev.ctrlKey && ev.key === 'c' && ev.type === 'keydown') { if (term.hasSelection()) { navigator.clipboard.writeText(term.getSelection()); term.clearSelection(); return false } return true }
+                if (ev.ctrlKey && ev.shiftKey && ev.key === 'V' && ev.type === 'keydown') { navigator.clipboard.readText().then(t => { if (t && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: t })) }).catch(() => { }); return false }
+                return true
             });
-
-            // Right-click paste
-            document.getElementById('tbox').addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-                navigator.clipboard.readText().then(text => {
-                    if (text && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: text }));
-                }).catch(() => { });
-            });
-
+            document.getElementById('tbox').addEventListener('contextmenu', e => { e.preventDefault(); navigator.clipboard.readText().then(t => { if (t && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: t })) }).catch(() => { }) });
             ws = new WebSocket(WS_BASE + '/ws/terminal?token=' + encodeURIComponent(authToken));
             ws.onopen = () => { const d = fitA.proposeDimensions(); if (d) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) };
             ws.onmessage = ev => term.write(ev.data); ws.onerror = () => term.write('\r\n\x1b[31m[Error]\x1b[0m\r\n'); ws.onclose = () => term.write('\r\n\x1b[31m[Disconnected]\x1b[0m\r\n');
             term.onData(d => { if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: d })) });
             window.addEventListener('resize', () => { if (fitA) { fitA.fit(); const d = fitA.proposeDimensions(); if (d && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) } })
         }
+
+        // ALERT
+        async function lAlert() {
+            try {
+                const r = await api('/api/alert'); const d = await r.json();
+                if (d.alert && d.alert.message && !sessionStorage.getItem('alertClosed')) { document.getElementById('alertMsg').textContent = '⚠️ ' + d.alert.message; document.getElementById('alertBar').classList.add('sh') }
+            } catch (e) { }
+        }
+        function closeAlert() { document.getElementById('alertBar').classList.remove('sh'); sessionStorage.setItem('alertClosed', '1') }
 
         // RESOURCES
         async function lRes() {
@@ -1338,9 +1685,31 @@
                 document.getElementById('rbRf').style.width = d.role === 'owner' ? '0' : '40%';
                 document.getElementById('rbCt').textContent = d.role === 'owner' ? 'Unlimited' : d.cpu.limit + ' Core';
                 document.getElementById('rbCf').style.width = d.role === 'owner' ? '0' : '50%';
+                const plan = d.plan || 'free';
+                document.getElementById('planBadge').innerHTML = `<span class="plan-badge plan-${plan}">${plan.toUpperCase()} PLAN</span>`;
             } catch (e) { }
         }
         setInterval(() => { if (user) lRes() }, 15000);
+
+        // PLANS
+        async function lPlans() {
+            try {
+                const r = await api('/api/plans'); const d = await r.json();
+                const pop = 'pro';
+                document.getElementById('plansGrid').innerHTML = d.plans.map(p => `
+      <div class="plan-card${p.id === pop ? ' pop' : ''}">
+        <div class="plan-name">${p.name}</div>
+        <div class="plan-price">₹${p.price}<small>/mo</small></div>
+        <ul class="plan-features">
+          <li>${p.storage} Storage</li>
+          <li>${p.ram} RAM</li>
+          <li>${p.cpu}</li>
+          <li>${p.id === 'free' ? 'Basic Support' : p.id === 'pro' ? 'Priority Support' : 'Premium Support'}</li>
+          <li>${p.id === 'ultra' ? 'All Features' : 'Standard Features'}</li>
+        </ul>
+      </div>`).join('')
+            } catch (e) { }
+        }
 
         // FILES
         async function lf() { try { const r = await api('/api/files?path=' + encodeURIComponent(curPath)); const d = await r.json(); rBc(); rFl(d.files || []) } catch (e) { } }
@@ -1362,59 +1731,77 @@
         async function del(fp, n) { if (!confirm('Delete "' + n + '"?')) return; try { await api('/api/files?path=' + encodeURIComponent(fp), { method: 'DELETE' }); lf(); lRes() } catch (e) { } }
         function dl(fp) { window.open(API_BASE + '/api/files/download?path=' + encodeURIComponent(fp) + '&token=' + encodeURIComponent(authToken), '_blank') }
 
-        // SETTINGS — shows user-specific limits for regular users
+        // SETTINGS
         async function lStats() {
             try {
-                const r = await api('/api/system'); const d = await r.json();
-                const isOwner = d.role === 'owner';
-                let html = `<div class="sc"><div class="sl">🟢 Status</div><div class="sv">${d.status}</div><div class="ss">iq4u8 SERVER</div></div>
+                const r = await api('/api/system'); const d = await r.json(); const isOwner = d.role === 'owner';
+                let html = `<div class="sc"><div class="sl">🟢 Status</div><div class="sv">${d.status}</div><div class="ss">${d.plan.toUpperCase()} Plan</div></div>
 <div class="sc"><div class="sl">⏱️ Uptime</div><div class="sv">${d.uptime}</div></div>
 <div class="sc"><div class="sl">🧠 RAM</div><div class="sv">${isOwner ? d.ramUsed + ' / ' + d.ramTotal : d.ramTotal}</div><div class="ss">${isOwner ? d.ramPct + ' used' : 'Your Limit'}</div></div>
 <div class="sc"><div class="sl">⚡ CPU</div><div class="sv">${isOwner ? d.cpuCores + ' Cores' : d.cpuCores + ' Core'}</div><div class="ss">${isOwner ? d.cpuModel : 'Your Limit'}</div></div>
 <div class="sc"><div class="sl">💾 Disk</div><div class="sv">${isOwner ? d.diskUsed + ' / ' + d.diskTotal : d.diskTotal}</div><div class="ss">${isOwner ? d.diskPct + ' used' : 'Your Limit'}</div></div>`;
-                if (isOwner) html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>`;
-                if (isOwner) html += `<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div>
-<div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
-                document.getElementById('sG').innerHTML = html;
+                if (isOwner) html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div><div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div><div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
+                document.getElementById('sG').innerHTML = html
             } catch (e) { }
         }
         setInterval(() => { if (user) lStats() }, 30000);
 
-        // ═══ USER MANAGEMENT (Owner Only) ═══
+        // USER MANAGEMENT
         async function lUsers() {
             if (!user || user.role !== 'owner') return;
             try {
                 const r = await api('/api/users'); const d = await r.json();
                 document.getElementById('uCnt').textContent = d.users.length + ' total';
-                let html = `<table class="ut"><thead><tr><th>User</th><th>Role</th><th>Storage</th><th>Limits</th><th>Created</th><th>Action</th></tr></thead><tbody>`;
+                let html = `<table class="ut"><thead><tr><th>User</th><th>Role</th><th>Plan</th><th>Storage</th><th>Price</th><th>Actions</th></tr></thead><tbody>`;
                 for (const u of d.users) {
-                    const date = u.createdAt !== 'Unknown' ? new Date(u.createdAt).toLocaleDateString() : '—';
-                    const isOwn = u.role === 'owner';
-                    html += `<tr>
-                        <td><div class="u-name"><div class="u-av">${u.username[0].toUpperCase()}</div>${u.username}</div></td>
-                        <td><span class="u-role ${isOwn ? 'owner' : 'usr'}">${isOwn ? '👑 Owner' : 'User'}</span></td>
-                        <td>${u.storageLimit === 'Unlimited' ? '∞' : u.storageLimit}</td>
-                        <td style="font-size:10px;color:var(--txd)">RAM: ${u.ramLimit}<br>CPU: ${u.cpuLimit}</td>
-                        <td style="color:var(--txd)">${date}</td>
-                        <td>${isOwn ? '—' : `<button class="u-del" onclick="delUser('${u.username}')">🗑️ Delete</button>`}</td>
-                    </tr>`;
+                    const isOwn = u.role === 'owner'; const date = u.createdAt !== 'Unknown' ? new Date(u.createdAt).toLocaleDateString() : '—';
+                    html += `<tr><td><div class="u-name"><div class="u-av">${u.username[0].toUpperCase()}</div>${u.username}</div></td>
+        <td><span class="u-role ${isOwn ? 'owner' : 'usr'}">${isOwn ? '👑 Owner' : 'User'}</span></td>
+        <td><span class="plan-badge plan-${u.plan}">${u.plan.toUpperCase()}</span></td>
+        <td style="font-size:10px">${u.storageMB}MB / ${u.storageLimit}</td>
+        <td style="font-weight:700">${u.price}</td>
+        <td>${isOwn ? '—' : `<button class="u-act" onclick="showPw('${u.username}')">🔑</button><button class="u-act" onclick="showPl('${u.username}','${u.plan}')">💎</button><button class="u-act del" onclick="delUser('${u.username}')">🗑️</button>`}</td></tr>`
                 }
-                html += '</tbody></table>';
-                document.getElementById('uTbl').innerHTML = html;
-            } catch (e) { document.getElementById('uTbl').innerHTML = '<div class="es"><span class="ei">❌</span><p>Failed to load users</p></div>'; }
+                html += '</tbody></table>'; document.getElementById('uTbl').innerHTML = html
+            } catch (e) { document.getElementById('uTbl').innerHTML = '<div class="es"><span class="ei">❌</span><p>Failed</p></div>' }
+        }
+        async function delUser(u) {
+            if (!confirm(`⚠️ Delete "${u}"?\n\nThis deletes:\n• Account\n• All files\n• Data\n\nCannot undo!`)) return;
+            try { const r = await api('/api/users/' + encodeURIComponent(u), { method: 'DELETE' }); const d = await r.json(); if (d.success) { alert('✅ ' + d.message); lUsers() } else alert('❌ ' + (d.error || 'Failed')) } catch (e) { alert('❌ Error') }
         }
 
-        async function delUser(username) {
-            if (!confirm(`⚠️ Delete user "${username}"?\n\nThis will permanently delete:\n• User account\n• User data folder\n• All files\n\nThis cannot be undone!`)) return;
+        // Password reset
+        function showPw(u) { document.getElementById('pwM').classList.add('sh'); document.getElementById('pwUser').textContent = 'User: ' + u; document.getElementById('pwN').value = ''; document.getElementById('pwN').dataset.user = u; document.getElementById('pwN').focus() }
+        async function pwGo() {
+            const u = document.getElementById('pwN').dataset.user, p = document.getElementById('pwN').value;
+            if (!p || p.length < 6) { alert('6+ characters required'); return }
             try {
-                const r = await api('/api/users/' + encodeURIComponent(username), { method: 'DELETE' });
-                const d = await r.json();
-                if (d.success) { alert('✅ ' + d.message); lUsers(); }
-                else alert('❌ ' + (d.error || 'Failed'));
-            } catch (e) { alert('❌ Network error'); }
+                const r = await api('/api/users/' + encodeURIComponent(u) + '/password', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: p }) }); const d = await r.json();
+                if (d.success) { alert('✅ ' + d.message); document.getElementById('pwM').classList.remove('sh') } else alert('❌ ' + (d.error || 'Failed'))
+            } catch (e) { alert('❌ Error') }
         }
 
-        checkSaved();
+        // Plan set
+        function showPl(u, cur) { document.getElementById('plM').classList.add('sh'); document.getElementById('plUser').textContent = 'User: ' + u; document.getElementById('plSel').value = cur; document.getElementById('plSel').dataset.user = u }
+        async function plGo() {
+            const u = document.getElementById('plSel').dataset.user, p = document.getElementById('plSel').value;
+            try {
+                const r = await api('/api/users/' + encodeURIComponent(u) + '/plan', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: p }) }); const d = await r.json();
+                if (d.success) { alert('✅ ' + d.message); document.getElementById('plM').classList.remove('sh'); lUsers() } else alert('❌ ' + (d.error || 'Failed'))
+            } catch (e) { alert('❌ Error') }
+        }
+
+        // Alert modal
+        function showAlertModal() { document.getElementById('alM').classList.add('sh'); document.getElementById('alMsg').value = ''; document.getElementById('alMsg').focus() }
+        async function alGo() {
+            const msg = document.getElementById('alMsg').value.trim();
+            try {
+                const r = await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type: 'warning' }) }); const d = await r.json();
+                if (d.success) { alert(msg ? '✅ Alert sent!' : '✅ Alert cleared!'); document.getElementById('alM').classList.remove('sh'); if (msg) { document.getElementById('alertMsg').textContent = '⚠️ ' + msg; document.getElementById('alertBar').classList.add('sh'); sessionStorage.removeItem('alertClosed') } else { document.getElementById('alertBar').classList.remove('sh') } }
+            } catch (e) { alert('❌ Error') }
+        }
+
+        checkSaved(); lAlert();
     </script>
 </body>
 
