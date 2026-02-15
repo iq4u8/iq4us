@@ -1,218 +1,1193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>IQ4U8 SERVER | COSMIC VPS</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>iq4u8 SERVER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css">
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
     <style>
         :root {
-            --bg: #030305;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #007AFF;
-            --neon: #5AC8FA;
-            --glow: rgba(0, 122, 255, 0.4);
+            --bg: #06080f;
+            --bg2: #0d1117;
+            --card: #161b22;
+            --inp: #1c2333;
+            --bdr: rgba(255, 255, 255, .06);
+            --tx: #e6edf3;
+            --txd: #7d8590;
+            --ac: #6366f1;
+            --acs: rgba(99, 102, 241, .12);
+            --gn: #3fb950;
+            --rd: #f85149;
+            --sw: 220px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
 
         body {
-            min-height: 100dvh;
+            font-family: 'Inter', sans-serif;
             background: var(--bg);
+            color: var(--tx);
+            height: 100vh;
+            overflow: hidden
+        }
+
+        .bgx {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        .bgx::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, .07), transparent 70%);
+            top: -200px;
+            left: -200px
+        }
+
+        /* LOGIN */
+        .lw {
             display: flex;
-            justify-content: center;
             align-items: center;
-            overflow: hidden;
-            color: #fff;
-            padding: 20px;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+            z-index: 1
         }
 
-        /* --- LIVE COSMIC ENGINE (ANIMATED BACKGROUND) --- */
-        .space-engine {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #0a0a0f 0%, #000 100%);
+        .lc {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 18px;
+            padding: 36px 32px;
+            width: 380px;
+            max-width: 92vw
         }
 
-        /* Live Star Particles */
-        .stars {
-            position: absolute;
-            width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3;
-            animation: moveStars 100s linear infinite;
-        }
-
-        @keyframes moveStars {
-            from { transform: translateY(0); }
-            to { transform: translateY(-1000px); }
-        }
-
-        /* Deep Nebula Glow */
-        .nebula-glow {
-            position: absolute;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            animation: drift 20s infinite alternate;
-        }
-
-        @keyframes drift {
-            0% { transform: translate(-20%, -20%); }
-            100% { transform: translate(20%, 20%); }
-        }
-
-        /* --- WRAPPER (Centered & High-Mobile Reach) --- */
-        .wrapper {
-            width: 100%;
-            max-width: 420px;
-            margin-top: -6dvh; /* Centering fix for mobile */
-            animation: zoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9) translateY(40px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-
-        /* --- DARK GLASS CARD --- */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(45px) saturate(220%);
-            -webkit-backdrop-filter: blur(45px) saturate(220%);
-            border-radius: 45px;
-            border: 1px solid var(--border);
-            padding: 50px 30px;
+        .ll {
             text-align: center;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            position: relative;
+            margin-bottom: 24px
         }
 
-        /* --- BRANDING --- */
-        .brand-logo {
-            font-size: 10px; font-weight: 800; letter-spacing: 5px; 
-            color: var(--accent); margin-bottom: 15px; text-transform: uppercase;
+        .ll .ic {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, .25)
         }
 
-        h1.title {
-            font-size: clamp(36px, 11vw, 48px); font-weight: 800; line-height: 1.1;
-            background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.1));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .ll h1 {
+            font-size: 20px;
+            font-weight: 800
         }
 
-        .subtitle { font-size: 13px; color: var(--neon); margin: 15px 0 40px; font-weight: 500; letter-spacing: 1px; }
+        .ll p {
+            color: var(--txd);
+            font-size: 12px;
+            margin-top: 3px
+        }
 
-        /* --- JOIN BUTTON (Live Pulse Effect) --- */
-        .join-btn {
-            display: inline-block;
+        .ts {
+            display: flex;
+            background: var(--inp);
+            border-radius: 9px;
+            padding: 3px;
+            margin-bottom: 20px
+        }
+
+        .ts button {
+            flex: 1;
+            padding: 8px;
+            background: 0;
+            border: 0;
+            color: var(--txd);
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: .3s
+        }
+
+        .ts button.a {
+            background: var(--ac);
+            color: #fff
+        }
+
+        .fg {
+            margin-bottom: 14px
+        }
+
+        .fg label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--txd);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .fg input {
             width: 100%;
-            padding: 22px;
-            border-radius: 28px;
-            border: none;
-            background: #fff;
-            color: #000;
-            font-size: 18px; font-weight: 800;
-            text-decoration: none;
-            position: relative;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Breathing Glow Animation */
-            animation: pulseGlow 2.5s infinite;
+            padding: 10px 12px;
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 9px;
+            color: var(--tx);
+            font-family: inherit;
+            font-size: 13px;
+            outline: 0;
+            transition: .3s
         }
 
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
-            70% { box-shadow: 0 0 25px 15px rgba(255, 255, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        .fg input:focus {
+            border-color: var(--ac)
         }
 
-        .join-btn:hover {
-            transform: scale(1.03) translateY(-5px);
-            background: var(--accent);
+        .bgo {
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: 0;
+            border-radius: 9px;
             color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s
         }
 
-        .join-btn:active { transform: scale(0.95); }
+        .bgo:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, .3)
+        }
 
-        /* --- MOBILE PILL NOTIFICATION --- */
-        .pill {
+        .bgo:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none
+        }
+
+        .em {
+            background: rgba(248, 81, 73, .1);
+            border: 1px solid rgba(248, 81, 73, .3);
+            color: #fca5a5;
+            padding: 8px 10px;
+            border-radius: 7px;
+            font-size: 11px;
+            margin-bottom: 12px;
+            display: none
+        }
+
+        /* APP */
+        .app {
+            display: none;
+            height: 100vh;
+            position: relative;
+            z-index: 1
+        }
+
+        .app.sh {
+            display: flex
+        }
+
+        .sb {
+            width: var(--sw);
+            background: var(--bg2);
+            border-right: 1px solid var(--bdr);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0
+        }
+
+        .sbr {
+            padding: 16px 14px;
+            border-bottom: 1px solid var(--bdr);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .sbr .ic {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0
+        }
+
+        .sbr h2 {
+            font-size: 14px;
+            font-weight: 800;
+            white-space: nowrap
+        }
+
+        .sbn {
+            flex: 1;
+            padding: 10px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px
+        }
+
+        .ni {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: .2s;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--txd);
+            border: 0;
+            background: 0;
+            width: 100%;
+            text-align: left;
+            font-family: inherit
+        }
+
+        .ni:hover {
+            background: var(--acs);
+            color: var(--tx)
+        }
+
+        .ni.a {
+            background: var(--acs);
+            color: var(--ac)
+        }
+
+        .ni .nx {
+            font-size: 16px;
+            width: 22px;
+            text-align: center
+        }
+
+        /* Resource bars in sidebar */
+        .res {
+            padding: 10px 12px;
+            border-top: 1px solid var(--bdr)
+        }
+
+        .res-t {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--txd);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 6px
+        }
+
+        .rb {
+            margin-bottom: 8px
+        }
+
+        .rb-h {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--txd);
+            margin-bottom: 3px
+        }
+
+        .rb-bar {
+            height: 4px;
+            background: var(--inp);
+            border-radius: 3px;
+            overflow: hidden
+        }
+
+        .rb-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: .5s;
+            background: var(--ac)
+        }
+
+        .rb-fill.warn {
+            background: var(--rd)
+        }
+
+        .sbf {
+            padding: 10px 12px;
+            border-top: 1px solid var(--bdr)
+        }
+
+        .ub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            background: var(--inp);
+            border-radius: 8px;
+            margin-bottom: 6px
+        }
+
+        .ua {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .un {
+            font-size: 12px;
+            font-weight: 700
+        }
+
+        .ur {
+            font-size: 10px;
+            color: var(--txd)
+        }
+
+        .bo {
+            width: 100%;
+            padding: 7px;
+            background: rgba(248, 81, 73, .08);
+            border: 1px solid rgba(248, 81, 73, .2);
+            border-radius: 7px;
+            color: #f85149;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .bo:hover {
+            background: rgba(248, 81, 73, .15)
+        }
+
+        .mn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden
+        }
+
+        .mh {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--bdr);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg2);
+            flex-shrink: 0
+        }
+
+        .mh h2 {
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+
+        .mh .bd {
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .bdg {
+            background: rgba(63, 185, 80, .12);
+            color: #3fb950
+        }
+
+        .bdb {
+            background: rgba(88, 166, 255, .12);
+            color: #58a6ff
+        }
+
+        .pn {
+            flex: 1;
+            overflow: auto;
+            display: none
+        }
+
+        .pn.a {
+            display: flex;
+            flex-direction: column
+        }
+
+        #tbox {
+            flex: 1;
+            background: #000;
+            padding: 3px
+        }
+
+        .fb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: var(--card);
+            border-bottom: 1px solid var(--bdr);
+            flex-wrap: wrap;
+            flex-shrink: 0
+        }
+
+        .fbc {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            flex: 1;
+            min-width: 120px;
+            flex-wrap: wrap
+        }
+
+        .fc {
+            padding: 3px 8px;
+            background: var(--inp);
+            border-radius: 5px;
+            font-size: 11px;
+            cursor: pointer;
+            border: 0;
+            color: var(--tx);
+            font-family: inherit;
+            font-weight: 600;
+            transition: .2s
+        }
+
+        .fc:hover {
+            background: var(--ac)
+        }
+
+        .fbs {
+            display: flex;
+            gap: 4px
+        }
+
+        .fb2 {
+            padding: 5px 10px;
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 7px;
+            color: var(--tx);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .fb2:hover {
+            border-color: var(--ac)
+        }
+
+        .dz {
+            padding: 20px;
+            text-align: center;
+            border: 2px dashed var(--bdr);
+            margin: 10px 14px;
+            border-radius: 12px;
+            color: var(--txd);
+            font-size: 12px;
+            transition: .3s;
+            cursor: pointer;
+            flex-shrink: 0
+        }
+
+        .dz.ov {
+            border-color: var(--ac);
+            background: var(--acs);
+            color: var(--ac)
+        }
+
+        .dz .di {
+            font-size: 26px;
+            display: block;
+            margin-bottom: 5px
+        }
+
+        .fl {
+            flex: 1;
+            overflow: auto;
+            padding: 4px 12px
+        }
+
+        .fi {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: .15s;
+            gap: 10px
+        }
+
+        .fi:hover {
+            background: var(--acs)
+        }
+
+        .fii {
+            width: 32px;
+            height: 32px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0
+        }
+
+        .fii.d {
+            background: rgba(210, 153, 34, .12)
+        }
+
+        .fii.f {
+            background: rgba(88, 166, 255, .12)
+        }
+
+        .fin {
+            flex: 1;
+            min-width: 0
+        }
+
+        .fn {
+            font-weight: 600;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .fm {
+            font-size: 10px;
+            color: var(--txd);
+            margin-top: 1px
+        }
+
+        .fa {
+            display: flex;
+            gap: 3px;
+            opacity: 0;
+            transition: .2s
+        }
+
+        .fi:hover .fa {
+            opacity: 1
+        }
+
+        .fab {
+            width: 24px;
+            height: 24px;
+            border-radius: 5px;
+            border: 1px solid var(--bdr);
+            background: var(--inp);
+            color: var(--tx);
+            cursor: pointer;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s
+        }
+
+        .fab:hover {
+            border-color: var(--ac)
+        }
+
+        .fab.x:hover {
+            border-color: var(--rd);
+            color: var(--rd)
+        }
+
+        .es {
+            padding: 40px 16px;
+            text-align: center;
+            color: var(--txd)
+        }
+
+        .es .ei {
+            font-size: 34px;
+            display: block;
+            margin-bottom: 10px
+        }
+
+        .sg {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            padding: 16px
+        }
+
+        .sc {
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 10px;
+            padding: 12px;
+            transition: .3s
+        }
+
+        .sc:hover {
+            border-color: var(--bdr2);
+            transform: translateY(-1px)
+        }
+
+        .sl {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--txd);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 4px
+        }
+
+        .sv {
+            font-size: 16px;
+            font-weight: 800
+        }
+
+        .ss {
+            font-size: 10px;
+            color: var(--txd);
+            margin-top: 2px
+        }
+
+        .mo {
             position: fixed;
-            bottom: -80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            padding: 12px 28px;
-            border-radius: 50px;
-            z-index: 10000;
-            transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999
         }
-        .pill.active { bottom: 35px; }
-        .pill-flex { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: #fff; }
 
-        .footer { margin-top: 40px; font-size: 10px; opacity: 0.3; letter-spacing: 4px; }
+        .mo.sh {
+            display: flex
+        }
+
+        .mb {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 14px;
+            padding: 24px;
+            width: 320px;
+            max-width: 90vw
+        }
+
+        .mb h3 {
+            font-size: 14px;
+            margin-bottom: 12px
+        }
+
+        .mb input {
+            width: 100%;
+            padding: 9px 12px;
+            background: var(--inp);
+            border: 1px solid var(--bdr);
+            border-radius: 7px;
+            color: var(--tx);
+            font-family: inherit;
+            font-size: 12px;
+            outline: 0;
+            margin-bottom: 12px
+        }
+
+        .mb input:focus {
+            border-color: var(--ac)
+        }
+
+        .ma {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end
+        }
+
+        .ma button {
+            padding: 7px 14px;
+            border-radius: 7px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 12px;
+            border: 1px solid var(--bdr)
+        }
+
+        .ma .c {
+            background: var(--inp);
+            color: var(--tx)
+        }
+
+        .ma .k {
+            background: var(--ac);
+            color: #fff;
+            border-color: transparent
+        }
+
+        #finp {
+            display: none
+        }
+
+        /* Mobile: keep sidebar left, narrow + small fonts */
+        @media(max-width:700px) {
+            .sb {
+                width: 52px;
+            }
+
+            .sbr h2,
+            .ni span:not(.nx),
+            .un,
+            .ur {
+                display: none;
+            }
+
+            .sbr {
+                justify-content: center;
+                padding: 10px 6px;
+            }
+
+            .sbr .ic {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+                border-radius: 7px;
+            }
+
+            .ni {
+                padding: 8px 0;
+                justify-content: center;
+            }
+
+            .ni .nx {
+                font-size: 16px;
+            }
+
+            .res {
+                padding: 6px 4px;
+            }
+
+            .res-t {
+                display: none;
+            }
+
+            .rb {
+                margin-bottom: 5px;
+            }
+
+            .rb-h {
+                display: none;
+            }
+
+            .rb-bar {
+                height: 3px;
+            }
+
+            .ub {
+                justify-content: center;
+                padding: 5px;
+            }
+
+            .ua {
+                width: 24px;
+                height: 24px;
+                font-size: 10px;
+                border-radius: 6px;
+            }
+
+            .bo {
+                font-size: 9px;
+                padding: 5px;
+            }
+
+            .sbf {
+                padding: 8px 4px;
+            }
+
+            .mh {
+                padding: 8px 12px;
+            }
+
+            .mh h2 {
+                font-size: 13px;
+            }
+
+            .mh .bd {
+                font-size: 8px;
+                padding: 2px 6px;
+            }
+
+            .lc {
+                width: 92vw;
+                padding: 24px 18px;
+            }
+
+            .ll .ic {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .ll h1 {
+                font-size: 17px;
+            }
+
+            .ll p {
+                font-size: 11px;
+            }
+
+            .ts button {
+                font-size: 11px;
+                padding: 7px;
+            }
+
+            .fg label {
+                font-size: 9px;
+            }
+
+            .fg input {
+                padding: 9px 10px;
+                font-size: 12px;
+            }
+
+            .bgo {
+                padding: 10px;
+                font-size: 13px;
+            }
+
+            .fb {
+                padding: 6px 8px;
+                gap: 4px;
+            }
+
+            .fb2 {
+                padding: 4px 7px;
+                font-size: 10px;
+                gap: 3px;
+            }
+
+            .fc {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+
+            .dz {
+                padding: 12px;
+                margin: 6px 8px;
+                font-size: 10px;
+            }
+
+            .dz .di {
+                font-size: 18px;
+                margin-bottom: 3px;
+            }
+
+            .fl {
+                padding: 3px 6px;
+            }
+
+            .fi {
+                padding: 6px 8px;
+                gap: 6px;
+            }
+
+            .fii {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+                border-radius: 5px;
+            }
+
+            .fn {
+                font-size: 11px;
+            }
+
+            .fm {
+                font-size: 9px;
+            }
+
+            .fab {
+                width: 22px;
+                height: 22px;
+                font-size: 9px;
+            }
+
+            .sg {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                padding: 8px;
+            }
+
+            .sc {
+                padding: 8px;
+                border-radius: 8px;
+            }
+
+            .sl {
+                font-size: 8px;
+            }
+
+            .sv {
+                font-size: 12px;
+            }
+
+            .ss {
+                font-size: 8px;
+            }
+
+            .es {
+                padding: 30px 10px;
+            }
+
+            .es .ei {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
+
 <body>
+    <div class="bgx"></div>
 
-    <div class="space-engine">
-        <div class="nebula-glow"></div>
-        <div class="stars"></div>
-    </div>
-
-    <div class="pill" id="pill">
-        <div class="pill-flex">
-            <span id="p-icon">🪐</span>
-            <span id="p-msg">Establishing Deep Link...</span>
+    <div class="lw" id="lp">
+        <div class="lc">
+            <div class="ll">
+                <div class="ic">⚡</div>
+                <h1>iq4u8 SERVER</h1>
+                <p>Multi-User VPS Dashboard</p>
+            </div>
+            <div class="ts"><button class="a" onclick="stab('login')">Login</button><button
+                    onclick="stab('signup')">Sign Up</button></div>
+            <div class="em" id="aErr"></div>
+            <form onsubmit="doAuth(event)">
+                <div class="fg"><label>Username</label><input type="text" id="aU" placeholder="Username" required></div>
+                <div class="fg"><label>Password</label><input type="password" id="aP" placeholder="Password" required>
+                </div>
+                <button type="submit" class="bgo" id="aB">Login</button>
+            </form>
         </div>
     </div>
 
-    <div class="wrapper">
-        <div class="card">
-            <div class="brand-logo">IQ4U8 SERVER CORE</div>
-            
-            <h1 class="title">DARK</h1>
-            <h1 class="title" style="color: var(--accent); -webkit-text-fill-color: var(--accent);">TERMINAL</h1>
-
-            <div class="subtitle">ENCRYPTED VPS ACCESS PROTOCOL</div>
-
-            <a href="https://evidzone-love.hf.space/?utm_source=site&utm_medium=nav&utm_campaign=General-Visit&id=94197" class="join-btn" onclick="pop('Redirecting to IQ4U8 Server...', '🚀')">
-                JOIN US NOW
-            </a>
-
-            <div class="footer">
-                V3 KERNEL // DESIGN BY <b>EVID</b>
+    <div class="app" id="app">
+        <div class="sb">
+            <div class="sbr">
+                <div class="ic">⚡</div>
+                <h2>iq4u8</h2>
+            </div>
+            <div class="sbn">
+                <button class="ni a" onclick="sp('terminal',this)"><span
+                        class="nx">💻</span><span>Terminal</span></button>
+                <button class="ni" onclick="sp('files',this)"><span class="nx">📂</span><span>Files</span></button>
+                <button class="ni" onclick="sp('settings',this)"><span
+                        class="nx">⚙️</span><span>Settings</span></button>
+            </div>
+            <div class="res" id="resBox">
+                <div class="res-t">Resources</div>
+                <div class="rb" id="rbStorage">
+                    <div class="rb-h"><span>Storage</span><span id="rbSt">—</span></div>
+                    <div class="rb-bar">
+                        <div class="rb-fill" id="rbSf" style="width:0"></div>
+                    </div>
+                </div>
+                <div class="rb" id="rbRam">
+                    <div class="rb-h"><span>RAM</span><span id="rbRt">—</span></div>
+                    <div class="rb-bar">
+                        <div class="rb-fill" id="rbRf" style="width:0"></div>
+                    </div>
+                </div>
+                <div class="rb" id="rbCpu">
+                    <div class="rb-h"><span>CPU</span><span id="rbCt">—</span></div>
+                    <div class="rb-bar">
+                        <div class="rb-fill" id="rbCf" style="width:0"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="sbf">
+                <div class="ub">
+                    <div class="ua" id="uA">U</div>
+                    <div>
+                        <div class="un" id="uN">user</div>
+                        <div class="ur" id="uR">user</div>
+                    </div>
+                </div>
+                <button class="bo" onclick="doLogout()">Logout</button>
+            </div>
+        </div>
+        <div class="mn">
+            <div class="mh">
+                <h2><span id="pI">💻</span> <span id="pT">Terminal</span></h2><span class="bd bdg" id="pB">ACTIVE</span>
+            </div>
+            <div class="pn a" id="p-terminal">
+                <div id="tbox"></div>
+            </div>
+            <div class="pn" id="p-files">
+                <div class="fb">
+                    <div class="fbc" id="fP"></div>
+                    <div class="fbs"><button class="fb2" onclick="sMk()">📁 New</button><button class="fb2"
+                            onclick="document.getElementById('finp').click()">⬆️ Upload</button><button class="fb2"
+                            onclick="lf()">🔄</button></div>
+                </div>
+                <input type="file" id="finp" multiple onchange="upl(this.files)">
+                <div class="dz" id="dZ" ondragover="event.preventDefault();this.classList.add('ov')"
+                    ondragleave="this.classList.remove('ov')" ondrop="hDr(event)"><span class="di">📥</span><strong>Drop
+                        files here</strong><br><small>ZIP auto-extract</small></div>
+                <div class="fl" id="fL"></div>
+            </div>
+            <div class="pn" id="p-settings">
+                <div class="sg" id="sG"></div>
             </div>
         </div>
     </div>
 
+    <div class="mo" id="mkM">
+        <div class="mb">
+            <h3>📁 New Folder</h3><input type="text" id="mkN" placeholder="Name"
+                onkeydown="if(event.key==='Enter')mkGo()">
+            <div class="ma"><button class="c" onclick="cMk()">Cancel</button><button class="k"
+                    onclick="mkGo()">Create</button></div>
+        </div>
+    </div>
+
     <script>
-        // Notification Function
-        function pop(msg, icon) {
-            const pill = document.getElementById('pill');
-            document.getElementById('p-msg').innerText = msg;
-            document.getElementById('p-icon').innerText = icon;
-            pill.classList.add('active');
-            setTimeout(() => pill.classList.remove('active'), 2500);
+        // ═══ BACKEND URL — Points to your HF Space ═══
+        const API_BASE = 'https://evidzone-love.hf.space';
+        const WS_BASE = 'wss://evidzone-love.hf.space';
+
+        let user = null, authMode = 'login', curPath = '', term = null, ws = null, fitA = null, authToken = null;
+        function api(u, o = {}) { if (!o.headers) o.headers = {}; if (authToken) o.headers['X-Auth-Token'] = authToken; return fetch(API_BASE + u, o) }
+        function fSz(b) { if (!b || b === Infinity) return '∞'; const k = 1024, s = ['B', 'KB', 'MB', 'GB'], i = Math.min(Math.floor(Math.log(b) / Math.log(k)), 3); return (b / Math.pow(k, i)).toFixed(1) + s[i] }
+
+        function stab(m) { authMode = m; document.querySelectorAll('.ts button').forEach((b, i) => b.classList.toggle('a', m === 'login' ? i === 0 : i === 1)); document.getElementById('aB').textContent = m === 'login' ? 'Login' : 'Sign Up'; document.getElementById('aErr').style.display = 'none' }
+
+        async function doAuth(e) {
+            e.preventDefault(); const u = document.getElementById('aU').value.trim(), p = document.getElementById('aP').value, btn = document.getElementById('aB');
+            btn.disabled = true; btn.textContent = 'Wait...';
+            try {
+                const r = await fetch(API_BASE + (authMode === 'login' ? '/api/login' : '/api/signup'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: u, password: p }) }); const d = await r.json();
+                if (d.success) { user = d.user; authToken = d.token; localStorage.setItem('token', d.token); localStorage.setItem('user', JSON.stringify(d.user)); openApp() }
+                else { const el = document.getElementById('aErr'); el.textContent = d.error; el.style.display = 'block' }
+            } catch (err) { document.getElementById('aErr').textContent = 'Network error'; document.getElementById('aErr').style.display = 'block' }
+            btn.disabled = false; btn.textContent = authMode === 'login' ? 'Login' : 'Sign Up'
         }
 
-        // Mouse Drift Background Effect (Desktop Only)
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            const glow = document.querySelector('.nebula-glow');
-            glow.style.left = (x * 50) + '%';
-            glow.style.top = (y * 50) + '%';
-        });
+        async function checkSaved() { const t = localStorage.getItem('token'); if (!t) return; try { const r = await fetch(API_BASE + '/api/me?token=' + t); const d = await r.json(); if (d.loggedIn) { user = d.user; authToken = t; openApp() } else localStorage.clear() } catch (e) { localStorage.clear() } }
 
-        window.onload = () => {
-            setTimeout(() => pop('Cosmic Terminal Online', '📡'), 1000);
-        };
+        function doLogout() { user = null; authToken = null; localStorage.clear(); document.getElementById('lp').style.display = 'flex'; document.getElementById('app').classList.remove('sh'); if (ws) { ws.close(); ws = null } if (term) { term.dispose(); term = null } }
+
+        function openApp() {
+            document.getElementById('lp').style.display = 'none'; document.getElementById('app').classList.add('sh');
+            document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
+            setTimeout(() => { initTerm(); lf(); lStats(); lRes() }, 300)
+        }
+
+        function sp(id, btn) {
+            document.querySelectorAll('.pn').forEach(p => p.classList.remove('a')); document.querySelectorAll('.ni').forEach(n => n.classList.remove('a'));
+            document.getElementById('p-' + id).classList.add('a'); if (btn) btn.classList.add('a');
+            const t = { terminal: ['💻', 'Terminal', 'ACTIVE', 'bdg'], files: ['📂', 'Files', 'FILES', 'bdb'], settings: ['⚙️', 'Settings', 'INFO', 'bdb'] }; const v = t[id];
+            document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1]; document.getElementById('pB').textContent = v[2]; document.getElementById('pB').className = 'bd ' + v[3];
+            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') lStats()
+        }
+
+        function initTerm() {
+            if (term) return;
+            term = new Terminal({ cursorBlink: true, fontSize: 13, fontFamily: '"Fira Code",monospace', theme: { background: '#06080f', foreground: '#e6edf3', cursor: '#6366f1', selectionBackground: 'rgba(99,102,241,.3)', black: '#1e293b', red: '#f85149', green: '#3fb950', yellow: '#d29922', blue: '#58a6ff', magenta: '#8b5cf6', cyan: '#06b6d4', white: '#e6edf3' } });
+            fitA = new FitAddon.FitAddon(); term.loadAddon(fitA); term.open(document.getElementById('tbox')); setTimeout(() => fitA.fit(), 100);
+            ws = new WebSocket(WS_BASE + '/ws/terminal?token=' + encodeURIComponent(authToken));
+            ws.onopen = () => { const d = fitA.proposeDimensions(); if (d) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) };
+            ws.onmessage = ev => term.write(ev.data); ws.onerror = () => term.write('\r\n\x1b[31m[Error]\x1b[0m\r\n'); ws.onclose = () => term.write('\r\n\x1b[31m[Disconnected]\x1b[0m\r\n');
+            term.onData(d => { if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: d })) });
+            window.addEventListener('resize', () => { if (fitA) { fitA.fit(); const d = fitA.proposeDimensions(); if (d && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) } })
+        }
+
+        // RESOURCES
+        async function lRes() {
+            try {
+                const r = await api('/api/resources'); const d = await r.json();
+                const sP = d.storage.limit === null || d.storage.limit > 1e15 ? 0 : d.storage.pct;
+                document.getElementById('rbSt').textContent = fSz(d.storage.used) + (d.role === 'owner' ? ' / ∞' : ' / ' + fSz(d.storage.limit));
+                document.getElementById('rbSf').style.width = (d.role === 'owner' ? 0 : sP) + '%'; document.getElementById('rbSf').className = 'rb-fill' + (sP > 85 ? ' warn' : '');
+                document.getElementById('rbRt').textContent = d.role === 'owner' ? 'Unlimited' : d.ram.limit + 'MB';
+                document.getElementById('rbRf').style.width = d.role === 'owner' ? '0' : '40%';
+                document.getElementById('rbCt').textContent = d.role === 'owner' ? 'Unlimited' : d.cpu.limit + ' Core';
+                document.getElementById('rbCf').style.width = d.role === 'owner' ? '0' : '50%';
+            } catch (e) { }
+        }
+        setInterval(() => { if (user) lRes() }, 15000);
+
+        // FILES
+        async function lf() { try { const r = await api('/api/files?path=' + encodeURIComponent(curPath)); const d = await r.json(); rBc(); rFl(d.files || []) } catch (e) { } }
+        function rBc() { const el = document.getElementById('fP'); const p = ['~', ...curPath.split('/').filter(Boolean)]; el.innerHTML = p.map((x, i) => { const to = i === 0 ? '' : p.slice(1, i + 1).join('/'); return `<button class="fc" onclick="nav('${to}')">${x}</button>` }).join('<span style="color:var(--txd);margin:0 1px">/</span>') }
+        function rFl(files) {
+            const el = document.getElementById('fL'); if (!files.length) { el.innerHTML = '<div class="es"><span class="ei">📭</span><p>Empty</p></div>'; return }
+            el.innerHTML = files.map(f => {
+                const ic = f.isDir ? '📁' : fI(f.name), c = f.isDir ? 'd' : 'f', sz = f.isDir ? 'Folder' : fSz(f.size), fp = curPath ? curPath + '/' + f.name : f.name;
+                return `<div class="fi" ${f.isDir ? `ondblclick="nav('${fp}')"` : ''}><div class="fii ${c}">${ic}</div><div class="fin"><div class="fn">${f.name}</div><div class="fm">${sz}</div></div><div class="fa">${!f.isDir ? `<button class="fab" onclick="dl('${fp}')">⬇</button>` : ''}<button class="fab x" onclick="del('${fp}','${f.name}')">✕</button></div></div>`
+            }).join('')
+        }
+        function nav(p) { curPath = p; lf() }
+        function fI(n) { const e = n.split('.').pop().toLowerCase(); return { js: '📜', py: '🐍', html: '🌐', css: '🎨', json: '📋', zip: '📦', png: '🖼️', jpg: '🖼️', mp4: '🎬', txt: '📄', md: '📝', sh: '⚙️' }[e] || '📄' }
+        async function upl(files) { if (!files || !files.length) return; const fd = new FormData(); fd.append('path', curPath); for (const f of files) fd.append('files', f); try { const r = await api('/api/files/upload', { method: 'POST', body: fd }); const d = await r.json(); if (d.error) alert(d.error); lf(); lRes() } catch (e) { alert('Failed') } document.getElementById('finp').value = '' }
+        function hDr(e) { e.preventDefault(); e.currentTarget.classList.remove('ov'); upl(e.dataTransfer.files) }
+        function sMk() { document.getElementById('mkM').classList.add('sh'); document.getElementById('mkN').value = ''; document.getElementById('mkN').focus() }
+        function cMk() { document.getElementById('mkM').classList.remove('sh') }
+        async function mkGo() { const n = document.getElementById('mkN').value.trim(); if (!n) return; const fp = curPath ? curPath + '/' + n : n; try { await api('/api/files/mkdir', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ path: fp }) }); cMk(); lf() } catch (e) { } }
+        async function del(fp, n) { if (!confirm('Delete "' + n + '"?')) return; try { await api('/api/files?path=' + encodeURIComponent(fp), { method: 'DELETE' }); lf(); lRes() } catch (e) { } }
+        function dl(fp) { window.open(API_BASE + '/api/files/download?path=' + encodeURIComponent(fp) + '&token=' + encodeURIComponent(authToken), '_blank') }
+
+        // SETTINGS
+        async function lStats() {
+            try {
+                const r = await fetch(API_BASE + '/api/system'); const d = await r.json();
+                let html = `
+<div class="sc"><div class="sl">🟢 Status</div><div class="sv">${d.status}</div><div class="ss">iq4u8 SERVER</div></div>
+<div class="sc"><div class="sl">⏱️ Uptime</div><div class="sv">${d.uptime}</div></div>
+<div class="sc"><div class="sl">🧠 RAM</div><div class="sv">${d.ramUsed} / ${d.ramTotal}</div><div class="ss">${d.ramPct} used</div></div>
+<div class="sc"><div class="sl">⚡ CPU</div><div class="sv">${d.cpuCores} Cores</div><div class="ss">${d.cpuModel}</div></div>
+<div class="sc"><div class="sl">💾 Disk</div><div class="sv">${d.diskUsed} / ${d.diskTotal}</div><div class="ss">${d.diskPct} used</div></div>`;
+                if (user && user.role === 'owner') html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>`;
+                html += `<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div>
+<div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
+                document.getElementById('sG').innerHTML = html;
+            } catch (e) { }
+        }
+        setInterval(() => { if (user) lStats() }, 30000);
+
+        checkSaved();
     </script>
 </body>
+
 </html>
