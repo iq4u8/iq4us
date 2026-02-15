@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Iq4u8 Servers</title>
+    <title>iq4u8 Server</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css">
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
@@ -1281,8 +1281,45 @@
 
         function initTerm() {
             if (term) return;
-            term = new Terminal({ cursorBlink: true, fontSize: 13, fontFamily: '"Fira Code",monospace', theme: { background: '#06080f', foreground: '#e6edf3', cursor: '#6366f1', selectionBackground: 'rgba(99,102,241,.3)', black: '#1e293b', red: '#f85149', green: '#3fb950', yellow: '#d29922', blue: '#58a6ff', magenta: '#8b5cf6', cyan: '#06b6d4', white: '#e6edf3' } });
+            term = new Terminal({ cursorBlink: true, fontSize: 13, fontFamily: '"Fira Code",monospace', rightClickSelectsWord: true, theme: { background: '#06080f', foreground: '#e6edf3', cursor: '#6366f1', selectionBackground: 'rgba(99,102,241,.3)', black: '#1e293b', red: '#f85149', green: '#3fb950', yellow: '#d29922', blue: '#58a6ff', magenta: '#8b5cf6', cyan: '#06b6d4', white: '#e6edf3' } });
             fitA = new FitAddon.FitAddon(); term.loadAddon(fitA); term.open(document.getElementById('tbox')); setTimeout(() => fitA.fit(), 100);
+
+            // ═══ CLIPBOARD SUPPORT ═══
+            term.attachCustomKeyEventHandler((ev) => {
+                // Ctrl+V → Paste from clipboard
+                if (ev.ctrlKey && ev.key === 'v' && ev.type === 'keydown') {
+                    navigator.clipboard.readText().then(text => {
+                        if (text && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: text }));
+                    }).catch(() => { });
+                    return false;
+                }
+                // Ctrl+C → Copy selected text (if any), else send interrupt
+                if (ev.ctrlKey && ev.key === 'c' && ev.type === 'keydown') {
+                    if (term.hasSelection()) {
+                        navigator.clipboard.writeText(term.getSelection());
+                        term.clearSelection();
+                        return false;
+                    }
+                    return true; // let Ctrl+C go through as interrupt
+                }
+                // Ctrl+Shift+V → Also paste
+                if (ev.ctrlKey && ev.shiftKey && ev.key === 'V' && ev.type === 'keydown') {
+                    navigator.clipboard.readText().then(text => {
+                        if (text && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: text }));
+                    }).catch(() => { });
+                    return false;
+                }
+                return true;
+            });
+
+            // Right-click paste
+            document.getElementById('tbox').addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                navigator.clipboard.readText().then(text => {
+                    if (text && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: text }));
+                }).catch(() => { });
+            });
+
             ws = new WebSocket(WS_BASE + '/ws/terminal?token=' + encodeURIComponent(authToken));
             ws.onopen = () => { const d = fitA.proposeDimensions(); if (d) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) };
             ws.onmessage = ev => term.write(ev.data); ws.onerror = () => term.write('\r\n\x1b[31m[Error]\x1b[0m\r\n'); ws.onclose = () => term.write('\r\n\x1b[31m[Disconnected]\x1b[0m\r\n');
