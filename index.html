@@ -649,16 +649,20 @@
             overflow-y: auto;
             overflow-x: hidden;
             display: none;
-            min-height: 0
+            min-height: 0;
+            height: 0;
+            -webkit-overflow-scrolling: touch
         }
 
         .pn.a {
-            display: block
-        }
-
-        #p-terminal.a {
             display: flex;
             flex-direction: column
+        }
+
+        #p-plans.a,
+        #p-settings.a,
+        #p-users.a {
+            display: block
         }
 
         #tbox {
