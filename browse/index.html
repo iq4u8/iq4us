@@ -1703,6 +1703,81 @@
                 min-width: 240px;
                 padding: 24px 20px
             }
+
+            /* MOBILE: Fix panels */
+            .mn {
+                min-height: 0;
+                flex: 1;
+                overflow: hidden
+            }
+
+            .pn {
+                min-height: 0;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch
+            }
+
+            /* Terminal: fill height */
+            #p-terminal {
+                flex: 1;
+                display: flex !important;
+                flex-direction: column
+            }
+
+            #p-terminal.a {
+                display: flex !important
+            }
+
+            #tbox {
+                flex: 1;
+                min-height: calc(100vh - 120px);
+                width: 100%
+            }
+
+            /* Settings scroll */
+            #p-settings {
+                overflow-y: auto !important;
+                padding-bottom: 80px
+            }
+
+            .sg {
+                overflow: visible
+            }
+
+            /* Plans: full cards + buttons visible */
+            #p-plans {
+                overflow-y: auto !important
+            }
+
+            .plan-grid {
+                overflow: visible !important;
+                max-height: none !important
+            }
+
+            .plan-card {
+                overflow: visible !important;
+                margin-bottom: 8px
+            }
+
+            .plan-buy {
+                position: relative;
+                z-index: 1
+            }
+
+            /* Admin scroll */
+            #p-admin {
+                overflow-y: auto !important;
+                padding-bottom: 60px
+            }
+
+            .admin-section {
+                overflow-x: auto
+            }
+
+            /* Contact scroll */
+            #p-contact {
+                overflow-y: auto !important
+            }
         }
     </style>
 </head>
