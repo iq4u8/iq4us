@@ -3,36 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="description" content="Premium VPS Hosting Dashboard - Terminal, File Manager, Multi-Plan Support">
     <title>iq4u8 — Premium VPS Hosting</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
     <style>
-        /* === LANDING PAGE MASTER STYLES === */
         html,
         body {
             overflow-x: hidden;
             overflow-y: auto;
             height: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         .landing {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
         }
 
-        /* --- Hero --- */
+        /* NAV */
+        .land-nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ln-logo {
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* HERO */
         .hero {
             text-align: center;
-            padding: 80px 20px 60px;
+            padding: 80px 20px 40px;
         }
 
         .hero h1 {
-            font-size: clamp(32px, 5vw, 56px);
+            font-size: clamp(30px, 5vw, 52px);
             font-weight: 800;
             line-height: 1.15;
             margin-bottom: 16px;
@@ -45,45 +65,53 @@
         .hero p {
             font-size: 16px;
             color: var(--txd);
-            max-width: 500px;
-            margin: 0 auto 24px;
+            max-width: 460px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
         }
 
-        /* --- Stats Section --- */
-        .stats-section {
-            max-width: 700px;
-            margin: 0 auto 60px;
-            padding: 30px 40px;
-            background: rgba(22, 27, 34, .6);
-            border: 1px solid var(--bdr);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
+        .land-cta {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: 0;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .3s;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, .3);
         }
 
+        .land-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, .5);
+        }
+
+        /* STATS - no box, clean inline */
         .stats-row {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            text-align: center;
-            gap: 20px;
+            justify-content: center;
+            gap: 60px;
+            padding: 50px 20px;
         }
 
         .stat-item {
-            flex: 1;
+            text-align: center;
         }
 
         .stat-val {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         .stat-lbl {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--txd);
-            margin-top: 4px;
+            margin-top: 6px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             font-weight: 600;
         }
 
@@ -94,328 +122,312 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* --- Feature Cards --- */
-        .section-title {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 12px;
+        /* FEATURES - minimal, no borders */
+        .feat-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
         }
 
-        .section-sub {
+        .sect-head {
             text-align: center;
-            color: var(--txd);
-            font-size: 14px;
             margin-bottom: 40px;
         }
 
-        .feat-wrap {
-            max-width: 1000px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
+        .sect-head h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
 
-        .feat-grid {
+        .sect-head p {
+            color: var(--txd);
+            font-size: 14px;
+        }
+
+        .feat-list {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            gap: 32px;
         }
 
-        .feat-card {
-            background: var(--card);
-            border: 1px solid var(--bdr);
-            border-radius: 14px;
-            padding: 24px 20px;
+        .feat-item {
             text-align: center;
-            transition: all .3s ease;
+            padding: 10px;
         }
 
-        .feat-card:hover {
-            border-color: var(--ac);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, .1);
+        .feat-item .fi-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
-        .fc-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .feat-card h3 {
-            font-size: 15px;
+        .feat-item h3 {
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--tx);
+            margin-bottom: 4px;
         }
 
-        .feat-card p {
+        .feat-item p {
             font-size: 12px;
             color: var(--txd);
             line-height: 1.5;
         }
 
-        /* --- How It Works --- */
+        /* DIVIDER */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        /* HOW IT WORKS - simple numbered */
         .hiw-section {
-            max-width: 900px;
-            margin: 0 auto 80px;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 20px;
             text-align: center;
-            padding: 0 20px;
         }
 
         .hiw-section h2 {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
         }
 
-        .hiw-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+        .hiw-steps {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
         }
 
         .hiw-step {
-            background: var(--card);
-            border: 1px solid var(--bdr);
-            border-radius: 14px;
-            padding: 30px 20px;
-            transition: .3s;
-        }
-
-        .hiw-step:hover {
-            border-color: var(--ac);
+            flex: 1;
+            text-align: center;
         }
 
         .hiw-num {
-            font-size: 36px;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
             margin-bottom: 12px;
         }
 
         .hiw-step h3 {
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
-
-        .hiw-step p {
-            color: var(--txd);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        /* --- Pricing --- */
-        .pricing-section {
-            max-width: 950px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .pricing-section h2 {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-
-        .pricing-sub {
-            color: var(--txd);
-            font-size: 14px;
-            margin-bottom: 40px;
-        }
-
-        .lp-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            align-items: stretch;
-        }
-
-        .lp-card {
-            background: var(--card);
-            border: 1px solid var(--bdr);
-            border-radius: 16px;
-            padding: 28px 22px;
-            text-align: center;
-            transition: .3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .lp-card:hover {
-            border-color: var(--ac);
-            transform: translateY(-3px);
-        }
-
-        .lp-card.featured {
-            border-color: var(--ac);
-            box-shadow: 0 0 40px rgba(99, 102, 241, .15);
-            position: relative;
-        }
-
-        .lp-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 50px;
-            letter-spacing: .5px;
-        }
-
-        .lp-head {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .lp-price {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--ac);
-            margin-bottom: 20px;
+        .hiw-step p {
+            font-size: 12px;
+            color: var(--txd);
+            line-height: 1.5;
         }
 
-        .lp-price span {
+        /* PRICING - clean, minimal */
+        .price-section {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            text-align: center;
+        }
+
+        .price-section h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .price-section>p {
+            color: var(--txd);
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            align-items: start;
+        }
+
+        .price-card {
+            background: rgba(22, 27, 34, .5);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: left;
+            transition: .3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .price-card.pop {
+            border-color: var(--ac);
+            background: rgba(99, 102, 241, .06);
+            box-shadow: 0 0 40px rgba(99, 102, 241, .1);
+            position: relative;
+        }
+
+        .pop-tag {
+            position: absolute;
+            top: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 14px;
+            border-radius: 50px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .price-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .price-val {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--ac);
+            margin-bottom: 16px;
+        }
+
+        .price-val span {
             font-size: 14px;
             color: var(--txd);
             font-weight: 400;
         }
 
-        .lp-feat {
+        .price-list {
             list-style: none;
-            text-align: left;
-            margin-bottom: 24px;
-            font-size: 13px;
-            color: var(--txd);
-            flex: 1;
+            margin-bottom: 20px;
+            padding: 0;
         }
 
-        .lp-feat li {
-            margin-bottom: 8px;
+        .price-list li {
+            font-size: 13px;
+            color: var(--txd);
+            padding: 5px 0;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .lp-feat li::before {
+        .price-list li::before {
             content: '✓';
             color: var(--gn);
             font-weight: 700;
+            font-size: 12px;
         }
 
-        .lp-btn {
+        .price-btn {
+            display: block;
             width: 100%;
-            padding: 12px;
-            background: rgba(99, 102, 241, .1);
-            border: 1px solid rgba(99, 102, 241, .3);
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, .1);
             border-radius: 10px;
-            color: var(--ac);
+            color: var(--tx);
             font-family: inherit;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
             transition: .3s;
         }
 
-        .lp-btn:hover {
-            background: var(--ac);
-            color: #fff;
+        .price-btn:hover {
+            border-color: var(--ac);
+            color: var(--ac);
         }
 
-        .lp-btn.primary {
+        .price-btn.main {
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
             border: none;
             color: #fff;
         }
 
-        .lp-btn.primary:hover {
-            transform: translateY(-1px);
+        .price-btn.main:hover {
             box-shadow: 0 4px 20px rgba(99, 102, 241, .4);
         }
 
-        /* --- Footer --- */
+        /* FOOTER */
         .land-footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             font-size: 12px;
             color: var(--txd);
             border-top: 1px solid var(--bdr);
         }
 
-        /* ====== MOBILE 768px ====== */
+        /* === MOBILE === */
         @media (max-width: 768px) {
+            .land-nav {
+                padding: 16px;
+            }
+
             .hero {
-                padding: 50px 16px 40px;
+                padding: 50px 20px 30px;
             }
 
             .hero p {
                 font-size: 14px;
             }
 
-            .land-nav {
-                padding: 14px 16px;
-            }
-
-            .stats-section {
-                margin: 0 16px 40px;
-                padding: 20px 16px;
-            }
-
             .stats-row {
-                gap: 10px;
+                gap: 30px;
+                padding: 30px 20px;
             }
 
             .stat-val {
-                font-size: 24px;
+                font-size: 28px;
             }
 
             .stat-lbl {
                 font-size: 10px;
             }
 
-            .feat-wrap {
-                padding: 0 16px;
-                margin-bottom: 50px;
+            .feat-list {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
 
-            .feat-grid {
-                grid-template-columns: 1fr 1fr;
+            .feat-section {
+                padding: 30px 20px 40px;
             }
 
-            .section-title {
-                font-size: 22px;
+            .hiw-steps {
+                flex-direction: column;
+                gap: 24px;
             }
 
             .hiw-section {
-                margin-bottom: 50px;
-                padding: 0 16px;
+                padding: 40px 20px;
             }
 
-            .hiw-section h2 {
-                font-size: 22px;
-                margin-bottom: 24px;
-            }
-
-            .hiw-grid {
+            .price-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                max-width: 340px;
+                margin: 0 auto;
             }
 
-            .pricing-section {
-                padding: 0 16px;
-                margin-bottom: 50px;
-            }
-
-            .pricing-section h2 {
-                font-size: 22px;
-            }
-
-            .lp-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
+            .price-section {
+                padding: 30px 20px 50px;
             }
 
             .lc {
@@ -425,56 +437,36 @@
             }
         }
 
-        /* ====== MOBILE 480px ====== */
-        @media (max-width: 480px) {
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
             .hero p {
                 font-size: 13px;
             }
 
             .stats-row {
                 flex-direction: column;
-                gap: 14px;
+                gap: 16px;
             }
 
             .stat-val {
-                font-size: 22px;
+                font-size: 24px;
             }
 
-            .feat-grid {
+            .feat-list {
                 grid-template-columns: 1fr;
-            }
-
-            .feat-card {
-                padding: 18px 14px;
-            }
-
-            .feat-card h3 {
-                font-size: 14px;
-            }
-
-            .feat-card p {
-                font-size: 11px;
-            }
-
-            .lp-card {
-                padding: 20px 16px;
-            }
-
-            .lp-head {
-                font-size: 16px;
-            }
-
-            .lp-price {
-                font-size: 26px;
-            }
-
-            .ln-logo {
-                font-size: 16px;
+                gap: 16px;
             }
 
             .land-cta {
-                font-size: 12px;
-                padding: 8px 16px;
+                font-size: 13px;
+                padding: 10px 22px;
+            }
+
+            .ln-logo {
+                font-size: 17px;
             }
         }
     </style>
@@ -483,7 +475,6 @@
 <body>
     <div class="bgx"></div>
 
-    <!-- LANDING PAGE -->
     <div class="landing" id="landingPage">
         <nav class="land-nav">
             <div class="ln-logo">
@@ -499,137 +490,124 @@
             <button class="land-cta" onclick="showLogin()">⚡ Start Free Trial</button>
         </section>
 
-        <!-- Stats -->
-        <div class="stats-section">
-            <div class="stats-row">
-                <div class="stat-item">
-                    <div class="stat-val gradient-text">99.9%</div>
-                    <div class="stat-lbl">Uptime</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-val" style="color:#3fb950">10k+</div>
-                    <div class="stat-lbl">Deployments</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-val" style="color:#f59e0b">24/7</div>
-                    <div class="stat-lbl">Support</div>
-                </div>
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-val gradient-text">99.9%</div>
+                <div class="stat-lbl">Uptime</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val" style="color:#3fb950">10k+</div>
+                <div class="stat-lbl">Deployments</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val" style="color:#f59e0b">24/7</div>
+                <div class="stat-lbl">Support</div>
             </div>
         </div>
 
-        <!-- Features -->
-        <div class="feat-wrap">
-            <div class="section-title">Powerful Features</div>
-            <div class="section-sub">Everything you need to deploy and manage your applications</div>
-            <div class="feat-grid">
-                <div class="feat-card">
-                    <div class="fc-icon">💻</div>
+        <div class="divider"></div>
+
+        <div class="feat-section">
+            <div class="sect-head">
+                <h2>Powerful Features</h2>
+                <p>Everything you need to deploy and manage your apps</p>
+            </div>
+            <div class="feat-list">
+                <div class="feat-item">
+                    <div class="fi-icon">💻</div>
                     <h3>Full Terminal</h3>
                     <p>Bash shell with PTY — run Python, Node.js, and more</p>
                 </div>
-                <div class="feat-card">
-                    <div class="fc-icon">📂</div>
+                <div class="feat-item">
+                    <div class="fi-icon">📂</div>
                     <h3>File Manager</h3>
                     <p>Upload, download, rename, and manage your files</p>
                 </div>
-                <div class="feat-card">
-                    <div class="fc-icon">🛡️</div>
+                <div class="feat-item">
+                    <div class="fi-icon">🛡️</div>
                     <h3>Isolated Sandbox</h3>
                     <p>Each user gets their own secure, jailed environment</p>
                 </div>
-                <div class="feat-card">
-                    <div class="fc-icon">📊</div>
-                    <h3>Real-time Monitoring</h3>
+                <div class="feat-item">
+                    <div class="fi-icon">📊</div>
+                    <h3>Monitoring</h3>
                     <p>Live CPU, RAM, and Storage usage charts</p>
                 </div>
-                <div class="feat-card">
-                    <div class="fc-icon">💎</div>
+                <div class="feat-item">
+                    <div class="fi-icon">💎</div>
                     <h3>Flexible Plans</h3>
                     <p>Free, Pro, and Ultra tiers to fit your needs</p>
                 </div>
-                <div class="feat-card">
-                    <div class="fc-icon">🚀</div>
+                <div class="feat-item">
+                    <div class="fi-icon">🚀</div>
                     <h3>Instant Setup</h3>
                     <p>Sign up and start deploying in minutes</p>
                 </div>
-                <div class="feat-card">
-                    <div class="fc-icon">🔄</div>
-                    <h3>Auto Backups</h3>
-                    <p>Daily backups of your data kept safe and secure</p>
-                </div>
-                <div class="feat-card">
-                    <div class="fc-icon">👥</div>
-                    <h3>Multi-User</h3>
-                    <p>Create sub-accounts and manage team access easily</p>
-                </div>
-                <div class="feat-card">
-                    <div class="fc-icon">🌐</div>
-                    <h3>Global Edge</h3>
-                    <p>Low latency servers optimized for performance</p>
-                </div>
             </div>
         </div>
 
-        <!-- How It Works -->
+        <div class="divider"></div>
+
         <div class="hiw-section">
             <h2>How It Works</h2>
-            <div class="hiw-grid">
+            <div class="hiw-steps">
                 <div class="hiw-step">
-                    <div class="hiw-num">1️⃣</div>
+                    <div class="hiw-num">1</div>
                     <h3>Create Account</h3>
-                    <p>Sign up for free and verify your email</p>
+                    <p>Sign up for free in seconds</p>
                 </div>
                 <div class="hiw-step">
-                    <div class="hiw-num">2️⃣</div>
+                    <div class="hiw-num">2</div>
                     <h3>Choose Plan</h3>
-                    <p>Select resources that fit your project</p>
+                    <p>Pick resources that fit your project</p>
                 </div>
                 <div class="hiw-step">
-                    <div class="hiw-num">3️⃣</div>
+                    <div class="hiw-num">3</div>
                     <h3>Deploy</h3>
-                    <p>Launch your VPS and start coding instantly</p>
+                    <p>Launch your VPS and start coding</p>
                 </div>
             </div>
         </div>
 
-        <!-- Pricing -->
-        <div class="pricing-section">
+        <div class="divider"></div>
+
+        <div class="price-section">
             <h2>Choose Your Plan</h2>
-            <div class="pricing-sub">Simple, transparent pricing. No hidden fees.</div>
-            <div class="lp-grid">
-                <div class="lp-card">
-                    <div class="lp-head">Free</div>
-                    <div class="lp-price">₹40<span>/mo</span></div>
-                    <ul class="lp-feat">
+            <p>Simple pricing. No hidden fees.</p>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-name">Free</div>
+                    <div class="price-val">₹40<span>/mo</span></div>
+                    <ul class="price-list">
                         <li>0.5 CPU Core</li>
                         <li>280MB RAM</li>
                         <li>500MB Storage</li>
                         <li>Community Support</li>
                     </ul>
-                    <button class="lp-btn" onclick="showLogin()">Get Started</button>
+                    <button class="price-btn" onclick="showLogin()">Get Started</button>
                 </div>
-                <div class="lp-card featured">
-                    <div class="lp-badge">POPULAR</div>
-                    <div class="lp-head" style="color:var(--ac)">Pro</div>
-                    <div class="lp-price">₹70<span>/mo</span></div>
-                    <ul class="lp-feat">
+                <div class="price-card pop">
+                    <div class="pop-tag">Popular</div>
+                    <div class="price-name" style="color:var(--ac)">Pro</div>
+                    <div class="price-val">₹70<span>/mo</span></div>
+                    <ul class="price-list">
                         <li>1 CPU Core</li>
                         <li>560MB RAM</li>
                         <li>1GB Storage</li>
                         <li>Priority Support</li>
                     </ul>
-                    <button class="lp-btn primary" onclick="showLogin()">Upgrade to Pro</button>
+                    <button class="price-btn main" onclick="showLogin()">Upgrade to Pro</button>
                 </div>
-                <div class="lp-card">
-                    <div class="lp-head">Ultra</div>
-                    <div class="lp-price">₹150<span>/mo</span></div>
-                    <ul class="lp-feat">
+                <div class="price-card">
+                    <div class="price-name">Ultra</div>
+                    <div class="price-val">₹150<span>/mo</span></div>
+                    <ul class="price-list">
                         <li>2 CPU Cores</li>
                         <li>1120MB RAM</li>
                         <li>2GB Storage</li>
                         <li>Dedicated Support</li>
                     </ul>
-                    <button class="lp-btn" onclick="showLogin()">Upgrade to Ultra</button>
+                    <button class="price-btn" onclick="showLogin()">Upgrade to Ultra</button>
                 </div>
             </div>
         </div>
@@ -682,9 +660,7 @@
     </div>
 
     <script src="assets/main.js"></script>
-    <script>
-        if (localStorage.getItem('token')) location.href = '/browse/';
-    </script>
+    <script>if (localStorage.getItem('token')) location.href = '/browse/';</script>
 </body>
 
 </html>
