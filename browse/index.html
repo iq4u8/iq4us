@@ -1452,7 +1452,11 @@
             }
         }
 
-/* MOBILE */
+
+        /* LOGOUT NAV btn */
+        .logout-ni { display: none }
+
+        /* MOBILE */
         @media(max-width:700px) {
             .app.sh { flex-direction: column }
             .sb {
@@ -1461,31 +1465,38 @@
                 flex-direction: row; overflow: visible;
                 position: fixed; bottom: 0; left: 0; right: 0;
                 z-index: 100; background: var(--bg2);
-                flex-shrink: initial
+                flex-shrink: initial; padding: 0 2px;
+                box-shadow: 0 -2px 16px rgba(0,0,0,.25)
             }
             .sbr { display: none }
             .sbn {
                 flex-direction: row; overflow-x: auto; overflow-y: hidden;
-                gap: 0; padding: 4px 2px; flex: 1;
-                align-items: center; justify-content: space-around;
+                gap: 0; padding: 2px 0; flex: 1;
+                align-items: center; justify-content: space-evenly;
                 -webkit-overflow-scrolling: touch; scrollbar-width: none
             }
             .sbn::-webkit-scrollbar { display: none }
             .ni {
-                flex-direction: column; padding: 6px 10px; gap: 2px;
-                font-size: 9px; min-width: 52px; text-align: center;
+                flex-direction: column; padding: 6px 4px; gap: 2px;
+                font-size: 9px; min-width: 48px; text-align: center;
                 border-radius: 8px; flex-shrink: 0;
-                width: auto !important
+                width: auto !important; align-items: center;
+                justify-content: center
             }
-            .ni .nx { font-size: 18px; width: auto }
+            .ni.a { background: rgba(99,102,241,.15) }
+            .ni .nx { font-size: 18px; width: auto; display: block; line-height: 1 }
             .ni span:not(.nx) {
-                display: block; font-size: 9px; white-space: nowrap;
-                overflow: hidden; text-overflow: ellipsis; max-width: 54px
+                display: block; font-size: 8px; white-space: nowrap;
+                overflow: hidden; text-overflow: ellipsis; max-width: 50px;
+                line-height: 1.2; margin-top: 1px
             }
+            .logout-ni { display: flex !important }
+            .logout-ni .nx { color: #f87171 }
+            .logout-ni span:not(.nx) { color: #f87171 }
             .res, .sbf { display: none }
             .mn {
                 order: 1; flex: 1; min-height: 0;
-                overflow: hidden; padding-bottom: 60px
+                overflow: hidden; padding-bottom: 62px
             }
             .mh { padding: 8px 12px }
             .mh h2 { font-size: 14px }
@@ -1603,6 +1614,8 @@
                 <button class="ni" onclick="sp('contact',this)"><span class="nx">📞</span><span>Contact</span></button>
                 <button class="ni" onclick="sp('admin',this)" id="adminNav" style="display:none"><span
                         class="nx">👑</span><span>Admin</span></button>
+                <button class="ni logout-ni" onclick="doLogout()" id="logoutNav"><span
+                        class="nx">🚪</span><span>Logout</span></button>
             </div>
             <div class="res" id="resBox">
                 <div class="res-t">Resources</div>
@@ -2081,8 +2094,8 @@
 <button class="tbtn red" onclick="deleteUser('${u.username}')">🗑️</button></div>` : ''}</td></tr>`).join('')
             } catch (e) { }
         }
-        async function approveUser(u) { try { await api('/api/users/' + u + '/approve', { method: 'PUT' }); loadUsers() } catch (e) { } }
-        async function rejectUser(u) { if (!confirm('Reject and delete "' + u + '"?')) return; try { await api('/api/users/' + u + '/reject', { method: 'PUT' }); loadUsers() } catch (e) { } }
+        async function approveUser(u) { try { const r = await api('/api/users/' + u + '/approve', { method: 'PUT' }); const d = await r.json(); toast(d.message || 'Approved!', 'success'); loadUsers() } catch (e) { toast('Approve failed', 'error') } }
+        async function rejectUser(u) { if (!confirm('Reject and delete "' + u + '"?')) return; try { const r = await api('/api/users/' + u + '/reject', { method: 'PUT' }); const d = await r.json(); toast(d.message || 'Rejected!', 'success'); loadUsers() } catch (e) { toast('Reject failed', 'error') } }
         async function deleteUser(u) { if (!confirm('Delete user "' + u + '" and all their data?')) return; try { await api('/api/users/' + u, { method: 'DELETE' }); loadUsers() } catch (e) { } }
         function showPlanModal(u) { planUser = u; document.getElementById('planM').classList.add('sh') }
         async function changePlanGo() { const plan = document.getElementById('planSel').value; try { await api('/api/users/' + planUser + '/plan', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan }) }); document.getElementById('planM').classList.remove('sh'); loadUsers() } catch (e) { } }
