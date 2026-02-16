@@ -29,36 +29,30 @@
             width: 100%;
         }
 
-        /* SUPPORT BAR */
-        .support-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, rgba(0, 136, 204, .12), rgba(99, 102, 241, .12));
-            border-bottom: 1px solid rgba(0, 136, 204, .2);
-            font-size: 13px;
-            color: var(--tx);
+        /* SUPPORT BUTTON */
+        .support-section {
+            text-align: center;
+            padding: 30px 20px;
         }
 
-        .support-bar a {
+        .support-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 5px 14px;
+            gap: 8px;
+            padding: 12px 28px;
             background: linear-gradient(135deg, #0088CC, #6366f1);
             color: #fff;
-            border-radius: 20px;
-            font-size: 12px;
+            border-radius: 50px;
+            font-size: 14px;
             font-weight: 700;
             text-decoration: none;
             transition: .3s;
+            box-shadow: 0 4px 20px rgba(0, 136, 204, .3);
         }
 
-        .support-bar a:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(0, 136, 204, .4);
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 136, 204, .5);
         }
 
         /* NAV */
@@ -80,7 +74,7 @@
         /* HERO */
         .hero {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 50px 20px 24px;
         }
 
         .hero h1 {
@@ -124,8 +118,8 @@
         .stats-row {
             display: flex;
             justify-content: center;
-            gap: 60px;
-            padding: 50px 20px;
+            gap: 40px;
+            padding: 24px 20px;
         }
 
         .stat-item {
@@ -133,15 +127,15 @@
         }
 
         .stat-val {
-            font-size: 40px;
+            font-size: 28px;
             font-weight: 800;
             line-height: 1;
         }
 
         .stat-lbl {
-            font-size: 12px;
+            font-size: 10px;
             color: var(--txd);
-            margin-top: 6px;
+            margin-top: 4px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
@@ -407,59 +401,70 @@
             border-top: 1px solid var(--bdr);
         }
 
-        /* === MOBILE === */
         @media (max-width: 768px) {
             .land-nav {
-                padding: 16px;
+                padding: 14px 16px;
             }
 
             .hero {
-                padding: 50px 20px 30px;
+                padding: 30px 20px 16px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
             }
 
             .hero p {
-                font-size: 14px;
+                font-size: 12px;
+                margin-bottom: 18px;
+            }
+
+            .land-cta {
+                font-size: 12px;
+                padding: 10px 22px;
             }
 
             .stats-row {
-                gap: 30px;
-                padding: 30px 20px;
+                flex-direction: row;
+                gap: 20px;
+                padding: 16px 20px;
             }
 
             .stat-val {
-                font-size: 28px;
+                font-size: 20px;
             }
 
             .stat-lbl {
-                font-size: 10px;
-            }
-
-            .feat-list {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .feat-section {
-                padding: 30px 20px 40px;
+                font-size: 8px;
+                letter-spacing: 1px;
             }
 
             .hiw-steps {
                 flex-direction: column;
-                gap: 24px;
+                gap: 20px;
             }
 
             .hiw-section {
-                padding: 40px 20px;
+                padding: 30px 20px;
             }
 
-            .price-grid {
-                grid-template-columns: 1fr;
-                max-width: 340px;
-                margin: 0 auto;
+            .hiw-section h2 {
+                font-size: 20px;
+                margin-bottom: 24px;
             }
 
-            .price-section {
-                padding: 30px 20px 50px;
+            .hiw-step h3 {
+                font-size: 13px;
+            }
+
+            .hiw-step p {
+                font-size: 11px;
+            }
+
+            .hiw-num {
+                width: 36px;
+                height: 36px;
+                font-size: 15px;
             }
 
             .lc {
@@ -467,38 +472,18 @@
                 max-width: 92vw;
                 padding: 24px 20px;
             }
-        }
-
-        @media (max-width: 420px) {
-            .hero h1 {
-                font-size: 26px;
-            }
-
-            .hero p {
-                font-size: 13px;
-            }
-
-            .stats-row {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .stat-val {
-                font-size: 24px;
-            }
-
-            .feat-list {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .land-cta {
-                font-size: 13px;
-                padding: 10px 22px;
-            }
 
             .ln-logo {
                 font-size: 17px;
+            }
+
+            .support-btn {
+                font-size: 12px;
+                padding: 10px 22px;
+            }
+
+            .support-section {
+                padding: 20px;
             }
         }
     </style>
@@ -508,11 +493,6 @@
     <div class="bgx"></div>
 
     <div class="landing" id="landingPage">
-        <div class="support-bar">
-            ✈️ Need help? Contact us on Telegram
-            <a href="https://t.me/iq4u8" target="_blank">✈️ Join Telegram</a>
-        </div>
-
         <nav class="land-nav">
             <div class="ln-logo">
                 <div class="ic">⚡</div>iq4u8
@@ -564,6 +544,9 @@
             </div>
         </div>
 
+        <div class="support-section">
+            <a href="https://t.me/xxbga" target="_blank" class="support-btn">✈️ Support — Telegram</a>
+        </div>
 
         <div class="land-footer">© 2026 iq4u8 — Premium VPS Hosting. All rights reserved.</div>
     </div>
