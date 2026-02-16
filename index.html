@@ -29,6 +29,38 @@
             width: 100%;
         }
 
+        /* SUPPORT BAR */
+        .support-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(0, 136, 204, .12), rgba(99, 102, 241, .12));
+            border-bottom: 1px solid rgba(0, 136, 204, .2);
+            font-size: 13px;
+            color: var(--tx);
+        }
+
+        .support-bar a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #0088CC, #6366f1);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .support-bar a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 136, 204, .4);
+        }
+
         /* NAV */
         .land-nav {
             padding: 20px 40px;
@@ -476,6 +508,11 @@
     <div class="bgx"></div>
 
     <div class="landing" id="landingPage">
+        <div class="support-bar">
+            ✈️ Need help? Contact us on Telegram
+            <a href="https://t.me/iq4u8" target="_blank">✈️ Join Telegram</a>
+        </div>
+
         <nav class="land-nav">
             <div class="ln-logo">
                 <div class="ic">⚡</div>iq4u8
@@ -505,48 +542,6 @@
             </div>
         </div>
 
-        <div class="divider"></div>
-
-        <div class="feat-section">
-            <div class="sect-head">
-                <h2>Powerful Features</h2>
-                <p>Everything you need to deploy and manage your apps</p>
-            </div>
-            <div class="feat-list">
-                <div class="feat-item">
-                    <div class="fi-icon">💻</div>
-                    <h3>Full Terminal</h3>
-                    <p>Bash shell with PTY — run Python, Node.js, and more</p>
-                </div>
-                <div class="feat-item">
-                    <div class="fi-icon">📂</div>
-                    <h3>File Manager</h3>
-                    <p>Upload, download, rename, and manage your files</p>
-                </div>
-                <div class="feat-item">
-                    <div class="fi-icon">🛡️</div>
-                    <h3>Isolated Sandbox</h3>
-                    <p>Each user gets their own secure, jailed environment</p>
-                </div>
-                <div class="feat-item">
-                    <div class="fi-icon">📊</div>
-                    <h3>Monitoring</h3>
-                    <p>Live CPU, RAM, and Storage usage charts</p>
-                </div>
-                <div class="feat-item">
-                    <div class="fi-icon">💎</div>
-                    <h3>Flexible Plans</h3>
-                    <p>Free, Pro, and Ultra tiers to fit your needs</p>
-                </div>
-                <div class="feat-item">
-                    <div class="fi-icon">🚀</div>
-                    <h3>Instant Setup</h3>
-                    <p>Sign up and start deploying in minutes</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
 
         <div class="hiw-section">
             <h2>How It Works</h2>
@@ -569,48 +564,6 @@
             </div>
         </div>
 
-        <div class="divider"></div>
-
-        <div class="price-section">
-            <h2>Choose Your Plan</h2>
-            <p>Simple pricing. No hidden fees.</p>
-            <div class="price-grid">
-                <div class="price-card">
-                    <div class="price-name">Free</div>
-                    <div class="price-val">₹40<span>/mo</span></div>
-                    <ul class="price-list">
-                        <li>0.5 CPU Core</li>
-                        <li>280MB RAM</li>
-                        <li>500MB Storage</li>
-                        <li>Community Support</li>
-                    </ul>
-                    <button class="price-btn" onclick="showLogin()">Get Started</button>
-                </div>
-                <div class="price-card pop">
-                    <div class="pop-tag">Popular</div>
-                    <div class="price-name" style="color:var(--ac)">Pro</div>
-                    <div class="price-val">₹70<span>/mo</span></div>
-                    <ul class="price-list">
-                        <li>1 CPU Core</li>
-                        <li>560MB RAM</li>
-                        <li>1GB Storage</li>
-                        <li>Priority Support</li>
-                    </ul>
-                    <button class="price-btn main" onclick="showLogin()">Upgrade to Pro</button>
-                </div>
-                <div class="price-card">
-                    <div class="price-name">Ultra</div>
-                    <div class="price-val">₹150<span>/mo</span></div>
-                    <ul class="price-list">
-                        <li>2 CPU Cores</li>
-                        <li>1120MB RAM</li>
-                        <li>2GB Storage</li>
-                        <li>Dedicated Support</li>
-                    </ul>
-                    <button class="price-btn" onclick="showLogin()">Upgrade to Ultra</button>
-                </div>
-            </div>
-        </div>
 
         <div class="land-footer">© 2026 iq4u8 — Premium VPS Hosting. All rights reserved.</div>
     </div>
