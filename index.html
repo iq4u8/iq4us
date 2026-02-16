@@ -9,18 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
     <style>
-        /* CRITICAL OVERRIDES - embedded to guarantee they apply */
-        html {
-            height: auto !important;
-            overflow-y: scroll !important;
-            overflow-x: hidden !important;
-        }
-
+        /* === LANDING PAGE MASTER STYLES === */
+        html,
         body {
-            height: auto !important;
-            overflow-y: scroll !important;
-            overflow-x: hidden !important;
-            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: auto;
         }
 
         .landing {
@@ -31,55 +25,145 @@
             overflow-x: hidden;
         }
 
+        /* --- Hero --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+
         .hero h1 {
-            font-size: clamp(28px, 5vw, 56px);
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--txd);
+            max-width: 500px;
+            margin: 0 auto 24px;
+        }
+
+        /* --- Stats Section --- */
+        .stats-section {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            padding: 30px 40px;
+            background: rgba(22, 27, 34, .6);
+            border: 1px solid var(--bdr);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
         }
 
         .stats-row {
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 40px auto;
+            justify-content: space-around;
+            align-items: center;
             text-align: center;
-            padding: 0 20px;
-            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            flex: 1;
         }
 
         .stat-val {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
+            line-height: 1.2;
         }
 
         .stat-lbl {
+            font-size: 13px;
             color: var(--txd);
-            font-size: 12px;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #6366f1, #a78bfa);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Feature Cards --- */
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: var(--txd);
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .feat-wrap {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
         }
 
         .feat-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
-            max-width: 900px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
         }
 
+        .feat-card {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all .3s ease;
+        }
+
+        .feat-card:hover {
+            border-color: var(--ac);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, .1);
+        }
+
+        .fc-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .feat-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--tx);
+        }
+
+        .feat-card p {
+            font-size: 12px;
+            color: var(--txd);
+            line-height: 1.5;
+        }
+
+        /* --- How It Works --- */
         .hiw-section {
             max-width: 900px;
-            margin: 80px auto;
+            margin: 0 auto 80px;
             text-align: center;
             padding: 0 20px;
         }
 
         .hiw-section h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 800;
             margin-bottom: 40px;
         }
@@ -87,142 +171,310 @@
         .hiw-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 24px;
+        }
+
+        .hiw-step {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 14px;
+            padding: 30px 20px;
+            transition: .3s;
+        }
+
+        .hiw-step:hover {
+            border-color: var(--ac);
+        }
+
+        .hiw-num {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .hiw-step h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
         }
 
         .hiw-step p {
             color: var(--txd);
             font-size: 13px;
+            line-height: 1.5;
         }
 
-        .hiw-num {
-            font-size: 40px;
-            margin-bottom: 10px;
+        /* --- Pricing --- */
+        .pricing-section {
+            max-width: 950px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            text-align: center;
         }
 
-        .lp-featured {
-            border-color: var(--ac) !important;
-            box-shadow: 0 0 30px rgba(99, 102, 241, .15);
+        .pricing-section h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .pricing-sub {
+            color: var(--txd);
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .lp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            align-items: stretch;
+        }
+
+        .lp-card {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 16px;
+            padding: 28px 22px;
+            text-align: center;
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lp-card:hover {
+            border-color: var(--ac);
+            transform: translateY(-3px);
+        }
+
+        .lp-card.featured {
+            border-color: var(--ac);
+            box-shadow: 0 0 40px rgba(99, 102, 241, .15);
+            position: relative;
+        }
+
+        .lp-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px;
+            letter-spacing: .5px;
+        }
+
+        .lp-head {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .lp-price {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--ac);
+            margin-bottom: 20px;
         }
 
         .lp-price span {
-            font-size: 12px;
+            font-size: 14px;
             color: var(--txd);
             font-weight: 400;
         }
 
-        /* ====== MOBILE ====== */
+        .lp-feat {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--txd);
+            flex: 1;
+        }
+
+        .lp-feat li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lp-feat li::before {
+            content: '✓';
+            color: var(--gn);
+            font-weight: 700;
+        }
+
+        .lp-btn {
+            width: 100%;
+            padding: 12px;
+            background: rgba(99, 102, 241, .1);
+            border: 1px solid rgba(99, 102, 241, .3);
+            border-radius: 10px;
+            color: var(--ac);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .lp-btn:hover {
+            background: var(--ac);
+            color: #fff;
+        }
+
+        .lp-btn.primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            color: #fff;
+        }
+
+        .lp-btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, .4);
+        }
+
+        /* --- Footer --- */
+        .land-footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 12px;
+            color: var(--txd);
+            border-top: 1px solid var(--bdr);
+        }
+
+        /* ====== MOBILE 768px ====== */
         @media (max-width: 768px) {
             .hero {
-                padding: 40px 16px !important;
-            }
-
-            .hero h1 {
-                font-size: 28px !important;
+                padding: 50px 16px 40px;
             }
 
             .hero p {
-                font-size: 14px !important;
+                font-size: 14px;
             }
 
             .land-nav {
-                padding: 15px 16px !important;
+                padding: 14px 16px;
+            }
+
+            .stats-section {
+                margin: 0 16px 40px;
+                padding: 20px 16px;
             }
 
             .stats-row {
-                flex-direction: column !important;
-                gap: 16px !important;
-                align-items: center !important;
+                gap: 10px;
             }
 
             .stat-val {
-                font-size: 24px !important;
+                font-size: 24px;
+            }
+
+            .stat-lbl {
+                font-size: 10px;
+            }
+
+            .feat-wrap {
+                padding: 0 16px;
+                margin-bottom: 50px;
             }
 
             .feat-grid {
-                grid-template-columns: 1fr !important;
-                max-width: 100% !important;
-                padding: 0 16px !important;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-title {
+                font-size: 22px;
             }
 
             .hiw-section {
-                margin: 40px auto !important;
-                padding: 0 16px !important;
+                margin-bottom: 50px;
+                padding: 0 16px;
+            }
+
+            .hiw-section h2 {
+                font-size: 22px;
+                margin-bottom: 24px;
             }
 
             .hiw-grid {
-                grid-template-columns: 1fr !important;
-                gap: 24px !important;
+                grid-template-columns: 1fr;
+                gap: 16px;
             }
 
-            .hiw-num {
-                font-size: 32px !important;
+            .pricing-section {
+                padding: 0 16px;
+                margin-bottom: 50px;
+            }
+
+            .pricing-section h2 {
+                font-size: 22px;
             }
 
             .lp-grid {
-                grid-template-columns: 1fr !important;
-            }
-
-            .land-pricing {
-                padding: 20px 16px !important;
-            }
-
-            .land-footer {
-                padding: 20px 16px !important;
-                font-size: 11px !important;
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
 
             .lc {
-                width: 100% !important;
-                max-width: 92vw !important;
-                padding: 24px 20px !important;
+                width: 100%;
+                max-width: 92vw;
+                padding: 24px 20px;
             }
         }
 
+        /* ====== MOBILE 480px ====== */
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 24px !important;
+            .hero p {
+                font-size: 13px;
             }
 
-            .hero p {
-                font-size: 13px !important;
+            .stats-row {
+                flex-direction: column;
+                gap: 14px;
             }
 
             .stat-val {
-                font-size: 20px !important;
+                font-size: 22px;
+            }
+
+            .feat-grid {
+                grid-template-columns: 1fr;
             }
 
             .feat-card {
-                padding: 14px !important;
+                padding: 18px 14px;
             }
 
             .feat-card h3 {
-                font-size: 13px !important;
+                font-size: 14px;
             }
 
             .feat-card p {
-                font-size: 10px !important;
+                font-size: 11px;
             }
 
             .lp-card {
-                padding: 14px !important;
+                padding: 20px 16px;
             }
 
             .lp-head {
-                font-size: 14px !important;
+                font-size: 16px;
             }
 
             .lp-price {
-                font-size: 20px !important;
+                font-size: 26px;
             }
 
             .ln-logo {
-                font-size: 16px !important;
+                font-size: 16px;
             }
 
             .land-cta {
-                font-size: 12px !important;
-                padding: 8px 16px !important;
+                font-size: 12px;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -239,6 +491,7 @@
             </div>
             <button class="land-cta" onclick="showLogin()">Get Started →</button>
         </nav>
+
         <section class="hero">
             <h1>Premium VPS Hosting<br>Made Simple</h1>
             <p>Deploy your applications with a full terminal, file manager, and real-time monitoring. Starting at just
@@ -246,69 +499,78 @@
             <button class="land-cta" onclick="showLogin()">⚡ Start Free Trial</button>
         </section>
 
-        <div class="stats-row">
-            <div>
-                <div class="stat-val gradient-text">99.9%</div>
-                <div class="stat-lbl">Uptime</div>
-            </div>
-            <div>
-                <div class="stat-val" style="color:#3fb950">10k+</div>
-                <div class="stat-lbl">Deployments</div>
-            </div>
-            <div>
-                <div class="stat-val" style="color:#f59e0b">24/7</div>
-                <div class="stat-val stat-lbl">Support</div>
-            </div>
-        </div>
-
-        <div class="feat-grid">
-            <div class="feat-card">
-                <div class="fc-icon">💻</div>
-                <h3>Full Terminal</h3>
-                <p>Bash shell with PTY — run Python, Node.js, and more</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">📂</div>
-                <h3>File Manager</h3>
-                <p>Upload, download, rename, and manage your files</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">🛡️</div>
-                <h3>Isolated Sandbox</h3>
-                <p>Each user gets their own secure, jailed environment</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">📊</div>
-                <h3>Real-time Monitoring</h3>
-                <p>Live CPU, RAM, and Storage usage charts</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">💎</div>
-                <h3>Flexible Plans</h3>
-                <p>Free, Pro, and Ultra tiers to fit your needs</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">🚀</div>
-                <h3>Instant Setup</h3>
-                <p>Sign up and start deploying in minutes</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">🔄</div>
-                <h3>Auto Backups</h3>
-                <p>Daily backups of your data kept safe and secure</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">👥</div>
-                <h3>Multi-User</h3>
-                <p>Create sub-accounts and manage team access easily</p>
-            </div>
-            <div class="feat-card">
-                <div class="fc-icon">🌐</div>
-                <h3>Global Edge</h3>
-                <p>Low latency servers optimized for performance</p>
+        <!-- Stats -->
+        <div class="stats-section">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-val gradient-text">99.9%</div>
+                    <div class="stat-lbl">Uptime</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val" style="color:#3fb950">10k+</div>
+                    <div class="stat-lbl">Deployments</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val" style="color:#f59e0b">24/7</div>
+                    <div class="stat-lbl">Support</div>
+                </div>
             </div>
         </div>
 
+        <!-- Features -->
+        <div class="feat-wrap">
+            <div class="section-title">Powerful Features</div>
+            <div class="section-sub">Everything you need to deploy and manage your applications</div>
+            <div class="feat-grid">
+                <div class="feat-card">
+                    <div class="fc-icon">💻</div>
+                    <h3>Full Terminal</h3>
+                    <p>Bash shell with PTY — run Python, Node.js, and more</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">📂</div>
+                    <h3>File Manager</h3>
+                    <p>Upload, download, rename, and manage your files</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">🛡️</div>
+                    <h3>Isolated Sandbox</h3>
+                    <p>Each user gets their own secure, jailed environment</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">📊</div>
+                    <h3>Real-time Monitoring</h3>
+                    <p>Live CPU, RAM, and Storage usage charts</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">💎</div>
+                    <h3>Flexible Plans</h3>
+                    <p>Free, Pro, and Ultra tiers to fit your needs</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">🚀</div>
+                    <h3>Instant Setup</h3>
+                    <p>Sign up and start deploying in minutes</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">🔄</div>
+                    <h3>Auto Backups</h3>
+                    <p>Daily backups of your data kept safe and secure</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">👥</div>
+                    <h3>Multi-User</h3>
+                    <p>Create sub-accounts and manage team access easily</p>
+                </div>
+                <div class="feat-card">
+                    <div class="fc-icon">🌐</div>
+                    <h3>Global Edge</h3>
+                    <p>Low latency servers optimized for performance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works -->
         <div class="hiw-section">
             <h2>How It Works</h2>
             <div class="hiw-grid">
@@ -330,8 +592,10 @@
             </div>
         </div>
 
-        <div class="land-pricing">
+        <!-- Pricing -->
+        <div class="pricing-section">
             <h2>Choose Your Plan</h2>
+            <div class="pricing-sub">Simple, transparent pricing. No hidden fees.</div>
             <div class="lp-grid">
                 <div class="lp-card">
                     <div class="lp-head">Free</div>
@@ -342,8 +606,10 @@
                         <li>500MB Storage</li>
                         <li>Community Support</li>
                     </ul>
+                    <button class="lp-btn" onclick="showLogin()">Get Started</button>
                 </div>
-                <div class="lp-card lp-featured">
+                <div class="lp-card featured">
+                    <div class="lp-badge">POPULAR</div>
                     <div class="lp-head" style="color:var(--ac)">Pro</div>
                     <div class="lp-price">₹70<span>/mo</span></div>
                     <ul class="lp-feat">
@@ -352,6 +618,7 @@
                         <li>1GB Storage</li>
                         <li>Priority Support</li>
                     </ul>
+                    <button class="lp-btn primary" onclick="showLogin()">Upgrade to Pro</button>
                 </div>
                 <div class="lp-card">
                     <div class="lp-head">Ultra</div>
@@ -362,9 +629,11 @@
                         <li>2GB Storage</li>
                         <li>Dedicated Support</li>
                     </ul>
+                    <button class="lp-btn" onclick="showLogin()">Upgrade to Ultra</button>
                 </div>
             </div>
         </div>
+
         <div class="land-footer">© 2026 iq4u8 — Premium VPS Hosting. All rights reserved.</div>
     </div>
 
