@@ -1849,6 +1849,17 @@
                     </div>
                 </div>
                 <div class="sg" id="sG"></div>
+                <div id="dangerZone" style="padding:16px;display:none">
+                    <div
+                        style="border:1px solid rgba(248,81,73,.3);border-radius:12px;padding:16px;background:rgba(248,81,73,.05)">
+                        <h4 style="color:#f85149;font-size:13px;margin-bottom:8px">⚠️ Danger Zone</h4>
+                        <p style="font-size:11px;color:var(--txd);margin-bottom:12px">Once you delete your account, all
+                            your files and data will be permanently removed.</p>
+                        <button onclick="deleteAccount()"
+                            style="padding:8px 16px;background:rgba(248,81,73,.15);border:1px solid rgba(248,81,73,.4);border-radius:8px;color:#f85149;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">🗑️
+                            Delete My Account</button>
+                    </div>
+                </div>
             </div>
             <!-- PLANS -->
             <div class="pn" id="p-plans">
@@ -2010,6 +2021,7 @@
             document.getElementById('lp').style.display = 'none'; document.getElementById('pendingPage').style.display = 'none'; document.getElementById('app').classList.add('sh');
             document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
             if (user.role === 'owner') document.getElementById('adminNav').style.display = '';
+            if (user.role !== 'owner') document.getElementById('dangerZone').style.display = '';
             if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
             document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
             setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner() }, 300)
@@ -2041,7 +2053,7 @@
             if (ws) { try { ws.close() } catch (e) { } }
             // Dispose previous onData handler to prevent double-paste
             if (dataDisp) { dataDisp.dispose(); dataDisp = null; }
-            // WebSocket to HF Space
+            // WS HF
             ws = new WebSocket('wss://evidzone-love.hf.space/ws/terminal?token=' + encodeURIComponent(authToken));
             ws.onopen = () => { const d = fitA.proposeDimensions(); if (d) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) };
             ws.onmessage = ev => term.write(ev.data); ws.onerror = () => term.write('\r\n\x1b[31m[Error]\x1b[0m\r\n'); ws.onclose = () => term.write('\r\n\x1b[31m[Disconnected]\x1b[0m\r\n');
@@ -2134,6 +2146,11 @@
             } catch (e) { }
         }
         setInterval(() => { if (user) lStats() }, 30000);
+        async function deleteAccount() {
+            if (!confirm('Are you sure you want to DELETE your account? All files will be lost!')) return;
+            if (!confirm('This CANNOT be undone. Confirm deletion?')) return;
+            try { const r = await api('/api/account', { method: 'DELETE' }); const d = await r.json(); if (d.error) { toast(d.error, 'error'); return; } toast('Account deleted', 'success'); doLogout(); } catch (e) { toast('Failed', 'error'); }
+        }
         async function loadCharts() {
             try {
                 const r = await api('/api/stats/history'); const d = await r.json(); const h = d.history || [];
