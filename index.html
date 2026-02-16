@@ -5291,6 +5291,59 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     document.getElementById('vps-payment-popup').addEventListener('click', function (e) {
       if (e.target === this) this.style.display = 'none';
     });
+
+    // Reliable DOM-based button handlers (works regardless of React internals)
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('button, a');
+      if (!btn) return;
+      var text = (btn.textContent || '').trim();
+
+      // "Get Started" in navbar or "Start Free Trial" / "Start Your Free Trial" → go to /browse/
+      if (text === 'Get Started' && btn.tagName === 'BUTTON' && !btn.closest('.pricing-card')) {
+        e.preventDefault();
+        window.location.href = '/browse/';
+        return;
+      }
+      if (text.indexOf('Start Free Trial') !== -1 || text.indexOf('Start Your Free Trial') !== -1) {
+        e.preventDefault();
+        window.location.href = '/browse/';
+        return;
+      }
+
+      // "Watch Demo" → scroll to features
+      if (text.indexOf('Watch Demo') !== -1) {
+        e.preventDefault();
+        var feat = document.getElementById('features');
+        if (feat) feat.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      // Pricing card "Get Started" → show popup with plan info
+      if (text === 'Get Started' && btn.tagName === 'BUTTON' && btn.closest('.pricing-card')) {
+        e.preventDefault();
+        var card = btn.closest('.pricing-card');
+        var planName = '';
+        var h3 = card.querySelector('h3');
+        var price = card.querySelector('.text-5xl, [class*="text-5xl"]');
+        if (h3) planName = h3.textContent;
+        if (price) planName += ' - ' + price.textContent + '/month';
+        var popup = document.getElementById('vps-payment-popup');
+        var label = document.getElementById('popup-plan-name');
+        if (label) label.textContent = planName || 'Selected Plan';
+        if (popup) popup.style.display = 'flex';
+        return;
+      }
+
+      // Navbar "Support" link → show popup
+      if (btn.tagName === 'A' && text === 'Support' && btn.closest('nav')) {
+        e.preventDefault();
+        var popup2 = document.getElementById('vps-payment-popup');
+        var label2 = document.getElementById('popup-plan-name');
+        if (label2) label2.textContent = 'Contact Support';
+        if (popup2) popup2.style.display = 'flex';
+        return;
+      }
+    });
   </script>
 </body>
 
