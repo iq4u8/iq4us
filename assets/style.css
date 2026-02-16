@@ -16,18 +16,13 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
-img,
-video,
-svg {
-    max-width: 100%;
-    height: auto;
-}
-
-html {
-    min-height: 100%;
+html,
+body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
     scroll-behavior: smooth;
 }
 
@@ -36,10 +31,6 @@ body {
     background: var(--bg);
     color: var(--tx);
     min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
 }
 
 /* === • ━━  ANIMATED BACKGROUND ━━ • === */
@@ -49,9 +40,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .bgx::before {
@@ -376,15 +367,12 @@ body {
     display: none
 }
 
+/* === • ━━  APP ━━ • === */
 .app {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-    background: var(--bg2);
+    height: 100vh;
+    position: relative;
+    z-index: 1
 }
 
 .app.sh {
@@ -1077,7 +1065,78 @@ body {
 .hero {
     text-align: center;
     padding: 80px 20px;
-    flex: 1
+}
+
+/* Stats Row */
+.stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-val {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.stat-lbl {
+    color: var(--txd);
+    font-size: 12px;
+}
+
+.gradient-text {
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* How It Works */
+.hiw-section {
+    max-width: 900px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hiw-section h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.hiw-step p {
+    color: var(--txd);
+    font-size: 13px;
+}
+
+.hiw-num {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.lp-featured {
+    border-color: var(--ac);
+    box-shadow: 0 0 30px rgba(99, 102, 241, .15);
+}
+
+.lp-price span {
+    font-size: 12px;
+    color: var(--txd);
+    font-weight: 400;
 }
 
 .hero h1 {
@@ -1264,41 +1323,81 @@ body {
 /* === • ━━  RESPONSIVE  ━━ • === */
 @media (max-width: 768px) {
 
-    /* Land Page */
+    /* Landing Page Mobile */
+    .landing {
+        padding: 0 10px;
+    }
+
+    .land-nav {
+        padding: 15px 16px;
+    }
+
+    .hero {
+        padding: 40px 16px;
+    }
+
     .hero h1 {
-        font-size: 32px;
+        font-size: 28px !important;
     }
 
     .hero p {
         font-size: 14px;
-        padding: 0 20px;
+        padding: 0;
     }
 
-    .stats-box {
+    .stats-row {
         flex-direction: column;
-        gap: 20px;
+        gap: 16px;
+    }
+
+    .stat-val {
+        font-size: 24px !important;
     }
 
     .feat-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        padding: 0 10px;
     }
 
-    .hiw>div {
-        grid-template-columns: 1fr;
-        margin-bottom: 30px;
+    .hiw-section {
+        margin: 40px auto;
+        padding: 0 16px;
+    }
+
+    .hiw-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+    }
+
+    .hiw-num {
+        font-size: 32px;
     }
 
     .lp-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
+    .land-pricing {
+        padding: 20px 10px;
+    }
+
+    .land-footer {
+        padding: 20px 10px;
+        font-size: 11px;
+    }
+
+    /* Login */
+    .lc {
+        padding: 24px 20px;
+        width: 100%;
+        max-width: 95vw;
+    }
+
+    /* Dashboard */
     .res {
         display: none;
     }
 
-    /* Hide heavy charts on mobile */
-
-    /* Dashboard */
     .app {
         flex-direction: column;
     }
@@ -1319,52 +1418,91 @@ body {
         transform: translateX(0);
     }
 
-    /* Mobile Toggle */
     .mob-toggle {
         display: flex !important;
         position: fixed;
-        bottom: 25px;
-        right: 25px;
-        width: 55px;
-        height: 55px;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
         background: var(--ac);
         color: white;
         border-radius: 50%;
         align-items: center;
         justify-content: center;
-        font-size: 28px;
-        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5);
-        z-index: 2000;
+        font-size: 24px;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        z-index: 1010;
         border: none;
         cursor: pointer;
-        transition: .2s;
-    }
-
-    .mob-toggle:active {
-        transform: scale(0.9);
     }
 
     .mn {
         width: 100%;
-        height: 100%;
-        overflow-y: auto;
-        padding-bottom: 80px;
-        /* Space for toggle */
+        height: 100vh;
+    }
+
+    .mh h2 {
+        font-size: 13px;
     }
 
     /* Tables */
     .fl,
-    .ut-wrap {
-        width: 100%;
+    .ut {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 10px;
     }
 
     table {
         width: 100%;
         min-width: 600px;
-        white-space: nowrap;
+    }
+
+    /* User table */
+    .ut {
+        font-size: 11px;
+    }
+
+    .u-act {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 24px !important;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    .stat-val {
+        font-size: 22px !important;
+    }
+
+    .feat-card {
+        padding: 14px;
+    }
+
+    .feat-card h3 {
+        font-size: 13px;
+    }
+
+    .feat-card p {
+        font-size: 10px;
+    }
+
+    .lp-card {
+        padding: 14px;
+    }
+
+    .lp-head {
+        font-size: 14px;
+    }
+
+    .lp-price {
+        font-size: 20px;
     }
 }
 
