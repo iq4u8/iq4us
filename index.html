@@ -8,6 +8,224 @@
     <title>iq4u8 — Premium VPS Hosting</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
+    <style>
+        /* CRITICAL OVERRIDES - embedded to guarantee they apply */
+        html {
+            height: auto !important;
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+        }
+
+        body {
+            height: auto !important;
+            overflow-y: scroll !important;
+            overflow-x: hidden !important;
+            min-height: 100vh;
+        }
+
+        .landing {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 56px);
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px auto;
+            text-align: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-val {
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .stat-lbl {
+            color: var(--txd);
+            font-size: 12px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .hiw-section {
+            max-width: 900px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hiw-section h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .hiw-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .hiw-step p {
+            color: var(--txd);
+            font-size: 13px;
+        }
+
+        .hiw-num {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .lp-featured {
+            border-color: var(--ac) !important;
+            box-shadow: 0 0 30px rgba(99, 102, 241, .15);
+        }
+
+        .lp-price span {
+            font-size: 12px;
+            color: var(--txd);
+            font-weight: 400;
+        }
+
+        /* ====== MOBILE ====== */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 16px !important;
+            }
+
+            .hero h1 {
+                font-size: 28px !important;
+            }
+
+            .hero p {
+                font-size: 14px !important;
+            }
+
+            .land-nav {
+                padding: 15px 16px !important;
+            }
+
+            .stats-row {
+                flex-direction: column !important;
+                gap: 16px !important;
+                align-items: center !important;
+            }
+
+            .stat-val {
+                font-size: 24px !important;
+            }
+
+            .feat-grid {
+                grid-template-columns: 1fr !important;
+                max-width: 100% !important;
+                padding: 0 16px !important;
+            }
+
+            .hiw-section {
+                margin: 40px auto !important;
+                padding: 0 16px !important;
+            }
+
+            .hiw-grid {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+
+            .hiw-num {
+                font-size: 32px !important;
+            }
+
+            .lp-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .land-pricing {
+                padding: 20px 16px !important;
+            }
+
+            .land-footer {
+                padding: 20px 16px !important;
+                font-size: 11px !important;
+            }
+
+            .lc {
+                width: 100% !important;
+                max-width: 92vw !important;
+                padding: 24px 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 24px !important;
+            }
+
+            .hero p {
+                font-size: 13px !important;
+            }
+
+            .stat-val {
+                font-size: 20px !important;
+            }
+
+            .feat-card {
+                padding: 14px !important;
+            }
+
+            .feat-card h3 {
+                font-size: 13px !important;
+            }
+
+            .feat-card p {
+                font-size: 10px !important;
+            }
+
+            .lp-card {
+                padding: 14px !important;
+            }
+
+            .lp-head {
+                font-size: 14px !important;
+            }
+
+            .lp-price {
+                font-size: 20px !important;
+            }
+
+            .ln-logo {
+                font-size: 16px !important;
+            }
+
+            .land-cta {
+                font-size: 12px !important;
+                padding: 8px 16px !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -29,17 +247,17 @@
         </section>
 
         <div class="stats-row">
-            <div class="stat-item">
+            <div>
                 <div class="stat-val gradient-text">99.9%</div>
                 <div class="stat-lbl">Uptime</div>
             </div>
-            <div class="stat-item">
+            <div>
                 <div class="stat-val" style="color:#3fb950">10k+</div>
                 <div class="stat-lbl">Deployments</div>
             </div>
-            <div class="stat-item">
+            <div>
                 <div class="stat-val" style="color:#f59e0b">24/7</div>
-                <div class="stat-lbl">Support</div>
+                <div class="stat-val stat-lbl">Support</div>
             </div>
         </div>
 
