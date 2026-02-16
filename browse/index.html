@@ -221,8 +221,15 @@
         <button class="alert-x" onclick="closeAlert()">✕</button>
     </div>
 
+    <!-- Mobile Toggle -->
+    <button class="mob-toggle" onclick="toggleSb()">☰</button>
+
     <script src="../assets/main.js"></script>
     <script>
+        function toggleSb() {
+            document.querySelector('.sb').classList.toggle('open');
+        }
+
         // DASHBOARD LOGIC
         if (!localStorage.getItem('token')) location.href = '/';
         const user = JSON.parse(atob(localStorage.getItem('token').split('.')[0] || '{}') || '{}'); // Mock decode if JWT, else redundant if token is opaque. 
