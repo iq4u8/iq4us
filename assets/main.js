@@ -42,7 +42,7 @@ function closeAlert() { document.getElementById('alertBar').classList.remove('sh
 async function doAuth(e) {
     e.preventDefault();
     const u = document.getElementById('aU').value, p = document.getElementById('aP').value, m = document.getElementById('aErr'), b = document.getElementById('aB');
-    if (!document.getElementById('agreeTC').checked) return alert('Please agree to Terms & Privacy Policy');
+    if ((b.dataset.mode || 'login') === 'signup' && !document.getElementById('agreeTC').checked) return alert('Please agree to Terms & Privacy Policy');
     m.style.display = 'none'; b.disabled = true; b.textContent = 'Wait...';
     try {
         const r = await api('/api/' + (b.dataset.mode || 'login'), { method: 'POST', body: JSON.stringify({ username: u, password: p }) });
