@@ -2172,9 +2172,9 @@
         // PLANS
         async function loadPlans() {
             const plans = [
-                { id: 'free', name: 'Free', price: '₹40', storage: '512MB', ram: '128MB', cpu: '0.5 Core', color: '#6366f1' },
-                { id: 'pro', name: 'Pro', price: '₹70', storage: '2GB', ram: '512MB', cpu: '1 Core', color: '#8b5cf6' },
-                { id: 'ultra', name: 'Ultra', price: '₹150', storage: '10GB', ram: '2GB', cpu: '2 Cores', color: '#ec4899' }
+                { id: 'free', name: 'Free', price: '₹40', storage: '500MB', ram: '280MB', cpu: '0.5 Core', color: '#6366f1' },
+                { id: 'pro', name: 'Pro', price: '₹70', storage: '1GB', ram: '560MB', cpu: '1 Core', color: '#8b5cf6' },
+                { id: 'ultra', name: 'Ultra', price: '₹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
             ];
             let wa = '';
             try { const r = await fetch(API_BASE + '/api/support'); const d = await r.json(); wa = d.whatsapp || ''; } catch (e) { }
