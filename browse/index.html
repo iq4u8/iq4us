@@ -2251,14 +2251,12 @@
                 { id: 'pro', name: 'Pro', price: '₹70', storage: '1GB', ram: '560MB', cpu: '1 Core', color: '#8b5cf6' },
                 { id: 'ultra', name: 'Ultra', price: '₹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
             ];
-            let wa = '';
-            try { const r = await fetch(API_BASE + '/api/support'); const d = await r.json(); wa = d.whatsapp || ''; } catch (e) { }
+            let wa = '', tg = '';
+            try { const r = await fetch(API_BASE + '/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
             const currentPlan = user ? (user.plan || 'free') : 'free';
             const grid = document.getElementById('planGrid');
             grid.innerHTML = plans.map(p => {
                 const isCurrent = currentPlan === p.id;
-                const waMsg = encodeURIComponent(`Hi, I want to buy the ${p.name} plan (${p.price}/month) for my account: ${user ? user.username : ''} on iq4u8 SERVER`);
-                const waLink = wa ? `https://wa.me/${wa.replace(/[^0-9]/g, '')}?text=${waMsg}` : '#';
                 return `<div class="plan-card${isCurrent ? ' current' : ''}">
                     ${isCurrent ? '<span class="plan-badge">CURRENT</span>' : ''}
                     <h3>${p.name}</h3>
@@ -2268,9 +2266,36 @@
                         <li>RAM: ${p.ram}</li>
                         <li>CPU: ${p.cpu}</li>
                     </ul>
-                    ${isCurrent ? '<button class="plan-buy current-btn">✓ Current Plan</button>' : `<a href="${waLink}" target="_blank" style="text-decoration:none"><button class="plan-buy">Buy Now →</button></a>`}
+                    ${isCurrent ? '<button class="plan-buy current-btn">✓ Current Plan</button>' : `<button class="plan-buy" onclick="showBuyPopup('${p.name}','${p.price}')">Buy Now →</button>`}
                 </div>`;
             }).join('');
+            // Store for popup
+            window._supportWA = wa;
+            window._supportTG = tg;
+        }
+        function showBuyPopup(planName, planPrice) {
+            const msg = `Hi, I want to buy the ${planName} plan (${planPrice}/month) for my account: ${user ? user.username : ''} on iq4u8 SERVER`;
+            const wa = window._supportWA || '';
+            const tg = window._supportTG || '';
+            if (!wa && !tg) { toast('No contact info set. Ask admin.', 'warning'); return; }
+            const waLink = wa ? `https://wa.me/${wa.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}` : '';
+            const tgLink = tg ? `${tg.startsWith('http') ? tg : 'https://t.me/' + tg.replace('@', '')}?text=${encodeURIComponent(msg)}` : '';
+            // Remove old popup
+            const old = document.getElementById('buyPopup'); if (old) old.remove();
+            const popup = document.createElement('div');
+            popup.id = 'buyPopup';
+            popup.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)';
+            popup.innerHTML = `<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:24px;max-width:320px;width:90%;text-align:center">
+                <h3 style="font-size:16px;font-weight:800;margin-bottom:4px">📱 Contact Us</h3>
+                <p style="font-size:12px;color:var(--txd);margin-bottom:16px">Choose how to reach us for<br><strong>${planName} Plan (${planPrice}/month)</strong></p>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                    ${waLink ? `<a href="${waLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#25D366;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">💬 WhatsApp</button></a>` : ''}
+                    ${tgLink ? `<a href="${tgLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#2AABEE;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">✈️ Telegram</button></a>` : ''}
+                </div>
+                <button onclick="document.getElementById('buyPopup').remove()" style="margin-top:14px;padding:8px 20px;background:var(--inp);border:1px solid var(--bdr);border-radius:8px;color:var(--txd);font-family:inherit;font-size:12px;cursor:pointer">Close</button>
+            </div>`;
+            popup.addEventListener('click', e => { if (e.target === popup) popup.remove(); });
+            document.body.appendChild(popup);
         }
         // CONTACT
         async function loadContact() {
