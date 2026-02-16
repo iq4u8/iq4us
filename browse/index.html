@@ -1456,23 +1456,26 @@
         @media(max-width:700px) {
             .app.sh { flex-direction: column }
             .sb {
-                width: 100%; height: auto; border-right: none;
+                width: 100% !important; height: auto; border-right: none;
                 border-top: 1px solid var(--bdr); order: 2;
                 flex-direction: row; overflow: visible;
                 position: fixed; bottom: 0; left: 0; right: 0;
-                z-index: 100; background: var(--bg2)
+                z-index: 100; background: var(--bg2);
+                flex-shrink: initial
             }
             .sbr { display: none }
             .sbn {
                 flex-direction: row; overflow-x: auto; overflow-y: hidden;
                 gap: 0; padding: 4px 2px; flex: 1;
+                align-items: center; justify-content: space-around;
                 -webkit-overflow-scrolling: touch; scrollbar-width: none
             }
             .sbn::-webkit-scrollbar { display: none }
             .ni {
                 flex-direction: column; padding: 6px 10px; gap: 2px;
                 font-size: 9px; min-width: 52px; text-align: center;
-                border-radius: 8px; flex-shrink: 0
+                border-radius: 8px; flex-shrink: 0;
+                width: auto !important
             }
             .ni .nx { font-size: 18px; width: auto }
             .ni span:not(.nx) {
