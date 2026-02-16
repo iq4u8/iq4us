@@ -2218,8 +2218,8 @@
 <div class="sc"><div class="sl">🧠 RAM</div><div class="sv">${d.ramUsed} / ${d.ramTotal}</div><div class="ss">${d.ramPct || 0}% used</div></div>
 <div class="sc"><div class="sl">⚡ CPU</div><div class="sv">${d.cpuCores} Core${d.cpuCores > 1 ? 's' : ''}</div><div class="ss">${d.cpuPct || 0}%</div></div>
 <div class="sc"><div class="sl">💾 Disk</div><div class="sv">${d.diskUsed} / ${d.diskTotal}</div><div class="ss">${d.diskPct || 0}% used</div></div>`;
-                if (user && user.role === 'owner') html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>`;
-                html += `<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div><div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
+                if (user && user.role === 'owner') html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>
+<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div><div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
                 document.getElementById('sG').innerHTML = html
             } catch (e) { }
         }
