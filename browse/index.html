@@ -2252,7 +2252,7 @@
                 { id: 'ultra', name: 'Ultra', price: '₹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
             ];
             let wa = '', tg = '';
-            try { const r = await fetch(API_BASE + '/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
+            try { const r = await api('/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
             const currentPlan = user ? (user.plan || 'free') : 'free';
             const grid = document.getElementById('planGrid');
             grid.innerHTML = plans.map(p => {
@@ -2300,7 +2300,7 @@
         // CONTACT
         async function loadContact() {
             try {
-                const r = await fetch(API_BASE + '/api/support'); const d = await r.json();
+                const r = await api('/api/support'); const d = await r.json();
                 const cards = document.getElementById('contactCards');
                 let html = '';
                 if (d.whatsapp) html += `<a href="https://wa.me/${d.whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="contact-card"><div class="contact-icon wa">💬</div><div class="contact-info"><h4>WhatsApp</h4><p>${d.whatsapp}</p></div></a>`;
