@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="description" content="Premium VPS Hosting Dashboard - Terminal, File Manager, Multi-Plan Support">
+    <title>iq4u8 — Premium VPS Hosting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <div class="bgx"></div>
+
+    <!-- LANDING PAGE -->
+    <div class="landing" id="landingPage">
+        <nav class="land-nav">
+            <div class="ln-logo">
+                <div class="ic">⚡</div>iq4u8
+            </div>
+            <button class="land-cta" onclick="showLogin()">Get Started →</button>
+        </nav>
+        <section class="hero">
+            <h1>Premium VPS Hosting<br>Made Simple</h1>
+            <p>Deploy your applications with a full terminal, file manager, and real-time monitoring. Starting at just
+                ₹40/mo.</p>
+            <button class="land-cta" onclick="showLogin()">⚡ Start Free Trial</button>
+        </section>
+
+        <div class="stats-box" style="display:flex;justify-content:center;gap:40px;margin:40px 0;text-align:center">
+            <div>
+                <div class="s-val"
+                    style="font-size:32px;font-weight:800;background:linear-gradient(to right,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+                    99.9%</div>
+                <div class="s-lbl" style="color:var(--txd);font-size:12px">Uptime</div>
+            </div>
+            <div>
+                <div class="s-val" style="font-size:32px;font-weight:800;color:#3fb950">10k+</div>
+                <div class="s-lbl" style="color:var(--txd);font-size:12px">Deployments</div>
+            </div>
+            <div>
+                <div class="s-val" style="font-size:32px;font-weight:800;color:#f59e0b">24/7</div>
+                <div class="s-lbl" style="color:var(--txd);font-size:12px">Support</div>
+            </div>
+        </div>
+
+        <div class="feat-grid">
+            <div class="feat-card">
+                <div class="fc-icon">💻</div>
+                <h3>Full Terminal</h3>
+                <p>Bash shell with PTY — run Python, Node.js, and more</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">📂</div>
+                <h3>File Manager</h3>
+                <p>Upload, download, rename, and manage your files</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">🛡️ </div>
+                <h3>Isolated Sandbox</h3>
+                <p>Each user gets their own secure, jailed environment</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">📊</div>
+                <h3>Real-time Monitoring</h3>
+                <p>Live CPU, RAM, and Storage usage charts</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">💎</div>
+                <h3>Flexible Plans</h3>
+                <p>Free, Pro, and Ultra tiers to fit your needs</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">🚀</div>
+                <h3>Instant Setup</h3>
+                <p>Sign up and start deploying in minutes</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">🔄</div>
+                <h3>Auto Backups</h3>
+                <p>Daily backups of your data kept safe and secure</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">👥</div>
+                <h3>Multi-User</h3>
+                <p>Create sub-accounts and manage team access easily</p>
+            </div>
+            <div class="feat-card">
+                <div class="fc-icon">🌐</div>
+                <h3>Global Edge</h3>
+                <p>Low latency servers optimized for performance</p>
+            </div>
+        </div>
+
+        <div class="hiw" style="max-width:900px;margin:80px auto;text-align:center">
+            <h2 style="font-size:24px;font-weight:800;margin-bottom:40px">How It Works</h2>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+                <div>
+                    <div style="font-size:40px;margin-bottom:10px">1️⃣</div>
+                    <h3>Create Account</h3>
+                    <p style="color:var(--txd);font-size:13px">Sign up for free and verify your email</p>
+                </div>
+                <div>
+                    <div style="font-size:40px;margin-bottom:10px">2️⃣</div>
+                    <h3>Choose Plan</h3>
+                    <p style="color:var(--txd);font-size:13px">Select resources that fit your project</p>
+                </div>
+                <div>
+                    <div style="font-size:40px;margin-bottom:10px">3️⃣</div>
+                    <h3>Deploy</h3>
+                    <p style="color:var(--txd);font-size:13px">Launch your VPS and start coding instantly</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="land-pricing">
+            <h2>Choose Your Plan</h2>
+            <div class="lp-grid">
+                <div class="lp-card">
+                    <div class="lp-head">Free</div>
+                    <div class="lp-price">₹40<span style="font-size:12px;color:var(--txd);font-weight:400">/mo</span>
+                    </div>
+                    <ul class="lp-feat">
+                        <li>0.5 CPU Core</li>
+                        <li>280MB RAM</li>
+                        <li>500MB Storage</li>
+                        <li>Community Support</li>
+                    </ul>
+                </div>
+                <div class="lp-card" style="border-color:var(--ac);box-shadow:0 0 30px rgba(99,102,241,.15)">
+                    <div class="lp-head" style="color:var(--ac)">Pro</div>
+                    <div class="lp-price">₹70<span style="font-size:12px;color:var(--txd);font-weight:400">/mo</span>
+                    </div>
+                    <ul class="lp-feat">
+                        <li>1 CPU Core</li>
+                        <li>560MB RAM</li>
+                        <li>1GB Storage</li>
+                        <li>Priority Support</li>
+                    </ul>
+                </div>
+                <div class="lp-card">
+                    <div class="lp-head">Ultra</div>
+                    <div class="lp-price">₹150<span style="font-size:12px;color:var(--txd);font-weight:400">/mo</span>
+                    </div>
+                    <ul class="lp-feat">
+                        <li>2 CPU Cores</li>
+                        <li>1120MB RAM</li>
+                        <li>2GB Storage</li>
+                        <li>Dedicated Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="land-footer">© 2026 iq4u8 — Premium VPS Hosting. All rights reserved.</div>
+    </div>
+
+    <!-- PENDING APPROVAL -->
+    <div class="pending-box" id="pendingPage" style="display:none">
+        <div class="pb-icon">⏳</div>
+        <h2>Account Pending Approval</h2>
+        <p>Your account has been created and is waiting for admin approval. If not approved within 6 hours, the account
+            will be automatically deleted.</p>
+        <button class="land-cta" style="margin-top:20px" onclick="location.reload()">Back to Login</button>
+    </div>
+
+    <!-- ALERT BANNER -->
+    <div class="alert-bar warning" id="alertBar">
+        <span id="alertMsg">⚠️ Alert</span>
+        <button class="alert-x" onclick="closeAlert()">✕</button>
+    </div>
+
+    <!-- LOGIN/SIGNUP -->
+    <div class="lw" id="lp" style="display:none">
+        <div class="lc">
+            <div class="ll">
+                <div class="ic">⚡</div>
+                <h1>iq4u8 SERVER</h1>
+                <p>Multi-User VPS Dashboard</p>
+            </div>
+            <div class="ts"><button class="a" onclick="stab('login')">Login</button><button
+                    onclick="stab('signup')">Sign Up</button></div>
+            <div class="em" id="aErr"></div>
+            <form onsubmit="doAuth(event)">
+                <div class="fg"><label>Username</label><input type="text" id="aU" placeholder="Enter username" required>
+                </div>
+                <div class="fg"><label>Password</label><input type="password" id="aP" placeholder="Enter password"
+                        required></div>
+                <div class="tc" id="tcBox">
+                    <input type="checkbox" id="agreeTC">
+                    <span>I agree to the <a href="#"
+                            onclick="alert('Terms: Use responsibly. No illegal activity. Data may be deleted for violations. Storage limits apply per plan.');return false">Terms
+                            & Conditions</a> and <a href="#"
+                            onclick="alert('Privacy: We store your username, hashed password, and files. No data shared with third parties.');return false">Privacy
+                            Policy</a></span>
+                </div>
+                <button type="submit" class="bgo" id="aB" data-mode="login">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/main.js"></script>
+    <script>
+        // Check if already logged in
+        if (localStorage.getItem('token')) location.href = '/browse/';
+    </script>
+</body>
+
+</html>
