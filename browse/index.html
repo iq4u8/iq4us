@@ -16,7 +16,7 @@
     <!-- Open Graph -->
     <meta property="og:title" content="IQ4U8 | Ultimate VPS Terminal & Cloud Hosting">
     <meta property="og:description"
-        content="Premium VPS hosting with SSH terminal, file manager, referral rewards, and real-time monitoring. Plans from â‚¹40/mo.">
+        content="Premium VPS hosting with SSH terminal, file manager, referral rewards, and real-time monitoring. Plans from ₹40/mo.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://iq4u8.shop/">
     <meta property="og:site_name" content="IQ4U8">
@@ -1479,7 +1479,7 @@
             }
         }
 
-        /* â•â• MOBILE BOTTOM NAV BAR â•â• */
+        /* ══ MOBILE BOTTOM NAV BAR ══ */
         .mob-nav {
             display: none;
             position: fixed;
@@ -1540,7 +1540,7 @@
             color: var(--rd)
         }
 
-        /* â•â• MOBILE LAYOUT â•â• */
+        /* ══ MOBILE LAYOUT ══ */
         @media(max-width:700px) {
 
             /* Bottom nav: only visible when .sh */
@@ -1580,7 +1580,7 @@
                 padding-bottom: 56px
             }
 
-            /* â”€â”€ HEADER BAR â”€â”€ always visible at top of .mn */
+            /* ── HEADER BAR ── always visible at top of .mn */
             .mh {
                 display: flex !important;
                 align-items: center !important;
@@ -1616,7 +1616,7 @@
                 font-size: 10px
             }
 
-            /* â”€â”€ PANELS â”€â”€ fill remaining space below header */
+            /* ── PANELS ── fill remaining space below header */
             .pn {
                 display: none !important;
                 flex-direction: column;
@@ -2055,7 +2055,7 @@
                             <div class="sv" id="refFriends">0</div>
                         </div>
                         <div class="sc" style="text-align:center">
-                            <div class="sl">â­ Points Earned</div>
+                            <div class="sl">⭐ Points Earned</div>
                             <div class="sv" id="refPoints">0</div>
                         </div>
                         <div class="sc" style="text-align:center">
@@ -2066,9 +2066,9 @@
                     <div
                         style="background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.2);border-radius:10px;padding:14px;margin-bottom:20px">
                         <p style="font-size:12px;color:var(--txd);line-height:1.6">📌 <strong
-                                style="color:var(--tx)">How it works:</strong> Share your link â†’ Friend signs up â†’
+                                style="color:var(--tx)">How it works:</strong> Share your link → Friend signs up →
                             After
-                            24h retention â†’ You earn <strong style="color:var(--ac)">1 point</strong>. If they get
+                            24h retention → You earn <strong style="color:var(--ac)">1 point</strong>. If they get
                             Pro/Ultra: <strong style="color:#00D4AA">2x points!</strong></p>
                     </div>
                     <h4 style="font-size:14px;font-weight:700;margin-bottom:10px">Referred Friends</h4>
@@ -2193,9 +2193,9 @@
     <div class="mo" id="planM">
         <div class="mb">
             <h3>📋 Change Plan</h3><select id="planSel">
-                <option value="free">Free (â‚¹40)</option>
-                <option value="pro">Pro (â‚¹70)</option>
-                <option value="ultra">Ultra (â‚¹150)</option>
+                <option value="free">Free (₹40)</option>
+                <option value="pro">Pro (₹70)</option>
+                <option value="ultra">Ultra (₹150)</option>
             </select>
             <div class="ma"><button class="c"
                     onclick="document.getElementById('planM').classList.remove('sh')">Cancel</button><button class="k"
@@ -2247,7 +2247,7 @@
             if (user.role === 'owner') { document.getElementById('adminNav').style.display = ''; document.getElementById('dangerZone').style.display = 'none'; var mab = document.getElementById('mobAdminBtn'); if (mab) mab.style.display = ''; }
             else { document.getElementById('adminNav').style.display = 'none'; document.getElementById('dangerZone').style.display = ''; }
             if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
-            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? 'â¬œ Normal' : 'â›¶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
+            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
             setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner() }, 300)
         }
         // ALERT BANNER
@@ -2279,7 +2279,7 @@
             xtermEls.forEach(function (el) { el.style.display = (id === 'terminal') ? '' : 'none'; el.style.visibility = (id === 'terminal') ? '' : 'hidden'; });
             // Header actions
             const ha = document.getElementById('mhActions');
-            if (id === 'terminal') ha.innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? 'â¬œ Normal' : 'â›¶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
+            if (id === 'terminal') ha.innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
             else if (id === 'files') ha.innerHTML = '<button class="mh-btn danger" style="color:var(--rd)" onclick="factoryReset()">🗑️ Factory Reset</button>';
             else ha.innerHTML = '';
             if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') { lStats(); const cr = document.querySelector('.chart-row'); if (cr) cr.style.display = (user && user.role === 'owner') ? '' : 'none'; if (user && user.role === 'owner') loadCharts(); } if (id === 'plans') loadPlans(); if (id === 'contact') loadContact(); if (id === 'referral') loadReferral(); if (id === 'admin') { if (user.role !== 'owner') { sp('terminal', document.querySelector('.ni')); return; } loadAdmin() }
@@ -2304,7 +2304,7 @@
         function refreshTerm() { if (term) { term.clear() } connectWS() }
         function toggleTermFS() {
             termFS = !termFS; const sb = document.querySelector('.sb'); const mh = document.querySelector('.mh'); if (termFS) { sb.style.display = 'none' } else { sb.style.display = '' }
-            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? 'â¬œ Normal' : 'â›¶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
+            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
             setTimeout(() => { if (fitA) fitA.fit() }, 100)
         }
         window.addEventListener('resize', () => { if (fitA) { fitA.fit(); const d = fitA.proposeDimensions(); if (d && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) } });
@@ -2445,9 +2445,9 @@
         // PLANS
         async function loadPlans() {
             const plans = [
-                { id: 'free', name: 'Free', price: 'â‚¹40', storage: '500MB', ram: '280MB', cpu: '0.5 Core', color: '#6366f1' },
-                { id: 'pro', name: 'Pro', price: 'â‚¹70', storage: '1GB', ram: '560MB', cpu: '1 Core', color: '#8b5cf6' },
-                { id: 'ultra', name: 'Ultra', price: 'â‚¹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
+                { id: 'free', name: 'Free', price: '₹40', storage: '500MB', ram: '280MB', cpu: '0.5 Core', color: '#6366f1' },
+                { id: 'pro', name: 'Pro', price: '₹70', storage: '1GB', ram: '560MB', cpu: '1 Core', color: '#8b5cf6' },
+                { id: 'ultra', name: 'Ultra', price: '₹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
             ];
             let wa = '', tg = '';
             try { const r = await api('/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
@@ -2464,7 +2464,7 @@
                         <li>RAM: ${p.ram}</li>
                         <li>CPU: ${p.cpu}</li>
                     </ul>
-                    ${isCurrent ? '<button class="plan-buy current-btn">✓ Current Plan</button>' : `<button class="plan-buy" onclick="showBuyPopup('${p.name}','${p.price}')">Buy Now â†’</button>`}
+                    ${isCurrent ? '<button class="plan-buy current-btn">✓ Current Plan</button>' : `<button class="plan-buy" onclick="showBuyPopup('${p.name}','${p.price}')">Buy Now →</button>`}
                 </div>`;
             }).join('');
             // Store for popup
