@@ -1517,17 +1517,24 @@
         /* ══ MOBILE LAYOUT ══ */
         @media(max-width:700px) {
 
-            /* Show bottom nav only when logged in (.sh class added by JS) */
+            /* Bottom nav: only visible when .sh */
             .mob-nav.sh {
                 display: block
             }
 
-            /* Hide sidebar completely */
+            /* Hide sidebar */
             .sb {
                 display: none !important
             }
 
-            /* App: column layout, full screen */
+            /* Body */
+            body,
+            .app {
+                max-width: 100vw;
+                overflow-x: hidden
+            }
+
+            /* App: full screen column */
             .app.sh {
                 display: flex !important;
                 flex-direction: column !important;
@@ -1536,35 +1543,37 @@
                 overflow: hidden
             }
 
-            body,
-            .app {
-                max-width: 100vw;
-                overflow-x: hidden
-            }
-
-            /* Main content: takes full width, leave room for bottom nav */
+            /* Main content area: column, fills app except bottom nav */
             .mn {
-                flex: 1 !important;
+                flex: 1 1 auto !important;
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
                 overflow: hidden !important;
+                min-height: 0 !important;
                 padding-bottom: 56px
             }
 
-            /* Header - force visible */
+            /* ── HEADER BAR ── always visible at top of .mn */
             .mh {
                 display: flex !important;
-                padding: 8px 12px;
+                align-items: center !important;
+                justify-content: space-between !important;
+                padding: 10px 14px !important;
+                background: #0d1117 !important;
+                border-bottom: 1px solid rgba(255, 255, 255, .06) !important;
                 flex-shrink: 0 !important;
-                min-height: 40px;
-                background: var(--bg2);
-                border-bottom: 1px solid var(--bdr);
-                z-index: 10
+                min-height: 42px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                z-index: 10 !important
             }
 
             .mh h2 {
-                font-size: 13px
+                font-size: 14px !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 6px !important
             }
 
             .mh .bd {
@@ -1573,50 +1582,60 @@
             }
 
             .mh-actions {
-                gap: 3px
+                gap: 4px
             }
 
             .mh-btn {
-                padding: 3px 6px;
+                padding: 4px 8px;
                 font-size: 10px
             }
 
-            /* Panels: simple display switching */
+            /* ── PANELS ── fill remaining space below header */
             .pn {
                 display: none !important;
-                position: relative !important;
+                flex-direction: column;
                 flex: 1 1 0% !important;
                 min-height: 0 !important;
                 overflow-y: auto !important;
-                -webkit-overflow-scrolling: touch
+                -webkit-overflow-scrolling: touch;
+                position: relative !important
             }
 
             .pn.a {
                 display: flex !important;
-                flex-direction: column
+                flex-direction: column !important
             }
 
-            /* Terminal panel & tbox: hide everything when not active */
-            #p-terminal:not(.a) #tbox,
-            #p-terminal:not(.a) #tbox * {
-                display: none !important;
-                visibility: hidden !important;
-                height: 0 !important;
-                overflow: hidden !important
-            }
-
+            /* Terminal panel */
             #p-terminal.a {
                 display: flex !important;
                 flex-direction: column !important;
                 flex: 1 1 0% !important;
-                min-height: 0 !important
+                min-height: 0 !important;
+                overflow: hidden !important
             }
 
             #p-terminal.a #tbox {
-                flex: 1;
+                flex: 1 1 0%;
                 min-height: 0;
                 width: 100%;
-                height: 100%
+                height: 100%;
+                display: block !important;
+                visibility: visible !important
+            }
+
+            /* CRITICAL: hide terminal when NOT active */
+            #p-terminal:not(.a) {
+                display: none !important
+            }
+
+            #p-terminal:not(.a) #tbox,
+            #p-terminal:not(.a) .xterm,
+            #p-terminal:not(.a) canvas {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important
             }
 
             /* Login card */
@@ -1783,7 +1802,7 @@
 
             .user-table th,
             .user-table td {
-                padding: 6px 6px;
+                padding: 6px;
                 white-space: nowrap
             }
 
@@ -1810,7 +1829,7 @@
                 padding: 24px 20px
             }
 
-            /* Toast on mobile: above bottom nav */
+            /* Toast above bottom nav */
             .toast-box {
                 bottom: 64px !important
             }
@@ -2158,7 +2177,7 @@
             else { document.getElementById('adminNav').style.display = 'none'; document.getElementById('dangerZone').style.display = ''; }
             if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
             document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
-            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner(); fixMobileLayout() }, 300)
+            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner() }, 300)
         }
         // ALERT BANNER
         async function loadAlertBanner() { try { const r = await fetch(API_BASE + '/api/alert'); const d = await r.json(); if (d.alert && d.alert.message) { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar ' + (d.alert.type || 'warning') + ' sh'; document.getElementById('alertMsg').textContent = d.alert.message } } catch (e) { } }
@@ -2193,7 +2212,6 @@
             else if (id === 'files') ha.innerHTML = '<button class="mh-btn danger" style="color:var(--rd)" onclick="factoryReset()">🗑️ Factory Reset</button>';
             else ha.innerHTML = '';
             if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') { lStats(); loadCharts() } if (id === 'plans') loadPlans(); if (id === 'contact') loadContact(); if (id === 'admin') { if (user.role !== 'owner') { sp('terminal', document.querySelector('.ni')); return; } loadAdmin() }
-            fixMobileLayout();
         }
         // TERMINAL
         function initTerm() {
@@ -2413,59 +2431,6 @@
         // ALERT MANAGEMENT
         async function setAlert() { const msg = document.getElementById('alertText').value.trim(); const type = document.getElementById('alertType').value; if (!msg) return; try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type }) }); toast('Alert set!', 'success'); loadAlertBanner() } catch (e) { } }
         async function clearAlert() { try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) }); document.getElementById('alertBar').classList.remove('sh'); document.getElementById('alertText').value = ''; toast('Alert cleared', 'success') } catch (e) { } }
-        // MOBILE LAYOUT FIX - Force inline styles on mobile
-        function fixMobileLayout() {
-            if (window.innerWidth > 700) return;
-            // Force header visible
-            var mh = document.querySelector('.mh');
-            if (mh) {
-                mh.style.cssText = 'display:flex !important;padding:8px 12px;flex-shrink:0;min-height:40px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);align-items:center;justify-content:space-between;z-index:10;width:100%;box-sizing:border-box';
-            }
-            // Force mn layout
-            var mn = document.querySelector('.mn');
-            if (mn) {
-                mn.style.cssText = 'flex:1;display:flex;flex-direction:column;overflow:hidden;width:100%;padding-bottom:56px';
-            }
-            // Force app layout
-            var app = document.getElementById('app');
-            if (app && app.classList.contains('sh')) {
-                app.style.cssText = 'display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;position:relative;z-index:1';
-            }
-            // Force sidebar hidden
-            var sb = document.querySelector('.sb');
-            if (sb) sb.style.display = 'none';
-            // Fix all panels
-            document.querySelectorAll('.pn').forEach(function (p) {
-                if (p.classList.contains('a')) {
-                    p.style.cssText = 'display:flex;flex-direction:column;flex:1 1 0%;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch';
-                } else {
-                    p.style.cssText = 'display:none';
-                }
-            });
-            // Fix terminal
-            var tPanel = document.getElementById('p-terminal');
-            var tbox = document.getElementById('tbox');
-            if (tPanel && tPanel.classList.contains('a')) {
-                tPanel.style.cssText = 'display:flex;flex-direction:column;flex:1 1 0%;min-height:0;overflow:hidden';
-                if (tbox) {
-                    tbox.style.cssText = 'flex:1;width:100%;min-height:0;display:block;visibility:visible';
-                }
-                // Show xterm elements
-                document.querySelectorAll('#tbox .xterm, #tbox canvas, #tbox .xterm-screen').forEach(function (el) {
-                    el.style.display = '';
-                    el.style.visibility = '';
-                });
-                if (fitA) setTimeout(function () { fitA.fit() }, 150);
-            } else if (tbox) {
-                tbox.style.cssText = 'display:none;visibility:hidden;height:0;overflow:hidden';
-                document.querySelectorAll('#tbox .xterm, #tbox canvas, #tbox .xterm-screen').forEach(function (el) {
-                    el.style.display = 'none';
-                    el.style.visibility = 'hidden';
-                });
-            }
-        }
-        // Also fix on resize
-        window.addEventListener('resize', function () { fixMobileLayout() });
         // INIT
         checkSaved();
     </script>
