@@ -1,10 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0">
-    <title>iq4u8 SERVER</title>
+    <title>IQ4U8 | Ultimate VPS Terminal & Cloud Hosting</title>
+    <meta name="description"
+        content="IQ4U8 â€” Premium VPS hosting with integrated SSH terminal, file manager, referral rewards, and real-time system monitoring. Secure, fast, and affordable cloud server management.">
+    <meta name="keywords"
+        content="VPS hosting, cloud terminal, SSH terminal, server management, iq4u8, VPS dashboard, cheap VPS, referral rewards, file manager">
+    <meta name="author" content="IQ4U8">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#06080f">
+    <link rel="canonical" href="https://iq4u8.shop/">
+    <!-- Open Graph -->
+    <meta property="og:title" content="IQ4U8 | Ultimate VPS Terminal & Cloud Hosting">
+    <meta property="og:description"
+        content="Premium VPS hosting with SSH terminal, file manager, referral rewards, and real-time monitoring. Plans from â‚¹40/mo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://iq4u8.shop/">
+    <meta property="og:site_name" content="IQ4U8">
+    <meta property="og:image" content="https://iq4u8.shop/favicon-32x32.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IQ4U8 | Ultimate VPS Terminal">
+    <meta name="twitter:description"
+        content="Premium VPS hosting with SSH terminal, file manager, and referral rewards.">
+    <meta name="twitter:image" content="https://iq4u8.shop/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css">
     <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
@@ -1196,7 +1222,7 @@
         }
 
         .plan-card .plan-features li::before {
-            content: '✓';
+            content: 'âœ“';
             color: var(--gn);
             font-weight: 700
         }
@@ -1452,8 +1478,7 @@
             }
         }
 
-
-        /* ══ MOBILE BOTTOM NAV BAR ══ */
+        /* â•â• MOBILE BOTTOM NAV BAR â•â• */
         .mob-nav {
             display: none;
             position: fixed;
@@ -1514,7 +1539,7 @@
             color: var(--rd)
         }
 
-        /* ══ MOBILE LAYOUT ══ */
+        /* â•â• MOBILE LAYOUT â•â• */
         @media(max-width:700px) {
 
             /* Bottom nav: only visible when .sh */
@@ -1554,7 +1579,7 @@
                 padding-bottom: 56px
             }
 
-            /* ── HEADER BAR ── always visible at top of .mn */
+            /* â”€â”€ HEADER BAR â”€â”€ always visible at top of .mn */
             .mh {
                 display: flex !important;
                 align-items: center !important;
@@ -1590,7 +1615,7 @@
                 font-size: 10px
             }
 
-            /* ── PANELS ── fill remaining space below header */
+            /* â”€â”€ PANELS â”€â”€ fill remaining space below header */
             .pn {
                 display: none !important;
                 flex-direction: column;
@@ -1841,13 +1866,13 @@
     <div class="bgx"></div>
     <!-- ALERT -->
     <div class="alert-bar warning" id="alertBar"><span id="alertMsg"></span><button class="alert-x"
-            onclick="closeAlert()">✕</button></div>
+            onclick="closeAlert()">âœ•</button></div>
     <div class="toast-box" id="toastBox"></div>
     <!-- LOGIN -->
     <div class="lw" id="lp">
         <div class="lc">
             <div class="ll">
-                <div class="ic">⚡</div>
+                <div class="ic">âš¡</div>
                 <h1>iq4u8 SERVER</h1>
                 <p>Multi-User VPS Dashboard</p>
             </div>
@@ -1867,7 +1892,7 @@
     </div>
     <!-- PENDING (legacy fallback) -->
     <div class="pending-box" id="pendingPage" style="display:none">
-        <div class="pb-icon">⏳</div>
+        <div class="pb-icon">â³</div>
         <h2>Account Pending Approval</h2>
         <p>Your account is waiting for admin approval. If not approved within <strong>6 hours</strong>, it will be
             auto-deleted.</p>
@@ -1877,7 +1902,7 @@
     <!-- UPLOAD PROGRESS -->
     <div class="upload-overlay" id="uplOverlay">
         <div class="upload-box">
-            <h3>⬆️ Uploading...</h3>
+            <h3>â¬†ï¸ Uploading...</h3>
             <div class="upload-bar">
                 <div class="upload-fill" id="uplFill"></div>
             </div>
@@ -1888,38 +1913,38 @@
     <div class="app" id="app">
         <div class="sb">
             <div class="sbr">
-                <div class="ic">⚡</div>
+                <div class="ic">âš¡</div>
                 <h2>iq4u8</h2>
             </div>
             <div class="sbn">
                 <button class="ni a" onclick="sp('terminal',this)"><span
-                        class="nx">💻</span><span>Terminal</span></button>
-                <button class="ni" onclick="sp('files',this)"><span class="nx">📂</span><span>Files</span></button>
+                        class="nx">ðŸ’»</span><span>Terminal</span></button>
+                <button class="ni" onclick="sp('files',this)"><span class="nx">ðŸ“‚</span><span>Files</span></button>
                 <button class="ni" onclick="sp('settings',this)"><span
-                        class="nx">📊</span><span>Settings</span></button>
-                <button class="ni" onclick="sp('plans',this)"><span class="nx">📋</span><span>Plans</span></button>
-                <button class="ni" onclick="sp('contact',this)"><span class="nx">📞</span><span>Contact</span></button>
+                        class="nx">ðŸ“Š</span><span>Settings</span></button>
+                <button class="ni" onclick="sp('plans',this)"><span class="nx">ðŸ“‹</span><span>Plans</span></button>
+                <button class="ni" onclick="sp('contact',this)"><span class="nx">ðŸ“ž</span><span>Contact</span></button>
+                <button class="ni" onclick="sp('referral',this)"><span
+                        class="nx">ðŸ”—</span><span>Referral</span></button>
                 <button class="ni" onclick="sp('admin',this)" id="adminNav" style="display:none"><span
-                        class="nx">👑</span><span>Admin</span></button>
-                <button class="ni logout-ni" onclick="doLogout()" id="logoutNav"><span
-                        class="nx">🚪</span><span>Logout</span></button>
+                        class="nx">ðŸ‘‘</span><span>Admin</span></button>
             </div>
             <div class="res" id="resBox">
                 <div class="res-t">Resources</div>
                 <div class="rb">
-                    <div class="rb-h"><span>Storage</span><span id="rbSt">—</span></div>
+                    <div class="rb-h"><span>Storage</span><span id="rbSt">â€”</span></div>
                     <div class="rb-bar">
                         <div class="rb-fill" id="rbSf" style="width:0"></div>
                     </div>
                 </div>
                 <div class="rb">
-                    <div class="rb-h"><span>RAM</span><span id="rbRt">—</span></div>
+                    <div class="rb-h"><span>RAM</span><span id="rbRt">â€”</span></div>
                     <div class="rb-bar">
                         <div class="rb-fill" id="rbRf" style="width:0"></div>
                     </div>
                 </div>
                 <div class="rb">
-                    <div class="rb-h"><span>CPU</span><span id="rbCt">—</span></div>
+                    <div class="rb-h"><span>CPU</span><span id="rbCt">â€”</span></div>
                     <div class="rb-bar">
                         <div class="rb-fill" id="rbCf" style="width:0"></div>
                     </div>
@@ -1938,7 +1963,7 @@
         </div>
         <div class="mn">
             <div class="mh">
-                <h2><span id="pI">💻</span> <span id="pT">Terminal</span></h2>
+                <h2><span id="pI">ðŸ’»</span> <span id="pT">Terminal</span></h2>
                 <div class="mh-actions" id="mhActions"></div>
             </div>
             <!-- TERMINAL -->
@@ -1950,23 +1975,23 @@
                 <div class="fb">
                     <div class="fbc" id="fP"></div>
                     <div class="fbs">
-                        <button class="fb2" onclick="toggleSelect()">☑️ Select</button>
-                        <button class="fb2" onclick="sMk()">📁 New</button>
-                        <button class="fb2" onclick="document.getElementById('finp').click()">⬆️ Upload</button>
-                        <button class="fb2" onclick="lf()">🔄</button>
+                        <button class="fb2" onclick="toggleSelect()">â˜‘ï¸ Select</button>
+                        <button class="fb2" onclick="sMk()">ðŸ“ New</button>
+                        <button class="fb2" onclick="document.getElementById('finp').click()">â¬†ï¸ Upload</button>
+                        <button class="fb2" onclick="lf()">ðŸ”„</button>
                     </div>
                 </div>
                 <div class="bulk-bar" id="bulkBar">
                     <span id="bulkCount">0 selected</span>
-                    <button class="fb2" onclick="bulkDelete()">🗑️ Delete</button>
-                    <button class="fb2" onclick="bulkMove()">📦 Move</button>
-                    <button class="fb2" onclick="bulkCopy()">📋 Copy</button>
+                    <button class="fb2" onclick="bulkDelete()">ðŸ—‘ï¸ Delete</button>
+                    <button class="fb2" onclick="bulkMove()">ðŸ“¦ Move</button>
+                    <button class="fb2" onclick="bulkCopy()">ðŸ“‹ Copy</button>
                     <button class="fb2" onclick="selectAll()">Select All</button>
                     <button class="fb2" onclick="toggleSelect()">Cancel</button>
                 </div>
                 <input type="file" id="finp" multiple onchange="upl(this.files)">
                 <div class="dz" id="dZ" ondragover="event.preventDefault();this.classList.add('ov')"
-                    ondragleave="this.classList.remove('ov')" ondrop="hDr(event)"><span class="di">📥</span><strong>Drop
+                    ondragleave="this.classList.remove('ov')" ondrop="hDr(event)"><span class="di">ðŸ“¥</span><strong>Drop
                         files here</strong><br><small>All file types supported</small></div>
                 <div class="fl" id="fL"></div>
             </div>
@@ -1987,11 +2012,11 @@
                 <div id="dangerZone" style="padding:16px;display:none">
                     <div
                         style="border:1px solid rgba(248,81,73,.3);border-radius:12px;padding:16px;background:rgba(248,81,73,.05)">
-                        <h4 style="color:#f85149;font-size:13px;margin-bottom:8px">⚠️ Danger Zone</h4>
+                        <h4 style="color:#f85149;font-size:13px;margin-bottom:8px">âš ï¸ Danger Zone</h4>
                         <p style="font-size:11px;color:var(--txd);margin-bottom:12px">Once you delete your account, all
                             your files and data will be permanently removed.</p>
                         <button onclick="deleteAccount()"
-                            style="padding:8px 16px;background:rgba(248,81,73,.15);border:1px solid rgba(248,81,73,.4);border-radius:8px;color:#f85149;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">🗑️
+                            style="padding:8px 16px;background:rgba(248,81,73,.15);border:1px solid rgba(248,81,73,.4);border-radius:8px;color:#f85149;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">ðŸ—‘ï¸
                             Delete My Account</button>
                     </div>
                 </div>
@@ -2003,20 +2028,59 @@
             <!-- CONTACT -->
             <div class="pn" id="p-contact">
                 <div class="contact-section" id="contactSection">
-                    <h3 style="font-size:16px;font-weight:800;margin-bottom:16px">📞 Contact Us</h3>
+                    <h3 style="font-size:16px;font-weight:800;margin-bottom:16px">ðŸ“ž Contact Us</h3>
                     <div id="contactCards">
                         <p style="color:var(--txd);font-size:13px">Loading...</p>
                     </div>
+                </div>
+            </div>
+            <!-- REFERRAL -->
+            <div class="pn" id="p-referral">
+                <div style="padding:16px;overflow-y:auto">
+                    <div style="margin-bottom:20px">
+                        <h3 style="font-size:16px;font-weight:800;margin-bottom:12px">ðŸ”— Your Referral Link</h3>
+                        <div style="display:flex;gap:8px;align-items:stretch">
+                            <input type="text" id="refLink" readonly
+                                style="flex:1;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px;color:var(--tx);font-family:monospace;font-size:12px" />
+                            <button onclick="copyRefLink()"
+                                style="padding:10px 16px;background:var(--ac);border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer;font-size:13px;white-space:nowrap">ðŸ“‹
+                                Copy</button>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px"
+                        id="refStats">
+                        <div class="sc" style="text-align:center">
+                            <div class="sl">ðŸ‘¥ Friends Joined</div>
+                            <div class="sv" id="refFriends">0</div>
+                        </div>
+                        <div class="sc" style="text-align:center">
+                            <div class="sl">â­ Points Earned</div>
+                            <div class="sv" id="refPoints">0</div>
+                        </div>
+                        <div class="sc" style="text-align:center">
+                            <div class="sl">â³ Pending</div>
+                            <div class="sv" id="refPending">0</div>
+                        </div>
+                    </div>
+                    <div
+                        style="background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.2);border-radius:10px;padding:14px;margin-bottom:20px">
+                        <p style="font-size:12px;color:var(--txd);line-height:1.6">ðŸ“Œ <strong
+                                style="color:var(--tx)">How it works:</strong> Share your link â†’ Friend signs up â†’ After
+                            24h retention â†’ You earn <strong style="color:var(--ac)">1 point</strong>. If they get
+                            Pro/Ultra: <strong style="color:#00D4AA">2x points!</strong></p>
+                    </div>
+                    <h4 style="font-size:14px;font-weight:700;margin-bottom:10px">Referred Friends</h4>
+                    <div id="refFriendsList" style="font-size:12px;color:var(--txd)">Loading...</div>
                 </div>
             </div>
             <!-- ADMIN -->
             <div class="pn" id="p-admin">
                 <div class="admin-section">
                     <div class="admin-tabs">
-                        <button class="admin-tab a" onclick="aTab('users',this)">👥 Users</button>
-                        <button class="admin-tab" onclick="aTab('ips',this)">🛡️ IPs</button>
-                        <button class="admin-tab" onclick="aTab('alerts',this)">📢 Alerts</button>
-                        <button class="admin-tab" onclick="aTab('support',this)">📞 Support</button>
+                        <button class="admin-tab a" onclick="aTab('users',this)">ðŸ‘¥ Users</button>
+                        <button class="admin-tab" onclick="aTab('ips',this)">ðŸ›¡ï¸ IPs</button>
+                        <button class="admin-tab" onclick="aTab('alerts',this)">ðŸ“¢ Alerts</button>
+                        <button class="admin-tab" onclick="aTab('support',this)">ðŸ“ž Support</button>
                     </div>
                     <div id="adminUsers">
                         <div style="overflow-x:auto">
@@ -2036,7 +2100,7 @@
                         </div>
                     </div>
                     <div id="adminIps" style="display:none">
-                        <h3>🛡️ Banned IPs</h3>
+                        <h3>ðŸ›¡ï¸ Banned IPs</h3>
                         <div style="display:flex;gap:6px;margin-bottom:12px"><input type="text" id="banIpInput"
                                 placeholder="Enter IP to ban"
                                 style="flex:1;padding:8px;background:var(--inp);border:1px solid var(--bdr);border-radius:7px;color:var(--tx);font-family:inherit;font-size:12px;outline:0"><button
@@ -2044,24 +2108,24 @@
                         <ul class="ip-list" id="ipList"></ul>
                     </div>
                     <div id="adminAlerts" style="display:none">
-                        <h3>📢 Global Alert</h3>
+                        <h3>ðŸ“¢ Global Alert</h3>
                         <div class="alert-form"><textarea id="alertText"
                                 placeholder="Alert message for all users..."></textarea>
                             <div style="display:flex;gap:8px;margin-top:8px"><select id="alertType">
-                                    <option value="warning">⚠️ Warning</option>
-                                    <option value="info">ℹ️ Info</option>
+                                    <option value="warning">âš ï¸ Warning</option>
+                                    <option value="info">â„¹ï¸ Info</option>
                                 </select><button class="tbtn" onclick="setAlert()">Set Alert</button><button
                                     class="tbtn red" onclick="clearAlert()">Clear Alert</button></div>
                         </div>
                     </div>
                     <div id="adminSupport" style="display:none">
-                        <h3>📞 Support Contact Settings</h3>
+                        <h3>ðŸ“ž Support Contact Settings</h3>
                         <div class="support-form">
                             <div class="fg"><label>WhatsApp Number (with country code)</label><input type="text"
                                     id="supportWA" placeholder="+91XXXXXXXXXX"></div>
                             <div class="fg"><label>Telegram Username</label><input type="text" id="supportTG"
                                     placeholder="@username or link"></div>
-                            <button class="tbtn green" onclick="saveSupport()" style="padding:8px 20px">💾 Save</button>
+                            <button class="tbtn green" onclick="saveSupport()" style="padding:8px 20px">ðŸ’¾ Save</button>
                         </div>
                     </div>
                 </div>
@@ -2072,24 +2136,26 @@
     <div class="mob-nav" id="mobNav">
         <div class="mob-nav-inner">
             <button class="mob-btn a" onclick="sp('terminal',null,this)" data-panel="terminal"><span
-                    class="mob-icon">💻</span>Terminal</button>
+                    class="mob-icon">ðŸ’»</span>Terminal</button>
             <button class="mob-btn" onclick="sp('files',null,this)" data-panel="files"><span
-                    class="mob-icon">📂</span>Files</button>
+                    class="mob-icon">ðŸ“‚</span>Files</button>
             <button class="mob-btn" onclick="sp('settings',null,this)" data-panel="settings"><span
-                    class="mob-icon">📊</span>Settings</button>
+                    class="mob-icon">ðŸ“Š</span>Settings</button>
             <button class="mob-btn" onclick="sp('plans',null,this)" data-panel="plans"><span
-                    class="mob-icon">📋</span>Plans</button>
+                    class="mob-icon">ðŸ“‹</span>Plans</button>
             <button class="mob-btn" onclick="sp('contact',null,this)" data-panel="contact"><span
-                    class="mob-icon">📞</span>Contact</button>
+                    class="mob-icon">ðŸ“ž</span>Contact</button>
+            <button class="mob-btn" onclick="sp('referral',null,this)" data-panel="referral"><span
+                    class="mob-icon">ðŸ”—</span>Referral</button>
             <button class="mob-btn" onclick="sp('admin',null,this)" data-panel="admin" id="mobAdminBtn"
-                style="display:none"><span class="mob-icon">👑</span>Admin</button>
-            <button class="mob-btn logout-btn" onclick="doLogout()"><span class="mob-icon">🚪</span>Logout</button>
+                style="display:none"><span class="mob-icon">ðŸ‘‘</span>Admin</button>
+            <button class="mob-btn logout-btn" onclick="doLogout()"><span class="mob-icon">ðŸšª</span>Logout</button>
         </div>
     </div>
     <!-- MODALS -->
     <div class="mo" id="mkM">
         <div class="mb">
-            <h3>📁 New Folder</h3><input type="text" id="mkN" placeholder="Folder name"
+            <h3>ðŸ“ New Folder</h3><input type="text" id="mkN" placeholder="Folder name"
                 onkeydown="if(event.key==='Enter')mkGo()">
             <div class="ma"><button class="c" onclick="cMk()">Cancel</button><button class="k"
                     onclick="mkGo()">Create</button></div>
@@ -2097,7 +2163,7 @@
     </div>
     <div class="mo" id="renameM">
         <div class="mb">
-            <h3>✏️ Rename</h3><input type="text" id="renameN" placeholder="New name"
+            <h3>âœï¸ Rename</h3><input type="text" id="renameN" placeholder="New name"
                 onkeydown="if(event.key==='Enter')renameGo()">
             <div class="ma"><button class="c"
                     onclick="document.getElementById('renameM').classList.remove('sh')">Cancel</button><button class="k"
@@ -2106,7 +2172,7 @@
     </div>
     <div class="mo" id="moveM">
         <div class="mb">
-            <h3>📦 Move To</h3><input type="text" id="moveN" placeholder="Destination path (e.g. subfolder)"
+            <h3>ðŸ“¦ Move To</h3><input type="text" id="moveN" placeholder="Destination path (e.g. subfolder)"
                 onkeydown="if(event.key==='Enter')moveGo()">
             <div class="ma"><button class="c"
                     onclick="document.getElementById('moveM').classList.remove('sh')">Cancel</button><button class="k"
@@ -2115,7 +2181,7 @@
     </div>
     <div class="mo" id="copyM">
         <div class="mb">
-            <h3>📋 Copy To</h3><input type="text" id="copyN" placeholder="Destination path"
+            <h3>ðŸ“‹ Copy To</h3><input type="text" id="copyN" placeholder="Destination path"
                 onkeydown="if(event.key==='Enter')copyGo()">
             <div class="ma"><button class="c"
                     onclick="document.getElementById('copyM').classList.remove('sh')">Cancel</button><button class="k"
@@ -2124,10 +2190,10 @@
     </div>
     <div class="mo" id="planM">
         <div class="mb">
-            <h3>📋 Change Plan</h3><select id="planSel">
-                <option value="free">Free (₹40)</option>
-                <option value="pro">Pro (₹70)</option>
-                <option value="ultra">Ultra (₹150)</option>
+            <h3>ðŸ“‹ Change Plan</h3><select id="planSel">
+                <option value="free">Free (â‚¹40)</option>
+                <option value="pro">Pro (â‚¹70)</option>
+                <option value="ultra">Ultra (â‚¹150)</option>
             </select>
             <div class="ma"><button class="c"
                     onclick="document.getElementById('planM').classList.remove('sh')">Cancel</button><button class="k"
@@ -2136,16 +2202,17 @@
     </div>
     <div class="mo" id="passM">
         <div class="mb">
-            <h3>🔑 Reset Password</h3><input type="password" id="passN" placeholder="New password (6+ chars)">
+            <h3>ðŸ”‘ Reset Password</h3><input type="password" id="passN" placeholder="New password (6+ chars)">
             <div class="ma"><button class="c"
                     onclick="document.getElementById('passM').classList.remove('sh')">Cancel</button><button class="k"
                     onclick="passGo()">Reset</button></div>
         </div>
     </div>
     <script>
+        const API_BASE = 'https://evidzone-love.hf.space';
         let user = null, authMode = 'login', curPath = '', term = null, ws = null, fitA = null, authToken = null, selectMode = false, selected = new Set(), renamePath = '', planUser = '', passUser = '', cpuChart = null, ramChart = null, diskChart = null, termFS = false, dataDisp = null;
-        const API_BASE = 'https://evidzone-love.hf.space'; function api(u, o = {}) { if (!o.headers) o.headers = {}; if (authToken) o.headers['X-Auth-Token'] = authToken; return fetch(API_BASE + u, o) }
-        function fSz(b) { if (!b || b === Infinity) return '∞'; const k = 1024, s = ['B', 'KB', 'MB', 'GB'], i = Math.min(Math.floor(Math.log(b) / Math.log(k)), 3); return (b / Math.pow(k, i)).toFixed(1) + s[i] }
+        function api(u, o = {}) { if (!o.headers) o.headers = {}; if (authToken) o.headers['X-Auth-Token'] = authToken; return fetch(API_BASE + u, o) }
+        function fSz(b) { if (!b || b === Infinity) return 'âˆž'; const k = 1024, s = ['B', 'KB', 'MB', 'GB'], i = Math.min(Math.floor(Math.log(b) / Math.log(k)), 3); return (b / Math.pow(k, i)).toFixed(1) + s[i] }
         function toast(msg, type = 'info') { const t = document.createElement('div'); t.className = 'toast ' + type; t.textContent = msg; document.getElementById('toastBox').appendChild(t); setTimeout(() => { try { t.remove() } catch (e) { } }, 2500) }
         // AUTH
         function stab(m) { authMode = m; document.querySelectorAll('.ts button').forEach((b, i) => b.classList.toggle('a', m === 'login' ? i === 0 : i === 1)); document.getElementById('aB').textContent = m === 'login' ? 'Login' : 'Sign Up'; document.getElementById('aErr').style.display = 'none'; document.getElementById('tcBox').style.display = m === 'signup' ? 'flex' : 'none' }
@@ -2154,12 +2221,14 @@
             if (authMode === 'signup' && !document.getElementById('agreeTC').checked) { const el = document.getElementById('aErr'); el.textContent = 'Please agree to Terms & Conditions'; el.style.display = 'block'; return }
             btn.disabled = true; btn.textContent = 'Wait...';
             try {
-                const r = await fetch(API_BASE + (authMode === 'login' ? '/api/login' : '/api/signup'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: u, password: p }) }); const d = await r.json();
+                const body = { username: u, password: p };
+                if (authMode === 'signup') { const ref = localStorage.getItem('ref'); if (ref) body.ref = ref; }
+                const r = await fetch(authMode === 'login' ? API_BASE + '/api/login' : API_BASE + '/api/signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); const d = await r.json();
                 if (d.success && d.token && d.user) {
                     user = d.user; authToken = d.token;
                     localStorage.setItem('token', d.token); localStorage.setItem('user', JSON.stringify(d.user));
                     openApp();
-                    if (d.newUser) { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Make payment to activate your account. Contact admin.'; }
+                    if (d.newUser) { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = 'âš ï¸ Make payment to activate your account. Contact admin.'; }
                 }
                 else if (d.pending) { showPending() }
                 else if (d.success) { toast(d.message || 'Success!', 'success'); if (authMode === 'signup') stab('login') }
@@ -2172,11 +2241,11 @@
         function doLogout() { user = null; authToken = null; localStorage.clear(); document.getElementById('lp').style.display = 'flex'; document.getElementById('app').classList.remove('sh'); document.getElementById('pendingPage').style.display = 'none'; var mn = document.getElementById('mobNav'); if (mn) mn.classList.remove('sh'); if (ws) { ws.close(); ws = null } if (term) { term.dispose(); term = null } }
         function openApp() {
             document.getElementById('lp').style.display = 'none'; document.getElementById('pendingPage').style.display = 'none'; document.getElementById('app').classList.add('sh'); var mn = document.getElementById('mobNav'); if (mn) mn.classList.add('sh');
-            document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
+            document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? 'ðŸ‘‘ Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
             if (user.role === 'owner') { document.getElementById('adminNav').style.display = ''; document.getElementById('dangerZone').style.display = 'none'; var mab = document.getElementById('mobAdminBtn'); if (mab) mab.style.display = ''; }
             else { document.getElementById('adminNav').style.display = 'none'; document.getElementById('dangerZone').style.display = ''; }
-            if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
-            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
+            if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = 'âš ï¸ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
+            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? 'â¬œ Normal' : 'â›¶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">ðŸ”„ Restart</button>';
             setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner() }, 300)
         }
         // ALERT BANNER
@@ -2195,7 +2264,7 @@
             if (mobBtn) { mobBtn.classList.add('a'); }
             else { var mb = document.querySelector('.mob-btn[data-panel="' + id + '"]'); if (mb) mb.classList.add('a'); }
             // Update header
-            const t = { terminal: ['💻', 'Terminal'], files: ['📂', 'Files'], settings: ['📊', 'Settings'], plans: ['📋', 'Plans'], contact: ['📞', 'Contact'], admin: ['👑', 'Admin'] }; const v = t[id] || ['⚙️', id];
+            const t = { terminal: ['ðŸ’»', 'Terminal'], files: ['ðŸ“‚', 'Files'], settings: ['ðŸ“Š', 'Settings'], plans: ['ðŸ“‹', 'Plans'], contact: ['ðŸ“ž', 'Contact'], referral: ['ðŸ”—', 'Referral'], admin: ['ðŸ‘‘', 'Admin'] }; const v = t[id] || ['âš™ï¸', id];
             document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1];
             // Explicitly hide/show terminal canvas (xterm renders on top otherwise)
             const tbox = document.getElementById('tbox');
@@ -2208,10 +2277,10 @@
             xtermEls.forEach(function (el) { el.style.display = (id === 'terminal') ? '' : 'none'; el.style.visibility = (id === 'terminal') ? '' : 'hidden'; });
             // Header actions
             const ha = document.getElementById('mhActions');
-            if (id === 'terminal') ha.innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
-            else if (id === 'files') ha.innerHTML = '<button class="mh-btn danger" style="color:var(--rd)" onclick="factoryReset()">🗑️ Factory Reset</button>';
+            if (id === 'terminal') ha.innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? 'â¬œ Normal' : 'â›¶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">ðŸ”„ Restart</button>';
+            else if (id === 'files') ha.innerHTML = '<button class="mh-btn danger" style="color:var(--rd)" onclick="factoryReset()">ðŸ—‘ï¸ Factory Reset</button>';
             else ha.innerHTML = '';
-            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') { lStats(); loadCharts() } if (id === 'plans') loadPlans(); if (id === 'contact') loadContact(); if (id === 'admin') { if (user.role !== 'owner') { sp('terminal', document.querySelector('.ni')); return; } loadAdmin() }
+            if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') { lStats(); const cr = document.querySelector('.chart-row'); if (cr) cr.style.display = (user && user.role === 'owner') ? '' : 'none'; if (user && user.role === 'owner') loadCharts(); } if (id === 'plans') loadPlans(); if (id === 'contact') loadContact(); if (id === 'referral') loadReferral(); if (id === 'admin') { if (user.role !== 'owner') { sp('terminal', document.querySelector('.ni')); return; } loadAdmin() }
         }
         // TERMINAL
         function initTerm() {
@@ -2224,7 +2293,7 @@
             if (ws) { try { ws.close() } catch (e) { } }
             // Dispose previous onData handler to prevent double-paste
             if (dataDisp) { dataDisp.dispose(); dataDisp = null; }
-            // WS HF
+            const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
             ws = new WebSocket('wss://evidzone-love.hf.space/ws/terminal?token=' + encodeURIComponent(authToken));
             ws.onopen = () => { const d = fitA.proposeDimensions(); if (d) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) };
             ws.onmessage = ev => term.write(ev.data); ws.onerror = () => term.write('\r\n\x1b[31m[Error]\x1b[0m\r\n'); ws.onclose = () => term.write('\r\n\x1b[31m[Disconnected]\x1b[0m\r\n');
@@ -2233,7 +2302,7 @@
         function refreshTerm() { if (term) { term.clear() } connectWS() }
         function toggleTermFS() {
             termFS = !termFS; const sb = document.querySelector('.sb'); const mh = document.querySelector('.mh'); if (termFS) { sb.style.display = 'none' } else { sb.style.display = '' }
-            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
+            document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? 'â¬œ Normal' : 'â›¶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">ðŸ”„ Restart</button>';
             setTimeout(() => { if (fitA) fitA.fit() }, 100)
         }
         window.addEventListener('resize', () => { if (fitA) { fitA.fit(); const d = fitA.proposeDimensions(); if (d && ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) } });
@@ -2242,7 +2311,7 @@
             try {
                 const r = await api('/api/resources'); const d = await r.json();
                 const sP = d.storage.limit === null || d.storage.limit > 1e15 ? 0 : d.storage.pct;
-                document.getElementById('rbSt').textContent = fSz(d.storage.used) + (d.role === 'owner' ? ' / ∞' : ' / ' + fSz(d.storage.limit));
+                document.getElementById('rbSt').textContent = fSz(d.storage.used) + (d.role === 'owner' ? ' / âˆž' : ' / ' + fSz(d.storage.limit));
                 document.getElementById('rbSf').style.width = (d.role === 'owner' ? 0 : sP) + '%'; document.getElementById('rbSf').className = 'rb-fill' + (sP > 85 ? ' warn' : '');
                 document.getElementById('rbRt').textContent = d.role === 'owner' ? 'Unlimited' : d.ram.limit + 'MB';
                 document.getElementById('rbRf').style.width = d.role === 'owner' ? '0' : '40%';
@@ -2255,16 +2324,16 @@
         async function lf() { try { const r = await api('/api/files?path=' + encodeURIComponent(curPath)); const d = await r.json(); rBc(); rFl(d.files || []) } catch (e) { } }
         function rBc() { const el = document.getElementById('fP'); const p = ['~', ...curPath.split('/').filter(Boolean)]; el.innerHTML = p.map((x, i) => { const to = i === 0 ? '' : p.slice(1, i + 1).join('/'); return `<button class="fc" onclick="nav('${to}')">${x}</button>` }).join('<span style="color:var(--txd);margin:0 1px">/</span>') }
         function rFl(files) {
-            const el = document.getElementById('fL'); if (!files.length) { el.innerHTML = '<div class="es"><span class="ei">📭</span><p>Empty folder</p></div>'; return }
+            const el = document.getElementById('fL'); if (!files.length) { el.innerHTML = '<div class="es"><span class="ei">ðŸ“­</span><p>Empty folder</p></div>'; return }
             el.innerHTML = files.map(f => {
-                const ic = f.isDir ? '📁' : fI(f.name), c = f.isDir ? 'd' : 'f', sz = f.isDir ? 'Folder' : fSz(f.size), fp = curPath ? curPath + '/' + f.name : f.name;
-                const chk = selectMode ? `<div class="fi-check${selected.has(fp) ? ' checked' : ''}" onclick="event.stopPropagation();toggleSel('${fp}',this)">${selected.has(fp) ? '✓' : ''}</div>` : '';
+                const ic = f.isDir ? 'ðŸ“' : fI(f.name), c = f.isDir ? 'd' : 'f', sz = f.isDir ? 'Folder' : fSz(f.size), fp = curPath ? curPath + '/' + f.name : f.name;
+                const chk = selectMode ? `<div class="fi-check${selected.has(fp) ? ' checked' : ''}" onclick="event.stopPropagation();toggleSel('${fp}',this)">${selected.has(fp) ? 'âœ“' : ''}</div>` : '';
                 const isZip = f.name.endsWith('.zip');
-                return `<div class="fi${selected.has(fp) ? ' selected' : ''}" ${f.isDir ? `ondblclick="nav('${fp}')"` : ''}>${chk}<div class="fii ${c}">${ic}</div><div class="fin"><div class="fn">${f.name}</div><div class="fm">${sz}</div></div><div class="fa">${isZip ? `<button class="fab" onclick="event.stopPropagation();unzipFile('${fp}')" title="Unzip">📤</button>` : ''}<button class="fab" onclick="event.stopPropagation();zipFile('${fp}')" title="Zip">📦</button><button class="fab" onclick="event.stopPropagation();renameFile('${fp}','${f.name}')" title="Rename">✏️</button>${!f.isDir ? `<button class="fab" onclick="event.stopPropagation();dl('${fp}')" title="Download">⬇</button>` : ''}<button class="fab x" onclick="event.stopPropagation();del('${fp}','${f.name}')" title="Delete">✕</button></div></div>`
+                return `<div class="fi${selected.has(fp) ? ' selected' : ''}" ${f.isDir ? `ondblclick="nav('${fp}')"` : ''}>${chk}<div class="fii ${c}">${ic}</div><div class="fin"><div class="fn">${f.name}</div><div class="fm">${sz}</div></div><div class="fa">${isZip ? `<button class="fab" onclick="event.stopPropagation();unzipFile('${fp}')" title="Unzip">ðŸ“¤</button>` : ''}<button class="fab" onclick="event.stopPropagation();zipFile('${fp}')" title="Zip">ðŸ“¦</button><button class="fab" onclick="event.stopPropagation();renameFile('${fp}','${f.name}')" title="Rename">âœï¸</button>${!f.isDir ? `<button class="fab" onclick="event.stopPropagation();dl('${fp}')" title="Download">â¬‡</button>` : ''}<button class="fab x" onclick="event.stopPropagation();del('${fp}','${f.name}')" title="Delete">âœ•</button></div></div>`
             }).join('')
         }
         function nav(p) { curPath = p; selected.clear(); updateBulk(); lf() }
-        function fI(n) { const e = n.split('.').pop().toLowerCase(); return { js: '📜', py: '🐍', html: '🌐', css: '🎨', json: '📋', zip: '📦', png: '🖼️', jpg: '🖼️', mp4: '🎬', txt: '📄', md: '📝', sh: '⚙️' }[e] || '📄' }
+        function fI(n) { const e = n.split('.').pop().toLowerCase(); return { js: 'ðŸ“œ', py: 'ðŸ', html: 'ðŸŒ', css: 'ðŸŽ¨', json: 'ðŸ“‹', zip: 'ðŸ“¦', png: 'ðŸ–¼ï¸', jpg: 'ðŸ–¼ï¸', mp4: 'ðŸŽ¬', txt: 'ðŸ“„', md: 'ðŸ“', sh: 'âš™ï¸' }[e] || 'ðŸ“„' }
         function upl(files) {
             if (!files || !files.length) return;
             const fd = new FormData(); fd.append('path', curPath); for (const f of files) fd.append('files', f);
@@ -2301,18 +2370,24 @@
         async function moveGo() { const dest = document.getElementById('moveN').value.trim(); try { await api('/api/files/move', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sources: [...selected], destination: dest }) }); document.getElementById('moveM').classList.remove('sh'); selected.clear(); updateBulk(); toast('Moved!', 'success'); lf() } catch (e) { toast('Move failed', 'error') } }
         function bulkCopy() { if (!selected.size) return; document.getElementById('copyM').classList.add('sh'); document.getElementById('copyN').value = ''; document.getElementById('copyN').focus() }
         async function copyGo() { const dest = document.getElementById('copyN').value.trim(); try { await api('/api/files/copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ sources: [...selected], destination: dest }) }); document.getElementById('copyM').classList.remove('sh'); selected.clear(); updateBulk(); toast('Copied!', 'success'); lf(); lRes() } catch (e) { toast('Copy failed', 'error') } }
-        async function factoryReset() { if (!confirm('⚠️ FACTORY RESET: This will delete ALL your files and restart your terminal. Are you sure?')) return; if (!confirm('This action CANNOT be undone. Type OK to confirm.')) return; try { await api('/api/files/reset', { method: 'POST', headers: { 'Content-Type': 'application/json' } }); lf(); lRes(); refreshTerm(); toast('Factory reset complete', 'success') } catch (e) { toast('Reset failed', 'error') } }
+        async function factoryReset() { if (!confirm('âš ï¸ FACTORY RESET: This will delete ALL your files and restart your terminal. Are you sure?')) return; if (!confirm('This action CANNOT be undone. Type OK to confirm.')) return; try { await api('/api/files/reset', { method: 'POST', headers: { 'Content-Type': 'application/json' } }); lf(); lRes(); refreshTerm(); toast('Factory reset complete', 'success') } catch (e) { toast('Reset failed', 'error') } }
         // SETTINGS + CHARTS
         async function lStats() {
             try {
                 const r = await api('/api/system'); const d = await r.json();
-                let html = `<div class="sc"><div class="sl">🟢 Status</div><div class="sv">${d.status}</div><div class="ss">Plan: ${d.plan}</div></div>
-<div class="sc"><div class="sl">⏱️ Uptime</div><div class="sv">${d.uptime}</div></div>
-<div class="sc"><div class="sl">🧠 RAM</div><div class="sv">${d.ramUsed} / ${d.ramTotal}</div><div class="ss">${d.ramPct || 0}% used</div></div>
-<div class="sc"><div class="sl">⚡ CPU</div><div class="sv">${d.cpuCores} Core${d.cpuCores > 1 ? 's' : ''}</div><div class="ss">${d.cpuPct || 0}%</div></div>
-<div class="sc"><div class="sl">💾 Disk</div><div class="sv">${d.diskUsed} / ${d.diskTotal}</div><div class="ss">${d.diskPct || 0}% used</div></div>`;
-                if (user && user.role === 'owner') html += `<div class="sc"><div class="sl">👥 Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>
-<div class="sc"><div class="sl">📊 Load</div><div class="sv">${d.loadAvg}</div></div><div class="sc"><div class="sl">🖥️ Platform</div><div class="sv">${d.platform}</div></div>`;
+                let html = `<div class="sc"><div class="sl">ðŸŸ¢ Status</div><div class="sv">${d.status}</div><div class="ss">Plan: ${d.plan}</div></div>
+<div class="sc"><div class="sl">â±ï¸ Uptime</div><div class="sv">${d.uptime}</div></div>`;
+                if (user && user.role === 'owner') {
+                    html += `<div class="sc"><div class="sl">ðŸ§  RAM</div><div class="sv">${d.ramUsed} / ${d.ramTotal}</div><div class="ss">${d.ramPct || 0}% used</div></div>
+<div class="sc"><div class="sl">âš¡ CPU</div><div class="sv">${d.cpuCores} Core${d.cpuCores > 1 ? 's' : ''}</div><div class="ss">${d.cpuPct || 0}%</div></div>
+<div class="sc"><div class="sl">ðŸ’¾ Disk</div><div class="sv">${d.diskUsed} / ${d.diskTotal}</div><div class="ss">${d.diskPct || 0}% used</div></div>
+<div class="sc"><div class="sl">ðŸ‘¥ Users</div><div class="sv">${d.totalUsers}</div><div class="ss">${d.nodeVer}</div></div>
+<div class="sc"><div class="sl">ðŸ“Š Load</div><div class="sv">${d.loadAvg}</div></div><div class="sc"><div class="sl">ðŸ–¥ï¸ Platform</div><div class="sv">${d.platform}</div></div>`;
+                } else {
+                    html += `<div class="sc"><div class="sl">ðŸ§  RAM Limit</div><div class="sv">${d.ramTotal}</div><div class="ss">Plan allocation</div></div>
+<div class="sc"><div class="sl">âš¡ CPU Limit</div><div class="sv">${d.cpuCores} Core${d.cpuCores > 1 ? 's' : ''}</div><div class="ss">Plan allocation</div></div>
+<div class="sc"><div class="sl">ðŸ’¾ Disk</div><div class="sv">${d.diskUsed} / ${d.diskTotal}</div><div class="ss">${d.diskPct || 0}% used</div></div>`;
+                }
                 document.getElementById('sG').innerHTML = html
             } catch (e) { }
         }
@@ -2323,8 +2398,10 @@
             try { const r = await api('/api/account', { method: 'DELETE' }); const d = await r.json(); if (d.error) { toast(d.error, 'error'); return; } toast('Account deleted', 'success'); doLogout(); } catch (e) { toast('Failed', 'error'); }
         }
         async function loadCharts() {
+            if (user && user.role !== 'owner') return;
             try {
                 const r = await api('/api/stats/history'); const d = await r.json(); const h = d.history || [];
+                if (!h.length) return;
                 const labels = h.map((_, i) => i); const cpuData = h.map(x => x.cpu); const ramData = h.map(x => x.ram); const diskData = h.map(x => x.disk);
                 const opts = { responsive: true, maintainAspectRatio: true, scales: { y: { min: 0, max: 100, ticks: { color: '#7d8590', callback: v => v + '%' }, grid: { color: 'rgba(255,255,255,.05)' } }, x: { display: false } }, plugins: { legend: { display: false } }, elements: { line: { tension: .4, borderWidth: 2 }, point: { radius: 0 } } };
                 if (cpuChart) { cpuChart.destroy() } cpuChart = new Chart(document.getElementById('cpuChart'), { type: 'line', data: { labels, datasets: [{ data: cpuData, borderColor: '#6366f1', backgroundColor: 'rgba(99,102,241,.1)', fill: true }] }, options: opts });
@@ -2337,15 +2414,41 @@
         async function loadAdmin() { loadUsers(); loadIps() }
         async function loadSupportConfig() { try { const r = await fetch(API_BASE + '/api/support'); const d = await r.json(); document.getElementById('supportWA').value = d.whatsapp || ''; document.getElementById('supportTG').value = d.telegram || ''; } catch (e) { } }
         async function saveSupport() { try { const wa = document.getElementById('supportWA').value.trim(); const tg = document.getElementById('supportTG').value.trim(); await fetch(API_BASE + '/api/support', { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Auth-Token': authToken }, body: JSON.stringify({ whatsapp: wa, telegram: tg }) }); toast('Support info saved!', 'success'); } catch (e) { toast('Failed to save', 'error'); } }
+        // REFERRAL
+        async function loadReferral() {
+            try {
+                const r = await api('/api/referral'); const d = await r.json();
+                if (d.error) { document.getElementById('refFriendsList').innerHTML = '<p style="color:var(--rd)">' + d.error + '</p>'; return; }
+                document.getElementById('refLink').value = d.referralLink || '';
+                document.getElementById('refFriends').textContent = d.totalFriends || 0;
+                document.getElementById('refPoints').textContent = d.points || 0;
+                document.getElementById('refPending').textContent = d.pendingFriends || 0;
+                const friends = d.friends || [];
+                if (!friends.length) { document.getElementById('refFriendsList').innerHTML = '<p style="color:var(--txd);font-size:12px">No referrals yet. Share your link to start earning points!</p>'; return; }
+                let html = '<table style="width:100%;border-collapse:collapse"><tr style="border-bottom:1px solid var(--bdr)"><th style="text-align:left;padding:6px;font-size:11px;color:var(--txd)">User</th><th style="text-align:left;padding:6px;font-size:11px;color:var(--txd)">Plan</th><th style="text-align:left;padding:6px;font-size:11px;color:var(--txd)">Status</th><th style="text-align:left;padding:6px;font-size:11px;color:var(--txd)">Points</th></tr>';
+                friends.forEach(f => {
+                    const statusColor = f.status === 'approved' ? '#3fb950' : f.status === 'pending' ? '#d29922' : '#f85149';
+                    const pts = f.credited ? ((f.plan === 'pro' || f.plan === 'ultra') ? '+2' : '+1') : 'â³';
+                    html += '<tr style="border-bottom:1px solid var(--bdr)"><td style="padding:6px;font-size:12px">' + f.username + '</td><td style="padding:6px;font-size:12px;text-transform:capitalize">' + f.plan + '</td><td style="padding:6px;font-size:12px;color:' + statusColor + '">' + f.status + '</td><td style="padding:6px;font-size:12px;color:var(--ac)">' + pts + '</td></tr>';
+                });
+                html += '</table>';
+                document.getElementById('refFriendsList').innerHTML = html;
+            } catch (e) { document.getElementById('refFriendsList').innerHTML = '<p style="color:var(--rd)">Failed to load</p>'; }
+        }
+        function copyRefLink() {
+            const el = document.getElementById('refLink');
+            if (navigator.clipboard) { navigator.clipboard.writeText(el.value).then(() => toast('Referral link copied!', 'success')).catch(() => { el.select(); document.execCommand('copy'); toast('Copied!', 'success'); }); }
+            else { el.select(); document.execCommand('copy'); toast('Copied!', 'success'); }
+        }
         // PLANS
         async function loadPlans() {
             const plans = [
-                { id: 'free', name: 'Free', price: '₹40', storage: '500MB', ram: '280MB', cpu: '0.5 Core', color: '#6366f1' },
-                { id: 'pro', name: 'Pro', price: '₹70', storage: '1GB', ram: '560MB', cpu: '1 Core', color: '#8b5cf6' },
-                { id: 'ultra', name: 'Ultra', price: '₹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
+                { id: 'free', name: 'Free', price: 'â‚¹40', storage: '500MB', ram: '280MB', cpu: '0.5 Core', color: '#6366f1' },
+                { id: 'pro', name: 'Pro', price: 'â‚¹70', storage: '1GB', ram: '560MB', cpu: '1 Core', color: '#8b5cf6' },
+                { id: 'ultra', name: 'Ultra', price: 'â‚¹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
             ];
             let wa = '', tg = '';
-            try { const r = await api('/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
+            try { const r = await api( '/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
             const currentPlan = user ? (user.plan || 'free') : 'free';
             const grid = document.getElementById('planGrid');
             grid.innerHTML = plans.map(p => {
@@ -2359,7 +2462,7 @@
                         <li>RAM: ${p.ram}</li>
                         <li>CPU: ${p.cpu}</li>
                     </ul>
-                    ${isCurrent ? '<button class="plan-buy current-btn">✓ Current Plan</button>' : `<button class="plan-buy" onclick="showBuyPopup('${p.name}','${p.price}')">Buy Now →</button>`}
+                    ${isCurrent ? '<button class="plan-buy current-btn">âœ“ Current Plan</button>' : `<button class="plan-buy" onclick="showBuyPopup('${p.name}','${p.price}')">Buy Now â†’</button>`}
                 </div>`;
             }).join('');
             // Store for popup
@@ -2379,11 +2482,11 @@
             popup.id = 'buyPopup';
             popup.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)';
             popup.innerHTML = `<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:24px;max-width:320px;width:90%;text-align:center">
-                <h3 style="font-size:16px;font-weight:800;margin-bottom:4px">📱 Contact Us</h3>
+                <h3 style="font-size:16px;font-weight:800;margin-bottom:4px">ðŸ“± Contact Us</h3>
                 <p style="font-size:12px;color:var(--txd);margin-bottom:16px">Choose how to reach us for<br><strong>${planName} Plan (${planPrice}/month)</strong></p>
                 <div style="display:flex;flex-direction:column;gap:10px">
-                    ${waLink ? `<a href="${waLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#25D366;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">💬 WhatsApp</button></a>` : ''}
-                    ${tgLink ? `<a href="${tgLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#2AABEE;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">✈️ Telegram</button></a>` : ''}
+                    ${waLink ? `<a href="${waLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#25D366;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">ðŸ’¬ WhatsApp</button></a>` : ''}
+                    ${tgLink ? `<a href="${tgLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#2AABEE;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">âœˆï¸ Telegram</button></a>` : ''}
                 </div>
                 <button onclick="document.getElementById('buyPopup').remove()" style="margin-top:14px;padding:8px 20px;background:var(--inp);border:1px solid var(--bdr);border-radius:8px;color:var(--txd);font-family:inherit;font-size:12px;cursor:pointer">Close</button>
             </div>`;
@@ -2393,11 +2496,11 @@
         // CONTACT
         async function loadContact() {
             try {
-                const r = await api('/api/support'); const d = await r.json();
+                const r = await api( '/api/support'); const d = await r.json();
                 const cards = document.getElementById('contactCards');
                 let html = '';
-                if (d.whatsapp) html += `<a href="https://wa.me/${d.whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="contact-card"><div class="contact-icon wa">💬</div><div class="contact-info"><h4>WhatsApp</h4><p>${d.whatsapp}</p></div></a>`;
-                if (d.telegram) html += `<a href="${d.telegram.startsWith('http') ? d.telegram : 'https://t.me/' + d.telegram.replace('@', '')}" target="_blank" class="contact-card"><div class="contact-icon tg">✈️</div><div class="contact-info"><h4>Telegram</h4><p>${d.telegram}</p></div></a>`;
+                if (d.whatsapp) html += `<a href="https://wa.me/${d.whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="contact-card"><div class="contact-icon wa">ðŸ’¬</div><div class="contact-info"><h4>WhatsApp</h4><p>${d.whatsapp}</p></div></a>`;
+                if (d.telegram) html += `<a href="${d.telegram.startsWith('http') ? d.telegram : 'https://t.me/' + d.telegram.replace('@', '')}" target="_blank" class="contact-card"><div class="contact-icon tg">âœˆï¸</div><div class="contact-info"><h4>Telegram</h4><p>${d.telegram}</p></div></a>`;
                 if (!html) html = '<p style="color:var(--txd);font-size:13px;text-align:center;padding:40px 0">No contact information set yet.<br>Ask the admin to configure support details.</p>';
                 cards.innerHTML = html;
             } catch (e) { document.getElementById('contactCards').innerHTML = '<p style="color:var(--rd)">Failed to load</p>'; }
@@ -2406,19 +2509,19 @@
             try {
                 const r = await api('/api/users'); const d = await r.json();
                 document.getElementById('userTbody').innerHTML = (d.users || []).map(u => `<tr>
-<td><strong>${u.username}</strong>${u.role === 'owner' ? ' 👑' : ''}</td>
+<td><strong>${u.username}</strong>${u.role === 'owner' ? ' ðŸ‘‘' : ''}</td>
 <td><span class="status-badge ${u.status}">${u.status}</span></td>
-<td>${u.price || '—'}</td>
+<td>${u.price || 'â€”'}</td>
 <td>${u.storageMB}MB / ${u.storageLimit}</td>
-<td style="font-size:10px">${u.lastIP || '—'}</td>
-<td>${u.role !== 'owner' ? `<div style="display:flex;gap:3px;flex-wrap:wrap">${u.status === 'pending' ? `<button class="tbtn green" onclick="approveUser('${u.username}')">✓</button><button class="tbtn red" onclick="rejectUser('${u.username}')">✕</button>` : ''}
-<button class="tbtn" onclick="showPlanModal('${u.username}')">📋</button>
-<button class="tbtn" onclick="showPassModal('${u.username}')">🔑</button>
-<button class="tbtn red" onclick="deleteUser('${u.username}')">🗑️</button></div>` : ''}</td></tr>`).join('')
+<td style="font-size:10px">${u.lastIP || 'â€”'}</td>
+<td>${u.role !== 'owner' ? `<div style="display:flex;gap:3px;flex-wrap:wrap">${u.status === 'pending' ? `<button class="tbtn green" onclick="approveUser('${u.username}')">âœ“</button><button class="tbtn red" onclick="rejectUser('${u.username}')">âœ•</button>` : ''}
+<button class="tbtn" onclick="showPlanModal('${u.username}')">ðŸ“‹</button>
+<button class="tbtn" onclick="showPassModal('${u.username}')">ðŸ”‘</button>
+<button class="tbtn red" onclick="deleteUser('${u.username}')">ðŸ—‘ï¸</button></div>` : ''}</td></tr>`).join('')
             } catch (e) { }
         }
-        async function approveUser(u) { try { const r = await api('/api/users/' + u + '/approve', { method: 'PUT' }); const d = await r.json(); toast(d.message || 'Approved!', 'success'); loadUsers() } catch (e) { toast('Approve failed', 'error') } }
-        async function rejectUser(u) { if (!confirm('Reject and delete "' + u + '"?')) return; try { const r = await api('/api/users/' + u + '/reject', { method: 'PUT' }); const d = await r.json(); toast(d.message || 'Rejected!', 'success'); loadUsers() } catch (e) { toast('Reject failed', 'error') } }
+        async function approveUser(u) { try { await api('/api/users/' + u + '/approve', { method: 'PUT' }); loadUsers() } catch (e) { } }
+        async function rejectUser(u) { if (!confirm('Reject and delete "' + u + '"?')) return; try { await api('/api/users/' + u + '/reject', { method: 'PUT' }); loadUsers() } catch (e) { } }
         async function deleteUser(u) { if (!confirm('Delete user "' + u + '" and all their data?')) return; try { await api('/api/users/' + u, { method: 'DELETE' }); loadUsers() } catch (e) { } }
         function showPlanModal(u) { planUser = u; document.getElementById('planM').classList.add('sh') }
         async function changePlanGo() { const plan = document.getElementById('planSel').value; try { await api('/api/users/' + planUser + '/plan', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan }) }); document.getElementById('planM').classList.remove('sh'); loadUsers() } catch (e) { } }
@@ -2429,11 +2532,13 @@
         async function banIp() { const ip = document.getElementById('banIpInput').value.trim(); if (!ip) return; try { await api('/api/ip/ban', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ip }) }); document.getElementById('banIpInput').value = ''; toast('IP banned', 'success'); loadIps() } catch (e) { toast('Ban failed', 'error') } }
         async function unbanIp(ip) { try { await api('/api/ip/unban', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ip }) }); loadIps() } catch (e) { } }
         // ALERT MANAGEMENT
-        async function setAlert() { const msg = document.getElementById('alertText').value.trim(); const type = document.getElementById('alertType').value; if (!msg) return; try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type }) }); toast('Alert set!', 'success'); loadAlertBanner() } catch (e) { } }
-        async function clearAlert() { try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) }); document.getElementById('alertBar').classList.remove('sh'); document.getElementById('alertText').value = ''; toast('Alert cleared', 'success') } catch (e) { } }
+        async function setAlert() { const msg = document.getElementById('alertText').value.trim(); const type = document.getElementById('alertType').value; if (!msg) return; try { await api( '/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type }) }); toast('Alert set!', 'success'); loadAlertBanner() } catch (e) { } }
+        async function clearAlert() { try { await api( '/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) }); document.getElementById('alertBar').classList.remove('sh'); document.getElementById('alertText').value = ''; toast('Alert cleared', 'success') } catch (e) { } }
+
         // INIT
         checkSaved();
     </script>
 </body>
 
 </html>
+
