@@ -2204,7 +2204,7 @@
     </div>
     <div class="mo" id="passM">
         <div class="mb">
-            <h3>ðŸ”‘ Reset Password</h3><input type="password" id="passN" placeholder="New password (6+ chars)">
+            <h3>🔑 Reset Password</h3><input type="password" id="passN" placeholder="New password (6+ chars)">
             <div class="ma"><button class="c"
                     onclick="document.getElementById('passM').classList.remove('sh')">Cancel</button><button class="k"
                     onclick="passGo()">Reset</button></div>
@@ -2484,7 +2484,7 @@
             popup.id = 'buyPopup';
             popup.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)';
             popup.innerHTML = `<div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:24px;max-width:320px;width:90%;text-align:center">
-                <h3 style="font-size:16px;font-weight:800;margin-bottom:4px">ðŸ“± Contact Us</h3>
+                <h3 style="font-size:16px;font-weight:800;margin-bottom:4px">📱 Contact Us</h3>
                 <p style="font-size:12px;color:var(--txd);margin-bottom:16px">Choose how to reach us for<br><strong>${planName} Plan (${planPrice}/month)</strong></p>
                 <div style="display:flex;flex-direction:column;gap:10px">
                     ${waLink ? `<a href="${waLink}" target="_blank" style="text-decoration:none"><button style="width:100%;padding:12px;background:#25D366;border:none;border-radius:10px;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">💬 WhatsApp</button></a>` : ''}
@@ -2518,7 +2518,7 @@
 <td style="font-size:10px">${u.lastIP || '—'}</td>
 <td>${u.role !== 'owner' ? `<div style="display:flex;gap:3px;flex-wrap:wrap">${u.status === 'pending' ? `<button class="tbtn green" onclick="approveUser('${u.username}')">✓</button><button class="tbtn red" onclick="rejectUser('${u.username}')">✕</button>` : ''}
 <button class="tbtn" onclick="showPlanModal('${u.username}')">📋</button>
-<button class="tbtn" onclick="showPassModal('${u.username}')">ðŸ”‘</button>
+<button class="tbtn" onclick="showPassModal('${u.username}')">🔑</button>
 <button class="tbtn red" onclick="deleteUser('${u.username}')">🗑️</button></div>` : ''}</td></tr>`).join('')
             } catch (e) { }
         }
