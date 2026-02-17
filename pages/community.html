@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0A0A0F;color:#F0F0F5;font-family:'Inter',sans-serif;line-height:1.7}
+    a{color:#6C63FF;text-decoration:none;transition:color .2s}
+    a:hover{color:#8B85FF}
+    .nav{padding:20px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1E1E2E}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;color:#F0F0F5;text-decoration:none}
+    .nav-logo div{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6C63FF,#00D4AA);display:flex;align-items:center;justify-content:center}
+    .nav-logo svg{width:20px;height:20px;color:#fff;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .nav-btn{padding:10px 24px;background:#6C63FF;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none}
+    .nav-btn:hover{background:#5B52E8;color:#fff;box-shadow:0 0 30px rgba(108,99,255,.3)}
+    .hero{padding:80px 40px 60px;max-width:900px;margin:0 auto;text-align:center}
+    .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,56px);margin-bottom:20px;background:linear-gradient(135deg,#F0F0F5,#7A7A8C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{color:#7A7A8C;font-size:18px;max-width:600px;margin:0 auto}
+    .content{max-width:900px;margin:0 auto;padding:0 40px 80px}
+    .card{background:#111118;border:1px solid #1E1E2E;border-radius:16px;padding:32px;margin-bottom:24px;transition:border-color .2s}
+    .card:hover{border-color:#6C63FF30}
+    .card h3{font-family:'Space Grotesk',sans-serif;font-size:22px;margin-bottom:12px}
+    .card p{color:#7A7A8C;font-size:15px}
+    .card-icon{width:48px;height:48px;border-radius:12px;background:rgba(108,99,255,.1);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .section{margin-bottom:60px}
+    .section h2{font-family:'Space Grotesk',sans-serif;font-size:32px;margin-bottom:16px}
+    .section p.sub{color:#7A7A8C;font-size:16px;margin-bottom:32px}
+    .tag{display:inline-block;padding:4px 12px;background:rgba(108,99,255,.1);color:#6C63FF;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:16px}
+    .footer{border-top:1px solid #1E1E2E;padding:30px 40px;text-align:center;color:#7A7A8C;font-size:13px}
+    ul{list-style:none;padding:0} ul li{padding:8px 0;color:#7A7A8C;font-size:15px;display:flex;align-items:center;gap:10px}
+    ul li::before{content:'ok';color:#00D4AA;font-weight:700}
+    .text-content{color:#7A7A8C;font-size:15px;line-height:1.9}
+    .text-content h2{font-family:'Space Grotesk',sans-serif;font-size:24px;color:#F0F0F5;margin:40px 0 16px}
+    .text-content h3{font-family:'Space Grotesk',sans-serif;font-size:18px;color:#F0F0F5;margin:30px 0 12px}
+    .text-content p{margin-bottom:16px}
+    .text-content ul li::before{content:'•'} .text-content ul li{padding:4px 0}
+    @media(max-width:600px){.nav{padding:16px 20px}.hero{padding:50px 20px 40px}.content{padding:0 20px 60px}.card{padding:24px}}
+  </style>
+  <title>Community - iq4u8</title>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <div><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 12h8M12 8v8"/></svg></div>
+      iq4u8
+    </a>
+    <a href="/" class="nav-btn">Back to Home</a>
+  </nav>
+  <div class="hero">
+    <span class="tag">COMMUNITY</span>
+    <h1>Join Our Community</h1>
+    <p>Connect with other developers using iq4u8 VPS hosting.</p>
+  </div>
+  <div class="content">
+    <div class="grid">
+      <div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 16px;background:rgba(37,211,102,.1)">💬</div><h3>WhatsApp Group</h3><p>Join our WhatsApp community for quick support, updates, and discussions with other users.</p><a href="#" class="nav-btn" style="display:inline-block;margin-top:16px;background:#25D366">Join WhatsApp</a></div>
+      <div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 16px;background:rgba(42,171,238,.1)">✈️</div><h3>Telegram Channel</h3><p>Follow our Telegram channel for announcements, tips, and community discussions.</p><a href="#" class="nav-btn" style="display:inline-block;margin-top:16px;background:#2AABEE">Join Telegram</a></div>
+      <div class="card" style="text-align:center"><div class="card-icon" style="margin:0 auto 16px">🐙</div><h3>GitHub</h3><p>Contribute, report issues, and explore our open-source tools on GitHub.</p><a href="https://github.com/iq4u8" target="_blank" class="nav-btn" style="display:inline-block;margin-top:16px;background:#333">View GitHub</a></div>
+    </div>
+  </div>
+  <footer class="footer">© 2026 iq4u8. All rights reserved.</footer>
+</body>
+</html>
