@@ -1453,99 +1453,359 @@
         }
 
 
-        /* LOGOUT NAV btn */
-        .logout-ni { display: none }
+        /* ══ MOBILE BOTTOM NAV BAR ══ */
+        .mob-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: var(--bg2);
+            border-top: 1px solid var(--bdr);
+            z-index: 100;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch
+        }
 
-        /* MOBILE */
+        .mob-nav-inner {
+            display: flex;
+            align-items: stretch;
+            height: 100%;
+            min-width: max-content;
+            padding: 0 2px
+        }
+
+        .mob-nav button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            min-width: 56px;
+            padding: 4px 8px;
+            background: none;
+            border: none;
+            color: var(--txd);
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color .2s;
+            flex-shrink: 0;
+            white-space: nowrap
+        }
+
+        .mob-nav button .mob-icon {
+            font-size: 18px;
+            line-height: 1
+        }
+
+        .mob-nav button.a {
+            color: var(--ac)
+        }
+
+        .mob-nav button:active {
+            transform: scale(.95)
+        }
+
+        .mob-nav button.logout-btn {
+            color: var(--rd)
+        }
+
+        /* ══ MOBILE LAYOUT ══ */
         @media(max-width:700px) {
-            .app.sh { flex-direction: column }
+
+            /* Show bottom nav */
+            .mob-nav {
+                display: block
+            }
+
+            /* Hide sidebar completely */
             .sb {
-                width: 100% !important; height: auto; border-right: none;
-                border-top: 1px solid var(--bdr); order: 2;
-                flex-direction: row; overflow: visible;
-                position: fixed; bottom: 0; left: 0; right: 0;
-                z-index: 100; background: var(--bg2);
-                flex-shrink: initial; padding: 0 2px;
-                box-shadow: 0 -2px 16px rgba(0,0,0,.25)
+                display: none !important
             }
-            .sbr { display: none }
-            .sbn {
-                flex-direction: row; overflow-x: auto; overflow-y: hidden;
-                gap: 0; padding: 2px 0; flex: 1;
-                align-items: center; justify-content: space-evenly;
-                -webkit-overflow-scrolling: touch; scrollbar-width: none
+
+            /* App: column layout, full screen */
+            .app.sh {
+                display: flex !important;
+                flex-direction: column !important;
+                height: 100vh;
+                height: 100dvh;
+                overflow: hidden
             }
-            .sbn::-webkit-scrollbar { display: none }
-            .ni {
-                flex-direction: column; padding: 6px 4px; gap: 2px;
-                font-size: 9px; min-width: 48px; text-align: center;
-                border-radius: 8px; flex-shrink: 0;
-                width: auto !important; align-items: center;
-                justify-content: center
+
+            body,
+            .app {
+                max-width: 100vw;
+                overflow-x: hidden
             }
-            .ni.a { background: rgba(99,102,241,.15) }
-            .ni .nx { font-size: 18px; width: auto; display: block; line-height: 1 }
-            .ni span:not(.nx) {
-                display: block; font-size: 8px; white-space: nowrap;
-                overflow: hidden; text-overflow: ellipsis; max-width: 50px;
-                line-height: 1.2; margin-top: 1px
-            }
-            .logout-ni { display: flex !important }
-            .logout-ni .nx { color: #f87171 }
-            .logout-ni span:not(.nx) { color: #f87171 }
-            .res, .sbf { display: none }
+
+            /* Main content: takes full width, leave room for bottom nav */
             .mn {
-                order: 1; flex: 1; min-height: 0;
-                overflow: hidden; padding-bottom: 62px
+                flex: 1 !important;
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+                padding-bottom: 56px
             }
-            .mh { padding: 8px 12px }
-            .mh h2 { font-size: 14px }
-            .mh .bd { font-size: 9px; padding: 2px 6px }
-            .mh-actions { gap: 4px }
-            .mh-btn { padding: 4px 8px; font-size: 11px }
-            .pn { min-height: 0; overflow-y: auto !important; -webkit-overflow-scrolling: touch }
-            .lc { width: 94vw; padding: 24px 18px }
-            .ll .ic { width: 44px; height: 44px; font-size: 20px }
-            .ll h1 { font-size: 18px }
-            .ll p { font-size: 12px }
-            .fb { padding: 6px 8px; gap: 4px }
-            .fb2 { padding: 5px 8px; font-size: 11px }
-            .fc { padding: 4px 8px; font-size: 11px }
-            .dz { padding: 14px; margin: 6px 8px; font-size: 11px }
-            .dz .di { font-size: 20px; margin-bottom: 4px }
-            .fl { padding: 4px 8px }
-            .fi { padding: 8px 10px; gap: 8px }
-            .fii { width: 28px; height: 28px; font-size: 13px; border-radius: 6px }
-            .fn { font-size: 12px }
-            .fm { font-size: 10px }
-            .fab { width: 24px; height: 24px; font-size: 10px }
-            .fa { opacity: 1 }
-            .bulk-bar { font-size: 11px; padding: 8px 10px }
-            .sg { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 10px; overflow: visible }
-            .sc { padding: 10px; border-radius: 8px }
-            .sl { font-size: 9px }
-            .sv { font-size: 14px }
-            .ss { font-size: 9px }
-            #p-settings { overflow-y: auto !important; padding-bottom: 80px }
-            .chart-row { grid-template-columns: 1fr; padding: 10px; gap: 10px }
-            #p-terminal { flex: 1; display: flex !important; flex-direction: column }
-            #p-terminal.a { display: flex !important }
-            #tbox { flex: 1; min-height: calc(100vh - 160px); width: 100% }
-            #p-plans { overflow-y: auto !important }
+
+            /* Header */
+            .mh {
+                padding: 8px 12px;
+                flex-shrink: 0
+            }
+
+            .mh h2 {
+                font-size: 13px
+            }
+
+            .mh .bd {
+                font-size: 8px;
+                padding: 2px 6px
+            }
+
+            .mh-actions {
+                gap: 3px
+            }
+
+            .mh-btn {
+                padding: 3px 6px;
+                font-size: 10px
+            }
+
+            /* Panels: simple display switching */
+            .pn {
+                display: none !important;
+                position: relative !important;
+                flex: 1;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch
+            }
+
+            .pn.a {
+                display: flex !important;
+                flex-direction: column
+            }
+
+            /* Terminal panel & tbox: hide everything when not active */
+            #p-terminal:not(.a) #tbox,
+            #p-terminal:not(.a) #tbox * {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important
+            }
+
+            #p-terminal.a {
+                display: flex !important;
+                flex-direction: column !important;
+                flex: 1
+            }
+
+            #p-terminal.a #tbox {
+                flex: 1;
+                min-height: 0;
+                width: 100%
+            }
+
+            /* Login card */
+            .lc {
+                width: 94vw;
+                padding: 24px 18px
+            }
+
+            .ll .ic {
+                width: 44px;
+                height: 44px;
+                font-size: 20px
+            }
+
+            .ll h1 {
+                font-size: 18px
+            }
+
+            .ll p {
+                font-size: 12px
+            }
+
+            /* Files */
+            .fb {
+                padding: 6px 8px;
+                gap: 4px
+            }
+
+            .fb2 {
+                padding: 5px 8px;
+                font-size: 11px
+            }
+
+            .fc {
+                padding: 4px 8px;
+                font-size: 11px
+            }
+
+            .dz {
+                padding: 14px;
+                margin: 6px 8px;
+                font-size: 11px
+            }
+
+            .dz .di {
+                font-size: 20px;
+                margin-bottom: 4px
+            }
+
+            .fl {
+                padding: 4px 8px
+            }
+
+            .fi {
+                padding: 8px 10px;
+                gap: 8px
+            }
+
+            .fii {
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
+                border-radius: 6px
+            }
+
+            .fn {
+                font-size: 12px
+            }
+
+            .fm {
+                font-size: 10px
+            }
+
+            .fab {
+                width: 24px;
+                height: 24px;
+                font-size: 10px
+            }
+
+            .fa {
+                opacity: 1
+            }
+
+            .bulk-bar {
+                font-size: 11px;
+                padding: 8px 10px
+            }
+
+            /* Settings */
+            .sg {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                padding: 10px;
+                overflow: visible
+            }
+
+            .sc {
+                padding: 10px;
+                border-radius: 8px
+            }
+
+            .sl {
+                font-size: 9px
+            }
+
+            .sv {
+                font-size: 14px
+            }
+
+            .ss {
+                font-size: 9px
+            }
+
+            #p-settings {
+                overflow-y: auto !important;
+                padding-bottom: 80px
+            }
+
+            .chart-row {
+                grid-template-columns: 1fr;
+                padding: 10px;
+                gap: 10px
+            }
+
+            /* Plans */
+            #p-plans {
+                overflow-y: auto !important
+            }
+
             .plan-grid {
-                grid-template-columns: 1fr; padding: 12px; gap: 14px;
-                padding-bottom: 100px; overflow: visible !important; max-height: none !important
+                grid-template-columns: 1fr;
+                padding: 12px;
+                gap: 14px;
+                padding-bottom: 100px;
+                overflow: visible !important;
+                max-height: none !important
             }
-            .plan-card { overflow: visible !important; margin-bottom: 8px }
-            .plan-buy { position: relative; z-index: 1 }
-            #p-admin { overflow-y: auto !important; padding-bottom: 80px }
-            .admin-section { padding: 10px; overflow-x: auto }
-            .user-table { font-size: 11px; min-width: 600px }
-            .user-table th, .user-table td { padding: 6px 6px; white-space: nowrap }
-            #p-contact { overflow-y: auto !important; padding-bottom: 80px }
-            .contact-card { padding: 16px; gap: 12px }
-            .contact-icon { width: 42px; height: 42px; font-size: 22px }
-            .upload-box { min-width: 260px; padding: 24px 20px }
+
+            .plan-card {
+                overflow: visible !important;
+                margin-bottom: 8px
+            }
+
+            .plan-buy {
+                position: relative;
+                z-index: 1
+            }
+
+            /* Admin */
+            #p-admin {
+                overflow-y: auto !important;
+                padding-bottom: 80px
+            }
+
+            .admin-section {
+                padding: 10px;
+                overflow-x: auto
+            }
+
+            .user-table {
+                font-size: 11px;
+                min-width: 600px
+            }
+
+            .user-table th,
+            .user-table td {
+                padding: 6px 6px;
+                white-space: nowrap
+            }
+
+            /* Contact */
+            #p-contact {
+                overflow-y: auto !important;
+                padding-bottom: 80px
+            }
+
+            .contact-card {
+                padding: 16px;
+                gap: 12px
+            }
+
+            .contact-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 22px
+            }
+
+            /* Upload */
+            .upload-box {
+                min-width: 260px;
+                padding: 24px 20px
+            }
+
+            /* Toast on mobile: above bottom nav */
+            .toast-box {
+                bottom: 64px !important
+            }
         }
     </style>
 </head>
@@ -1781,6 +2041,24 @@
             </div>
         </div>
     </div>
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="mob-nav" id="mobNav">
+        <div class="mob-nav-inner">
+            <button class="mob-btn a" onclick="sp('terminal',null,this)" data-panel="terminal"><span
+                    class="mob-icon">💻</span>Terminal</button>
+            <button class="mob-btn" onclick="sp('files',null,this)" data-panel="files"><span
+                    class="mob-icon">📂</span>Files</button>
+            <button class="mob-btn" onclick="sp('settings',null,this)" data-panel="settings"><span
+                    class="mob-icon">📊</span>Settings</button>
+            <button class="mob-btn" onclick="sp('plans',null,this)" data-panel="plans"><span
+                    class="mob-icon">📋</span>Plans</button>
+            <button class="mob-btn" onclick="sp('contact',null,this)" data-panel="contact"><span
+                    class="mob-icon">📞</span>Contact</button>
+            <button class="mob-btn" onclick="sp('admin',null,this)" data-panel="admin" id="mobAdminBtn"
+                style="display:none"><span class="mob-icon">👑</span>Admin</button>
+            <button class="mob-btn logout-btn" onclick="doLogout()"><span class="mob-icon">🚪</span>Logout</button>
+        </div>
+    </div>
     <!-- MODALS -->
     <div class="mo" id="mkM">
         <div class="mb">
@@ -1868,7 +2146,7 @@
         function openApp() {
             document.getElementById('lp').style.display = 'none'; document.getElementById('pendingPage').style.display = 'none'; document.getElementById('app').classList.add('sh');
             document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
-            if (user.role === 'owner') { document.getElementById('adminNav').style.display = ''; document.getElementById('dangerZone').style.display = 'none'; }
+            if (user.role === 'owner') { document.getElementById('adminNav').style.display = ''; document.getElementById('dangerZone').style.display = 'none'; var mab = document.getElementById('mobAdminBtn'); if (mab) mab.style.display = ''; }
             else { document.getElementById('adminNav').style.display = 'none'; document.getElementById('dangerZone').style.display = ''; }
             if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
             document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
@@ -1878,11 +2156,29 @@
         async function loadAlertBanner() { try { const r = await fetch(API_BASE + '/api/alert'); const d = await r.json(); if (d.alert && d.alert.message) { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar ' + (d.alert.type || 'warning') + ' sh'; document.getElementById('alertMsg').textContent = d.alert.message } } catch (e) { } }
         function closeAlert() { document.getElementById('alertBar').classList.remove('sh') }
         // NAV
-        function sp(id, btn) {
-            document.querySelectorAll('.pn').forEach(p => p.classList.remove('a')); document.querySelectorAll('.ni').forEach(n => n.classList.remove('a'));
-            document.getElementById('p-' + id).classList.add('a'); if (btn) btn.classList.add('a');
+        function sp(id, btn, mobBtn) {
+            // Remove active from all panels & sidebar nav
+            document.querySelectorAll('.pn').forEach(p => p.classList.remove('a'));
+            document.querySelectorAll('.ni').forEach(n => n.classList.remove('a'));
+            // Activate the target panel
+            document.getElementById('p-' + id).classList.add('a');
+            if (btn) btn.classList.add('a');
+            // Update mobile bottom nav active state
+            document.querySelectorAll('.mob-btn').forEach(b => b.classList.remove('a'));
+            if (mobBtn) { mobBtn.classList.add('a'); }
+            else { var mb = document.querySelector('.mob-btn[data-panel="' + id + '"]'); if (mb) mb.classList.add('a'); }
+            // Update header
             const t = { terminal: ['💻', 'Terminal'], files: ['📂', 'Files'], settings: ['📊', 'Settings'], plans: ['📋', 'Plans'], contact: ['📞', 'Contact'], admin: ['👑', 'Admin'] }; const v = t[id] || ['⚙️', id];
             document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1];
+            // Explicitly hide/show terminal canvas (xterm renders on top otherwise)
+            const tbox = document.getElementById('tbox');
+            if (tbox) {
+                if (id === 'terminal') { tbox.style.display = ''; tbox.style.visibility = ''; tbox.style.height = ''; tbox.style.overflow = ''; }
+                else { tbox.style.display = 'none'; tbox.style.visibility = 'hidden'; tbox.style.height = '0'; tbox.style.overflow = 'hidden'; }
+            }
+            // Also hide all xterm canvas/elements when not terminal
+            var xtermEls = document.querySelectorAll('#tbox .xterm, #tbox canvas, #tbox .xterm-screen');
+            xtermEls.forEach(function (el) { el.style.display = (id === 'terminal') ? '' : 'none'; el.style.visibility = (id === 'terminal') ? '' : 'hidden'; });
             // Header actions
             const ha = document.getElementById('mhActions');
             if (id === 'terminal') ha.innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
