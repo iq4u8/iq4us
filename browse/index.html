@@ -2158,7 +2158,7 @@
             else { document.getElementById('adminNav').style.display = 'none'; document.getElementById('dangerZone').style.display = ''; }
             if (user.status === 'pending') { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar warning sh'; document.getElementById('alertMsg').textContent = '⚠️ Your account will be auto-deleted in 6 hours if not approved. Contact admin.'; }
             document.getElementById('mhActions').innerHTML = '<button class="mh-btn" onclick="toggleTermFS()">' + (termFS ? '⬜ Normal' : '⛶ Fullscreen') + '</button><button class="mh-btn" onclick="refreshTerm()">🔄 Restart</button>';
-            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner() }, 300)
+            setTimeout(() => { initTerm(); lf(); lStats(); lRes(); loadAlertBanner(); fixMobileLayout() }, 300)
         }
         // ALERT BANNER
         async function loadAlertBanner() { try { const r = await fetch(API_BASE + '/api/alert'); const d = await r.json(); if (d.alert && d.alert.message) { const bar = document.getElementById('alertBar'); bar.className = 'alert-bar ' + (d.alert.type || 'warning') + ' sh'; document.getElementById('alertMsg').textContent = d.alert.message } } catch (e) { } }
@@ -2193,6 +2193,7 @@
             else if (id === 'files') ha.innerHTML = '<button class="mh-btn danger" style="color:var(--rd)" onclick="factoryReset()">🗑️ Factory Reset</button>';
             else ha.innerHTML = '';
             if (id === 'terminal' && fitA) setTimeout(() => fitA.fit(), 100); if (id === 'files') lf(); if (id === 'settings') { lStats(); loadCharts() } if (id === 'plans') loadPlans(); if (id === 'contact') loadContact(); if (id === 'admin') { if (user.role !== 'owner') { sp('terminal', document.querySelector('.ni')); return; } loadAdmin() }
+            fixMobileLayout();
         }
         // TERMINAL
         function initTerm() {
@@ -2412,6 +2413,59 @@
         // ALERT MANAGEMENT
         async function setAlert() { const msg = document.getElementById('alertText').value.trim(); const type = document.getElementById('alertType').value; if (!msg) return; try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type }) }); toast('Alert set!', 'success'); loadAlertBanner() } catch (e) { } }
         async function clearAlert() { try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) }); document.getElementById('alertBar').classList.remove('sh'); document.getElementById('alertText').value = ''; toast('Alert cleared', 'success') } catch (e) { } }
+        // MOBILE LAYOUT FIX - Force inline styles on mobile
+        function fixMobileLayout() {
+            if (window.innerWidth > 700) return;
+            // Force header visible
+            var mh = document.querySelector('.mh');
+            if (mh) {
+                mh.style.cssText = 'display:flex !important;padding:8px 12px;flex-shrink:0;min-height:40px;background:#0d1117;border-bottom:1px solid rgba(255,255,255,.06);align-items:center;justify-content:space-between;z-index:10;width:100%;box-sizing:border-box';
+            }
+            // Force mn layout
+            var mn = document.querySelector('.mn');
+            if (mn) {
+                mn.style.cssText = 'flex:1;display:flex;flex-direction:column;overflow:hidden;width:100%;padding-bottom:56px';
+            }
+            // Force app layout
+            var app = document.getElementById('app');
+            if (app && app.classList.contains('sh')) {
+                app.style.cssText = 'display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden;position:relative;z-index:1';
+            }
+            // Force sidebar hidden
+            var sb = document.querySelector('.sb');
+            if (sb) sb.style.display = 'none';
+            // Fix all panels
+            document.querySelectorAll('.pn').forEach(function (p) {
+                if (p.classList.contains('a')) {
+                    p.style.cssText = 'display:flex;flex-direction:column;flex:1 1 0%;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch';
+                } else {
+                    p.style.cssText = 'display:none';
+                }
+            });
+            // Fix terminal
+            var tPanel = document.getElementById('p-terminal');
+            var tbox = document.getElementById('tbox');
+            if (tPanel && tPanel.classList.contains('a')) {
+                tPanel.style.cssText = 'display:flex;flex-direction:column;flex:1 1 0%;min-height:0;overflow:hidden';
+                if (tbox) {
+                    tbox.style.cssText = 'flex:1;width:100%;min-height:0;display:block;visibility:visible';
+                }
+                // Show xterm elements
+                document.querySelectorAll('#tbox .xterm, #tbox canvas, #tbox .xterm-screen').forEach(function (el) {
+                    el.style.display = '';
+                    el.style.visibility = '';
+                });
+                if (fitA) setTimeout(function () { fitA.fit() }, 150);
+            } else if (tbox) {
+                tbox.style.cssText = 'display:none;visibility:hidden;height:0;overflow:hidden';
+                document.querySelectorAll('#tbox .xterm, #tbox canvas, #tbox .xterm-screen').forEach(function (el) {
+                    el.style.display = 'none';
+                    el.style.visibility = 'hidden';
+                });
+            }
+        }
+        // Also fix on resize
+        window.addEventListener('resize', function () { fixMobileLayout() });
         // INIT
         checkSaved();
     </script>
