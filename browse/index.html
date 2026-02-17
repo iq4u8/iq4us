@@ -1552,10 +1552,15 @@
                 padding-bottom: 56px
             }
 
-            /* Header */
+            /* Header - force visible */
             .mh {
+                display: flex !important;
                 padding: 8px 12px;
-                flex-shrink: 0
+                flex-shrink: 0 !important;
+                min-height: 40px;
+                background: var(--bg2);
+                border-bottom: 1px solid var(--bdr);
+                z-index: 10
             }
 
             .mh h2 {
@@ -1580,7 +1585,8 @@
             .pn {
                 display: none !important;
                 position: relative !important;
-                flex: 1;
+                flex: 1 1 0% !important;
+                min-height: 0 !important;
                 overflow-y: auto !important;
                 -webkit-overflow-scrolling: touch
             }
@@ -1602,13 +1608,15 @@
             #p-terminal.a {
                 display: flex !important;
                 flex-direction: column !important;
-                flex: 1
+                flex: 1 1 0% !important;
+                min-height: 0 !important
             }
 
             #p-terminal.a #tbox {
                 flex: 1;
                 min-height: 0;
-                width: 100%
+                width: 100%;
+                height: 100%
             }
 
             /* Login card */
