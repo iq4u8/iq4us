@@ -1517,8 +1517,8 @@
         /* ══ MOBILE LAYOUT ══ */
         @media(max-width:700px) {
 
-            /* Show bottom nav */
-            .mob-nav {
+            /* Show bottom nav only when logged in (.sh class added by JS) */
+            .mob-nav.sh {
                 display: block
             }
 
@@ -2142,9 +2142,9 @@
         }
         function showPending() { document.getElementById('lp').style.display = 'none'; document.getElementById('app').classList.remove('sh'); document.getElementById('pendingPage').style.display = 'flex' }
         async function checkSaved() { const t = localStorage.getItem('token'); if (!t) return; try { const r = await fetch(API_BASE + '/api/me?token=' + t); const d = await r.json(); if (d.loggedIn) { user = d.user; authToken = t; if (user.status === 'pending') showPending(); else openApp() } else localStorage.clear() } catch (e) { localStorage.clear() } }
-        function doLogout() { user = null; authToken = null; localStorage.clear(); document.getElementById('lp').style.display = 'flex'; document.getElementById('app').classList.remove('sh'); document.getElementById('pendingPage').style.display = 'none'; if (ws) { ws.close(); ws = null } if (term) { term.dispose(); term = null } }
+        function doLogout() { user = null; authToken = null; localStorage.clear(); document.getElementById('lp').style.display = 'flex'; document.getElementById('app').classList.remove('sh'); document.getElementById('pendingPage').style.display = 'none'; var mn = document.getElementById('mobNav'); if (mn) mn.classList.remove('sh'); if (ws) { ws.close(); ws = null } if (term) { term.dispose(); term = null } }
         function openApp() {
-            document.getElementById('lp').style.display = 'none'; document.getElementById('pendingPage').style.display = 'none'; document.getElementById('app').classList.add('sh');
+            document.getElementById('lp').style.display = 'none'; document.getElementById('pendingPage').style.display = 'none'; document.getElementById('app').classList.add('sh'); var mn = document.getElementById('mobNav'); if (mn) mn.classList.add('sh');
             document.getElementById('uN').textContent = user.username; document.getElementById('uR').textContent = user.role === 'owner' ? '👑 Owner' : 'User'; document.getElementById('uA').textContent = user.username[0].toUpperCase();
             if (user.role === 'owner') { document.getElementById('adminNav').style.display = ''; document.getElementById('dangerZone').style.display = 'none'; var mab = document.getElementById('mobAdminBtn'); if (mab) mab.style.display = ''; }
             else { document.getElementById('adminNav').style.display = 'none'; document.getElementById('dangerZone').style.display = ''; }
