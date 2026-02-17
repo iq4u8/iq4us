@@ -1200,6 +1200,7 @@
             font-size: 28px;
             font-weight: 800;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 12px 0
@@ -1920,12 +1921,12 @@
                 <button class="ni a" onclick="sp('terminal',this)"><span
                         class="nx">💻</span><span>Terminal</span></button>
                 <button class="ni" onclick="sp('files',this)"><span class="nx">📂</span><span>Files</span></button>
-                <button class="ni" onclick="sp('settings',this)"><span
-                        class="nx">📊</span><span>Settings</span></button>
                 <button class="ni" onclick="sp('plans',this)"><span class="nx">📋</span><span>Plans</span></button>
                 <button class="ni" onclick="sp('contact',this)"><span class="nx">📞</span><span>Contact</span></button>
                 <button class="ni" onclick="sp('referral',this)"><span
                         class="nx">🔗</span><span>Referral</span></button>
+                <button class="ni" onclick="sp('settings',this)"><span
+                        class="nx">⚙️</span><span>Settings</span></button>
                 <button class="ni" onclick="sp('admin',this)" id="adminNav" style="display:none"><span
                         class="nx">👑</span><span>Admin</span></button>
             </div>
@@ -2065,7 +2066,8 @@
                     <div
                         style="background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.2);border-radius:10px;padding:14px;margin-bottom:20px">
                         <p style="font-size:12px;color:var(--txd);line-height:1.6">📌 <strong
-                                style="color:var(--tx)">How it works:</strong> Share your link â†’ Friend signs up â†’ After
+                                style="color:var(--tx)">How it works:</strong> Share your link â†’ Friend signs up â†’
+                            After
                             24h retention â†’ You earn <strong style="color:var(--ac)">1 point</strong>. If they get
                             Pro/Ultra: <strong style="color:#00D4AA">2x points!</strong></p>
                     </div>
@@ -2139,14 +2141,14 @@
                     class="mob-icon">💻</span>Terminal</button>
             <button class="mob-btn" onclick="sp('files',null,this)" data-panel="files"><span
                     class="mob-icon">📂</span>Files</button>
-            <button class="mob-btn" onclick="sp('settings',null,this)" data-panel="settings"><span
-                    class="mob-icon">📊</span>Settings</button>
             <button class="mob-btn" onclick="sp('plans',null,this)" data-panel="plans"><span
                     class="mob-icon">📋</span>Plans</button>
             <button class="mob-btn" onclick="sp('contact',null,this)" data-panel="contact"><span
                     class="mob-icon">📞</span>Contact</button>
             <button class="mob-btn" onclick="sp('referral',null,this)" data-panel="referral"><span
                     class="mob-icon">🔗</span>Referral</button>
+            <button class="mob-btn" onclick="sp('settings',null,this)" data-panel="settings"><span
+                    class="mob-icon">⚙️</span>Settings</button>
             <button class="mob-btn" onclick="sp('admin',null,this)" data-panel="admin" id="mobAdminBtn"
                 style="display:none"><span class="mob-icon">👑</span>Admin</button>
             <button class="mob-btn logout-btn" onclick="doLogout()"><span class="mob-icon">🚪</span>Logout</button>
@@ -2264,7 +2266,7 @@
             if (mobBtn) { mobBtn.classList.add('a'); }
             else { var mb = document.querySelector('.mob-btn[data-panel="' + id + '"]'); if (mb) mb.classList.add('a'); }
             // Update header
-            const t = { terminal: ['💻', 'Terminal'], files: ['📂', 'Files'], settings: ['📊', 'Settings'], plans: ['📋', 'Plans'], contact: ['📞', 'Contact'], referral: ['🔗', 'Referral'], admin: ['👑', 'Admin'] }; const v = t[id] || ['⚙️', id];
+            const t = { terminal: ['💻', 'Terminal'], files: ['📂', 'Files'], settings: ['⚙️', 'Settings'], plans: ['📋', 'Plans'], contact: ['📞', 'Contact'], referral: ['🔗', 'Referral'], admin: ['👑', 'Admin'] }; const v = t[id] || ['⚙️', id];
             document.getElementById('pI').textContent = v[0]; document.getElementById('pT').textContent = v[1];
             // Explicitly hide/show terminal canvas (xterm renders on top otherwise)
             const tbox = document.getElementById('tbox');
@@ -2448,7 +2450,7 @@
                 { id: 'ultra', name: 'Ultra', price: 'â‚¹150', storage: '2GB', ram: '1120MB', cpu: '2 Cores', color: '#ec4899' }
             ];
             let wa = '', tg = '';
-            try { const r = await api( '/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
+            try { const r = await api('/api/support'); const d = await r.json(); wa = d.whatsapp || ''; tg = d.telegram || ''; } catch (e) { }
             const currentPlan = user ? (user.plan || 'free') : 'free';
             const grid = document.getElementById('planGrid');
             grid.innerHTML = plans.map(p => {
@@ -2496,7 +2498,7 @@
         // CONTACT
         async function loadContact() {
             try {
-                const r = await api( '/api/support'); const d = await r.json();
+                const r = await api('/api/support'); const d = await r.json();
                 const cards = document.getElementById('contactCards');
                 let html = '';
                 if (d.whatsapp) html += `<a href="https://wa.me/${d.whatsapp.replace(/[^0-9]/g, '')}" target="_blank" class="contact-card"><div class="contact-icon wa">💬</div><div class="contact-info"><h4>WhatsApp</h4><p>${d.whatsapp}</p></div></a>`;
@@ -2532,8 +2534,8 @@
         async function banIp() { const ip = document.getElementById('banIpInput').value.trim(); if (!ip) return; try { await api('/api/ip/ban', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ip }) }); document.getElementById('banIpInput').value = ''; toast('IP banned', 'success'); loadIps() } catch (e) { toast('Ban failed', 'error') } }
         async function unbanIp(ip) { try { await api('/api/ip/unban', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ip }) }); loadIps() } catch (e) { } }
         // ALERT MANAGEMENT
-        async function setAlert() { const msg = document.getElementById('alertText').value.trim(); const type = document.getElementById('alertType').value; if (!msg) return; try { await api( '/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type }) }); toast('Alert set!', 'success'); loadAlertBanner() } catch (e) { } }
-        async function clearAlert() { try { await api( '/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) }); document.getElementById('alertBar').classList.remove('sh'); document.getElementById('alertText').value = ''; toast('Alert cleared', 'success') } catch (e) { } }
+        async function setAlert() { const msg = document.getElementById('alertText').value.trim(); const type = document.getElementById('alertType').value; if (!msg) return; try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: msg, type }) }); toast('Alert set!', 'success'); loadAlertBanner() } catch (e) { } }
+        async function clearAlert() { try { await api('/api/alert', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) }); document.getElementById('alertBar').classList.remove('sh'); document.getElementById('alertText').value = ''; toast('Alert cleared', 'success') } catch (e) { } }
 
         // INIT
         checkSaved();
@@ -2541,4 +2543,3 @@
 </body>
 
 </html>
-
