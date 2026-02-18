@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You've been invited! | IQ4U8 Cloud</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06080f;
+            --card: #161b22;
+            --bdr: rgba(255, 255, 255, 0.1);
+            --ac: #6366f1;
+            --tx: #e6edf3;
+            --txd: #8b949e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--tx);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .invite-card {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .invite-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        p {
+            color: var(--txd);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .referrer-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--bdr);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .referrer-name {
+            font-weight: 700;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .plan-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--ac);
+        }
+
+        .pro-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        /* Blue for Pro */
+        .ultra-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+        }
+
+        /* Gold for Ultra */
+
+        .claim-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: 0;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .claim-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .sub-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--txd);
+        }
+
+        .loader {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--ac);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="invite-card" id="loadingCard">
+        <div class="loader"></div>
+        <p style="margin-top:10px">Verifying invite...</p>
+    </div>
+
+    <!-- VALID INVITE -->
+    <div class="invite-card hide" id="validCard">
+        <div class="avatar" id="rAvatar">?</div>
+        <h1>You've been invited!</h1>
+        <p>Your friend has invited you to join <strong>IQ4U8 Cloud</strong>.<br>Claim your exclusive access and start
+            hosting today.</p>
+
+        <div class="referrer-box">
+            <span class="referrer-name" id="rName">Username</span>
+            <span class="plan-badge" id="rPlan">PRO</span>
+        </div>
+
+        <button onclick="claim()" class="claim-btn">🚀 Claim & Join Now</button>
+        <p class="sub-text">Redirecting to secure signup...</p>
+    </div>
+
+    <!-- INVALID INVITE -->
+    <div class="invite-card hide" id="errorCard">
+        <div class="avatar" style="background:#ef4444;box-shadow:0 10px 20px rgba(239, 68, 68, 0.3)">✕</div>
+        <h1>Invite Not Found</h1>
+        <p>This invitation link is invalid or has expired.<br>You can still join IQ4U8 directly!</p>
+        <a href="/browse/" class="claim-btn" style="background:var(--card);border:1px solid var(--bdr)">Go to Home</a>
+    </div>
+
+    <script>
+        const API_BASE = 'https://evidzone-love.hf.space'; // VPS Backend
+
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const ref = params.get('ref');
+
+            if (!ref) {
+                showError();
+                return;
+            }
+
+            try {
+                // Check Ref with Backend
+                const res = await fetch(`${API_BASE}/api/ref-check?code=${ref}`);
+                const data = await res.json();
+
+                if (data.valid) {
+                    document.getElementById('loadingCard').classList.add('hide');
+                    document.getElementById('validCard').classList.remove('hide');
+
+                    document.getElementById('rName').textContent = data.username;
+                    document.getElementById('rAvatar').textContent = data.username.charAt(0).toUpperCase();
+
+                    const planEl = document.getElementById('rPlan');
+                    planEl.textContent = data.plan.toUpperCase();
+                    if (data.plan === 'pro') planEl.className = 'plan-badge pro-badge';
+                    if (data.plan === 'ultra') planEl.className = 'plan-badge ultra-badge';
+                    if (data.plan === 'free') planEl.style.display = 'none';
+
+                    // Store for claim
+                    window.refCode = ref;
+                } else {
+                    showError();
+                }
+            } catch (e) {
+                console.error(e);
+                showError();
+            }
+        }
+
+        function showError() {
+            document.getElementById('loadingCard').classList.add('hide');
+            document.getElementById('errorCard').classList.remove('hide');
+        }
+
+        function claim() {
+            if (window.refCode) {
+                localStorage.setItem('ref', window.refCode);
+                // Redirect to App Signup
+                window.location.href = '/browse/';
+            }
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
