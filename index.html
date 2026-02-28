@@ -5314,11 +5314,10 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         return;
       }
 
-      // "Watch Demo" → scroll to features
+      // "Watch Demo" → open YouTube video
       if (text.indexOf('Watch Demo') !== -1) {
         e.preventDefault();
-        var feat = document.getElementById('features');
-        if (feat) feat.scrollIntoView({ behavior: 'smooth' });
+        window.open('https://youtu.be/AGCPpKay8Jo?si=bM05-UHHt0ap5KMZ', '_blank');
         return;
       }
 
