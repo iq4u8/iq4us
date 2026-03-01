@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -2670,6 +2670,7 @@
     <!-- v3.0 Pending Fix -->
     <script>
         const API_BASE = 'https://iq4u8-evidzone.hf.space';
+        const WS_BASE = 'wss://iq4u8-evidzone.hf.space';
         let user = null, curPath = '', term = null, ws = null, fitA = null, authToken = null, selectMode = false, selected = new Set(), renamePath = '', planUser = '', passUser = '', cpuChart = null, ramChart = null, diskChart = null, termFS = false, dataDisp = null;
         function api(u, o = {}) { if (!o.headers) o.headers = {}; if (authToken) o.headers['X-Auth-Token'] = authToken; return fetch(API_BASE + u, o) }
         function fSz(b) { if (!b || b === Infinity) return '∞'; const k = 1024, s = ['B', 'KB', 'MB', 'GB'], i = Math.min(Math.floor(Math.log(b) / Math.log(k)), 3); return (b / Math.pow(k, i)).toFixed(1) + s[i] }
