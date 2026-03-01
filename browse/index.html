@@ -2825,7 +2825,7 @@
             // Dispose previous onData handler to prevent double-paste
             if (dataDisp) { dataDisp.dispose(); dataDisp = null; }
             const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            ws = new WebSocket('wss://iq4u8-evidzone.hf.space/ws/terminal?token=' + encodeURIComponent(authToken));
+            ws = new WebSocket(WS_BASE + '/ws/terminal?token=' + encodeURIComponent(authToken));
             ws.onopen = () => { const d = fitA.proposeDimensions(); if (d) ws.send(JSON.stringify({ type: 'resize', cols: d.cols, rows: d.rows })) };
             ws.onmessage = ev => term.write(ev.data); ws.onerror = () => term.write('\r\n\x1b[31m[Error]\x1b[0m\r\n'); ws.onclose = () => term.write('\r\n\x1b[31m[Disconnected]\x1b[0m\r\n');
             dataDisp = term.onData(d => { if (ws && ws.readyState === 1) ws.send(JSON.stringify({ type: 'input', data: d })) })
