@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <base href="/browse/">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,viewport-fit=cover">
     <title>IQ4U8 | Ultimate VPS Terminal & Cloud Hosting</title>
     <meta name="description"
         content="IQ4U8 — Premium VPS hosting with integrated SSH terminal, file manager, referral rewards, and real-time system monitoring. Secure, fast, and affordable cloud server management.">
@@ -65,6 +66,7 @@
             background: var(--bg);
             color: var(--tx);
             height: 100vh;
+            height: 100dvh;
             overflow: hidden
         }
 
@@ -108,6 +110,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            height: 100dvh;
             position: relative;
             z-index: 1;
             overflow: hidden
@@ -628,6 +631,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            height: 100dvh;
             text-align: center;
             position: relative;
             z-index: 1;
@@ -695,6 +699,7 @@
         .app {
             display: none;
             height: 100vh;
+            height: 100dvh;
             position: relative;
             z-index: 1
         }
@@ -1856,7 +1861,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 56px;
+            height: calc(56px + env(safe-area-inset-bottom, 0px));
+            padding-bottom: env(safe-area-inset-bottom, 0px);
             background: var(--bg2);
             border-top: 1px solid var(--bdr);
             z-index: 100;
@@ -1936,7 +1942,8 @@
                 flex-direction: column !important;
                 height: 100vh;
                 height: 100dvh;
-                overflow: hidden
+                overflow: hidden;
+                padding-top: env(safe-area-inset-top, 0px)
             }
 
             /* Main content area: column, fills app except bottom nav */
@@ -1947,7 +1954,7 @@
                 flex-direction: column !important;
                 overflow: hidden !important;
                 min-height: 0 !important;
-                padding-bottom: 56px
+                padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px))
             }
 
             /* ── HEADER BAR ── always visible at top of .mn */
