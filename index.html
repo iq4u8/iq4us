@@ -3,49 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="iq4u8 — Smart Tools & Tricks. CC Generator, BIN Checker, Hash Tools and more.">
+  <meta name="description" content="iq4u8 — Smart Tools & Tricks platform for developers.">
   <title>iq4u8 — Smart Tools & Tricks</title>
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <meta property="og:title" content="iq4u8 — Smart Tools & Tricks">
-  <meta property="og:image" content="og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
-<canvas id="meshCanvas"></canvas>
+<canvas id="meshBg"></canvas>
 <div class="noise"></div>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" id="mainNav">
   <div class="container nav-inner">
     <a href="#" class="nav-logo"><div class="logo-mark"><i class="fa-solid fa-bolt"></i></div>iq4u8</a>
-    <div class="nav-links">
+    <!-- Desktop links centered -->
+    <div class="nav-center">
       <a href="#tools">Tools</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#reviews">Reviews</a>
-      <a href="./aicc/">CC Checker</a>
-      <a href="/browse/" class="cta">Get Started</a>
     </div>
-    <button class="mobile-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
-      <i class="fa-solid fa-bars" style="font-size:1.1rem"></i>
+    <a href="/browse/" class="nav-cta-btn">Get Started</a>
+    <!-- Hamburger for mobile -->
+    <button class="hamburger" id="hamBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-<div class="mobile-menu">
-  <a href="#tools">Tools</a>
-  <a href="#features">Features</a>
-  <a href="#pricing">Pricing</a>
-  <a href="#reviews">Reviews</a>
-  <a href="./aicc/">CC Checker</a>
-  <a href="/browse/" class="btn-p" style="margin-top:12px">Get Started</a>
+
+<!-- BUBBLE DROP MOBILE MENU -->
+<div class="bubble-menu" id="bubbleMenu">
+  <div class="bubble-row">
+    <a href="./tools/" class="bubble" style="--i:0"><i class="fa-solid fa-wrench"></i> Tools</a>
+    <a href="./tricks/" class="bubble" style="--i:1"><i class="fa-solid fa-lightbulb"></i> Tricks</a>
+    <a href="./blogs/" class="bubble" style="--i:2"><i class="fa-solid fa-pen-nib"></i> Blogs</a>
+  </div>
+  <div class="bubble-row">
+    <a href="./scripts/" class="bubble" style="--i:3"><i class="fa-solid fa-scroll"></i> Scripts</a>
+    <a href="/browse/" class="bubble" style="--i:4"><i class="fa-solid fa-rocket"></i> Dashboard</a>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -54,7 +58,7 @@
     <div class="hero-content">
       <div class="hero-chip"><span class="hero-dot"></span> Smart Tools Platform</div>
       <h1><span class="hw">Smart </span><span class="hw gr">Tools.</span><br><span class="hw">Powerful </span><span class="hw gr">Tricks.</span></h1>
-      <p>Your all-in-one toolkit for CC generation, BIN checking, hashing, and more. Built for speed, designed for power users.</p>
+      <p>Your all-in-one platform for tools, tricks, blogs and scripts. Built for speed, designed for power users.</p>
       <div class="hero-btns">
         <a href="#tools" class="btn-p">Explore Tools <i class="fa-solid fa-arrow-right"></i></a>
         <a href="/browse/" class="btn-g"><i class="fa-solid fa-play"></i> Dashboard</a>
@@ -79,17 +83,17 @@
 <section class="section" id="tools">
   <div class="container">
     <div class="s-head rv">
-      <div class="s-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Our Tools</div>
-      <h2 class="s-title">Powerful Tools at Your Fingertips</h2>
-      <p class="s-sub">Everything you need in one place. Fast, secure, and always available.</p>
+      <div class="s-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Our Platform</div>
+      <h2 class="s-title">Everything in One Place</h2>
+      <p class="s-sub">Tools, tricks, blogs and scripts — all built for developers.</p>
     </div>
     <div class="tools-grid">
-      <a href="./aicc/" class="tool-card rv"><div class="t-icon c1"><i class="fa-solid fa-credit-card"></i></div><h3>CC Generator</h3><p>Generate valid credit card numbers for testing. Supports BIN lookup and batch generation.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="/browse/" class="tool-card rv rv-d1"><div class="t-icon c2"><i class="fa-solid fa-barcode"></i></div><h3>BIN Checker</h3><p>Instantly lookup BIN/IIN details including bank, country, card type and brand.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="/browse/" class="tool-card rv rv-d2"><div class="t-icon c3"><i class="fa-solid fa-shuffle"></i></div><h3>Random Generator</h3><p>Generate random strings, numbers, UUIDs, passwords with custom rules.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="/browse/" class="tool-card rv rv-d3"><div class="t-icon c4"><i class="fa-solid fa-fingerprint"></i></div><h3>Hash Tools</h3><p>Hash and encode data with MD5, SHA1, SHA256, Base64, URL encode and more.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="/browse/" class="tool-card rv rv-d4"><div class="t-icon c5"><i class="fa-solid fa-code"></i></div><h3>API Tools</h3><p>Test APIs, format JSON, generate mock data and debug webhooks in real-time.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
-      <a href="/browse/" class="tool-card rv rv-d5"><div class="t-icon c6"><i class="fa-solid fa-font"></i></div><h3>Text Utilities</h3><p>Case converter, word counter, regex tester, diff checker and formatting tools.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="./tools/" class="tool-card rv"><div class="t-icon c1"><i class="fa-solid fa-wrench"></i></div><h3>Smart Tools</h3><p>Hash generators, encoders, decoders, formatters and more utility tools.</p><span class="t-link">Explore <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="./tricks/" class="tool-card rv rv-d1"><div class="t-icon c2"><i class="fa-solid fa-lightbulb"></i></div><h3>Pro Tricks</h3><p>Developer tips, hacks and tricks to boost your productivity and workflow.</p><span class="t-link">Explore <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="./blogs/" class="tool-card rv rv-d2"><div class="t-icon c3"><i class="fa-solid fa-pen-nib"></i></div><h3>Tech Blogs</h3><p>In-depth articles, tutorials and guides on latest tech and development.</p><span class="t-link">Explore <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="./scripts/" class="tool-card rv rv-d3"><div class="t-icon c4"><i class="fa-solid fa-scroll"></i></div><h3>Ready Scripts</h3><p>Pre-built scripts and automation tools. Download, deploy and run instantly.</p><span class="t-link">Explore <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="./aicc/" class="tool-card rv rv-d4"><div class="t-icon c5"><i class="fa-solid fa-code"></i></div><h3>Core Gen</h3><p>Advanced generation tool with BIN lookup, Luhn validation and batch mode.</p><span class="t-link">Launch <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="/browse/" class="tool-card rv rv-d5"><div class="t-icon c6"><i class="fa-solid fa-server"></i></div><h3>VPS Hosting</h3><p>Affordable VPS servers with SSH access, full root and 24/7 support.</p><span class="t-link">Get Started <i class="fa-solid fa-arrow-right"></i></span></a>
     </div>
   </div>
 </section>
@@ -119,24 +123,24 @@
     <div class="s-head rv">
       <div class="s-tag"><i class="fa-solid fa-tag"></i> Pricing</div>
       <h2 class="s-title">Simple, Transparent Pricing</h2>
-      <p class="s-sub">Choose the perfect plan. All plans include premium tools access.</p>
+      <p class="s-sub">Choose the perfect plan. All plans include premium access.</p>
     </div>
     <div class="price-grid">
       <div class="p-card rv">
         <h3>Free</h3><div class="p-price">₹40</div><div class="p-per">/ month</div>
-        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>0.5 CPU Core</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>280MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>500MB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Basic Support</li></ul>
-        <button class="p-btn line" onclick="showPayment('Free - ₹40/month')">Get Started</button>
+        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>0.5 CPU Core</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>280MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>500MB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Basic Support</li></ul>
+        <button class="p-btn line" onclick="showPayment('Free — ₹40/month')">Get Started</button>
       </div>
       <div class="p-card pop rv rv-d1">
         <div class="p-badge">Popular</div>
         <h3>Pro</h3><div class="p-price">₹70</div><div class="p-per">/ month</div>
-        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>1 CPU Core</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>560MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>1GB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Priority Support</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>File Manager</li></ul>
-        <button class="p-btn fill" onclick="showPayment('Pro - ₹70/month')">Get Started</button>
+        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>1 CPU Core</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>560MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>1GB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Priority Support</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>File Manager</li></ul>
+        <button class="p-btn fill" onclick="showPayment('Pro — ₹70/month')">Get Started</button>
       </div>
       <div class="p-card rv rv-d2">
         <h3>Ultra</h3><div class="p-price">₹150</div><div class="p-per">/ month</div>
-        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>2 CPU Cores</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>1120MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>2GB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>24/7 Support</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Full Root Access</li></ul>
-        <button class="p-btn line" onclick="showPayment('Ultra - ₹150/month')">Get Started</button>
+        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>2 CPU Cores</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>1120MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>2GB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>24/7 Support</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Full Root Access</li></ul>
+        <button class="p-btn line" onclick="showPayment('Ultra — ₹150/month')">Get Started</button>
       </div>
     </div>
   </div>
@@ -152,41 +156,35 @@
     </div>
   </div>
   <div class="t-scroll rv">
-    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"The CC Generator tool is incredibly fast and accurate. Best tool for testing payment integrations."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=1" alt="" class="t-av"><div><div class="t-name">Sarah Chen</div><div class="t-co">TechFlow Inc.</div></div></div></div>
-    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Love the all-in-one approach. BIN checker, hash tools and generators in one place."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=3" alt="" class="t-av"><div><div class="t-name">Marcus Rodriguez</div><div class="t-co">CloudScale Solutions</div></div></div></div>
-    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Rock-solid tools with a stunning UI. Everything runs blazing fast."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=5" alt="" class="t-av"><div><div class="t-name">Emily Watson</div><div class="t-co">DataStream Analytics</div></div></div></div>
-    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"As a startup dev, these tools saved us countless hours. Support is amazing too."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=7" alt="" class="t-av"><div><div class="t-name">David Kim</div><div class="t-co">StartupLab</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Best platform for developer tools. Everything is fast, clean and well-designed."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=1" alt="" class="t-av"><div><div class="t-name">Sarah Chen</div><div class="t-co">TechFlow Inc.</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"All-in-one toolkit that actually works. Blogs and scripts section is amazing."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=3" alt="" class="t-av"><div><div class="t-name">Marcus Rodriguez</div><div class="t-co">CloudScale Solutions</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Premium design with blazing fast tools. This is what every dev needs."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=5" alt="" class="t-av"><div><div class="t-name">Emily Watson</div><div class="t-co">DataStream Analytics</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Saved us countless hours. Support team is incredibly responsive too."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=7" alt="" class="t-av"><div><div class="t-name">David Kim</div><div class="t-co">StartupLab</div></div></div></div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
-  <div class="container">
-    <div class="cta-box rv">
-      <h2>Ready to <span class="gr">Level Up</span>?</h2>
-      <p>Join thousands of developers using iq4u8 tools every day.</p>
-      <a href="/browse/" class="btn-p">Start Now <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
-  </div>
-</section>
+<section class="cta"><div class="container"><div class="cta-box rv">
+  <h2>Ready to <span class="gr">Level Up</span>?</h2>
+  <p>Join thousands of developers using iq4u8 every day.</p>
+  <a href="/browse/" class="btn-p">Start Now <i class="fa-solid fa-arrow-right"></i></a>
+</div></div></section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="f-grid">
-      <div class="f-brand"><a href="#" class="nav-logo"><div class="logo-mark"><i class="fa-solid fa-bolt"></i></div>iq4u8</a><p>Smart Tools & Tricks platform for developers and power users.</p></div>
-      <div><h4>Product</h4><ul class="f-links"><li><a href="#tools">Tools</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="./aicc/">CC Checker</a></li></ul></div>
-      <div><h4>Resources</h4><ul class="f-links"><li><a href="/pages/docs.html">Docs</a></li><li><a href="/pages/tutorials.html">Tutorials</a></li><li><a href="/pages/blog.html">Blog</a></li><li><a href="/pages/community.html">Community</a></li></ul></div>
-      <div><h4>Company</h4><ul class="f-links"><li><a href="/pages/about.html">About</a></li><li><a href="/pages/privacy.html">Privacy</a></li><li><a href="/pages/terms.html">Terms</a></li><li><a href="https://t.me/iq4u8">Contact</a></li></ul></div>
-    </div>
-    <div class="f-bottom"><p>&copy; 2026 iq4u8. All rights reserved.</p>
-      <div class="socials"><a href="https://x.com/iq4u8" target="_blank"><i class="fa-brands fa-x-twitter"></i></a><a href="https://github.com/iq4u8" target="_blank"><i class="fa-brands fa-github"></i></a><a href="https://t.me/iq4u8" target="_blank"><i class="fa-brands fa-telegram"></i></a><a href="mailto:evidzone@gmail.com"><i class="fa-solid fa-envelope"></i></a></div>
-    </div>
+<footer class="footer"><div class="container">
+  <div class="f-grid">
+    <div class="f-brand"><a href="#" class="nav-logo"><div class="logo-mark"><i class="fa-solid fa-bolt"></i></div>iq4u8</a><p>Smart Tools & Tricks platform for developers and power users.</p></div>
+    <div><h4>Explore</h4><ul class="f-links"><li><a href="./tools/">Tools</a></li><li><a href="./tricks/">Tricks</a></li><li><a href="./blogs/">Blogs</a></li><li><a href="./scripts/">Scripts</a></li></ul></div>
+    <div><h4>Resources</h4><ul class="f-links"><li><a href="/pages/docs.html">Docs</a></li><li><a href="/pages/tutorials.html">Tutorials</a></li><li><a href="./aicc/">Core Gen</a></li><li><a href="/browse/">Dashboard</a></li></ul></div>
+    <div><h4>Company</h4><ul class="f-links"><li><a href="/pages/about.html">About</a></li><li><a href="/pages/privacy.html">Privacy</a></li><li><a href="/pages/terms.html">Terms</a></li><li><a href="https://t.me/iq4u8">Contact</a></li></ul></div>
   </div>
-</footer>
+  <div class="f-bottom"><p>&copy; 2026 iq4u8. All rights reserved.</p>
+    <div class="socials"><a href="https://x.com/iq4u8" target="_blank"><i class="fa-brands fa-x-twitter"></i></a><a href="https://github.com/iq4u8" target="_blank"><i class="fa-brands fa-github"></i></a><a href="https://t.me/iq4u8" target="_blank"><i class="fa-brands fa-telegram"></i></a><a href="mailto:evidzone@gmail.com"><i class="fa-solid fa-envelope"></i></a></div>
+  </div>
+</div></footer>
 
 <!-- POPUP -->
-<div class="popup"><div class="popup-box">
+<div class="popup" id="payPopup"><div class="popup-box">
   <button class="popup-x" onclick="closePayment()">✕</button>
   <div style="font-size:2.5rem;margin-bottom:12px">💳</div>
   <h3 style="font-family:var(--font2);font-size:1.4rem;margin-bottom:6px" id="popup-plan">Plan</h3>
@@ -195,6 +193,6 @@
   <p style="color:var(--text3);font-size:.78rem;margin-top:16px">Instant activation • 24/7 support</p>
 </div></div>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
