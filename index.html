@@ -19,127 +19,77 @@
 </head>
 <body>
 
-<!-- BG -->
 <canvas id="meshCanvas"></canvas>
 <div class="noise"></div>
-<div class="dot-grid"></div>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#" class="nav-logo"><div class="logo-mark"></div>iq4u8</a>
-    <div class="nav-pills">
-      <a href="#tools" class="nav-pill">Tools</a>
-      <a href="#features" class="nav-pill">Features</a>
-      <a href="#pricing" class="nav-pill">Pricing</a>
-      <a href="#reviews" class="nav-pill">Reviews</a>
-      <a href="./aicc/" class="nav-pill">CC Checker</a>
-      <a href="/browse/" class="nav-pill glow">Get Started</a>
+    <a href="#" class="nav-logo"><div class="logo-mark"><i class="fa-solid fa-bolt"></i></div>iq4u8</a>
+    <div class="nav-links">
+      <a href="#tools">Tools</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="./aicc/">CC Checker</a>
+      <a href="/browse/" class="cta">Get Started</a>
     </div>
+    <button class="mobile-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+      <i class="fa-solid fa-bars" style="font-size:1.1rem"></i>
+    </button>
   </div>
 </nav>
-
-<!-- MOBILE BOTTOM NAV -->
-<div class="mobile-nav">
-  <a href="#tools"><i class="fa-solid fa-grid-2"></i>Tools</a>
-  <a href="#features"><i class="fa-solid fa-bolt"></i>Features</a>
-  <a href="#pricing"><i class="fa-solid fa-tag"></i>Plans</a>
-  <a href="./aicc/"><i class="fa-solid fa-credit-card"></i>CC Gen</a>
-  <a href="/browse/"><i class="fa-solid fa-rocket"></i>Start</a>
+<div class="mobile-menu">
+  <a href="#tools">Tools</a>
+  <a href="#features">Features</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#reviews">Reviews</a>
+  <a href="./aicc/">CC Checker</a>
+  <a href="/browse/" class="btn-p" style="margin-top:12px">Get Started</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-orb o1"></div>
-  <div class="hero-orb o2"></div>
-  <div class="hero-orb o3"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-chip"><div class="hero-chip-dot">⚡</div>Smart Tools Platform</div>
-      <h1>
-        <span class="hw">Smart</span>
-        <span class="hw gr">Tools.</span><br>
-        <span class="hw">Powerful</span>
-        <span class="hw gr">Tricks.</span>
-      </h1>
+      <div class="hero-chip"><span class="hero-dot"></span> Smart Tools Platform</div>
+      <h1><span class="hw">Smart </span><span class="hw gr">Tools.</span><br><span class="hw">Powerful </span><span class="hw gr">Tricks.</span></h1>
       <p>Your all-in-one toolkit for CC generation, BIN checking, hashing, and more. Built for speed, designed for power users.</p>
       <div class="hero-btns">
-        <a href="#tools" class="mag-btn primary">Explore Tools <i class="fa-solid fa-arrow-right"></i></a>
-        <a href="/browse/" class="mag-btn ghost"><i class="fa-solid fa-play"></i> Dashboard</a>
+        <a href="#tools" class="btn-p">Explore Tools <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="/browse/" class="btn-g"><i class="fa-solid fa-play"></i> Dashboard</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE STATS -->
-<section class="marquee">
-  <div class="marquee-track">
-    <div class="marquee-item"><span class="mi">⚡</span><strong data-count="10" data-suffix="K+">10K+</strong> Active Users</div>
-    <div class="marquee-item"><span class="mi">🛠</span><strong data-count="50" data-suffix="+">50+</strong> Smart Tools</div>
-    <div class="marquee-item"><span class="mi">✅</span><strong data-count="99.9" data-suffix="%" data-decimal="1">99.9%</strong> Uptime</div>
-    <div class="marquee-item"><span class="mi">🔒</span> End-to-End Privacy</div>
-    <div class="marquee-item"><span class="mi">💬</span> 24/7 Telegram Support</div>
-    <div class="marquee-item"><span class="mi">🌍</span> Global Access</div>
-    <div class="marquee-item"><span class="mi">⚡</span><strong>10K+</strong> Active Users</div>
-    <div class="marquee-item"><span class="mi">🛠</span><strong>50+</strong> Smart Tools</div>
-    <div class="marquee-item"><span class="mi">✅</span><strong>99.9%</strong> Uptime</div>
-    <div class="marquee-item"><span class="mi">🔒</span> End-to-End Privacy</div>
-    <div class="marquee-item"><span class="mi">💬</span> 24/7 Telegram Support</div>
-    <div class="marquee-item"><span class="mi">🌍</span> Global Access</div>
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-box rv"><div class="stat-num"><span class="gr" data-count="10" data-suffix="K+">0</span></div><div class="stat-label">Active Users</div></div>
+      <div class="stat-box rv rv-d1"><div class="stat-num"><span class="gr" data-count="50" data-suffix="+">0</span></div><div class="stat-label">Smart Tools</div></div>
+      <div class="stat-box rv rv-d2"><div class="stat-num"><span class="gr" data-count="99.9" data-suffix="%" data-decimal="1">0</span></div><div class="stat-label">Uptime</div></div>
+      <div class="stat-box rv rv-d3"><div class="stat-num"><span class="gr" data-count="24" data-suffix="/7">0</span></div><div class="stat-label">Support</div></div>
+    </div>
   </div>
 </section>
 
-<!-- TOOLS BENTO -->
+<!-- TOOLS -->
 <section class="section" id="tools">
   <div class="container">
-    <div class="sheader rv">
-      <div class="stag"><i class="fa-solid fa-wand-magic-sparkles"></i> Our Tools</div>
-      <h2 class="stitle">Powerful Tools at Your Fingertips</h2>
-      <p class="ssub">Everything you need in one place. Fast, secure, and always available.</p>
+    <div class="s-head rv">
+      <div class="s-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Our Tools</div>
+      <h2 class="s-title">Powerful Tools at Your Fingertips</h2>
+      <p class="s-sub">Everything you need in one place. Fast, secure, and always available.</p>
     </div>
-    <div class="bento">
-      <a href="./aicc/" class="bento-card b-span-8 rv">
-        <div class="b-icon v"><i class="fa-solid fa-credit-card"></i></div>
-        <h3>CC Generator</h3>
-        <p>Generate valid credit card numbers for testing. Supports BIN lookup, batch generation, auto-fill and Luhn validation.</p>
-        <span class="b-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span>
-        <div class="b-deco" style="background:var(--v)"></div>
-      </a>
-      <a href="/browse/" class="bento-card b-span-4 rv rv-d1">
-        <div class="b-icon c"><i class="fa-solid fa-barcode"></i></div>
-        <h3>BIN Checker</h3>
-        <p>Lookup BIN/IIN details — bank, country, card type.</p>
-        <span class="b-link">Launch <i class="fa-solid fa-arrow-right"></i></span>
-        <div class="b-deco" style="background:var(--c)"></div>
-      </a>
-      <a href="/browse/" class="bento-card b-span-4 rv rv-d2">
-        <div class="b-icon p"><i class="fa-solid fa-shuffle"></i></div>
-        <h3>Random Generator</h3>
-        <p>Generate strings, UUIDs, passwords with custom rules.</p>
-        <span class="b-link">Launch <i class="fa-solid fa-arrow-right"></i></span>
-        <div class="b-deco" style="background:var(--p)"></div>
-      </a>
-      <a href="/browse/" class="bento-card b-span-8 rv rv-d3">
-        <div class="b-icon a"><i class="fa-solid fa-fingerprint"></i></div>
-        <h3>Hash Tools</h3>
-        <p>Hash and encode data with MD5, SHA1, SHA256, Base64, URL encode, JWT decode and more cryptographic utilities.</p>
-        <span class="b-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span>
-        <div class="b-deco" style="background:var(--a)"></div>
-      </a>
-      <a href="/browse/" class="bento-card b-span-6 rv rv-d4">
-        <div class="b-icon g"><i class="fa-solid fa-code"></i></div>
-        <h3>API Tools</h3>
-        <p>Test APIs, format JSON, generate mock data and debug webhooks in real-time.</p>
-        <span class="b-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span>
-        <div class="b-deco" style="background:#22C55E"></div>
-      </a>
-      <a href="/browse/" class="bento-card b-span-6 rv rv-d5">
-        <div class="b-icon b"><i class="fa-solid fa-font"></i></div>
-        <h3>Text Utilities</h3>
-        <p>Case converter, word counter, regex tester, diff checker and text formatting tools.</p>
-        <span class="b-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span>
-        <div class="b-deco" style="background:#60A5FA"></div>
-      </a>
+    <div class="tools-grid">
+      <a href="./aicc/" class="tool-card rv"><div class="t-icon c1"><i class="fa-solid fa-credit-card"></i></div><h3>CC Generator</h3><p>Generate valid credit card numbers for testing. Supports BIN lookup and batch generation.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="/browse/" class="tool-card rv rv-d1"><div class="t-icon c2"><i class="fa-solid fa-barcode"></i></div><h3>BIN Checker</h3><p>Instantly lookup BIN/IIN details including bank, country, card type and brand.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="/browse/" class="tool-card rv rv-d2"><div class="t-icon c3"><i class="fa-solid fa-shuffle"></i></div><h3>Random Generator</h3><p>Generate random strings, numbers, UUIDs, passwords with custom rules.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="/browse/" class="tool-card rv rv-d3"><div class="t-icon c4"><i class="fa-solid fa-fingerprint"></i></div><h3>Hash Tools</h3><p>Hash and encode data with MD5, SHA1, SHA256, Base64, URL encode and more.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="/browse/" class="tool-card rv rv-d4"><div class="t-icon c5"><i class="fa-solid fa-code"></i></div><h3>API Tools</h3><p>Test APIs, format JSON, generate mock data and debug webhooks in real-time.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
+      <a href="/browse/" class="tool-card rv rv-d5"><div class="t-icon c6"><i class="fa-solid fa-font"></i></div><h3>Text Utilities</h3><p>Case converter, word counter, regex tester, diff checker and formatting tools.</p><span class="t-link">Launch Tool <i class="fa-solid fa-arrow-right"></i></span></a>
     </div>
   </div>
 </section>
@@ -147,18 +97,18 @@
 <!-- FEATURES -->
 <section class="section alt" id="features">
   <div class="container">
-    <div class="sheader rv">
-      <div class="stag"><i class="fa-solid fa-bolt"></i> Why Choose Us</div>
-      <h2 class="stitle">Built for Performance</h2>
-      <p class="ssub">Every tool is optimized for speed, security and the best user experience.</p>
+    <div class="s-head rv">
+      <div class="s-tag"><i class="fa-solid fa-bolt"></i> Why Choose Us</div>
+      <h2 class="s-title">Built for Performance</h2>
+      <p class="s-sub">Every tool is optimized for speed, security and the best user experience.</p>
     </div>
     <div class="feat-grid">
-      <div class="feat-card rv"><div class="f-ic"><i class="fa-solid fa-gauge-high"></i></div><h3>Lightning Fast</h3><p>All tools run client-side for instant results with zero server latency.</p></div>
-      <div class="feat-card rv rv-d1"><div class="f-ic"><i class="fa-solid fa-lock"></i></div><h3>Fully Secure</h3><p>Your data never leaves your browser. End-to-end privacy guaranteed.</p></div>
-      <div class="feat-card rv rv-d2"><div class="f-ic"><i class="fa-solid fa-globe"></i></div><h3>Access Anywhere</h3><p>Works on any device — desktop, tablet or mobile with full responsiveness.</p></div>
-      <div class="feat-card rv rv-d3"><div class="f-ic"><i class="fa-solid fa-arrows-rotate"></i></div><h3>Always Updated</h3><p>New tools and features added regularly. Stay ahead of the curve.</p></div>
-      <div class="feat-card rv rv-d4"><div class="f-ic"><i class="fa-solid fa-terminal"></i></div><h3>Developer Friendly</h3><p>Clean APIs, keyboard shortcuts and power-user features built in.</p></div>
-      <div class="feat-card rv rv-d5"><div class="f-ic"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Get help anytime via Telegram. Our team responds within minutes.</p></div>
+      <div class="feat-card rv"><div class="f-icon"><i class="fa-solid fa-gauge-high"></i></div><h3>Lightning Fast</h3><p>All tools run client-side for instant results with zero server latency.</p></div>
+      <div class="feat-card rv rv-d1"><div class="f-icon"><i class="fa-solid fa-lock"></i></div><h3>Fully Secure</h3><p>Your data never leaves your browser. End-to-end privacy guaranteed.</p></div>
+      <div class="feat-card rv rv-d2"><div class="f-icon"><i class="fa-solid fa-globe"></i></div><h3>Access Anywhere</h3><p>Works on any device — desktop, tablet or mobile with full responsiveness.</p></div>
+      <div class="feat-card rv rv-d3"><div class="f-icon"><i class="fa-solid fa-arrows-rotate"></i></div><h3>Always Updated</h3><p>New tools and features added regularly. Stay ahead of the curve.</p></div>
+      <div class="feat-card rv rv-d4"><div class="f-icon"><i class="fa-solid fa-terminal"></i></div><h3>Developer Friendly</h3><p>Clean APIs, keyboard shortcuts and power-user features built in.</p></div>
+      <div class="feat-card rv rv-d5"><div class="f-icon"><i class="fa-solid fa-headset"></i></div><h3>24/7 Support</h3><p>Get help anytime via Telegram. Our team responds within minutes.</p></div>
     </div>
   </div>
 </section>
@@ -166,46 +116,26 @@
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="container">
-    <div class="sheader rv">
-      <div class="stag"><i class="fa-solid fa-tag"></i> Pricing</div>
-      <h2 class="stitle">Simple, Transparent Pricing</h2>
-      <p class="ssub">Choose the perfect plan. All plans include premium tools access.</p>
+    <div class="s-head rv">
+      <div class="s-tag"><i class="fa-solid fa-tag"></i> Pricing</div>
+      <h2 class="s-title">Simple, Transparent Pricing</h2>
+      <p class="s-sub">Choose the perfect plan. All plans include premium tools access.</p>
     </div>
     <div class="price-grid">
       <div class="p-card rv">
         <h3>Free</h3><div class="p-price">₹40</div><div class="p-per">/ month</div>
-        <ul class="p-list">
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>0.5 CPU Core</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>280MB RAM</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>500MB Storage</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Basic Support</li>
-        </ul>
+        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>0.5 CPU Core</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>280MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>500MB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Basic Support</li></ul>
         <button class="p-btn line" onclick="showPayment('Free - ₹40/month')">Get Started</button>
       </div>
       <div class="p-card pop rv rv-d1">
         <div class="p-badge">Popular</div>
         <h3>Pro</h3><div class="p-price">₹70</div><div class="p-per">/ month</div>
-        <ul class="p-list">
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>1 CPU Core</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>560MB RAM</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>1GB Storage</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Priority Support</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>File Manager</li>
-        </ul>
+        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>1 CPU Core</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>560MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>1GB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Priority Support</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>File Manager</li></ul>
         <button class="p-btn fill" onclick="showPayment('Pro - ₹70/month')">Get Started</button>
       </div>
       <div class="p-card rv rv-d2">
         <h3>Ultra</h3><div class="p-price">₹150</div><div class="p-per">/ month</div>
-        <ul class="p-list">
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>2 CPU Cores</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>1120MB RAM</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>2GB Storage</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>24/7 Dedicated Support</li>
-          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Full Root Access</li>
-        </ul>
+        <ul class="p-list"><li><span class="ck"><i class="fa-solid fa-check"></i></span>2 CPU Cores</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>1120MB RAM</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>2GB Storage</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>SSH Terminal Access</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>24/7 Support</li><li><span class="ck"><i class="fa-solid fa-check"></i></span>Full Root Access</li></ul>
         <button class="p-btn line" onclick="showPayment('Ultra - ₹150/month')">Get Started</button>
       </div>
     </div>
@@ -215,43 +145,27 @@
 <!-- REVIEWS -->
 <section class="section alt" id="reviews">
   <div class="container">
-    <div class="sheader rv">
-      <div class="stag"><i class="fa-solid fa-quote-left"></i> Reviews</div>
-      <h2 class="stitle">Trusted by Developers</h2>
-      <p class="ssub">See what our community has to say about their experience.</p>
+    <div class="s-head rv">
+      <div class="s-tag"><i class="fa-solid fa-quote-left"></i> Reviews</div>
+      <h2 class="s-title">Trusted by Developers</h2>
+      <p class="s-sub">See what our community says about their experience.</p>
     </div>
   </div>
   <div class="t-scroll rv">
-    <div class="t-card">
-      <div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-      <p class="t-quote">"The CC Generator tool is incredibly fast and accurate. Best tool I've used for testing payment integrations."</p>
-      <div class="t-who"><img src="https://i.pravatar.cc/150?img=1" alt="" class="t-av"><div><div class="t-name">Sarah Chen</div><div class="t-co">TechFlow Inc.</div></div></div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-      <p class="t-quote">"Love the all-in-one approach. BIN checker, hash tools and generators in one place saves so much time."</p>
-      <div class="t-who"><img src="https://i.pravatar.cc/150?img=3" alt="" class="t-av"><div><div class="t-name">Marcus Rodriguez</div><div class="t-co">CloudScale Solutions</div></div></div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-      <p class="t-quote">"Rock-solid tools with a stunning UI. The design is premium and everything runs blazing fast."</p>
-      <div class="t-who"><img src="https://i.pravatar.cc/150?img=5" alt="" class="t-av"><div><div class="t-name">Emily Watson</div><div class="t-co">DataStream Analytics</div></div></div>
-    </div>
-    <div class="t-card">
-      <div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-      <p class="t-quote">"As a startup dev, these tools saved us countless hours. Support team is incredibly responsive too."</p>
-      <div class="t-who"><img src="https://i.pravatar.cc/150?img=7" alt="" class="t-av"><div><div class="t-name">David Kim</div><div class="t-co">StartupLab</div></div></div>
-    </div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"The CC Generator tool is incredibly fast and accurate. Best tool for testing payment integrations."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=1" alt="" class="t-av"><div><div class="t-name">Sarah Chen</div><div class="t-co">TechFlow Inc.</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Love the all-in-one approach. BIN checker, hash tools and generators in one place."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=3" alt="" class="t-av"><div><div class="t-name">Marcus Rodriguez</div><div class="t-co">CloudScale Solutions</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"Rock-solid tools with a stunning UI. Everything runs blazing fast."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=5" alt="" class="t-av"><div><div class="t-name">Emily Watson</div><div class="t-co">DataStream Analytics</div></div></div></div>
+    <div class="t-card"><div class="t-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="t-quote">"As a startup dev, these tools saved us countless hours. Support is amazing too."</p><div class="t-who"><img src="https://i.pravatar.cc/150?img=7" alt="" class="t-av"><div><div class="t-name">David Kim</div><div class="t-co">StartupLab</div></div></div></div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="cta">
   <div class="container">
-    <div class="cta-inner rv">
+    <div class="cta-box rv">
       <h2>Ready to <span class="gr">Level Up</span>?</h2>
       <p>Join thousands of developers using iq4u8 tools every day.</p>
-      <a href="/browse/" class="mag-btn primary" style="position:relative;z-index:1">Start Now <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="/browse/" class="btn-p">Start Now <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -260,37 +174,26 @@
 <footer class="footer">
   <div class="container">
     <div class="f-grid">
-      <div class="f-brand">
-        <a href="#" class="nav-logo"><div class="logo-mark"></div>iq4u8</a>
-        <p>Smart Tools & Tricks platform for developers and power users.</p>
-      </div>
+      <div class="f-brand"><a href="#" class="nav-logo"><div class="logo-mark"><i class="fa-solid fa-bolt"></i></div>iq4u8</a><p>Smart Tools & Tricks platform for developers and power users.</p></div>
       <div><h4>Product</h4><ul class="f-links"><li><a href="#tools">Tools</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="./aicc/">CC Checker</a></li></ul></div>
-      <div><h4>Resources</h4><ul class="f-links"><li><a href="/pages/docs.html">Documentation</a></li><li><a href="/pages/tutorials.html">Tutorials</a></li><li><a href="/pages/blog.html">Blog</a></li><li><a href="/pages/community.html">Community</a></li></ul></div>
-      <div><h4>Company</h4><ul class="f-links"><li><a href="/pages/about.html">About Us</a></li><li><a href="/pages/privacy.html">Privacy</a></li><li><a href="/pages/terms.html">Terms</a></li><li><a href="https://t.me/iq4u8">Contact</a></li></ul></div>
+      <div><h4>Resources</h4><ul class="f-links"><li><a href="/pages/docs.html">Docs</a></li><li><a href="/pages/tutorials.html">Tutorials</a></li><li><a href="/pages/blog.html">Blog</a></li><li><a href="/pages/community.html">Community</a></li></ul></div>
+      <div><h4>Company</h4><ul class="f-links"><li><a href="/pages/about.html">About</a></li><li><a href="/pages/privacy.html">Privacy</a></li><li><a href="/pages/terms.html">Terms</a></li><li><a href="https://t.me/iq4u8">Contact</a></li></ul></div>
     </div>
-    <div class="f-bottom">
-      <p>&copy; 2026 iq4u8. All rights reserved.</p>
-      <div class="socials">
-        <a href="https://x.com/iq4u8" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="https://github.com/iq4u8" target="_blank"><i class="fa-brands fa-github"></i></a>
-        <a href="https://t.me/iq4u8" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-        <a href="mailto:evidzone@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-      </div>
+    <div class="f-bottom"><p>&copy; 2026 iq4u8. All rights reserved.</p>
+      <div class="socials"><a href="https://x.com/iq4u8" target="_blank"><i class="fa-brands fa-x-twitter"></i></a><a href="https://github.com/iq4u8" target="_blank"><i class="fa-brands fa-github"></i></a><a href="https://t.me/iq4u8" target="_blank"><i class="fa-brands fa-telegram"></i></a><a href="mailto:evidzone@gmail.com"><i class="fa-solid fa-envelope"></i></a></div>
     </div>
   </div>
 </footer>
 
 <!-- POPUP -->
-<div class="popup" id="payPopup">
-  <div class="popup-box" style="position:relative">
-    <button class="popup-x" onclick="closePayment()">✕</button>
-    <div style="font-size:2.5rem;margin-bottom:12px">💳</div>
-    <h3 style="font-family:var(--font2);font-size:1.4rem;margin-bottom:6px" id="popup-plan">Pro - ₹70/month</h3>
-    <p style="color:var(--text2);font-size:.88rem;margin-bottom:24px">Contact us on Telegram to complete your purchase</p>
-    <a href="https://t.me/iq4u8" target="_blank" class="mag-btn primary" style="width:100%;justify-content:center"><i class="fa-brands fa-telegram"></i> Contact on Telegram</a>
-    <p style="color:var(--text3);font-size:.78rem;margin-top:16px">Instant activation • 24/7 support</p>
-  </div>
-</div>
+<div class="popup"><div class="popup-box">
+  <button class="popup-x" onclick="closePayment()">✕</button>
+  <div style="font-size:2.5rem;margin-bottom:12px">💳</div>
+  <h3 style="font-family:var(--font2);font-size:1.4rem;margin-bottom:6px" id="popup-plan">Plan</h3>
+  <p style="color:var(--text2);font-size:.88rem;margin-bottom:24px">Contact us on Telegram to purchase</p>
+  <a href="https://t.me/iq4u8" target="_blank" class="btn-p" style="width:100%;justify-content:center;text-decoration:none"><i class="fa-brands fa-telegram"></i> Contact on Telegram</a>
+  <p style="color:var(--text3);font-size:.78rem;margin-top:16px">Instant activation • 24/7 support</p>
+</div></div>
 
 <script src="app.js"></script>
 </body>

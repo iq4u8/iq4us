@@ -1,88 +1,80 @@
-// ══════ STRIPE-STYLE MESH GRADIENT ══════
+// ══════ WEBGL MESH GRADIENT ══════
 (function(){
-  const c=document.getElementById('meshCanvas'),gl=c.getContext('webgl');
-  if(!gl){c.style.display='none';return}
+  const c=document.getElementById('meshCanvas');
+  if(!c)return;
+  const gl=c.getContext('webgl');
+  if(!gl){c.style.background='radial-gradient(ellipse at 30% 20%,rgba(139,92,246,.08),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(34,211,238,.06),transparent 50%)';return}
   function resize(){c.width=innerWidth;c.height=innerHeight;gl.viewport(0,0,c.width,c.height)}
-  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
+  const vs='attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}';
   const fs=`precision highp float;uniform float t;uniform vec2 r;
-  vec3 palette(float x){return .5+.5*cos(6.28*(x+vec3(.0,.33,.67)));}
   void main(){
-    vec2 uv=(gl_FragCoord.xy-.5*r)/min(r.x,r.y);
-    float d=length(uv);
-    float a=atan(uv.y,uv.x);
-    float v=sin(d*3.-t*.4)*sin(a*2.+t*.3)*.5+.5;
-    v+=sin(uv.x*2.+t*.2)*sin(uv.y*3.-t*.15)*.25;
-    vec3 col=palette(v*.4+t*.02)*.12;
-    col=mix(col,vec3(.031,.031,.047),smoothstep(.0,.8,d));
-    gl_FragColor=vec4(col,1);
+    vec2 uv=gl_FragCoord.xy/r;
+    float v=sin(uv.x*4.+t*.3)*sin(uv.y*3.-t*.2)*.5+.5;
+    v+=sin(length(uv-vec2(.3,.7))*6.-t*.4)*.15;
+    v+=sin(length(uv-vec2(.7,.3))*5.+t*.35)*.12;
+    vec3 c1=vec3(.545,.361,.965);vec3 c2=vec3(.133,.827,.933);vec3 c3=vec3(.925,.282,.612);
+    vec3 col=mix(mix(c1,c2,v),c3,sin(v*3.14)*.3+.1)*.1;
+    col=mix(col,vec3(.024,.024,.059),1.-smoothstep(0.,.6,v*.5));
+    gl_FragColor=vec4(col,1.);
   }`;
-  function compile(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s}
+  function mkShader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s}
   const prog=gl.createProgram();
-  gl.attachShader(prog,compile(gl.VERTEX_SHADER,vs));
-  gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,fs));
+  gl.attachShader(prog,mkShader(gl.VERTEX_SHADER,vs));
+  gl.attachShader(prog,mkShader(gl.FRAGMENT_SHADER,fs));
   gl.linkProgram(prog);gl.useProgram(prog);
   const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
   gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-  const pLoc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(pLoc);gl.vertexAttribPointer(pLoc,2,gl.FLOAT,!1,0,0);
-  const tLoc=gl.getUniformLocation(prog,'t'),rLoc=gl.getUniformLocation(prog,'r');
+  const pL=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(pL);gl.vertexAttribPointer(pL,2,gl.FLOAT,!1,0,0);
+  const tL=gl.getUniformLocation(prog,'t'),rL=gl.getUniformLocation(prog,'r');
   resize();addEventListener('resize',resize);
-  (function draw(now){gl.uniform1f(tLoc,now*.001);gl.uniform2f(rLoc,c.width,c.height);
-    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(draw)})(0);
+  !function draw(now){gl.uniform1f(tL,now*.001);gl.uniform2f(rL,c.width,c.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(draw)}(0);
 })();
 
-// ══════ NAV SCROLL ══════
+// ══════ NAV ══════
 const nav=document.querySelector('.nav');
-addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+
+// Mobile menu
+const mBtn=document.querySelector('.mobile-toggle');
+const mMenu=document.querySelector('.mobile-menu');
+if(mBtn&&mMenu){
+  mBtn.onclick=()=>{mMenu.classList.toggle('open');document.body.style.overflow=mMenu.classList.contains('open')?'hidden':''};
+  mMenu.querySelectorAll('a').forEach(a=>a.onclick=()=>{mMenu.classList.remove('open');document.body.style.overflow=''});
+}
 
 // ══════ SCROLL REVEAL ══════
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}})
-},{threshold:.12});
+},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 
-// ══════ BENTO MOUSE GLOW ══════
-document.querySelectorAll('.bento-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    card.style.setProperty('--mx',(e.clientX-r.left)+'px');
-    card.style.setProperty('--my',(e.clientY-r.top)+'px');
-    // Animated border angle
-    const cx=r.left+r.width/2,cy=r.top+r.height/2;
-    const angle=Math.atan2(e.clientY-cy,e.clientX-cx)*180/Math.PI+180;
-    card.style.setProperty('--angle',angle+'deg');
-  });
-});
-
 // ══════ COUNT UP ══════
-function countUp(el,target,suffix='',prefix='',dec=0){
+function countUp(el,target,suffix,prefix,dec){
   let cur=0;const step=target/50;
-  const timer=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(timer)}
+  const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}
     el.textContent=prefix+(dec?cur.toFixed(dec):Math.floor(cur))+suffix},30)
 }
-const mObs=new IntersectionObserver(entries=>{
+const sObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){
     document.querySelectorAll('[data-count]').forEach(el=>{
       countUp(el,parseFloat(el.dataset.count),el.dataset.suffix||'',el.dataset.prefix||'',parseInt(el.dataset.decimal||'0'))
-    });mObs.unobserve(e.target)}})
+    });sObs.unobserve(e.target)}})
 },{threshold:.3});
-const mEl=document.querySelector('.marquee');if(mEl)mObs.observe(mEl);
+const sEl=document.querySelector('.stats');if(sEl)sObs.observe(sEl);
 
-// ══════ PAYMENT ══════
+// ══════ PAYMENT POPUP ══════
 function showPayment(plan){document.getElementById('popup-plan').textContent=plan;document.querySelector('.popup').classList.add('on')}
 function closePayment(){document.querySelector('.popup').classList.remove('on')}
 
 // ══════ SMOOTH SCROLL ══════
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));
-    if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})
+    if(t)t.scrollIntoView({behavior:'smooth'})})
 });
 
-// ══════ HERO WORD REVEAL ══════
+// ══════ HERO WORDS ══════
 document.querySelectorAll('.hw').forEach((w,i)=>{
-  w.style.opacity='0';w.style.transform='translateY(50px) rotateX(15deg)';
-  setTimeout(()=>{w.style.transition='all .7s cubic-bezier(.16,1,.3,1)';w.style.opacity='1';w.style.transform='none'},200+i*100)
+  w.style.opacity='0';w.style.transform='translateY(40px)';
+  setTimeout(()=>{w.style.transition='all .6s cubic-bezier(.16,1,.3,1)';w.style.opacity='1';w.style.transform='none'},300+i*100)
 });
-
-// ══════ MARQUEE DUPLICATE ══════
-(function(){const track=document.querySelector('.marquee-track');
-  if(track)track.innerHTML+=track.innerHTML})();
