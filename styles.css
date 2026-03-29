@@ -69,7 +69,7 @@ button{font-family:inherit;cursor:pointer;border:none;outline:none;background:no
 /* ══════ PAGE CONTENT PUSH DOWN ON MOBILE MENU ══════ */
 #pageContent{transition:transform .45s cubic-bezier(.34,1.2,.64,1),margin-top .45s cubic-bezier(.34,1.2,.64,1)}
 body.menu-open #pageContent,
-body.menu-open #pageContent~*{transform:translateY(110px)}
+body.menu-open #pageContent~*{transform:translateY(140px)}
 
 /* ══════ FLOATING GLASS NODES ══════ */
 .float-nodes{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
@@ -78,9 +78,9 @@ body.menu-open #pageContent~*{transform:translateY(110px)}
   border:1px solid rgba(139,92,246,.08);
   display:flex;align-items:center;justify-content:space-between;gap:40px;
   min-width:200px;opacity:.5}
-.float-node.n1{top:12%;right:8%;animation:floatA 18s ease-in-out infinite}
-.float-node.n2{top:40%;right:5%;animation:floatB 22s ease-in-out infinite 2s}
-.float-node.n3{top:68%;right:10%;animation:floatC 20s ease-in-out infinite 4s}
+.float-node.n1{top:18%;right:6%;animation:floatA 18s ease-in-out infinite}
+.float-node.n2{top:42%;right:3%;animation:floatB 22s ease-in-out infinite 2s}
+.float-node.n3{top:66%;right:8%;animation:floatC 20s ease-in-out infinite 4s}
 .node-dots{display:flex;gap:6px}
 .nd{width:10px;height:10px;border-radius:50%}
 .nd.c1{background:#22D3EE}
