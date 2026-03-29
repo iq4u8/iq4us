@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Core Gen - Advanced CC Number Generator" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./iconapp.png" />
+  <title>Core Gen — CC Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+    <i id="theme-icon" class="fa-solid fa-sun"></i>
+  </button>
+
+  <main class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div>
+        <h1 id="app-title"><center>Core Gen</center></h1>
+        <p class="subtitle"><center>Advanced CC Generator</center></p>
+      </div>
+    </header>
+
+    <!-- Mode Switcher -->
+    <div class="mode-switcher-wrapper">
+      <div class="mode-switcher glass-card" id="modeSwitcher">
+        <button class="mode-btn active" id="autoModeBtn" onclick="switchMode('auto')">
+          <i class="fa-solid fa-bolt"></i><span>Auto</span>
+        </button>
+        <button class="mode-btn" id="manualModeBtn" onclick="switchMode('manual')">
+          <i class="fa-solid fa-sliders"></i><span>Manual</span>
+        </button>
+        <div class="mode-slider" id="modeSlider"></div>
+      </div>
+    </div>
+
+    <!-- ═══ MAIN LAYOUT ═══ -->
+    <div class="main-layout">
+
+      <!-- LEFT: BIN Config -->
+      <section class="glass-card config-card" id="configCard">
+        <div class="section-header">
+          <h2><i class="fa-solid fa-gear"></i> Configuration</h2>
+          <span class="mode-badge" id="modeBadge">AUTO</span>
+        </div>
+
+        <div class="input-group-custom">
+          <div class="label-row">
+            <label for="bin">BIN Number</label>
+            <span class="bin-badge hidden" id="binBadge">
+              <i id="binBadgeIcon" class="fa-brands fa-cc-visa"></i>
+              <span id="binBadgeText">Visa</span>
+            </span>
+          </div>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-hashtag"></i>
+            <input type="text" id="bin" placeholder="e.g. 462548" maxlength="16" autocomplete="off" oninput="onBinInput()" />
+          </div>
+          <div class="bin-meta">
+            <span class="input-hint">Remaining x's auto-filled</span>
+            <button class="recent-btn" id="recentBtn" onclick="toggleRecentBins()" title="Recent BINs">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </button>
+          </div>
+          <div class="recent-bins hidden" id="recentBins"></div>
+        </div>
+
+        <div id="manualFields" class="manual-fields hidden">
+          <div class="fields-row-3">
+            <div class="input-group-custom compact">
+              <label for="month">MM</label>
+              <div class="input-with-icon">
+                <i class="fa-regular fa-calendar"></i>
+                <input type="text" id="month" placeholder="12" maxlength="2" inputmode="numeric" pattern="[0-9]*" autocomplete="off" />
+              </div>
+            </div>
+            <div class="input-group-custom compact">
+              <label for="year">Year</label>
+              <div class="input-with-icon">
+                <i class="fa-regular fa-calendar-check"></i>
+                <input type="text" id="year" placeholder="29" maxlength="2" inputmode="numeric" pattern="[0-9]*" autocomplete="off" />
+              </div>
+            </div>
+            <div class="input-group-custom compact">
+              <label for="ccv">CVV</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="text" id="ccv" placeholder="Rnd" maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off" />
+              </div>
+            </div>
+          </div>
+          <span class="input-hint">Leave blank for random values</span>
+        </div>
+
+        <div class="input-group-custom">
+          <label for="count">Quantity</label>
+          <div class="input-with-icon">
+            <i class="fa-solid fa-layer-group"></i>
+            <input type="number" id="count" placeholder="50" min="1" max="3000" autocomplete="off" />
+          </div>
+          <span class="input-hint">1-3000 cards to generate</span>
+        </div>
+
+        <button class="generate-btn" id="generateBtn" onclick="generate()">
+          <span class="btn-content">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span id="btnText">Proceed & Generate</span>
+          </span>
+          <span class="btn-loader hidden" id="btnLoader">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <span id="btnLoaderText">Generating...</span>
+          </span>
+        </button>
+        <div class="shortcut-hint">Press <kbd>Ctrl</kbd>+<kbd>G</kbd> to generate</div>
+      </section>
+
+      <!-- RIGHT: Switchable Panels -->
+      <div class="right-panels">
+        <!-- Panel Tabs -->
+        <div class="panel-tabs">
+          <button class="panel-tab active" id="genPanelTab" onclick="switchPanel('gen')">
+            <i class="fa-solid fa-rectangle-list"></i>
+            <span>Generated Cards</span>
+            <span class="tab-count" id="genTabCount">0</span>
+          </button>
+          <button class="panel-tab" id="chkPanelTab" onclick="switchPanel('chk')">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Checker</span>
+            <span class="tab-count" id="chkTabCount">—</span>
+          </button>
+        </div>
+
+        <!-- Generated Cards Panel -->
+        <div class="panel-body active" id="genPanel">
+          <section class="glass-card panel-card">
+            <div class="section-header">
+              <h2><i class="fa-solid fa-rectangle-list"></i> Generated Cards</h2>
+              <span class="card-count" id="cardCount">0 cards</span>
+            </div>
+            <div class="output-wrapper">
+              <textarea id="output" rows="10" readonly placeholder="Generated cards will appear here..."></textarea>
+              <div class="floating-actions">
+                <button class="float-btn" onclick="downloadCards('gen')" title="Download .txt">
+                  <i class="fa-solid fa-download"></i>
+                </button>
+                <button class="float-btn" onclick="copyToClipboard()" title="Copy all">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+                <button class="float-btn" onclick="clearOutput()" title="Clear">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+            <div class="stats-bar" id="statsBar">
+              <div class="stat-item">
+                <span class="stat-label">Format</span>
+                <span class="stat-value" id="statFormat">—</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Type</span>
+                <span class="stat-value" id="statType">—</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Length</span>
+                <span class="stat-value" id="statLength">—</span>
+              </div>
+            </div>
+
+            <!-- Send to Checker Button (manual mode) -->
+            <button class="send-checker-btn hidden" id="sendToCheckerBtn" onclick="sendToChecker()">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Send to Checker</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </section>
+        </div>
+
+        <!-- Checker Panel -->
+        <div class="panel-body" id="chkPanel">
+          <section class="glass-card panel-card">
+            <div class="section-header">
+              <h2><i class="fa-solid fa-shield-halved"></i> CC Checker</h2>
+              <span class="mode-badge" id="checkerBadge">FILTER</span>
+            </div>
+
+            <div class="input-group-custom">
+              <label for="checkerInput">Cards to Check</label>
+              <textarea id="checkerInput" class="checker-textarea" rows="4" placeholder="Paste cards here (one per line)&#10;Format: CC|MM|YYYY|CVV"></textarea>
+            </div>
+
+            <div class="checker-actions-row">
+              <button class="generate-btn checker-btn" id="checkBtn" onclick="checkCards()">
+                <span class="btn-content" id="checkBtnContent">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <span>Check & Filter</span>
+                </span>
+                <span class="btn-loader hidden" id="checkBtnLoader">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                  Checking...
+                </span>
+              </button>
+              <button class="action-btn" onclick="clearChecker()" title="Clear checker">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+
+            <div class="checker-progress hidden" id="checkerProgress">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressFill"></div>
+              </div>
+              <span class="progress-text" id="progressText">0%</span>
+            </div>
+
+            <div class="checker-stats hidden" id="checkerStats">
+              <div class="checker-stat live active" onclick="filterCheckerResult('live')">
+                <i class="fa-solid fa-circle-check"></i>
+                <span id="liveCount">0</span>
+                <label>Live</label>
+              </div>
+              <div class="checker-stat dead" onclick="filterCheckerResult('dead')">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span id="deadCount">0</span>
+                <label>Dead</label>
+              </div>
+              <div class="checker-stat unknown" onclick="filterCheckerResult('unknown')">
+                <i class="fa-solid fa-circle-question"></i>
+                <span id="unknownCount">0</span>
+                <label>Unknown</label>
+              </div>
+            </div>
+
+            <!-- Success Rate -->
+            <div class="success-rate hidden" id="successRate">
+              <div class="rate-bar">
+                <div class="rate-fill" id="rateFill"></div>
+              </div>
+              <span class="rate-text" id="rateText">0% pass rate</span>
+            </div>
+
+            <div class="input-group-custom hidden" id="checkerResultGroup">
+              <div class="result-header">
+                <label id="checkerResultLabel">Live Cards</label>
+                <span class="card-count" id="liveCardCount">0</span>
+              </div>
+              <div class="output-wrapper">
+                <textarea id="checkerOutput" class="checker-textarea" rows="4" readonly placeholder="Filtered cards..."></textarea>
+                <div class="floating-actions">
+                  <button class="float-btn" onclick="copyLiveCards()" title="Copy filtered cards">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Stats Footer -->
+    <footer class="session-footer glass-card">
+      <div class="session-stat">
+        <i class="fa-solid fa-bolt"></i>
+        <span id="sessionGenCount">0</span>
+        <label>Generated</label>
+      </div>
+      <div class="session-stat">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span id="sessionChkCount">0</span>
+        <label>Checked</label>
+      </div>
+      <div class="session-stat">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="sessionLiveCount">0</span>
+        <label>Live</label>
+      </div>
+      <div class="session-stat">
+        <i class="fa-solid fa-clock"></i>
+        <span id="sessionTime">00:00</span>
+        <label>Session</label>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="./script.js"></script>
+</body>
+</html>
