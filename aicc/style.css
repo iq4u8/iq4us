@@ -848,6 +848,33 @@ h1#app-title {
   border-top: 1px solid var(--glass-border);
 }
 
+.gen-integrated-stats {
+  position: absolute;
+  bottom: 12px;
+  left: 18px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  gap: 14px;
+  z-index: 4;
+  justify-content: flex-start;
+}
+.gen-integrated-stats .stat-item {
+  text-align: left;
+  flex: none;
+}
+.gen-integrated-stats .stat-label {
+  font-size: 0.6rem;
+  margin-bottom: 0px;
+}
+.gen-integrated-stats .stat-value {
+  font-size: 0.75rem;
+}
+
+.gen-check-margin {
+  margin-top: 14px;
+}
+
 .stat-item {
   flex: 1;
   text-align: center;

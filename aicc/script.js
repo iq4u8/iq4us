@@ -156,24 +156,120 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ── Send to Checker (Manual mode button) ──
-function sendToChecker() {
-  const genOutput = document.getElementById('output').value.trim();
-  if (!genOutput) {
-    showToast('No cards to send', 'info');
+// ── GenPanel Checker Storage ──
+let genCheckerResults = { live: [], dead: [], unknown: [] };
+
+// ── Check Generated Cards (Inside GenPanel) ──
+function checkGeneratedCards() {
+  const input = document.getElementById('output').value.trim();
+  if (!input) {
+    showToast('Generate some cards first!', 'error');
     return;
   }
-  // Move cards to checker
-  document.getElementById('checkerInput').value = genOutput;
-  // Clear generator output
-  document.getElementById('output').value = '';
-  document.getElementById('cardCount').textContent = '0 cards';
-  document.getElementById('genTabCount').textContent = '0';
-  // Hide send button
-  document.getElementById('sendToCheckerBtn').classList.add('hidden');
-  // Switch to checker
-  switchPanel('chk');
-  showToast('Cards moved to checker', 'success');
+
+  const lines = input.split('\n').filter(l => l.trim());
+  if (lines.length === 0) {
+    showToast('No valid cards to check', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('genCheckBtn');
+  const btnContent = document.getElementById('genCheckBtnContent');
+  const btnLoader = document.getElementById('genCheckBtnLoader');
+  const progress = document.getElementById('genCheckerProgress');
+  const stats = document.getElementById('genCheckerStats');
+  const successRate = document.getElementById('genSuccessRate');
+
+  btnContent.classList.add('hidden');
+  btnLoader.classList.remove('hidden');
+  btn.disabled = true;
+  progress.classList.remove('hidden');
+
+  let live = 0, dead = 0, unknown = 0;
+  let deadCards = [], unknownCards = [], liveCards = [];
+  let processed = 0;
+  const total = lines.length;
+
+  genCheckerResults = { live: [], dead: [], unknown: [] };
+
+  function processNextGen() {
+    if (processed >= total) {
+      btnContent.classList.remove('hidden');
+      btnLoader.classList.add('hidden');
+      btn.disabled = false;
+      stats.classList.remove('hidden');
+      successRate.classList.remove('hidden');
+
+      document.getElementById('genLiveCount').textContent = live;
+      document.getElementById('genDeadCount').textContent = dead;
+      document.getElementById('genUnknownCount').textContent = unknown;
+
+      genCheckerResults.live = liveCards;
+      genCheckerResults.dead = deadCards;
+      genCheckerResults.unknown = unknownCards;
+
+      // Filter and Show Live
+      filterGenResult('live');
+
+      // Update pass rate
+      let rate = total > 0 ? Math.round((live / total) * 100) : 0;
+      document.getElementById('genRateFill').style.width = rate + '%';
+      document.getElementById('genPassRate').textContent = rate + '% pass rate';
+      
+      // Update session stats
+      sessionStats.checked += total;
+      sessionStats.live += live;
+      updateSessionStats();
+
+      showToast(`Checked: ${live} live, ${dead} dead, ${unknown} unknown`, live > 0 ? 'success' : 'error');
+      return;
+    }
+
+    const card = parseCardLine(lines[processed]);
+    const result = checkSingleCard(card);
+
+    if (result === 'live') { live++; liveCards.push(lines[processed].trim()); }
+    else if (result === 'dead') { dead++; deadCards.push(lines[processed].trim()); }
+    else { unknown++; unknownCards.push(lines[processed].trim()); }
+
+    processed++;
+    const pct = Math.round((processed / total) * 100);
+    document.getElementById('genProgressFill').style.width = pct + '%';
+    document.getElementById('genProgressText').textContent = pct + '%';
+
+    const delay = total > 100 ? 10 : total > 30 ? 30 : 60;
+    setTimeout(processNextGen, delay);
+  }
+
+  document.getElementById('genProgressFill').style.width = '0%';
+  document.getElementById('genProgressText').textContent = '0%';
+  stats.classList.add('hidden');
+  successRate.classList.add('hidden');
+
+  setTimeout(processNextGen, 200);
+}
+
+// ── Filter Gen Results ──
+function filterGenResult(type) {
+  const stats = document.querySelectorAll('#genCheckerStats .checker-stat');
+  stats.forEach(s => s.classList.remove('active'));
+
+  const output = document.getElementById('output');
+
+  let cards = [];
+  if (type === 'live') {
+    document.querySelector('#genCheckerStats .checker-stat.live').classList.add('active');
+    cards = genCheckerResults.live;
+  } else if (type === 'dead') {
+    document.querySelector('#genCheckerStats .checker-stat.dead').classList.add('active');
+    cards = genCheckerResults.dead;
+  } else {
+    document.querySelector('#genCheckerStats .checker-stat.unknown').classList.add('active');
+    cards = genCheckerResults.unknown;
+  }
+
+  output.value = cards.join('\n');
+  document.getElementById('cardCount').textContent = `${cards.length} cards`;
 }
 
 // ── Checker Result Storage ──
@@ -445,6 +541,17 @@ function clearOutput() {
   document.getElementById('statFormat').textContent = '—';
   document.getElementById('statType').textContent = '—';
   document.getElementById('statLength').textContent = '—';
+  
+  // Clear Gen Checker UI elements
+  document.getElementById('genCheckerProgress').classList.add('hidden');
+  document.getElementById('genCheckerStats').classList.add('hidden');
+  document.getElementById('genSuccessRate').classList.add('hidden');
+  document.getElementById('genProgressFill').style.width = '0%';
+  document.getElementById('genProgressText').textContent = '0%';
+  document.getElementById('genLiveCount').textContent = '0';
+  document.getElementById('genDeadCount').textContent = '0';
+  document.getElementById('genUnknownCount').textContent = '0';
+
   showToast('Output cleared', 'info');
 }
 

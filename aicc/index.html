@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="./style.css?v=3" />
+  <link rel="stylesheet" href="./style.css?v=4" />
 </head>
 
 <body>
@@ -165,29 +165,70 @@
                 <button class="float-btn" onclick="clearOutput()" title="Clear">
                   <i class="fa-solid fa-trash-can"></i>
                 </button>
-              </div>
-            </div>
-            <div class="stats-bar" id="statsBar">
-              <div class="stat-item">
-                <span class="stat-label">Format</span>
-                <span class="stat-value" id="statFormat">—</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-label">Type</span>
-                <span class="stat-value" id="statType">—</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-label">Length</span>
-                <span class="stat-value" id="statLength">—</span>
+              <div class="stats-bar gen-integrated-stats" id="statsBar">
+                <div class="stat-item">
+                  <span class="stat-label">Format</span>
+                  <span class="stat-value" id="statFormat">—</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Type</span>
+                  <span class="stat-value" id="statType">—</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Length</span>
+                  <span class="stat-value" id="statLength">—</span>
+                </div>
               </div>
             </div>
 
-            <!-- Send to Checker Button (manual mode) -->
-            <button class="send-checker-btn hidden" id="sendToCheckerBtn" onclick="sendToChecker()">
-              <i class="fa-solid fa-paper-plane"></i>
-              <span>Send to Checker</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+            <div class="checker-actions-row gen-check-margin">
+              <button class="generate-btn checker-btn" id="genCheckBtn" onclick="checkGeneratedCards()">
+                <span class="btn-content" id="genCheckBtnContent">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <span>Check & Filter</span>
+                </span>
+                <span class="btn-loader hidden" id="genCheckBtnLoader">
+                  <i class="fa-solid fa-spinner fa-spin"></i>
+                  Checking...
+                </span>
+              </button>
+            </div>
+
+            <div class="checker-progress hidden" id="genCheckerProgress">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="genProgressFill"></div>
+              </div>
+              <span class="progress-text" id="genProgressText">0%</span>
+            </div>
+
+            <div class="checker-stats hidden" id="genCheckerStats">
+              <div class="checker-stat live active" onclick="filterGenResult('live')">
+                <i class="fa-solid fa-circle-check"></i>
+                <span id="genLiveCount">0</span>
+                <label>Live</label>
+              </div>
+              <div class="checker-stat dead" onclick="filterGenResult('dead')">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <span id="genDeadCount">0</span>
+                <label>Dead</label>
+              </div>
+              <div class="checker-stat unknown" onclick="filterGenResult('unknown')">
+                <i class="fa-solid fa-circle-question"></i>
+                <span id="genUnknownCount">0</span>
+                <label>Unknown</label>
+              </div>
+            </div>
+
+            <!-- Success Rate -->
+            <div class="success-rate hidden" id="genSuccessRate">
+              <div class="rate-bar">
+                <div class="rate-fill" id="genRateFill"></div>
+              </div>
+              <div class="rate-labels">
+                <span>Live Cards</span>
+                <span id="genPassRate">0% pass rate</span>
+              </div>
+            </div>
           </section>
         </div>
 
@@ -303,6 +344,6 @@
   </main>
 
   <div class="toast-container" id="toastContainer"></div>
-  <script src="./script.js?v=3"></script>
+  <script src="./script.js?v=4"></script>
 </body>
 </html>
