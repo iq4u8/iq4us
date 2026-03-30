@@ -4,64 +4,64 @@
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Light Theme (default) */
-  --bg-primary: #ffffff;
-  --bg-secondary: #ffffff;
-  --glass-bg: rgba(0, 0, 0, 0.04);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --text-primary: #1e293b;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --accent: #5a5e66;
-  --accent-glow: rgba(90, 94, 102, 0.15);
-  --accent-hover: #4a4e55;
-  --accent-gradient: linear-gradient(135deg, #5a5e66 0%, #4a4e55 50%, #3a3f47 100%);
+  /* Light Theme — Premium Indigo Violet */
+  --bg-primary: #f8f7fc;
+  --bg-secondary: #f0eef8;
+  --glass-bg: rgba(108, 72, 197, 0.04);
+  --glass-border: rgba(108, 72, 197, 0.12);
+  --glass-shadow: 0 4px 24px rgba(108, 72, 197, 0.08);
+  --text-primary: #2d1b69;
+  --text-secondary: #5b4a8a;
+  --text-muted: #9387b5;
+  --accent: #6C48C5;
+  --accent-glow: rgba(108, 72, 197, 0.18);
+  --accent-hover: #5a35b5;
+  --accent-gradient: linear-gradient(135deg, #6C48C5 0%, #8B5CF6 50%, #A78BFA 100%);
   --success: #22c55e;
   --danger: #ef4444;
-  --input-bg: rgba(0, 0, 0, 0.04);
-  --input-border: rgba(0, 0, 0, 0.12);
-  --input-focus-border: #5a5e66;
-  --btn-bg: rgba(0, 0, 0, 0.06);
-  --btn-border: rgba(0, 0, 0, 0.15);
-  --btn-color: #3a3f47;
-  --orb-1: transparent;
-  --orb-2: transparent;
-  --orb-3: transparent;
-  --orb-4: transparent;
-  --scrollbar-track: rgba(0, 0, 0, 0.03);
-  --scrollbar-thumb: rgba(0, 0, 0, 0.12);
-  --toast-bg: rgba(255, 255, 255, 0.95);
+  --input-bg: rgba(108, 72, 197, 0.04);
+  --input-border: rgba(108, 72, 197, 0.14);
+  --input-focus-border: #6C48C5;
+  --btn-bg: rgba(108, 72, 197, 0.06);
+  --btn-border: rgba(108, 72, 197, 0.16);
+  --btn-color: #5b3db8;
+  --orb-1: rgba(108, 72, 197, 0.06);
+  --orb-2: rgba(139, 92, 246, 0.05);
+  --orb-3: rgba(167, 139, 250, 0.04);
+  --orb-4: rgba(196, 181, 253, 0.06);
+  --scrollbar-track: rgba(108, 72, 197, 0.04);
+  --scrollbar-thumb: rgba(108, 72, 197, 0.15);
+  --toast-bg: rgba(248, 247, 252, 0.95);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #000000;
-  --bg-secondary: #000000;
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent: #8b8f96;
-  --accent-glow: rgba(139, 143, 150, 0.2);
-  --accent-hover: #a0a4ab;
-  --accent-gradient: linear-gradient(135deg, #8b8f96 0%, #a0a4ab 50%, #c8cdd3 100%);
+  --bg-primary: #0a0a14;
+  --bg-secondary: #0f0f1e;
+  --glass-bg: rgba(139, 92, 246, 0.06);
+  --glass-border: rgba(139, 92, 246, 0.12);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  --text-primary: #e8e4f0;
+  --text-secondary: #a098c0;
+  --text-muted: #6b6390;
+  --accent: #8B5CF6;
+  --accent-glow: rgba(139, 92, 246, 0.2);
+  --accent-hover: #A78BFA;
+  --accent-gradient: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%);
   --success: #22c55e;
   --danger: #ef4444;
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --input-border: rgba(255, 255, 255, 0.12);
-  --input-focus-border: #a0a4ab;
-  --btn-bg: rgba(255, 255, 255, 0.08);
-  --btn-border: rgba(255, 255, 255, 0.15);
-  --btn-color: #c8cdd3;
-  --orb-1: transparent;
-  --orb-2: transparent;
-  --orb-3: transparent;
-  --orb-4: transparent;
-  --scrollbar-track: rgba(255, 255, 255, 0.03);
-  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
-  --toast-bg: rgba(0, 0, 0, 0.95);
+  --input-bg: rgba(139, 92, 246, 0.05);
+  --input-border: rgba(139, 92, 246, 0.14);
+  --input-focus-border: #A78BFA;
+  --btn-bg: rgba(139, 92, 246, 0.08);
+  --btn-border: rgba(139, 92, 246, 0.18);
+  --btn-color: #c4b5fd;
+  --orb-1: rgba(139, 92, 246, 0.06);
+  --orb-2: rgba(34, 211, 238, 0.04);
+  --orb-3: rgba(236, 72, 153, 0.03);
+  --orb-4: rgba(167, 139, 250, 0.05);
+  --scrollbar-track: rgba(139, 92, 246, 0.04);
+  --scrollbar-thumb: rgba(139, 92, 246, 0.12);
+  --toast-bg: rgba(10, 10, 20, 0.95);
 }
 
 /* --- Reset & Base --- */
