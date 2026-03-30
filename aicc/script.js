@@ -1153,3 +1153,18 @@ function updateSuccessRate(live, total) {
   else fill.style.background = '#ef4444';
   text.textContent = `${rate}% pass rate`;
 }
+
+// ── Handle Txt File Upload ──
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const textarea = document.getElementById('checkerInput');
+    textarea.value = textarea.value.trim() ? textarea.value.trim() + '\n' + text : text;
+    showToast('Cards loaded from file', 'success');
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // Reset input to allow same file again
+}

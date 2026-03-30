@@ -19,11 +19,11 @@
   --accent-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
   --success: #10b981;
   --danger: #ef4444;
-  --input-bg: #f8fafc;
-  --input-border: rgba(15, 23, 42, 0.12);
+  --input-bg: rgba(15, 23, 42, 0.03);
+  --input-border: rgba(15, 23, 42, 0.16);
   --input-focus-border: #2563eb;
-  --btn-bg: #eff6ff;
-  --btn-border: #bfdbfe;
+  --btn-bg: rgba(37, 99, 235, 0.08);
+  --btn-border: rgba(37, 99, 235, 0.15);
   --btn-color: #1d4ed8;
   --orb-1: rgba(37, 99, 235, 0.05);
   --orb-2: rgba(14, 165, 233, 0.04);
@@ -1656,4 +1656,37 @@ h1#app-title {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+/* --- Textarea File Upload Button --- */
+.file-upload-wrapper {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 10;
+}
+.hidden-file-input {
+  display: none;
+}
+.mini-upload-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--input-border);
+  color: var(--text-muted);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-size: 0.95rem;
+}
+.mini-upload-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--accent-glow);
 }
