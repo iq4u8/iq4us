@@ -331,14 +331,14 @@ function switchMode(mode) {
   if (mode === 'auto') {
     autoBtn.classList.add('active');
     manualBtn.classList.remove('active');
-    slider.classList.remove('right');
+    slider.classList.add('right');
     manualFields.classList.add('hidden');
     modeBadge.textContent = 'AUTO';
     btnText.textContent = 'Proceed & Generate';
   } else {
     manualBtn.classList.add('active');
     autoBtn.classList.remove('active');
-    slider.classList.add('right');
+    slider.classList.remove('right');
     manualFields.classList.remove('hidden');
     modeBadge.textContent = 'MANUAL';
     btnText.textContent = 'Generate Cards';
