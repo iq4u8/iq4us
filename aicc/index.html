@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="./style.css?v=8" />
+  <link rel="stylesheet" href="./style.css?v=9" />
 </head>
 
 <body>
@@ -248,18 +248,38 @@
               <textarea id="checkerInput" class="checker-textarea" rows="4" placeholder="Paste cards here (one per line)&#10;Format: CC|MM|YYYY|CVV"></textarea>
             </div>
 
+            <div class="input-group-custom">
+              <label for="skKeyInput">Stripe SK Key</label>
+              <div class="sk-input-wrapper">
+                <div class="sk-input-inner">
+                  <i class="fa-solid fa-key sk-icon"></i>
+                  <input type="text" id="skKeyInput" placeholder="sk_live_..." oninput="resetSkVerification()">
+                </div>
+                <button id="verifySkBtn" class="verify-btn" onclick="verifySkKey()">Verify</button>
+              </div>
+            </div>
+
             <div class="checker-actions-row">
-              <button class="generate-btn checker-btn" id="checkBtn" onclick="checkCards()">
+              <select id="priceAmount" class="price-dropdown">
+                <option value="rnd">RND (Random)</option>
+                <option value="0.5">$0.5</option>
+                <option value="1">$1.0</option>
+                <option value="1.5">$1.5</option>
+                <option value="2">$2.0</option>
+                <option value="5">$5.0</option>
+                <option value="10">$10.0</option>
+              </select>
+              <button class="generate-btn checker-btn check-action-active" id="checkBtn" onclick="checkCards()">
                 <span class="btn-content" id="checkBtnContent">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <span>Check & Filter</span>
+                  <i class="fa-solid fa-bolt"></i>
+                  <span>Check Cards</span>
                 </span>
                 <span class="btn-loader hidden" id="checkBtnLoader">
                   <i class="fa-solid fa-spinner fa-spin"></i>
                   Checking...
                 </span>
               </button>
-              <button class="action-btn" onclick="clearChecker()" title="Clear checker">
+              <button class="action-btn clear-btn-styled" onclick="clearChecker()" title="Clear checker">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
@@ -275,17 +295,17 @@
               <div class="checker-stat live active" onclick="filterCheckerResult('live')">
                 <i class="fa-solid fa-circle-check"></i>
                 <span id="liveCount">0</span>
+                <label>Charged</label>
+              </div>
+              <div class="checker-stat unknown" onclick="filterCheckerResult('unknown')">
+                <i class="fa-solid fa-circle-question"></i>
+                <span id="unknownCount">0</span>
                 <label>Live</label>
               </div>
               <div class="checker-stat dead" onclick="filterCheckerResult('dead')">
                 <i class="fa-solid fa-circle-xmark"></i>
                 <span id="deadCount">0</span>
-                <label>Dead</label>
-              </div>
-              <div class="checker-stat unknown" onclick="filterCheckerResult('unknown')">
-                <i class="fa-solid fa-circle-question"></i>
-                <span id="unknownCount">0</span>
-                <label>Unknown</label>
+                <label>Declined</label>
               </div>
             </div>
 
@@ -299,15 +319,21 @@
 
             <div class="input-group-custom hidden" id="checkerResultGroup">
               <div class="result-header">
-                <label id="checkerResultLabel">Live Cards</label>
+                <label id="checkerResultLabel">Charged Cards</label>
                 <span class="card-count" id="liveCardCount">0</span>
               </div>
               <div class="output-wrapper">
                 <textarea id="checkerOutput" class="checker-textarea" rows="4" readonly placeholder="Filtered cards..."></textarea>
-                <div class="floating-actions">
-                  <button class="float-btn" onclick="copyLiveCards()" title="Copy filtered cards">
-                    <i class="fa-regular fa-copy"></i>
-                  </button>
+                <div class="output-footer result-footer-override">
+                  <div class="empty-spacer-for-flex"></div>
+                  <div class="floating-actions">
+                    <button class="float-btn" onclick="downloadFilteredCards()" title="Download filtered cards">
+                      <i class="fa-solid fa-download"></i>
+                    </button>
+                    <button class="float-btn" onclick="copyLiveCards()" title="Copy filtered cards">
+                      <i class="fa-regular fa-copy"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -347,6 +373,6 @@
   </main>
 
   <div class="toast-container" id="toastContainer"></div>
-  <script src="./script.js?v=8"></script>
+  <script src="./script.js?v=9"></script>
 </body>
 </html>

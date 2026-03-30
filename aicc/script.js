@@ -277,7 +277,7 @@ let checkerResults = { live: [], dead: [], unknown: [] };
 
 // ── Filter Checker Results ──
 function filterCheckerResult(type) {
-  const stats = document.querySelectorAll('.checker-stat');
+  const stats = document.querySelectorAll('#checkerStats .checker-stat');
   stats.forEach(s => s.classList.remove('active'));
 
   const resultGroup = document.getElementById('checkerResultGroup');
@@ -287,17 +287,17 @@ function filterCheckerResult(type) {
 
   let cards = [];
   if (type === 'live') {
-    document.querySelector('.checker-stat.live').classList.add('active');
+    document.querySelector('#checkerStats .checker-stat.live').classList.add('active');
     cards = checkerResults.live;
-    label.textContent = 'Live Cards';
+    label.textContent = 'Charged Cards';
   } else if (type === 'dead') {
-    document.querySelector('.checker-stat.dead').classList.add('active');
+    document.querySelector('#checkerStats .checker-stat.dead').classList.add('active');
     cards = checkerResults.dead;
-    label.textContent = 'Dead Cards';
+    label.textContent = 'Declined Cards';
   } else {
-    document.querySelector('.checker-stat.unknown').classList.add('active');
+    document.querySelector('#checkerStats .checker-stat.unknown').classList.add('active');
     cards = checkerResults.unknown;
-    label.textContent = 'Unknown Cards';
+    label.textContent = 'Live Cards';
   }
 
   resultGroup.classList.remove('hidden');
@@ -703,6 +703,15 @@ function checkCards() {
     return;
   }
 
+  if (!isSkVerified) {
+    showToast('Please verify your SK Key first', 'error');
+    const skInput = document.getElementById('skKeyInput');
+    skInput.focus();
+    skInput.parentElement.parentElement.style.animation = 'shake 0.4s ease'; // basic visual cue
+    setTimeout(() => skInput.parentElement.parentElement.style.animation = '', 400);
+    return;
+  }
+
   // Show UI elements
   const btn = document.getElementById('checkBtn');
   const btnContent = document.getElementById('checkBtnContent');
@@ -806,27 +815,91 @@ function copyLiveCards() {
   const textarea = document.getElementById('checkerOutput');
   const text = textarea.value.trim();
   if (!text) {
-    showToast('No live cards to copy', 'info');
+    showToast('No cards to copy', 'info');
     return;
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
-      showToast('Live cards copied!', 'success');
+      showToast('Cards copied!', 'success');
     }).catch(() => {
       textarea.select();
       document.execCommand('copy');
-      showToast('Live cards copied!', 'success');
+      showToast('Cards copied!', 'success');
     });
   } else {
     textarea.select();
     document.execCommand('copy');
-    showToast('Live cards copied!', 'success');
+    showToast('Cards copied!', 'success');
   }
+}
+
+// ── Download Filtered Cards ──
+function downloadFilteredCards() {
+  const textarea = document.getElementById('checkerOutput');
+  const text = textarea.value.trim();
+  if (!text) {
+    showToast('No cards to download', 'info');
+    return;
+  }
+  
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  
+  const activeLabel = document.getElementById('checkerResultLabel').textContent;
+  const filename = `coregen_${activeLabel.toLowerCase().replace(' ', '_')}.txt`;
+  
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+// ── SK Key Verification ──
+let isSkVerified = false;
+
+function resetSkVerification() {
+  isSkVerified = false;
+  const btn = document.getElementById('verifySkBtn');
+  btn.textContent = 'Verify';
+  btn.className = 'verify-btn';
+}
+
+function verifySkKey() {
+  const input = document.getElementById('skKeyInput').value.trim();
+  const btn = document.getElementById('verifySkBtn');
+  
+  if (!input) {
+    showToast('Please enter an SK key', 'error');
+    return;
+  }
+  
+  if (!input.startsWith('sk_live_')) {
+    btn.textContent = 'Dead';
+    btn.className = 'verify-btn dead';
+    isSkVerified = false;
+    showToast('Invalid SK Key format', 'error');
+    return;
+  }
+  
+  // Mock Verification process
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+  btn.disabled = true;
+  
+  setTimeout(() => {
+    btn.disabled = false;
+    isSkVerified = true;
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Verified';
+    btn.className = 'verify-btn verified';
+    showToast('SK Key Verified!', 'success');
+  }, 800);
 }
 
 // ── Clear Checker ──
 function clearChecker() {
   document.getElementById('checkerInput').value = '';
+  document.getElementById('skKeyInput').value = '';
+  resetSkVerification();
   document.getElementById('checkerOutput').value = '';
   document.getElementById('checkerProgress').classList.add('hidden');
   document.getElementById('checkerStats').classList.add('hidden');

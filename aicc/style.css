@@ -1104,11 +1104,106 @@ h1#app-title {
   box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
+/* --- SK Input & New Checker Controls --- */
+.sk-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  background: var(--input-bg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-top: 4px;
+}
+.sk-input-wrapper:focus-within {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.sk-input-inner {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding-left: 14px;
+}
+.sk-icon {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-right: 10px;
+}
+#skKeyInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  padding: 14px 0;
+  outline: none;
+}
+.verify-btn {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  border-left: 1px solid var(--input-border);
+  padding: 0 20px;
+  height: auto;
+  align-self: stretch;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.verify-btn:hover {
+  background: var(--btn-hover);
+}
+.verify-btn.verified {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border-left-color: rgba(46, 204, 113, 0.3);
+}
+.verify-btn.dead {
+  background: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+  border-left-color: rgba(231, 76, 60, 0.3);
+}
+
+.price-dropdown {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  height: 48px;
+  outline: none;
+  transition: all 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+  padding-right: 36px;
+  flex: 0 0 auto;
+}
+.price-dropdown:hover, .price-dropdown:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.price-dropdown option {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
 .checker-actions-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
-  margin-top: 4px;
+  margin-top: 14px;
 }
 
 .checker-actions-row .checker-btn {
@@ -1117,6 +1212,11 @@ h1#app-title {
 
 .checker-actions-row .action-btn {
   flex-shrink: 0;
+}
+
+/* Fix missing spacer */
+.empty-spacer-for-flex {
+  flex: 1;
 }
 
 /* --- Progress Bar --- */
