@@ -1414,3 +1414,31 @@ h1#app-title {
   background: var(--accent);
   color: #fff;
 }
+
+/* --- Mobile Fix for Inner Elements --- */
+@media (max-width: 500px) {
+  .gen-integrated-stats {
+    gap: 10px;
+    left: 10px;
+    bottom: 8px;
+  }
+  .gen-integrated-stats .stat-label {
+    font-size: 0.55rem;
+  }
+  .gen-integrated-stats .stat-value {
+    font-size: 0.7rem;
+  }
+  .floating-actions {
+    right: 8px;
+    bottom: 8px;
+    gap: 4px;
+  }
+  .float-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+  #output {
+    padding-bottom: 50px;
+  }
+}
