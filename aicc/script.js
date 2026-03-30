@@ -3,8 +3,7 @@
    Auto & Manual Mode | Luhn Algorithm
    ============================================ */
 
-// ── State ──
-let currentMode = 'auto'; // 'auto' or 'manual'
+let currentMode = 'manual'; // 'auto' or 'manual'
 
 // ── Luhn Card Generator ──
 function generateCard(bin, length) {
@@ -941,8 +940,8 @@ window.addEventListener('DOMContentLoaded', () => {
     icon.className = 'fa-solid fa-sun';
   }
 
-  // Set default mode to auto
-  switchMode('auto');
+  // Set default mode to manual
+  switchMode('manual');
 
   // BIN input — sanitize only (no auto-x while typing)
   const binInput = document.getElementById('bin');

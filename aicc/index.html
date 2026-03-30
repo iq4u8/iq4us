@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="./style.css?v=16" />
+  <link rel="stylesheet" href="./style.css?v=18" />
 </head>
 
 <body>
@@ -40,11 +40,11 @@
     <!-- Mode Switcher -->
     <div class="mode-switcher-wrapper">
       <div class="mode-switcher glass-card" id="modeSwitcher">
-        <button class="mode-btn active" id="autoModeBtn" onclick="switchMode('auto')">
-          <i class="fa-solid fa-bolt"></i><span>Auto</span>
-        </button>
-        <button class="mode-btn" id="manualModeBtn" onclick="switchMode('manual')">
+        <button class="mode-btn active" id="manualModeBtn" onclick="switchMode('manual')">
           <i class="fa-solid fa-sliders"></i><span>Manual</span>
+        </button>
+        <button class="mode-btn" id="autoModeBtn" onclick="switchMode('auto')">
+          <i class="fa-solid fa-bolt"></i><span>Auto</span>
         </button>
         <div class="mode-slider" id="modeSlider"></div>
       </div>
@@ -57,7 +57,7 @@
       <section class="glass-card config-card" id="configCard">
         <div class="section-header">
           <h2><i class="fa-solid fa-gear"></i> Configuration</h2>
-          <span class="mode-badge" id="modeBadge">AUTO</span>
+          <span class="mode-badge" id="modeBadge">MANUAL</span>
         </div>
 
         <div class="input-group-custom">
@@ -81,7 +81,7 @@
           <div class="recent-bins hidden" id="recentBins"></div>
         </div>
 
-        <div id="manualFields" class="manual-fields hidden">
+        <div id="manualFields" class="manual-fields">
           <div class="fields-row-3">
             <div class="input-group-custom compact">
               <label for="month">MM</label>
