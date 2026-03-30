@@ -1619,16 +1619,36 @@ h1#app-title {
   }
 }
 
-/* Ensure check cards button never wraps */
-.checker-btn span {
+/* Better Dropdown & Action row heights for Checker constraints (fixes Mobile fat button) */
+.checker-actions-row {
+  display: flex !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+.checker-actions-row .price-dropdown {
+  height: 48px !important;
+  padding: 0 36px 0 16px !important; /* Preserves space for SVG arrow! */
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+}
+.checker-actions-row .checker-btn {
+  height: 48px !important;
+  padding: 0 18px !important;
+  font-size: 0.85rem !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.checker-actions-row .checker-btn span,
+.checker-actions-row .checker-btn .btn-content {
   white-space: nowrap !important;
 }
-@media (max-width: 500px) {
-  .checker-actions-row {
-    gap: 8px !important;
-  }
-  .price-dropdown, .checker-actions-row .checker-btn {
-    font-size: 0.8rem !important;
-    padding: 8px 10px !important;
-  }
+.checker-actions-row .action-btn {
+  height: 48px !important;
+  width: 48px !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
