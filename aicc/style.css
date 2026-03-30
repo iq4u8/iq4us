@@ -35,33 +35,33 @@
 }
 
 [data-theme="dark"] {
-  --bg-primary: #0a0a14;
-  --bg-secondary: #0f0f1e;
-  --glass-bg: rgba(139, 92, 246, 0.06);
-  --glass-border: rgba(139, 92, 246, 0.12);
-  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  --text-primary: #e8e4f0;
-  --text-secondary: #a098c0;
-  --text-muted: #6b6390;
-  --accent: #8B5CF6;
-  --accent-glow: rgba(139, 92, 246, 0.2);
-  --accent-hover: #A78BFA;
-  --accent-gradient: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%);
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #8b8f96;
+  --accent-glow: rgba(139, 143, 150, 0.2);
+  --accent-hover: #a0a4ab;
+  --accent-gradient: linear-gradient(135deg, #8b8f96 0%, #a0a4ab 50%, #c8cdd3 100%);
   --success: #22c55e;
   --danger: #ef4444;
-  --input-bg: rgba(139, 92, 246, 0.05);
-  --input-border: rgba(139, 92, 246, 0.14);
-  --input-focus-border: #A78BFA;
-  --btn-bg: rgba(139, 92, 246, 0.08);
-  --btn-border: rgba(139, 92, 246, 0.18);
-  --btn-color: #c4b5fd;
-  --orb-1: rgba(139, 92, 246, 0.06);
-  --orb-2: rgba(34, 211, 238, 0.04);
-  --orb-3: rgba(236, 72, 153, 0.03);
-  --orb-4: rgba(167, 139, 250, 0.05);
-  --scrollbar-track: rgba(139, 92, 246, 0.04);
-  --scrollbar-thumb: rgba(139, 92, 246, 0.12);
-  --toast-bg: rgba(10, 10, 20, 0.95);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --input-focus-border: #a0a4ab;
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --btn-border: rgba(255, 255, 255, 0.15);
+  --btn-color: #c8cdd3;
+  --orb-1: transparent;
+  --orb-2: transparent;
+  --orb-3: transparent;
+  --orb-4: transparent;
+  --scrollbar-track: rgba(255, 255, 255, 0.03);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --toast-bg: rgba(0, 0, 0, 0.95);
 }
 
 /* --- Reset & Base --- */
@@ -691,6 +691,20 @@ h1#app-title {
 
 .generate-btn:active {
   transform: translateY(0);
+}
+
+/* Original Look for Dark Mode */
+[data-theme="dark"] .generate-btn {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: 1px solid var(--btn-border);
+  box-shadow: none;
+}
+
+[data-theme="dark"] .generate-btn:hover {
+  background: var(--input-bg);
+  border-color: var(--text-muted);
+  box-shadow: none;
 }
 
 .btn-content,
