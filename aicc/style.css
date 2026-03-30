@@ -1439,23 +1439,25 @@ h1#app-title {
 /* --- Mobile Fix for Inner Elements --- */
 @media (max-width: 500px) {
   .output-footer {
-    padding: 8px 10px;
+    padding: 6px 8px;
   }
   .gen-integrated-stats {
-    gap: 10px;
+    gap: 6px;
   }
   .gen-integrated-stats .stat-label {
-    font-size: 0.55rem;
+    font-size: 0.45rem;
+    letter-spacing: 0.5px;
   }
   .gen-integrated-stats .stat-value {
-    font-size: 0.7rem;
+    font-size: 0.52rem;
+    white-space: nowrap;
   }
   .output-footer .floating-actions {
     gap: 4px;
   }
   .float-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 0.75rem;
+    width: 24px;
+    height: 24px;
+    font-size: 0.65rem;
   }
 }
