@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let genCheckerResults = { live: [], dead: [], unknown: [] };
 
 // ── Check Generated Cards (Inside GenPanel) ──
-function checkGeneratedCards() {
+function checkGeneratedCards(autoForward = false) {
   const input = document.getElementById('output').value.trim();
   if (!input) {
     showToast('Generate some cards first!', 'error');
@@ -221,7 +221,21 @@ function checkGeneratedCards() {
       sessionStats.live += live;
       updateSessionStats();
 
+      // ALWAYS forward live cards to the main Checker input when done
+      if (liveCards.length > 0) {
+        document.getElementById('checkerInput').value = liveCards.join('\n');
+      } else {
+        document.getElementById('checkerInput').value = '';
+      }
+
       showToast(`Checked: ${live} live, ${dead} dead, ${unknown} unknown`, live > 0 ? 'success' : 'error');
+      
+      if (autoForward && liveCards.length > 0) {
+        setTimeout(() => {
+          showToast(`Forwarded ${live} live cards to Checker panel!`, 'success');
+          switchPanel('chk');
+        }, 1200);
+      }
       return;
     }
 
@@ -469,15 +483,13 @@ function generate() {
     saveRecentBin(binInput);
 
     if (currentMode === 'auto') {
-      // AUTO MODE: auto-send to checker & check
-      showToast(`Step 1/2 ✓ Generated ${lineCount} cards`, 'success');
+      // AUTO MODE: Use integrated generator checker first
+      showToast(`Step 1/2 ✓ Generated ${lineCount} cards. Initializing filter...`, 'success');
       
       setTimeout(() => {
-        document.getElementById('checkerInput').value = output.value;
-        document.getElementById('chkTabCount').textContent = 'Checking...';
-        switchPanel('chk');
-        setTimeout(() => { checkCards(); }, 400);
-      }, 800);
+        // Auto trigger the internal checker, and automatically forward to checker view when done
+        checkGeneratedCards(true);
+      }, 500);
     } else {
       // MANUAL MODE: show Send to Checker button
       showToast(`Generated ${lineCount} cards`, 'success');
