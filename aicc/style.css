@@ -1628,15 +1628,17 @@ h1#app-title {
 .checker-actions-row .price-dropdown {
   flex: 1 !important;
   height: 48px !important;
-  padding: 0 36px 0 16px !important; /* Preserves space for SVG arrow! */
-  font-size: 0.85rem !important;
+  padding: 0 28px 0 10px !important; /* Minimal safe space for SVG arrow! */
+  background-position: right 10px center !important;
+  font-size: 0.75rem !important;
   margin: 0 !important;
+  white-space: nowrap !important;
 }
 .checker-actions-row .checker-btn {
-  flex: 1 !important;
+  flex: 1.5 !important;
   height: 48px !important;
-  padding: 0 18px !important;
-  font-size: 0.85rem !important;
+  padding: 0 10px !important;
+  font-size: 0.75rem !important;
   margin-top: 0 !important;
   display: flex !important;
   align-items: center !important;
@@ -1649,6 +1651,7 @@ h1#app-title {
 .checker-actions-row .action-btn {
   height: 48px !important;
   width: 48px !important;
+  flex: 0 0 48px !important;
   margin-top: 0 !important;
   display: flex !important;
   align-items: center !important;
