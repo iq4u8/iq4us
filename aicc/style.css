@@ -1619,18 +1619,16 @@ h1#app-title {
   }
 }
 
- / *   E n s u r e   c h e c k   c a r d s   b u t t o n   n e v e r   w r a p s   * / 
- . c h e c k e r - b t n   s p a n   { 
-     w h i t e - s p a c e :   n o w r a p   ! i m p o r t a n t ; 
- } 
- @ m e d i a   ( m a x - w i d t h :   5 0 0 p x )   { 
-     . c h e c k e r - a c t i o n s - r o w   { 
-         g a p :   8 p x   ! i m p o r t a n t ; 
-     } 
-     . p r i c e - d r o p d o w n ,   . c h e c k e r - a c t i o n s - r o w   . c h e c k e r - b t n   { 
-         f o n t - s i z e :   0 . 8 r e m   ! i m p o r t a n t ; 
-         p a d d i n g :   8 p x   1 0 p x   ! i m p o r t a n t ; 
-     } 
- } 
-  
- 
+/* Ensure check cards button never wraps */
+.checker-btn span {
+  white-space: nowrap !important;
+}
+@media (max-width: 500px) {
+  .checker-actions-row {
+    gap: 8px !important;
+  }
+  .price-dropdown, .checker-actions-row .checker-btn {
+    font-size: 0.8rem !important;
+    padding: 8px 10px !important;
+  }
+}
