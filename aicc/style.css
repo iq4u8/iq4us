@@ -722,24 +722,30 @@ h1#app-title {
 
 /* --- Output Section --- */
 .output-wrapper {
-  position: relative;
+  border: 1px solid var(--input-border);
+  border-radius: 14px;
+  background: var(--input-bg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.output-wrapper:focus-within {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 #output {
   width: 100%;
-  min-height: 240px;
+  min-height: 220px;
   padding: 16px;
-  padding-bottom: 44px;
-  border: 1px solid var(--input-border);
-  border-radius: 14px;
-  background: var(--input-bg);
+  border: none;
+  background: transparent;
   color: var(--text-primary);
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   line-height: 1.7;
   resize: none;
   outline: none;
-  transition: all 0.3s ease;
 }
 
 #output::placeholder {
@@ -750,8 +756,18 @@ h1#app-title {
 }
 
 #output:focus {
-  border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.output-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px dashed var(--glass-border);
+  background: rgba(0, 0, 0, 0.15);
 }
 
 /* --- Floating Action Buttons (inside textareas) --- */
@@ -762,6 +778,11 @@ h1#app-title {
   display: flex;
   gap: 6px;
   z-index: 5;
+}
+
+.output-footer .floating-actions {
+  position: static;
+  background: transparent;
 }
 
 .float-btn {
@@ -849,14 +870,14 @@ h1#app-title {
 }
 
 .gen-integrated-stats {
-  position: absolute;
-  bottom: 12px;
-  left: 18px;
+  position: static;
   margin: 0;
   padding: 0;
   border: none;
+  display: flex;
   gap: 14px;
   z-index: 4;
+  align-items: center;
   justify-content: flex-start;
 }
 .gen-integrated-stats .stat-item {
@@ -1417,10 +1438,11 @@ h1#app-title {
 
 /* --- Mobile Fix for Inner Elements --- */
 @media (max-width: 500px) {
+  .output-footer {
+    padding: 8px 10px;
+  }
   .gen-integrated-stats {
     gap: 10px;
-    left: 10px;
-    bottom: 8px;
   }
   .gen-integrated-stats .stat-label {
     font-size: 0.55rem;
@@ -1428,17 +1450,12 @@ h1#app-title {
   .gen-integrated-stats .stat-value {
     font-size: 0.7rem;
   }
-  .floating-actions {
-    right: 8px;
-    bottom: 8px;
+  .output-footer .floating-actions {
     gap: 4px;
   }
   .float-btn {
     width: 28px;
     height: 28px;
     font-size: 0.75rem;
-  }
-  #output {
-    padding-bottom: 50px;
   }
 }

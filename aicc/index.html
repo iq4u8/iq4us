@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="./style.css?v=5" />
+  <link rel="stylesheet" href="./style.css?v=6" />
 </head>
 
 <body>
@@ -155,29 +155,31 @@
             </div>
             <div class="output-wrapper">
               <textarea id="output" rows="10" readonly placeholder="Generated cards will appear here..."></textarea>
-              <div class="floating-actions">
-                <button class="float-btn" onclick="downloadCards('gen')" title="Download .txt">
-                  <i class="fa-solid fa-download"></i>
-                </button>
-                <button class="float-btn" onclick="copyToClipboard()" title="Copy all">
-                  <i class="fa-regular fa-copy"></i>
-                </button>
-                <button class="float-btn" onclick="clearOutput()" title="Clear">
-                  <i class="fa-solid fa-trash-can"></i>
-                </button>
-              </div>
-              <div class="stats-bar gen-integrated-stats" id="statsBar">
-                <div class="stat-item">
-                  <span class="stat-label">Format</span>
-                  <span class="stat-value" id="statFormat">—</span>
+              <div class="output-footer">
+                <div class="stats-bar gen-integrated-stats" id="statsBar">
+                  <div class="stat-item">
+                    <span class="stat-label">Format</span>
+                    <span class="stat-value" id="statFormat">—</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Type</span>
+                    <span class="stat-value" id="statType">—</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-label">Length</span>
+                    <span class="stat-value" id="statLength">—</span>
+                  </div>
                 </div>
-                <div class="stat-item">
-                  <span class="stat-label">Type</span>
-                  <span class="stat-value" id="statType">—</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-label">Length</span>
-                  <span class="stat-value" id="statLength">—</span>
+                <div class="floating-actions">
+                  <button class="float-btn" onclick="downloadCards('gen')" title="Download .txt">
+                    <i class="fa-solid fa-download"></i>
+                  </button>
+                  <button class="float-btn" onclick="copyToClipboard()" title="Copy all">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                  <button class="float-btn" onclick="clearOutput()" title="Clear">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
                 </div>
               </div>
             </div>
