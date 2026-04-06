@@ -4,9 +4,7 @@
   if(!c)return;
   var gl=c.getContext('webgl');
   if(!gl){
-    c.style.background='radial-gradient(ellipse at 25% 25%,rgba(139,92,246,.12),transparent 50%),'+
-      'radial-gradient(ellipse at 75% 75%,rgba(34,211,238,.08),transparent 50%),'+
-      'radial-gradient(ellipse at 50% 50%,rgba(236,72,153,.05),transparent 60%)';
+    c.style.background='#000000';
     return;
   }
   function resize(){c.width=window.innerWidth;c.height=window.innerHeight;gl.viewport(0,0,c.width,c.height)}
@@ -25,9 +23,9 @@
     '  vec3 c1=vec3(0.545,0.361,0.965);',
     '  vec3 c2=vec3(0.133,0.827,0.933);',
     '  vec3 c3=vec3(0.925,0.282,0.612);',
-    '  vec3 col=mix(c1,c2,v)*0.12;',
-    '  col+=c3*0.03*sin(v*6.28);',
-    '  col=mix(vec3(0.0,0.0,0.0),col,smoothstep(0.2,0.8,v));',
+    '  vec3 col=mix(c1,c2,v)*0.03;',
+    '  col+=c3*0.008*sin(v*6.28);',
+    '  col=mix(vec3(0.0,0.0,0.0),col,smoothstep(0.3,0.9,v));',
     '  gl_FragColor=vec4(col,1.0);',
     '}'
   ].join('\n');
