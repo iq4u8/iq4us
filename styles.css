@@ -72,16 +72,16 @@ body.menu-open #pageContent~*{transform:translateY(140px)}
 /* ══════ HERO DECORATIVE FLOATING ORBS (CSS ONLY - no text) ══════ */
 .hero-deco{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .orb{position:absolute;border-radius:50%;filter:blur(80px)}
-.orb1{width:400px;height:400px;background:rgba(139,92,246,.1);top:10%;left:5%;animation:orbFloat1 20s ease-in-out infinite}
-.orb2{width:350px;height:350px;background:rgba(34,211,238,.08);bottom:10%;right:5%;animation:orbFloat2 25s ease-in-out infinite}
-.orb3{width:250px;height:250px;background:rgba(236,72,153,.06);top:40%;right:25%;animation:orbFloat3 18s ease-in-out infinite}
+.orb1{width:400px;height:400px;background:rgba(139,92,246,.03);top:10%;left:5%;animation:orbFloat1 20s ease-in-out infinite}
+.orb2{width:350px;height:350px;background:rgba(34,211,238,.02);bottom:10%;right:5%;animation:orbFloat2 25s ease-in-out infinite}
+.orb3{width:250px;height:250px;background:rgba(236,72,153,.015);top:40%;right:25%;animation:orbFloat3 18s ease-in-out infinite}
 @keyframes orbFloat1{0%,100%{transform:translate(0,0)}25%{transform:translate(60px,-40px)}50%{transform:translate(-30px,50px)}75%{transform:translate(40px,20px)}}
 @keyframes orbFloat2{0%,100%{transform:translate(0,0)}25%{transform:translate(-50px,30px)}50%{transform:translate(40px,-60px)}75%{transform:translate(-20px,-30px)}}
 @keyframes orbFloat3{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,40px)}50%{transform:translate(-50px,-20px)}75%{transform:translate(60px,-40px)}}
 
 /* Floating glass panels via pseudo-elements on hero (pure CSS, no DOM text) */
 .hero::before,.hero::after{content:'';position:absolute;border-radius:18px;
-  background:rgba(139,92,246,.03);backdrop-filter:blur(4px);border:1px solid rgba(139,92,246,.06);
+  background:rgba(139,92,246,.01);backdrop-filter:blur(4px);border:1px solid rgba(139,92,246,.02);
   pointer-events:none;z-index:0}
 .hero::before{width:280px;height:70px;top:20%;right:8%;animation:glassFloat1 22s ease-in-out infinite}
 .hero::after{width:240px;height:60px;top:55%;right:4%;animation:glassFloat2 18s ease-in-out infinite 3s}
