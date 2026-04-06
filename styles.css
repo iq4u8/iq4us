@@ -1,7 +1,7 @@
 /* ══════ RESET ══════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#06060f;--bg2:#0c0c1a;--bg3:#111128;
+  --bg:#000000;--bg2:#050505;--bg3:#0a0a0a;
   --glass:rgba(15,15,35,.55);
   --border:rgba(100,100,200,.1);--border2:rgba(139,92,246,.2);
   --text:#e8e8f0;--text2:#8888a8;--text3:#5a5a7a;
