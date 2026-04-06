@@ -27,7 +27,7 @@
     '  vec3 c3=vec3(0.925,0.282,0.612);',
     '  vec3 col=mix(c1,c2,v)*0.12;',
     '  col+=c3*0.03*sin(v*6.28);',
-    '  col=mix(vec3(0.024,0.024,0.059),col,smoothstep(0.2,0.8,v));',
+    '  col=mix(vec3(0.0,0.0,0.0),col,smoothstep(0.2,0.8,v));',
     '  gl_FragColor=vec4(col,1.0);',
     '}'
   ].join('\n');
