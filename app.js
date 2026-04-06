@@ -19,14 +19,7 @@
     '  v+=sin(length(uv-vec2(0.3,0.7))*5.0-t*0.35)*0.2;',
     '  v+=sin(length(uv-vec2(0.7,0.2))*4.5+t*0.3)*0.18;',
     '  v+=sin((uv.x+uv.y)*2.0+t*0.15)*0.12;',
-    '  v=v*0.5+0.5;',
-    '  vec3 c1=vec3(0.545,0.361,0.965);',
-    '  vec3 c2=vec3(0.133,0.827,0.933);',
-    '  vec3 c3=vec3(0.925,0.282,0.612);',
-    '  vec3 col=mix(c1,c2,v)*0.03;',
-    '  col+=c3*0.008*sin(v*6.28);',
-    '  col=mix(vec3(0.0,0.0,0.0),col,smoothstep(0.3,0.9,v));',
-    '  gl_FragColor=vec4(col,1.0);',
+    '  gl_FragColor=vec4(0.0,0.0,0.0,1.0);',
     '}'
   ].join('\n');
   function mk(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}
