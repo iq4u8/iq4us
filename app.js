@@ -8,10 +8,14 @@
   var CHARS = '01';
   var FONT_SIZE = 11;
   var CHAR_STEP = FONT_SIZE + 3;
-  var COL_GAP = 30;
-  var ACTIVE_RATIO = 0.25;
 
   var streams = [];
+
+  function getConfig(){
+    var w = window.innerWidth;
+    if(w < 768) return { gap: 20, ratio: 0.35 };  // mobile — tighter, more columns
+    return { gap: 30, ratio: 0.25 };               // desktop
+  }
 
   function resize(){
     c.width = window.innerWidth;
@@ -23,10 +27,11 @@
 
   function initStreams(){
     streams = [];
-    var totalCols = Math.floor(c.width / COL_GAP);
+    var cfg = getConfig();
+    var totalCols = Math.floor(c.width / cfg.gap);
     for(var i = 0; i < totalCols; i++){
-      if(Math.random() > ACTIVE_RATIO) continue;
-      streams.push(createStream(i * COL_GAP + COL_GAP/2, true));
+      if(Math.random() > cfg.ratio) continue;
+      streams.push(createStream(i * cfg.gap + cfg.gap/2, true));
     }
   }
 
